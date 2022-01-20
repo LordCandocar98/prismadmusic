@@ -7,7 +7,7 @@
         <p>{{ __('voyager::login.signin_below') }}</p>
 
         <form action="{{ route('login') }}" method="POST">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
