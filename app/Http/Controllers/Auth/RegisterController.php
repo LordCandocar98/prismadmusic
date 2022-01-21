@@ -52,9 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'Nombre' => ['required', 'string', 'max:255'],
+            'Correo' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'Contraseña' => ['required', 'string', 'min:8', 'confirmed'],
             'g-recaptcha-response' => function ($attribute, $value, $fail) {
                 $secretKey = config('services.recaptcha.secret');
                 $response = $value;
@@ -80,9 +80,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $data['Nombre'],
+            'email' => $data['Correo'],
+            'password' => Hash::make($data['Contraseña']),
         ]);
     }
 }
