@@ -1,5 +1,15 @@
 @extends('voyager::auth.master')
 @section('pre_css')
+<style>
+        body.login .login-container {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            padding: 30px;
+            top: 0;
+            margin-top: 45px;
+        }
+</style>
 @endsection
 @section('content')
     <div class="login-container">
@@ -7,17 +17,6 @@
         <p>{{ __('voyager::login.signin_below') }}</p>
 
         <form action="{{ route('login') }}" method="POST">
-            <div class="col-md-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all('<li>:message</li>') as $message)
-                                {!! $message !!}
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
             {{ csrf_field() }}
             <div class="form-group form-group-default" id="emailGroup">
                 <label>{{ __('voyager::generic.email') }}</label>
@@ -42,15 +41,18 @@
             @endif
             <br />
             <div class="form-group" id="rememberMeGroup">
-                <div class="controls">
-                    <input type="checkbox" name="remember" id="remember" value="1"><label for="remember"
-                        class="remember-me-text">{{ __('voyager::generic.remember_me') }}</label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="checkbox" name="remember" id="remember" value="1"><label for="remember"
+                                class="remember-me-text">{{ __('voyager::generic.remember_me') }}</label>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ url('password/reset') }}">Olvide mi contraseña.</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" id="recuperarPassword">
-                <a href="{{ url('password/reset') }}">Olvide mi contraseña.</a>
-            </div>
-
             <button type="submit" class="btn btn-block login-button">
                 <span class="signingin hidden"><span class="voyager-refresh"></span>
                     {{ __('voyager::login.loggingin') }}...</span>
