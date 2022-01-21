@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\GestionClientes;
+namespace App\Http\Controllers\Clientes\Gestion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class GestionClientesController extends Controller
+class ClientesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class GestionClientesController extends Controller
             ->select('users.*', 'persona.*', 'cliente.*')
             ->where('role_id',2)
             ->get();
-        return view('gestionClientes.index', compact('users'));
+        return view('clientes.gestion.index', compact('users'));
     }
 
     /**

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\PersonaController;
 use GuzzleHttp\Middleware;
-use App\Http\Controllers\GestionClientes\GestionClientesController;
+use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +35,7 @@ Route::get('profile', function () {
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/nosotros', [SiteController::class, 'nosotros'])->name('nosotros');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
-Route::get('/gestionClientes', [GestionClientesController::class, 'index'])->name('gestionClientes');
+Route::get('/gestionClientes', [ClientesController::class, 'index'])->name('gestionClientes');
 
 
 
