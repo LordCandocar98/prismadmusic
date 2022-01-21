@@ -9,7 +9,7 @@ use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
-Route::group(['prefix' => 'admin'/*,'middleware'=>'autenticado'*/], function () {
+Route::group(['prefix' => 'admin','middleware'=>'autenticado'], function () {
     Voyager::routes();
 });
 
