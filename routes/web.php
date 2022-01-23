@@ -6,6 +6,7 @@ use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\PersonaController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
+use App\Http\Controllers\Nominas\Gestion\NominasController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/gestionClientes', [ClientesController::class, 'index'])->name('gestionClientes');
 
 
+Route::get('/nomina', [NominasController::class, 'index'])->name('inicio');
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Clientes\Gestion;
+namespace App\Http\Controllers\Nominas\Gestion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
-class ClientesController extends Controller
+class NominasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,12 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')
-            ->join('persona', 'users.id', '=', 'persona.user_id')
-            ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-            ->select('users.*', 'persona.*', 'cliente.*')
-            ->where('role_id', 2)
-            ->get();
-        $menu = DB::select('select * from menu_items where menu_id=2');
-        return view('clientes.gestion.index', compact('users', 'menu'));
+        $user = Auth::user();
+        if ($user->hasRole('admin')) {
+            return "Soy admin";
+        } else {
+            return "soy normal user xd";
+        }
     }
 
     /**
