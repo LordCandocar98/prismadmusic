@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('registro.master')
 
 @section('page_header')
     <h1 class="page-title">
