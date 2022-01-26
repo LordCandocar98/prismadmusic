@@ -7,8 +7,7 @@ use App\Http\Controllers\PersonaController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
-use App\Http\Controllers\Nomina\Gestion\NominaController;
-use App\Http\Controllers\Nominas\Gestion\NominasController;
+use App\Http\Controllers\Nominas\Gestion\NominaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
