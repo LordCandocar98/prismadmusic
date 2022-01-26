@@ -20,14 +20,14 @@
             <div class="form-group form-group-default" id="nameGroup">
                 <label>Nombre de usuario</label>
                 <div class="controls">
-                    <input type="text" name="Nombre" id="Nombre" value="{{ old('name') }}" placeholder="Nombre de usuario"
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Nombre de usuario"
                         class="form-control">
                 </div>
             </div>
             <div class="form-group form-group-default" id="emailGroup">
                 <label>Correo Electrónico</label>
                 <div class="controls">
-                    <input type="text" name="Correo" id="Correo" value="{{ old('email') }}" placeholder="Correo Electrónico"
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Correo Electrónico"
                         class="form-control">
                 </div>
             </div>
@@ -37,19 +37,18 @@
                     <div class="form-group form-group-default col-md-6" id="passwordGroup">
                         <div class="controls">
                             <label>Contraseña</label>
-                            <input type="password" name="Contraseña" placeholder="Contraseña" class="form-control">
+                            <input type="password" name="password" placeholder="password" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group form-group-default col-md-6" id="passwordGroup">              
+                    <div class="form-group form-group-default col-md-6" id="passwordGroup">
                         <div class="controls">
                             <label>Confirmar contraseña</label>
                             <input type="password" name="password_confirmation" placeholder="Contraseña" class="form-control">
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
-            
-            
+
             <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
             @if (Session::has('g-recaptcha-response'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">

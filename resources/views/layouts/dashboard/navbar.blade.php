@@ -31,15 +31,25 @@
                     @if (is_array($nav_items) && !empty($nav_items))
                         @foreach ($nav_items as $name => $item)
                             <li {!! isset($item['classes']) && !empty($item['classes']) ? 'class="' . $item['classes'] . '"' : '' !!}>
-                                <form action="{{ url('/logout') }}" method="POST">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger btn-block">
+                                @if (isset($item['route']) && $item['route'] == 'voyager.logout')
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger btn-block">
+                                            @if (isset($item['icon_class']) && !empty($item['icon_class']))
+                                                <i class="{!! $item['icon_class'] !!}"></i>
+                                            @endif
+                                            {{ __($name) }}
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="{{ isset($item['route']) && Route::has($item['route']) ? route($item['route']) : (isset($item['route']) ? $item['route'] : '#') }}"
+                                        {!! isset($item['target_blank']) && $item['target_blank'] ? 'target="_blank"' : '' !!}>
                                         @if (isset($item['icon_class']) && !empty($item['icon_class']))
                                             <i class="{!! $item['icon_class'] !!}"></i>
                                         @endif
                                         {{ __($name) }}
-                                    </button>
-                                </form>
+                                    </a>
+                                @endif
                             </li>
                         @endforeach
                     @endif
