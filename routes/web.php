@@ -6,6 +6,8 @@ use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\PersonaController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
+use App\Http\Controllers\Regalias\Gestion\RegaliasController;
+use App\Http\Controllers\Nomina\Gestion\NominaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,9 +37,15 @@ Route::get('profile', function () {
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/nosotros', [SiteController::class, 'nosotros'])->name('nosotros');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
-Route::get('/gestionClientes', [ClientesController::class, 'index'])->name('gestionClientes');
 
+//Gestión de clientes para los roles: AMIN y Moderadores.
+Route::resource('clientes', ClientesController::class);
 
+//Gestión de regalias para los roles: AMIN y Moderadores.
+Route::resource('regalias', RegaliasController::class);
+
+//Gestión de nomina para los roles: AMIN y Moderadores.
+Route::resource('nomina', NominaController::class);
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

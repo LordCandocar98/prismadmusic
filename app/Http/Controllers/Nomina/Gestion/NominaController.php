@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Nominas;
+namespace App\Http\Controllers\Nomina\Gestion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GestionNominaController extends Controller
+class NominaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
-        //
+        $users = DB::table('users')
+            ->join('persona', 'users.id', '=', 'persona.user_id')
+            ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+            ->select('users.*', 'persona.*', 'cliente.*')
+            ->where('role_id',2)
+            ->get();
+        return view('clientes.gestion.index', compact('users'));
     }
 
     /**

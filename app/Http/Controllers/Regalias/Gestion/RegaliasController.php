@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Regalias\Gestion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegaliasController extends Controller
 {
@@ -14,7 +15,14 @@ class RegaliasController extends Controller
      */
     public function index()
     {
-        //
+        $regalias = DB::table('users')
+        ->join('persona', 'users.id', '=', 'persona.user_id')
+        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+        ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
+        ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
+        ->where('role_id',2)
+        ->get();
+        return view('regalias.gestion.index', compact('regalias'));
     }
 
     /**
