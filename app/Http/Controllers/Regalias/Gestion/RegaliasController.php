@@ -21,6 +21,7 @@ class RegaliasController extends Controller
         ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
         ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
         ->where('role_id',2)
+        ->whereNull('nomina_id')
         ->get();
         return view('regalias.gestion.index', compact('regalias'));
     }
