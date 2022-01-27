@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Nomina\Gestion;
+namespace App\Http\Controllers\Nominas\Gestion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NominaController extends Controller
 {
@@ -14,13 +15,13 @@ class NominaController extends Controller
     */
     public function index()
     {
-        $users = DB::table('users')
+        $nominas = DB::table('users')
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->select('users.*', 'persona.*', 'cliente.*')
             ->where('role_id',2)
             ->get();
-        return view('clientes.gestion.index', compact('users'));
+        return view('nomina.gestion.index', compact('nominas'));
     }
 
     /**

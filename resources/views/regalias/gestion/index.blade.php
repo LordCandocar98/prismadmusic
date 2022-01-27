@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('gestionRegalias') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Regalias</a>
+        <a href="{{ route('regalias.index') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Regalias</a>
     </li>
 @endsection
 @section('page_header')
