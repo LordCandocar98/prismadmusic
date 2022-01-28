@@ -60,7 +60,10 @@ class PersonaController extends Controller
             'tipo_cuenta_bancaria'    => $request->tipo_cuenta_bancaria,
             'persona_id'              => $persona->id,
         ]);
-
-        return redirect('admin');
+        $notification = array(
+            'message' => 'Registro completado exitosamente!',
+            'alert-type' => 'success'
+        );
+        return redirect('admin')->with($notification);
     }
 }

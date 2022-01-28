@@ -11,4 +11,5 @@ class Regalia extends Model
     protected $table = "regalia";
     public $timestamps=false;
     protected $primaryKey = 'id'; // or null
+
 }

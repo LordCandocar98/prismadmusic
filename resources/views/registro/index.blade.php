@@ -52,13 +52,13 @@
                         @endif
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="tipoDoc">Nombre</label>
+                                <label for="nombre">Nombre</label>
                                 <br>
                                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ejemplo: Pepito"
                                     value="{{ old('nombre') }}">
                             </div>
                             <div class="col-sm-6">
-                                <label for="tipoDoc">Apellido</label>
+                                <label for="apellido">Apellido</label>
                                 <br>
                                 <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ejemplo: Pérez"
                                     value="{{ old('apellido') }}">
@@ -66,20 +66,20 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="tipoDoc">País</label>
+                                <label for="pais">País</label>
                                 <br>
                                 <select class="pais form-control" name="pais" id="pais">
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="tipoDoc">Departamento</label>
+                                <label for="departamento">Departamento</label>
                                 <br>
                                 <select class="departamento form-control" name="departamento"></select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="tipoDoc">Ciudad</label>
+                                <label for="ciudad">Ciudad</label>
                                 <br>{{--
                                 <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Bogotá"
                                     value="{{ old('ciudad') }}"> --}}

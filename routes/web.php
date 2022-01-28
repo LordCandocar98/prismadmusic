@@ -3,7 +3,7 @@
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
-use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\RepertorioController;
 use GuzzleHttp\Middleware;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Nominas\Gestion\NominasController;
@@ -28,6 +28,7 @@ Route::get('/admin/login', function () {
 })->name('login');
 
 Route::resource('registro', PersonaController::class);//Registro de Personas con un controlador creado a mano
+Route::resource('repertorio', RepertorioController::class);//Repertorio
 
 Route::get('profile', function () {
     return redirect('/admin');
