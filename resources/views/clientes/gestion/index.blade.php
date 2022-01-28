@@ -2,8 +2,7 @@
 
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('gestionClientes') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de
-            Clientes</a>
+        <a href="{{ route('clientes.index') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Clientes</a>
     </li>
 @endsection
 @section('page_header')
@@ -18,9 +17,9 @@
             masivo</span></a>
 @endsection
 @section('content')
-    <div class="row">
-        <section class="content">
-            <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12">  
+        <div class="panel panel-bordered"> 
+            <div class="panel-body">
                 <div class="table-responsive">
                     <table id="dataTableClientes" name="dataTableClientes" class="display" cellspacing="0"
                         width="100%">
@@ -80,5 +79,5 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('js/jsGestionClientes/scriptIndexGestionClientes.js') }}"></script>C:\laragon\www\prismad_music\public\js\jsGestionClientes
+    <script src="{{ asset('js/jsClientes/gestion/scriptIndexClientes.js') }}"></script>
 @endsection
