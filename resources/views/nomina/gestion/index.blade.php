@@ -9,7 +9,7 @@
         <i class="fa fa-university" aria-hidden="true"></i>
         Gestion de Nomina
     </h1>
-    <a href="#" class="btn btn-success btn-add-new">
+    <a href="{{ route('nomina.create') }}" class="btn btn-success btn-add-new">
         <i class="voyager-plus"></i> <span>Crear</span>
     </a>
     <a class="btn btn-danger" id="borradoMasivo" name="borradoMasivo"><i class="voyager-trash"></i> <span>Borrado masivo</span></a>

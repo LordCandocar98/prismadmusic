@@ -31,7 +31,7 @@ class NominaController extends Controller
      */
     public function create()
     {
-        //
+        return view('nomina.gestion.create');
     }
 
     /**

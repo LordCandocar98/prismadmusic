@@ -1,4 +1,9 @@
 $(document).ready( function () {
+    //Pone check all campos
+    $('.select_all').click(function() {
+        $('.checkRegalia').prop('checked', $(this).prop('checked'));
+    });
+
     var table= $('#dataTableRegalias').DataTable({
         language: {
             "decimal": "",
@@ -31,10 +36,10 @@ $(document).ready( function () {
         },
         order: [[ 1, 'asc' ]]
     });
-
-    table.on( 'order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    //Pone conteo en una columna
+    // table.on( 'order.dt search.dt', function () {
+    //     table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    //         cell.innerHTML = i+1;
+    //     } );
+    // } ).draw();
 });

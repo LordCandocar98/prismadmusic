@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('regalias.index') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Regalias</a>
+        <a href="{{ route('regalias.index') }}"><i class="voyager-wallet" aria-hidden="true"></i> Gestion de Regalias</a>
     </li>
 @endsection
 @section('page_header')
@@ -9,7 +9,7 @@
         <i class="voyager-wallet" aria-hidden="true"></i>
         Gestion de Regalias
     </h1>
-    <a href="#" class="btn btn-success btn-add-new">
+    <a href="{{ route('regalias.create') }}" class="btn btn-success btn-add-new">
         <i class="voyager-plus"></i> <span>Crear</span>
     </a>
     <a class="btn btn-danger" id="borradoMasivo" name="borradoMasivo"><i class="voyager-trash"></i> <span>Borrado masivo</span></a>
@@ -31,7 +31,9 @@
                                 <th></th>
                             </tr>
                             <tr>
-                                <th class="text-center">N°</th>
+                                <th class="dt-not-orderable">
+                                    <input type="checkbox" class="select_all">
+                                </th>
                                 <th class="text-center">Nombres y Apellidos</th>
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Numero Telefonico</th>
@@ -44,7 +46,10 @@
                         <tbody>
                         @foreach ($regalias as $regalia)
                         <tr role="row">
-                                <td class="text-center"></td>
+                                <td>
+                                    <input type="checkbox" name="row_id[]" class="checkRegalia"
+                                        id="checkbox_{{ $regalia->id }}" value="{{ $regalia->id }}">
+                                </td>
                                 <td class="text-center">{{ $regalia->nombre.' '.$regalia->apellido }}</td>
                                 <td class="text-center">{{ $regalia->email }}</td>
                                 <td class="text-center">{{ $regalia->telefono }}</td>

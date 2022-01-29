@@ -33,7 +33,7 @@ class RegaliasController extends Controller
      */
     public function create()
     {
-        //
+        return view('regalias.gestion.create');
     }
 
     /**
