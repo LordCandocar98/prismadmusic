@@ -4,13 +4,13 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\RepertorioController;
-use GuzzleHttp\Middleware;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
 use App\Http\Controllers\PersonaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+
 
 Route::group(['prefix' => 'admin','middleware'=>'autenticado'], function () {
     Voyager::routes();
@@ -30,6 +30,7 @@ Route::get('/admin/login', function () {
 })->name('login');
 
 Route::resource('registro', PersonaController::class);//Registro de Personas con un controlador creado a mano
+//Gestión de Repertorios para los rol: Cliente.
 Route::resource('repertorio', RepertorioController::class);//Repertorio
 
 Route::get('profile', function () {
@@ -51,5 +52,10 @@ Route::resource('nomina', NominaController::class);
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
+
+Route::get('/config-cache', function() {
+    Artisan::call('cache:config');
     return "Cache is cleared";
 });

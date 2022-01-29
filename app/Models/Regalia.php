@@ -12,4 +12,14 @@ class Regalia extends Model
     public $timestamps=false;
     protected $primaryKey = 'id'; // or null
 
+    protected $fillable = [
+        'cliente_id',
+        'informe',
+        'fecha_informe_inicio',
+        'fecha_informe_final',
+        'nomina_id',
+        'valor',
+
+
+    ];
 }

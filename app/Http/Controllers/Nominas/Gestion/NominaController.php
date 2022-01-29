@@ -20,6 +20,7 @@ class NominaController extends Controller
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->select('users.*', 'persona.*', 'cliente.*')
             ->where('role_id',2)
+            ->where('registro_confirmed', 1)
             ->get();
         return view('nomina.gestion.index', compact('nominas'));
     }
