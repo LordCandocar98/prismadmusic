@@ -23,9 +23,12 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    {{-- <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-10"> --}}
+<div class="col-md-12">  
+    <div class="panel panel-bordered"> 
+        <div class="panel-body">
                 <form action="/registro" method="post" id="formRegistro" name="formRegistro">
                     <div class="col-md-12">
                         @if ($errors->any())
@@ -169,6 +172,7 @@
             </div>
         </div>
     </div>
+</div>
     <!-- Modal Privacidad-->
     <div class="modal fade" id="modalPolitica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -155,8 +155,6 @@ class RegaliasController extends Controller
             
             return redirect('regalias')->with($notification);
         }
-        
-
     }
 
     /**

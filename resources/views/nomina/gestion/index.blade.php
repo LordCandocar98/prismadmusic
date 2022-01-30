@@ -43,10 +43,10 @@
                                     <a href="javascript:;" title="Borrar" class="btn btn-sm btn-danger pull-right delete" data-id="18" id="delete-18">
                                         <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
                                     </a>
-                                    <a href="http://127.0.0.1:8000/admin/users/14/edit" title="Editar" class="btn btn-sm btn-primary pull-right edit">
+                                    <a href="{{ url('nomina/'.$nomina->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
                                         <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
                                     </a>
-                                    <a href="http://127.0.0.1:8000/admin/users/14" title="Ver" class="btn btn-sm btn-warning pull-right view">
+                                    <a href="{{ url('Storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
                                 </td>
@@ -62,5 +62,5 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('js/jsNomina/gestion/scriptIndexNomina.js') }}"></script>
+    <script src="{{ asset('js/jsNomina/gestion/scriptIndex.js') }}"></script>
 @endsection
