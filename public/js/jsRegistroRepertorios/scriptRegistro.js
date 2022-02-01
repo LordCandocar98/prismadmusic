@@ -30,4 +30,12 @@ $(document).ready(function () {
         },
     });
     $('.artista_principal').val('-1').trigger('change');
+
+    $('.featuring').select2({
+        allowClear: true,
+        placeholder: {
+            id: -1,
+        },
+    });
+    $('.featuring').val('-1').trigger('change');
 });

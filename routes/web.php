@@ -3,6 +3,7 @@
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
+use App\Http\Controllers\CancionController;
 use App\Http\Controllers\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
@@ -32,6 +33,7 @@ Route::get('/admin/login', function () {
 Route::resource('registro', PersonaController::class);//Registro de Personas con un controlador creado a mano
 //Gestión de Repertorios para los rol: Cliente.
 Route::resource('repertorio', RepertorioController::class);//Repertorio
+Route::resource('cancion', CancionController::class);//Cancion
 
 Route::get('profile', function () {
     return redirect('/admin');
