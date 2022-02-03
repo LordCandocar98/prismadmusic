@@ -26,9 +26,9 @@ class RegistroRequest extends FormRequest
         return [
             'nombre'                =>'required|min:3|max:35',
             'apellido'              =>'required|min:3|max:35',
-            'pais'                  =>'required|min:3|max:20',
-            'ciudad'                =>'required|min:3|max:20',
-            'departamento'          =>'required|min:3|max:20',
+            'pais'                  =>'required',
+            'ciudad'                =>'required',
+            'departamento'          =>'required',
             'tipo_documento'        =>'required|min:2|max:3',
             'numero_identificacion' =>'required|min:3|max:20',
             'telefono'              =>'required|min:10|max:10',
@@ -36,6 +36,10 @@ class RegistroRequest extends FormRequest
             'link_spoty'            =>'required|min:2|max:255',
             'numero_cuenta_bancaria'=>'required|min:3|max:20',
             'tipo_cuenta_bancaria'  =>'required|min:1|max:20',
+            'acepta_TermsPrivCond'  =>'required',
+            'acepta_Contrato'       =>'required',
+            'nombre_banco'          =>'required',
+            'archivo_banco'         =>'required',
         ];
     }
 
@@ -45,7 +49,7 @@ class RegistroRequest extends FormRequest
             'required'  => 'El campo :attribute es requerido',
             'min'       => 'El campo :attribute debe tener como mínimo :min carácteres',
             'max'       => 'El campo :attribute puede tener como máximo :max carácteres',
-            
+
         ];
     }
 
@@ -64,6 +68,10 @@ class RegistroRequest extends FormRequest
             'link_spoty'            =>'Link Spotify',
             'numero_cuenta_bancaria'=>'Número de cuenta bancaria',
             'tipo_cuenta_bancaria'  =>'Tipo de cuenta bancaria',
+            'nombre_banco'          =>'Nombre del Banco',
+            'archivo_banco'          =>'Certificación Bancaria',
+            'acepta_TermsPrivCond'  =>'Políticas de Privacidad y Términos/Condiciones',
+            'acepta_Contrato'       =>'Contrato web Prismad Music',
         ];
     }
 

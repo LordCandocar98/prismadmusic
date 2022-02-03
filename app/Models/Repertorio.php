@@ -11,4 +11,21 @@ class Repertorio extends Model
     protected $table = "repertorio";
     public $timestamps=false;
     protected $primaryKey = 'id'; // or null
+
+    protected $fillable = [
+        'titulo',
+        'version',
+        'artista_principal',
+        'genero',
+        'subgenero',
+        'nombre_sello',
+        'formato',
+        'fecha_salida',
+        'productor',
+        'copyright',
+        'annio_produccion',
+        'upc_ean',
+        'numero_catalogo',
+        'portada',
+    ];
 }

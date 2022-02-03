@@ -3,7 +3,7 @@ $(document).ready(function () {
         allowClear: true,
         placeholder: {
             id: -1,
-            text: "Selecciona un Tipo de Cuenta"
+            text: "Ejemplo: Ahorros"
         },
     });
     $('.tipoDeCuentaBanco').val('-1').trigger('change');
@@ -12,7 +12,7 @@ $(document).ready(function () {
         allowClear: true,
         placeholder: {
             id: -1,
-            text: "Selecciona un Tipo de documento de identificación"
+            text: "ejemplo: CC"
         },
     });
     $('.tipoDNI').val('-1').trigger('change');

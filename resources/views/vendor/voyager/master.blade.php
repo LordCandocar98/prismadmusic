@@ -21,7 +21,6 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{asset('fa/css/font-awesome.min.css')}}">
 
     @yield('css')
     @if(__('voyager::generic.is_rtl') == 'true')
@@ -75,8 +74,8 @@ if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Ill
 <div class="app-container">
     <div class="fadetoblack visible-xs"></div>
     <div class="row content-container">
-        @include('layouts.dashboard.navbar')
-        @include('layouts.dashboard.sidebar')
+        @include('voyager::dashboard.navbar')
+        @include('voyager::dashboard.sidebar')
         <script>
             (function(){
                     var appContainer = document.querySelector('.app-container'),

@@ -27,12 +27,12 @@ class PersonaController extends Controller
             ->orderBy('id', 'DESC')
             ->get('');
         if (Auth::user()->registro_confirmed == 0){
-            return view('registro/index')->with('personas', $personas);
+            return view('registro/index')->with('personas', $personas); //ACÁ REDIRIGE A LA VISTA*******************************************
         }
         return redirect('admin');
     }
 
-    public function store(RegistroRequest $request)
+    public function store(RegistroRequest $request) //ACÁ REDIRIGE AL VALIDATOR*******************************
     {
         //Para recibir los valores del form
         //dd(Auth::user()->role_id); // LINEA DE CODIGO SUPREMA PARA OBTENER EL ROL DE VOYAGER
@@ -59,8 +59,13 @@ class PersonaController extends Controller
             'numero_cuenta_bancaria'  => $request->numero_cuenta_bancaria,
             'tipo_cuenta_bancaria'    => $request->tipo_cuenta_bancaria,
             'persona_id'              => $persona->id,
+            'nombre_banco'            => $request->nombre_banco,
+            'archivo_banco'           => $request->archivo_banco,
         ]);
-
-        return redirect('admin');
+        $notification = array(
+            'message' => 'Registro completado exitosamente!',
+            'alert-type' => 'success'
+        );
+        return redirect('admin')->with($notification);
     }
 }

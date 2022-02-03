@@ -26,7 +26,7 @@ class NoConfirmed
     public function handle($request, Closure $next)
     {
         /** @var \App\Models\User $user **/
-        if (Auth::user() != null) {
+        if (Auth::user()) {
             if (Auth::user()->registro_confirmed == 1 && Auth::user()->role_id != 1 && Auth::user()->role_id != 3) {
                 if (Auth::user()->registro_confirmed == 1) {
                     return $next($request);

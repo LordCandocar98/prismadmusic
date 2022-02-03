@@ -29,7 +29,7 @@ class IsMod
     {
         /** @var \App\Models\User $user **/
         //$user = Auth::user();
-        if (Auth::user()->role_id != 3) {
+        if (Auth::user()->role_id != 3 && Auth::user()->role_id != 1) {
             return redirect('admin/roles');
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
