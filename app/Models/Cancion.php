@@ -17,6 +17,7 @@ class Cancion extends Model
         'instrumental',
         'titulo',
         'version_subtitulo',
+        'cliente_id',
         'featuring',
         'remixer',
         'autor',
