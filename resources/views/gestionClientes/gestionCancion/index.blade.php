@@ -1237,7 +1237,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="input-group-text">
-                            <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" value="1"/>
+                            <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" data-toggle="modal" data-target="#modalContrato" value="1"/>
                             <label for="Contrato" data-toggle="modal" data-target="#modalContrato"><a class="font-weight-bold">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer modificaciones a la misma.</a></label>
                         </div>
                     </div>
