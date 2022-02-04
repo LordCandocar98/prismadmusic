@@ -31,7 +31,8 @@
 
         </div>
         <div id="adminmenu">
-            <ul class="nav navbar-nav">
+            {!! menu('cliente', 'roles.baseMenu.menu') !!}
+            {{-- <ul class="nav navbar-nav">
                 <li class=""><a target="_self" href="">
                         <span class="icon voyager-home"></span>
                         <span class="title">Visión general</span></a>
@@ -52,7 +53,7 @@
                         <span class="title">Gestión de repertorio</span></a>
                     <!---->
                 </li>
-            </ul>
+            </ul> --}}
         </div>
     </nav>
 </div>
