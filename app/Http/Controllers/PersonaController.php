@@ -59,6 +59,8 @@ class PersonaController extends Controller
             'numero_cuenta_bancaria'  => $request->numero_cuenta_bancaria,
             'tipo_cuenta_bancaria'    => $request->tipo_cuenta_bancaria,
             'persona_id'              => $persona->id,
+            'nombre_banco'            => $request->nombre_banco,
+            'archivo_banco'           => $request->archivo_banco,
         ]);
         $notification = array(
             'message' => 'Registro completado exitosamente!',

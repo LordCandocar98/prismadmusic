@@ -67,23 +67,31 @@ class CancionController extends Controller
         };
 
         $cancion = Cancion::create([
-            'titulo'               => $request->titulo,
-            'version'              => $request->version,
-            'artista_principal'    => $request->artista_principal,
-            'genero'               => $request->genero,
-            'subgenero'            => $request->subgenero,
-            'nombre_sello'         => $request->nombre_sello,
-            'formato'              => $request->formato,
-            'fecha_salida'         => $request->fecha_salida,
-            'productor'            => $request->productor,
-            'copyright'            => $request->copyright,
-            'annio_produccion'     => $request->annio_produccion,
-            'upc_ean'              => $request->upc_ean,
-            'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $filename,
+            'tipo_secundario'         => $request->tipo_secundario,
+            'instrumental'            => $request->instrumental,
+            'titulo'                  => $request->titulo,
+            'version_subtitulo'       => $request->version_subtitulo,
+            'cliente_id'              => $request->cliente_id, //ÉSTE ES EL QUE SUBE LA CANCIÓN, ARTISTA PRINCIPAL
+            'featuring'               => $request->featuring, //SI ESTE CAMBIO ESTÁ LLENO, SERÁ EL QUE COMPARTA COLABORACIÓN
+            'remixer'                 => $request->remixer, //SI ESTE CAMBIO ESTÁ LLENO, SERÁ EL QUE COMPARTA COLABORACIÓN
+            'autor'                   => $request->autor,
+            'compositor'              => $request->compositor,
+            'arreglista'              => $request->arreglista,
+            'productor'               => $request->productor,
+            'pline'                   => $request->pline,
+            'annio_produccion'        => $request->annio_produccion,
+            'genero'                  => $request->genero,
+            'subgenero'               => $request->subgenero,
+            'genero_secundario'       => $request->genero_secundario,
+            'subgenero_secundario'    => $request->subgenero_secundario,
+            'letra_chocante_vulgar'   => $request->letra_chocante_vulgar,
+            'inicio_previsualizacion' => $request->inicio_previsualizacion,
+            'idioma_titulo'           => $request->idioma_titulo,
+            'idioma_letra'            => $request->idioma_letra,
+            'fecha_principal_salida'  => $request->fecha_principal_salida,
         ]);
         $notification = array(
-            'message' => 'Repertorio creado exitosamente!',
+            'message' => 'Canción añadida exitosamente!',
             'alert-type' => 'success'
         );
 

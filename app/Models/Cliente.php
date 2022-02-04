@@ -18,6 +18,8 @@ class Cliente extends Model
         'numero_cuenta_bancaria',
         'tipo_cuenta_bancaria',
         'persona_id', //Se tiene que añadir para poder crear clientes en el controlador de Persona
+        'nombre_banco',
+        'archivo_banco',
     ];
 
 }

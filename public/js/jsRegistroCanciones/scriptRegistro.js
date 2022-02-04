@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $('.artista_principal').select2({
+    $('.cliente_id').select2({
         allowClear: true,
         placeholder: {
             id: -1,
         },
     });
-    $('.artista_principal').val('-1').trigger('change');
+    $('.cliente_id').val('-1').trigger('change');
 
     $('.featuring').select2({
         allowClear: true,

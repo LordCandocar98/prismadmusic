@@ -122,10 +122,10 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="artista_principal">Artista principal</label>
+                                <label for="cliente_id">Artista principal</label>
                                 <br>
-                                <select class="artista_principal col-md-12" name="artista_principal" id="artista_principal"
-                                    value="{{ old('artista_principal') }}">
+                                <select class="cliente_id col-md-12" name="cliente_id" id="cliente_id"
+                                    value="{{ old('cliente_id') }}">
                                     @foreach ($clientes as $clientes)
                                         <option value="{{ $clientes->id }}">{{ $clientes->nombre_artistico }}</option>
                                     @endforeach
@@ -200,10 +200,10 @@
                                     value="{{ old('annio_produccion') }}">
                             </div>
                             <div class="col-sm-6">
-                                <label for="editor">Editor</label>
+                                <label for="genero">Selecciona una fecha principal de salida al mercado (*para vídeo horarios CET)</label>
                                 <br>
-                                <input type="text" class="form-control" id="editor" name="editor" placeholder="..."
-                                    value="{{ old('editor') }}">
+                                <input type="date" class="form-control" id="fecha_principal_salida" name="fecha_principal_salida"
+                                    value="{{ old('fecha_principal_salida') }}">
                             </div>
                         </div>
 
@@ -1165,21 +1165,6 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="genero">Precio</label>
-                                <br>
-                                <input type="text" class="form-control" id="genero" name="genero" placeholder="..."
-                                    value="{{ old('genero') }}">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="subgenero">No. catálogo productor</label>
-                                <br>
-                                <input type="text" class="form-control" id="subgenero" name="subgenero" placeholder="..."
-                                    value="{{ old('subgenero') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
                                 <label for="genero">Letra chocante o vulgar</label>
                                 <br>
                                 <div class="form-check">
@@ -1249,16 +1234,12 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="genero">Selecciona una fecha principal de salida al mercado (*para vídeo horarios CET)</label>
-                                <br>
-                                <input type="date" class="form-control" id="fecha_principal_salida" name="fecha_principal_salida"
-                                    value="{{ old('fecha_principal_salida') }}">
-                            </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group-text">
+                            <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" data-toggle="modal" data-target="#modalContrato" value="1"/>
+                            <label for="Contrato" data-toggle="modal" data-target="#modalContrato"><a class="font-weight-bold">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer modificaciones a la misma.</a></label>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Añadir canción</button>
@@ -1267,6 +1248,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Estás Seguro de Crear la canción-->
+    <div class="modal fade" id="modalContrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- MENSAJE LARGO -->
+            <form action="">
+                <div class="modal-body parrafo">
+                    ¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no puedes hacer cambios.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
 @endsection
 @section('javascript')
     <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
