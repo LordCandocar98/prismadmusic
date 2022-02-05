@@ -47,6 +47,11 @@ class CancionRequest extends FormRequest
             'idioma_letra'             =>'required',
             'fecha_principal_salida'   =>'required',
             'acepta_riesgo'            =>'required',
+            'porcentaje_artistaPr'     =>'required|numeric',
+            'porcentaje_featuring'     =>'numeric',
+            'porcentaje_remix'         =>'numeric',
+            'nombre_colaboracion'      =>'',
+            'repertorio_id'            =>'required',
         ];
     }
 
@@ -86,7 +91,7 @@ class CancionRequest extends FormRequest
             'idioma_titulo'            =>'Idioma título',
             'idioma_letra'             =>'Idioma letra',
             'fecha_principal_salida'   =>'Fecha principal de salida',
-            'acepta_riesgo'          =>'Acepto responsabilidad de creación de la canción',
+            'acepta_riesgo'            =>'Acepto responsabilidad de creación de la canción',
         ];
     }
 

@@ -11,4 +11,11 @@ class Colaboracion extends Model
     protected $table = "colaboracion";
     public $timestamps=false;
     protected $primaryKey = 'id'; // or null
+
+    protected $fillable = [
+        'nombre_colaboracion',
+        'porcentaje_intelectual',
+        'cliente_id',
+        'cancion_id',
+    ];
 }

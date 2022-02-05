@@ -13,6 +13,7 @@ class Cancion extends Model
     protected $primaryKey = 'id'; // or null
 
     protected $fillable = [
+        'repertorio_id',
         'tipo_secundario',
         'instrumental',
         'titulo',

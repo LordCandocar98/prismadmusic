@@ -131,7 +131,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="nombre_banco">Nombre del Banco</label>
                                 <br>
@@ -162,7 +162,7 @@
                                 <input type="text" class="form-control" id="numero_cuenta_bancaria"
                                     name="numero_cuenta_bancaria" placeholder="Ejemplo: 05700002715"
                                     value="{{ old('numero_cuenta_bancaria') }}">
-                            </div>
+                            </div> --}}
                             <!-- Checkboxes of Privacidad y TérminosyCond, Contratos -->
                             <div class="form-group row">
                                 <div class="col-md-12">
