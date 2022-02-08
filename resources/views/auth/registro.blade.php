@@ -37,13 +37,13 @@
                     <div class="form-group form-group-default col-md-6" id="passwordGroup">
                         <div class="controls">
                             <label>Contraseña</label>
-                            <input type="password" name="password" placeholder="password" class="form-control">
+                            <input type="password" name="password" placeholder="Contraseña" class="form-control">
                         </div>
                     </div>
                     <div class="form-group form-group-default col-md-6" id="passwordGroup">
                         <div class="controls">
                             <label>Confirmar contraseña</label>
-                            <input type="password" name="password_confirmation" placeholder="Contraseña" class="form-control">
+                            <input type="password" name="password_confirmation" placeholder="Confirmar contraseña" class="form-control">
                         </div>
                     </div>
                 </div>

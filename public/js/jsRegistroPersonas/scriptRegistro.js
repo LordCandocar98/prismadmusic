@@ -112,4 +112,14 @@ $(document).ready(function () {
     const limpiar = () => {
         $select.empty();
     };
+
+    $('#acepta_Contrato').on('change', function() {
+        if ($(this).is(':checked') ) {
+            $('#modalContrato').modal('show');
+        }else{
+            console.log("No select");
+        }
+    });
+
+
 });

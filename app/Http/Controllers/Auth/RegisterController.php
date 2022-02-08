@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'], //modifiqué Nombre por name, Correo por email y Contraseña por password
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'g-recaptcha-response' => function ($attribute, $value, $fail) {
@@ -64,10 +64,22 @@ class RegisterController extends Controller
                 $response = json_decode($response);
                 if(!$response->success){
                     Session::flash('g-recaptcha-response','Por favor marca la verificación');
-                    Session::flash('alert-class','alert-danger');
-                    $fail($attribute.'google reCaptcha failed');
                 }
             }
+        ],
+        [
+            'required'  => 'Te falto ingresar el/la :attribute.',
+            'string'    => ':attribute debe ser texto.',
+            'min'       => 'La :attribute debe tener minimo :min caracteres.',
+            'max'       => 'El :attribute debe tener maximo :max caracteres.',
+            'email'     => 'Parece que no es un nombre de :attribute valido .',
+            'unique'    => 'El :attribute no es unico.',
+            'confirmed' => ':attribute debe ser confirmado.'
+        ],
+        [
+            'name'     => 'Nombre de usuario',
+            'email'    => 'Correo eletronico',
+            'password' => 'Contraseña'
         ]);
     }
 
