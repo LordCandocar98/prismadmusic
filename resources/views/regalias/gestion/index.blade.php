@@ -66,10 +66,10 @@
                                     <a href="javascript:;" title="Borrar" class="btn btn-sm btn-danger pull-right delete" data-id="18" id="delete-18">
                                         <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
                                     </a>
-                                    <a href="{{ url('nomina/'.$regalia->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
+                                    <a href="{{ url('regalias/'.$regalia->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
                                         <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
                                     </a>
-                                    <a href="{{ url('Storage/'.$regalia->informe) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
+                                    <a href="{{ url('storage/'.$regalia->informe) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
                                 </td>
