@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Regalias\Gestion;
+namespace App\Http\Requests\Nomina\Gestion;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegaliasRequest extends FormRequest
+class NominaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class RegaliasRequest extends FormRequest
     public function rules()
     {
         return [
-            'idCliente'             =>'required',
-            'fileInforme'           =>'required|mimes:doc,csv,xlsx,xls,docx,ppt,odt,ods,odp|max:3000"',
-            'fecha_informe_inicio'  =>'required',
-            'fecha_informe_final'   =>'required',
-            'valor'                 =>'required|numeric'
+            'idCliente'           =>'required',
+            'fileDesprendible'    =>'required|mimes:pdf|max:3000"',
+            'fecha_Desprendible'  =>'required',
+            'valor'               =>'required|numeric'
         ];
     }
     
@@ -37,7 +36,7 @@ class RegaliasRequest extends FormRequest
         return [
             'required'  => 'El campo :attribute es requerido',
             'numeric'   => 'El campo :attribute debe ser numérico',
-            'mimes'     => 'Debe cargar en el campo :attribute un archivo excel'
+            'mimes'     => 'Debe cargar en el campo :attribute un archivo pdf'
         ];
     }
 
@@ -45,9 +44,8 @@ class RegaliasRequest extends FormRequest
     {
         return [
             'idCliente'             =>'Cliente',
-            'fileInforme'           =>'Informe',
-            'fecha_informe_inicio'  =>'Fecha Informe Inicio',
-            'fecha_informe_final'   =>'Fecha Informe Final',
+            'fileDesprendible'      =>'Desprendible',
+            'fecha_Desprendible'    =>'Fecha Desprendible',
             'valor'                 =>'Valor'
         ];
     }

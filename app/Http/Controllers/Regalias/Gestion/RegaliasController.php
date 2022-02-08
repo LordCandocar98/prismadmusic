@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Regalias\Gestion;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Regalias\Gestion\RegaliasRequest;
 use App\Models\Cliente;
 use App\Models\Persona;
 use App\Models\Regalia;
@@ -53,7 +54,7 @@ class RegaliasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegaliasRequest $request)
     {
         $filename = "";
         if($xlsArchivo = $request->file('fileInforme')){
@@ -116,7 +117,7 @@ class RegaliasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RegaliasRequest $request, $id)
     {
         $regalia = Regalia::find($id);
         if ($regalia->nomina_id == null) {
