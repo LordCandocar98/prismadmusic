@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::group(['prefix' => 'admin','middleware'=>'autenticado'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'autenticado'], function () {
     Voyager::routes();
 });
 
@@ -30,10 +30,10 @@ Route::get('/admin/login', function () {
     return redirect()->route('login');
 })->name('login');
 
-Route::resource('registro', PersonaController::class);//Registro de Personas con un controlador creado a mano
+Route::resource('registro', PersonaController::class); //Registro de Personas con un controlador creado a mano
 //Gestión de Repertorios para los rol: Cliente.
-Route::resource('repertorio', RepertorioController::class);//Repertorio
-Route::resource('cancion', CancionController::class);//Cancion
+Route::resource('repertorio', RepertorioController::class); //Repertorio
+Route::resource('cancion', CancionController::class); //Cancion
 
 Route::get('profile', function () {
     return redirect('/admin');
@@ -42,6 +42,8 @@ Route::get('profile', function () {
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/nosotros', [SiteController::class, 'nosotros'])->name('nosotros');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
+Route::get('/compartir-musica', [SiteController::class, 'compartir'])->name('compartir');
+Route::post('/compartir-musica', [SiteController::class, 'postCompartir'])->name('compartirMusica');
 
 //Gestión de clientes para los roles: AMIN y Moderadores.
 Route::resource('clientes', ClientesController::class);
@@ -52,12 +54,12 @@ Route::resource('regalias', RegaliasController::class);
 //Gestión de nomina para los roles: AMIN y Moderadores.
 Route::resource('nomina', NominaController::class);
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return "Cache is cleared";
 });
 
-Route::get('/config-cache', function() {
+Route::get('/config-cache', function () {
     Artisan::call('cache:config');
     return "Cache is cleared";
 });

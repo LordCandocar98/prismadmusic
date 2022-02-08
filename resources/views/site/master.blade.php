@@ -48,17 +48,18 @@
                                 <div class="rd-navbar-nav-wrap">
                                     <!-- RD Navbar Nav-->
                                     <ul class="rd-navbar-nav">
-                                        <li class="rd-nav-item {{ request()->routeIs('home') ? 'active' : '' }}"><a class="rd-nav-link"
-                                                href="{{ url('/') }}">Home</a>
+                                        <li class="rd-nav-item {{ request()->routeIs('home') ? 'active' : '' }}"><a
+                                                class="rd-nav-link" href="{{ url('/') }}">Home</a>
                                         </li>
-                                        <li class="rd-nav-item {{ request()->routeIs('nosotros') ? 'active' : '' }}"><a class="rd-nav-link" href="{{url('/nosotros')}}">Quienes
+                                        <li class="rd-nav-item {{ request()->routeIs('nosotros') ? 'active' : '' }}">
+                                            <a class="rd-nav-link" href="{{ url('/nosotros') }}">Quienes
                                                 somos</a>
                                         </li>
                                         <li class="rd-nav-item"><a class="rd-nav-link"
-                                                href="{{url('/admin/login')}}">Login</a>
+                                                href="{{ url('/login') }}">Login</a>
                                         </li>
-                                        <li class="rd-nav-item"><a class="rd-nav-link"
-                                                href="">Envíanos tu canción</a>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url('/compartir-musica') }}">Envíanos tu
+                                                canción</a>
                                         </li>
                                     </ul>
                                 </div>
