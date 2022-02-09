@@ -48,7 +48,7 @@
 
         // Set Icon
         // if(isset($options->icon) && $options->icon == true){
-            $icon = '<i class="' . $item->icon_class . '"></i>';
+            $icon = '<span class="icon ' . $item->icon_class . '"></span>';
         // }
 
     @endphp
@@ -56,7 +56,7 @@
     <li class="{{ $listItemClass }}">
         <a href="{{ url($item->link()) }}" target="{{ $item->target }}" style="{{ $styles }}" {!! $linkAttributes ?? '' !!}>
             {!! $icon !!}
-            <span>{{ $item->title }}</span>
+            <span class="title">{{ $item->title }}</span>
             {!! $caret !!}
         </a>
         @if(!$originalItem->children->isEmpty())
