@@ -1234,7 +1234,7 @@
                         </div>
 
                         <div class="text-center font-weight-bold">
-                            <p>¿Tu compañero no pertenece a Prismad? ¡Invítalo!</p>
+                            <p>¿Tu compañero no pertenece a Prismad? ¡Invítalo!</p><br>
                         </div>
 
                         <div class="form-group row">
@@ -1278,18 +1278,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="xd">Tipo de colaboración</label>
+                            <div class="col-sm-6">
+                                <label for="porcentaje_intelectual">Letra chocante o vulgar</label>
                                 <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="remixInvitado" id="remixInvitado" value="remix">
-                                    <label class="form-check-label" for="remixInvitado">
+                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="remix">
+                                    <label class="form-check-label" for="porcentaje_intelectual">
                                         Remix
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="featuringInvitado" id="featuringInvitado" value="featuring">
-                                    <label class="form-check-label" for="no">
+                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="featuring">
+                                    <label class="form-check-label" for="porcentaje_intelectual">
                                         Featuring
                                     </label>
                                 </div>
