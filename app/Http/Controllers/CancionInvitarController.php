@@ -101,8 +101,8 @@ class CancionInvitarController extends Controller
         ]);
 
         $usuario = User::create([
-            'name' => $request['name'],
             'email' => $request['email'],
+            'name' => $request['email'], //Registrarse con el mismo email como nombre de usuario
             'password' => 'password',
         ]);
 

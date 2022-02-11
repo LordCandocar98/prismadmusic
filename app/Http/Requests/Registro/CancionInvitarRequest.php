@@ -48,14 +48,14 @@ class CancionInvitarRequest extends FormRequest
             'fecha_principal_salida'   =>'required',
             'acepta_riesgo'            =>'required',
             'porcentaje_artistaPr'     =>'required|numeric',
-            'porcentaje_featuring'     =>'numeric',
-            'porcentaje_remix'         =>'numeric',
+            'porcentaje_featuring'     =>'',
+            'porcentaje_remix'         =>'',
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
 
             'nombre_artistico'         =>'required|min:1|max:255',
 
-            'name'                     => ['required', 'string', 'max:255'],
+            'name'                     => '',
             'email'                    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'                 => '',
         ];
