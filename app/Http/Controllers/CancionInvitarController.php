@@ -7,9 +7,9 @@ use App\Models\User;
 use App\Models\Cancion;
 use App\Models\Colaboracion;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Cancion\CancionRequest;
+use App\Http\Requests\Registro\CancionInvitarRequest;
 
-class CancionController extends Controller
+class CancionInvitarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,19 +36,20 @@ class CancionController extends Controller
             ->get('');
 
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('gestionClientes/gestionCancion/index')
+            return view('gestionClientes/gestionCancion/invitar')
                         ->with('clientes', $clientes)
                         ->with('clientes2', $clientes2)
                         ->with('clientes3', $clientes3)
                         ->with('repertorios', $repertorios);
         }
         //return redirect('admin');
-        return view('gestionClientes/gestionCancion/index')
+        return view('gestionClientes/gestionCancion/invitar')
                     ->with('clientes', $clientes)
                     ->with('clientes2', $clientes2)
                     ->with('clientes3', $clientes3)
                     ->with('repertorios', $repertorios);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,7 +66,7 @@ class CancionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CancionRequest $request)
+    public function store(CancionInvitarRequest $request)
     {
         //dd($request);
         if($image = $request->file('portada')){

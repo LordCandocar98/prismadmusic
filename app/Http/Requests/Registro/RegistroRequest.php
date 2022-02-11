@@ -33,7 +33,7 @@ class RegistroRequest extends FormRequest
             'numero_identificacion' =>'required|min:3|max:20',
             'telefono'              =>'required|min:10|max:10',
             'nombre_artistico'      =>'required|min:3|max:20',
-            'link_spoty'            =>'required|min:2|max:255',
+            'link_spoty'            =>'max:255',
             'numero_cuenta_bancaria'=>'required|min:3|max:20',
             'tipo_cuenta_bancaria'  =>'required|min:1|max:20',
             'acepta_TermsPrivCond'  =>'required',
