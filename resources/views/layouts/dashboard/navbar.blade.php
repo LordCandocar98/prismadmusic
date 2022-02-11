@@ -7,7 +7,10 @@
             @section('breadcrumbs')
                 <ol class="breadcrumb hidden-xs">
                     <li class="active">
-                        <a href="{{ route('voyager.dashboard') }}"><i class="voyager-boat"></i> Tablero</a>
+                        <a href="{{ route('voyager.dashboard') }}">
+                            <span class="icon voyager-home"></span>
+                            <span class="title">Tablero</span>
+                        </a>
                     </li>
                     @yield('addBreadcrumbs')
                 </ol>
