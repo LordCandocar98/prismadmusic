@@ -215,6 +215,7 @@
 @endsection
 
 @section('javascript')
+    <script src="{{ asset('js/signature_pad/signature_pad.js') }}"></script>
     <script src="{{ asset('js/jsRegistroPersonas/scriptRegistro.js') }}"></script>
     <script src="{{ asset('js/jsRegistroPersonas/scriptCanvas.js') }}"></script>
 @endsection
