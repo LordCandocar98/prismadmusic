@@ -3,7 +3,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="fa fa-music" aria-hidden="true"></i>
-        Información sobre la pista
+        Información sobre la pista - Invitar un Colaborador
     </h1>
 @endsection
 
