@@ -52,6 +52,12 @@ class CancionInvitarRequest extends FormRequest
             'porcentaje_remix'         =>'numeric',
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
+
+            'nombre_artistico'         =>'required|min:1|max:255',
+
+            'name'                     => ['required', 'string', 'max:255'],
+            'email'                    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'                 => '',
         ];
     }
 
@@ -62,7 +68,9 @@ class CancionInvitarRequest extends FormRequest
             'min'       => 'El campo :attribute debe tener como mínimo :min carácteres',
             'max'       => 'El campo :attribute puede tener como máximo :max carácteres',
             'numeric'   => 'El campo :attribute debe ser numérico',
-
+            'email'     => 'Parece que no es un nombre de :attribute valido .',
+            'unique'    => 'El :attribute no es unico.',
+            'confirmed' => ':attribute debe ser confirmado.'
         ];
     }
 
@@ -92,6 +100,12 @@ class CancionInvitarRequest extends FormRequest
             'idioma_letra'             =>'Idioma letra',
             'fecha_principal_salida'   =>'Fecha principal de salida',
             'acepta_riesgo'            =>'Acepto responsabilidad de creación de la canción',
+
+            'nombre_artistico'         =>'Nombre artístico colaborador',
+
+            'name'                     => 'Nombre de usuario',
+            'email'                    => 'Correo eletronico',
+            'password'                 => 'Contraseña'
         ];
     }
 

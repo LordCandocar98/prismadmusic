@@ -1248,7 +1248,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>Contraseña</label>
                                 <input type="password" name="password" class="form-control">
@@ -1256,6 +1256,31 @@
                             <div class="col-sm-6">
                                 <label>Confirmar contraseña</label>
                                 <input type="password" name="password_confirmation" class="form-control">
+                            </div>
+                        </div> --}}
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="porcentaje_intelectual">Tipo de colaboración</label>
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="remix">
+                                    <label class="form-check-label" for="tipo_colaboracion">
+                                        Remix
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="featuring">
+                                    <label class="form-check-label" for="tipo_colaboracion">
+                                        Featuring
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nombre_artistico">Nombre artístico temporal del colaborador</label>
+                                <br>
+                                <input type="text" class="form-control" id="nombre_artistico" name="nombre_artistico"
+                                    value="{{ old('nombre_artistico') }}">
                             </div>
                         </div>
 
@@ -1274,25 +1299,6 @@
                                 <br>
                                 <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix"
                                 value="{{ old('porcentaje_remix') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="porcentaje_intelectual">Letra chocante o vulgar</label>
-                                <br>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="remix">
-                                    <label class="form-check-label" for="porcentaje_intelectual">
-                                        Remix
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="featuring">
-                                    <label class="form-check-label" for="porcentaje_intelectual">
-                                        Featuring
-                                    </label>
-                                </div>
                             </div>
                         </div>
 
