@@ -4,6 +4,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\CancionController;
+use App\Http\Controllers\CancionInvitarController;
 use App\Http\Controllers\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
@@ -34,6 +35,7 @@ Route::resource('registro', PersonaController::class); //Registro de Personas co
 //Gestión de Repertorios para los rol: Cliente.
 Route::resource('repertorio', RepertorioController::class); //Repertorio
 Route::resource('cancion', CancionController::class); //Cancion
+Route::resource('cancion_invitarcolab', CancionInvitarController::class); //Canción con invitación
 
 Route::get('profile', function () {
     return redirect('/admin');

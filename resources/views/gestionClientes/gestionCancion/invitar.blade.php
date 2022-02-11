@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <form action="/cancion" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
+                <form action="/cancion_invitarcolab" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
                     <div class="col-md-12">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -1233,18 +1233,34 @@
                             </div>
                         </div>
 
+                        <div class="text-center font-weight-bold">
+                            <p>¿Tu compañero no pertenece a Prismad? ¡Invítalo!</p>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="featuring">Featuring</label>
-                                <br>
-                                <select class="featuring col-md-12" name="featuring" id="featuring"
-                                    value="{{ old('featuring') }}">
-                                    @foreach ($clientes2 as $clientes2)
-                                        <option value="{{ $clientes2->id }}">{{ $clientes2->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Nombre de usuario</label>
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Pepito" class="form-control">
                             </div>
                             <div class="col-sm-6">
+                                <label>Correo Electrónico</label>
+                                <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Pepito@gmail.com" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label>Contraseña</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Confirmar contraseña</label>
+                                <input type="password" name="password_confirmation" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <label for="porcentaje_featuring">Porcentaje intelectual Featuring</label>
                                 <br>
                                 <input type="text" class="form-control" id="porcentaje_featuring" name="porcentaje_featuring"
@@ -1253,17 +1269,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="formato">Remixer</label>
-                                <br>
-                                <select class="remixer col-md-12" name="remixer" id="remixer"
-                                    value="{{ old('remixer') }}">
-                                    @foreach ($clientes3 as $clientes3)
-                                        <option value="{{ $clientes3->id }}">{{ $clientes3->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-12">
                                 <label for="porcentaje_remix">Porcentaje intelectual Remixer</label>
                                 <br>
                                 <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix"
@@ -1271,15 +1277,32 @@
                             </div>
                         </div>
 
-                    </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="xd">Tipo de colaboración</label>
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="remixInvitado" id="remixInvitado" value="remix">
+                                    <label class="form-check-label" for="remixInvitado">
+                                        Remix
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="featuringInvitado" id="featuringInvitado" value="featuring">
+                                    <label class="form-check-label" for="no">
+                                        Featuring
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
                     <div class="col-md-12">
                         <div class="input-group-text">
                             <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" data-toggle="modal" data-target="#modalAlerta" value="1"/>
                             <label for="Contrato" data-toggle="modal" data-target="#modalAlerta"><a class="font-weight-bold">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer modificaciones a la misma.</a></label>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Añadir canción</button>
                     </div>
@@ -1310,100 +1333,6 @@
         </div>
         </div>
     </div>
-    <!-- Modal NO ESTÁ REGISTRADO EN PRISMAD-->
-    <div class="modal fade" id="modalInvitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">INVITAR A UN COLABORADOR</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <!-- Form registro de usuario, persona, cliente y colaboración-->
-                <form action="/cancion" method="POST" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all('<li>:message</li>') as $message)
-                                        {!! $message !!}
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    </div>
-                    @csrf
-
-                    <div class="modal-body">
-                        @if ($message = Session::get('ErrorInsert'))
-                            <div class="col-12 alert-danger alert-dissmissable fade show" role="alert">
-                                <h5>Errores:</h5>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="name">Nombre</label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="password">Contraseña</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <label for="password">Confirmar contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Invitar colaborador</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-
 @endsection
 @section('javascript')
     <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
