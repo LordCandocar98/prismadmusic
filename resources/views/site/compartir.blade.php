@@ -33,38 +33,45 @@
                     <form class="rd-form" method="post" action="/compartir-musica">
                         {{ csrf_field() }}
                         <div class="form-wrap border {{ $errors->has('nombre_artista') ? 'has-error' : '' }}">
-                            <input class="form-input" type="text" name="nombre_artista" id="nombre_artista">
+                            <input class="form-input" type="text" name="nombre_artista" id="nombre_artista"
+                                value="{{ old('nombre_artista') }}">
                             @if ($errors->has('nombre_artista'))
                                 <span class="form-validation">{{ $errors->first('nombre_artista') }}</span>
                             @endif
                             <label class="form-label rd-input-label" for="nombre_artista">Nombre artistico</label>
                         </div>
                         <div class="form-wrap border {{ $errors->has('link_spotify') ? 'has-error' : '' }}">
-                            <input class="form-input" type="text" name="link_spotify" id="link_spotify">
+                            <input class="form-input" type="text" name="link_spotify" id="link_spotify"
+                            value="{{ old('link_spotify') }}">
                             @if ($errors->has('link_spotify'))
                                 <span class="form-validation">{{ $errors->first('link_spotify') }}</span>
                             @endif
                             <label class="form-label rd-input-label" for="link_spotify">Link Spotify</label>
                         </div>
                         <div class="form-wrap border {{ $errors->has('num_celular') ? 'has-error' : '' }}">
-                            <input class="form-input" type="number" name="num_celular" id="num_celular">
+                            <input class="form-input" type="number" name="num_celular" id="num_celular"
+                            value="{{ old('num_celular') }}">
                             @if ($errors->has('num_celular'))
                                 <span class="form-validation">{{ $errors->first('num_celular') }}</span>
                             @endif
                             <label class="form-label rd-input-label" for="num_celular">Número de télefono o celular</label>
                         </div>
                         <div class="form-wrap border {{ $errors->has('email') ? 'has-error' : '' }}">
-                            <input class="form-input form-control-has-validation" id="email" type="email" name="email">
+                            <input class="form-input form-control-has-validation" id="email" type="email" name="email"
+                            value="{{ old('email') }}">
                             @if ($errors->has('email'))
                                 <span class="form-validation">{{ $errors->first('email') }}</span>
                             @endif
                             <label class="form-label rd-input-label" for="email">Correo electronico</label>
                         </div>
-                        <div class="form-wrap border">
+                        <div class="form-wrap border {{ $errors->has('descripcion') ? 'has-error' : '' }}">
                             <label class="form-label rd-input-label" for="descripcion">Describa brevemente sus
                                 expectativas</label>
                             <textarea class="form-input form-control-has-validation form-control-last-child"
-                                id="descripcion" name="descripcion"></textarea><span class="form-validation"></span>
+                                id="descripcion" name="descripcion">{{ old('descripcion') }}</textarea>
+                            @if ($errors->has('descripcion'))
+                                <span class="form-validation">{{ $errors->first('descripcion') }}</span>
+                            @endif
                         </div>
                         <button class="button button-primary" type="submit">Enviar canción</button>
                     </form>
