@@ -109,6 +109,11 @@ $(document).ready(function () {
         $('.ciudad').val('-1').trigger('change');
     }
 
+    $('#tipo_documento').select2({
+        allowClear: false,
+        placeholder: 'Selecciona una opción'
+    });
+
     const limpiar = () => {
         $select.empty();
     };
@@ -120,6 +125,5 @@ $(document).ready(function () {
             console.log("No select");
         }
     });
-
 
 });

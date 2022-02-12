@@ -1238,17 +1238,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            {{-- <div class="col-sm-6">
                                 <label>Nombre de usuario</label>
                                 <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Pepito" class="form-control">
-                            </div>
-                            <div class="col-sm-6">
+                            </div> --}}
+                            <div class="col-md-12">
                                 <label>Correo Electrónico</label>
                                 <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Pepito@gmail.com" class="form-control">
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="col-sm-6">
                                 <label>Contraseña</label>
                                 <input type="password" name="password" class="form-control">
@@ -1257,13 +1257,38 @@
                                 <label>Confirmar contraseña</label>
                                 <input type="password" name="password_confirmation" class="form-control">
                             </div>
+                        </div> --}}
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="porcentaje_intelectual">Tipo de colaboración</label>
+                                <br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="remix">
+                                    <label class="form-check-label" for="tipo_colaboracion">
+                                        Remix
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="featuring">
+                                    <label class="form-check-label" for="tipo_colaboracion">
+                                        Featuring
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nombre_artistico">Nombre artístico temporal del colaborador</label>
+                                <br>
+                                <input type="text" class="form-control" id="nombre_artistico" name="nombre_artistico"
+                                    value="{{ old('nombre_artistico') }}">
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <label for="porcentaje_featuring">Porcentaje intelectual Featuring</label>
                                 <br>
-                                <input type="text" class="form-control" id="porcentaje_featuring" name="porcentaje_featuring"
+                                <input type="text" class="form-control" id="porcentaje_featuring" name="porcentaje_featuring" placeholder="Ej: 60"
                                 value="{{ old('porcentaje_featuring') }}">
                             </div>
                         </div>
@@ -1272,27 +1297,8 @@
                             <div class="col-md-12">
                                 <label for="porcentaje_remix">Porcentaje intelectual Remixer</label>
                                 <br>
-                                <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix"
+                                <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix" placeholder="Ej: 40"
                                 value="{{ old('porcentaje_remix') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="porcentaje_intelectual">Letra chocante o vulgar</label>
-                                <br>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="remix">
-                                    <label class="form-check-label" for="porcentaje_intelectual">
-                                        Remix
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="porcentaje_intelectual" id="porcentaje_intelectual" value="featuring">
-                                    <label class="form-check-label" for="porcentaje_intelectual">
-                                        Featuring
-                                    </label>
-                                </div>
                             </div>
                         </div>
 

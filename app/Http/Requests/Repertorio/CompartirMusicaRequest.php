@@ -26,9 +26,10 @@ class CompartirMusicaRequest extends FormRequest
     {
         return [
             'nombre_artista'    => 'required',
-            'link_spotify'      => 'required|min:3|max:255',
+            'link_spotify'      => 'required|min:5|max:255',
             'num_celular'       => 'required|numeric|digits:10',
             'email'             => 'required|email',
+            'descripcion'       => 'max:280',
         ];
     }
 
