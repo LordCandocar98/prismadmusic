@@ -622,6 +622,25 @@
                                     value="{{ old('numero_catalogo') }}">
                             </div>
                             <div class="col-sm-6">
+                                <label for="sello">Fecha de Lanzamiento</label>
+                                <br>
+                                <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
+                                    value="{{ old('fecha_lanzamiento') }}">
+                            </div>
+                        </div>
+
+                        <div class="text-start font-weight-bold">
+                            <p>Requisitos y especificaciones para la carátula:</p><br>
+                            <p>- Formato de archivo: JPG, PNG</p>
+                            <p>- Tamaño de al menos: 3000x3000 píxeles</p>
+                            <p>- Tamaño del archivo: No puede superar los 35 MB</p>
+                            <p>- Color: RGB (incluyendo imagenes en blanco y negro)</p>
+                            <p>- Resolución: 72 dpi</p>
+                            <p>La carátula no puede tener ningún tipo de logos, información de páginas web, fechas de lanzamiento ni publicidad de algún tipo</p>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <label for="numero_catalogo">Carga una Imagen de Portada</label>
                                 <br>
                                 <input type="file" class="form-control" id="portada" name="portada"

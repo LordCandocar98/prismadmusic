@@ -34,8 +34,8 @@ class RegistroRequest extends FormRequest
             'telefono'              =>'required|min:10|max:10',
             'nombre_artistico'      =>'required|min:3|max:20',
             'link_spoty'            =>'max:255',
-            'numero_cuenta_bancaria'=>'required|min:3|max:20',
-            'tipo_cuenta_bancaria'  =>'required|min:1|max:20',
+            'numero_cuenta_bancaria'=>'',
+            'tipo_cuenta_bancaria'  =>'',
             'acepta_TermsPrivCond'  =>'required',
             'acepta_Contrato'       =>'required',
         ];

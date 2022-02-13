@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+<link href="{{asset('multiinput/css/jq.multiinput.min.css')}}" rel="stylesheet">
+
 @section('page_header')
     <h1 class="page-title">
         <i class="fa fa-music" aria-hidden="true"></i>
@@ -1237,27 +1239,57 @@
                             <p>¿Tu compañero no pertenece a Prismad? ¡Invítalo!</p><br>
                         </div>
 
-                        <div class="form-group row">
-                            {{-- <div class="col-sm-6">
-                                <label>Nombre de usuario</label>
-                                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Pepito" class="form-control">
-                            </div> --}}
-                            <div class="col-md-12">
-                                <label>Correo Electrónico</label>
-                                <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Pepito@gmail.com" class="form-control">
-                            </div>
-                        </div>
+                        <textarea
+                            class="form-control multi"
+                            name="{{ $row->field }}"
+                            data-name="{{ $row->display_name }}"
+                            @if($row->required == 1) required @endif
+                        >
+                        @if(isset($dataTypeContent->{$row->field}))
+                        {{ old($row->field, $dataTypeContent->{$row->field}) }}
+                        @else
+                        []
+                        @endif
+                        </textarea>
+                        <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
+                        <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
+
+                        <script>
+                            $('.multi').multiInput({
+                                json: true,
+                                input: $(
+                                    '<div class="row inputElement">\n' +
+                                    '<div class="multiinput-title col-xs-12">Datos de tu Colaborador <span class="number">1</span></div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '</div>\n' +
+
+                                    '</div>\n'),
+                                limit: 10,
+                                onElementAdd: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                },
+                                onElementRemove: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                }
+                            });
+                        </script>
 
                         {{-- <div class="form-group row">
                             <div class="col-sm-6">
-                                <label>Contraseña</label>
-                                <input type="password" name="password" class="form-control">
+                                <label>Correo Electrónico</label>
+                                <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Pepito@gmail.com" class="form-control">
                             </div>
                             <div class="col-sm-6">
-                                <label>Confirmar contraseña</label>
-                                <input type="password" name="password_confirmation" class="form-control">
+                                <label for="nombre_artistico">Nombre artístico temporal del colaborador</label>
+                                <br>
+                                <input type="text" class="form-control" id="nombre_artistico" name="nombre_artistico"
+                                    value="{{ old('nombre_artistico') }}">
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group row">
                             <div class="col-sm-6">
@@ -1275,12 +1307,6 @@
                                         Featuring
                                     </label>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="nombre_artistico">Nombre artístico temporal del colaborador</label>
-                                <br>
-                                <input type="text" class="form-control" id="nombre_artistico" name="nombre_artistico"
-                                    value="{{ old('nombre_artistico') }}">
                             </div>
                         </div>
 
@@ -1300,7 +1326,7 @@
                                 <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix" placeholder="Ej: 40"
                                 value="{{ old('porcentaje_remix') }}">
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <div class="col-md-12">

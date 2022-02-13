@@ -21,6 +21,7 @@ class Repertorio extends Model
         'nombre_sello',
         'formato',
         'fecha_salida',
+        'fecha_lanzamiento',
         'productor',
         'copyright',
         'annio_produccion',

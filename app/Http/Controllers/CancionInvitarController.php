@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Persona;
@@ -11,6 +12,7 @@ use App\Models\Colaboracion;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Registro\CancionInvitarRequest;
+
 
 class CancionInvitarController extends Controller
 {
@@ -106,13 +108,15 @@ class CancionInvitarController extends Controller
             'password' => 'password',
         ]);
 
+        // Send confirmation code
+
         $persona = Persona::create([
             'user_id'               => $usuario->id, //AGARRA EL ID DE LA SESIÓN ACTUAL
             'role_id'               => 2, //2 de usuario normal, 3 para moderador
         ]);
 
         $cliente = Cliente::create([
-            'nombre_artistico'        => $request->nombre_artistico, //Poner actualizar en cascada al nombre artístico
+            'nombre_artistico'        => 'ArtistaInvitado', //Poner actualizar en cascada al nombre artístico
             'persona_id'              => $persona->id,
         ]);
 
