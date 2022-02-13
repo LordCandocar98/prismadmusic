@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-02-2022 a las 23:04:08
+-- Tiempo de generación: 13-02-2022 a las 04:51:56
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -446,12 +446,18 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (26, 1, 'Despliegue', '', '_blank', 'voyager-dot-3', '#000000', 25, 1, '2022-01-10 23:30:25', '2022-01-10 23:32:50', NULL, 'null'),
 (27, 1, 'Desarrollo', '', '_self', 'voyager-whale', '#000000', NULL, 2, '2022-01-10 23:38:07', '2022-01-10 23:41:13', NULL, ''),
 (28, 1, 'Gestión Clientes', '/gestionClientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 5, '2022-01-15 21:22:45', '2022-01-15 21:22:45', NULL, ''),
-(30, 3, 'Gestión de Repertorios', '/repertorio', '_self', 'voyager-music', '#000000', NULL, 2, '2022-02-03 21:55:21', '2022-02-03 22:05:49', NULL, ''),
+(30, 3, 'Gestión de Repertorios', '/repertorio', '_self', 'voyager-music', '#000000', 38, 1, '2022-02-03 21:55:21', '2022-02-12 23:43:07', NULL, ''),
 (31, 3, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:56:24', '2022-02-03 21:56:37', NULL, ''),
 (32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 6, '2022-02-03 21:57:47', '2022-02-03 21:57:47', NULL, ''),
 (33, 2, 'Gestión de Nómina', '/nomina', '_self', 'fa fa-university', '#000000', NULL, 7, '2022-02-03 22:00:00', '2022-02-03 22:00:00', NULL, ''),
 (34, 2, 'Gestón de Regalías', '/regalias', '_self', 'voyager-wallet', '#000000', NULL, 8, '2022-02-03 22:01:50', '2022-02-03 22:01:50', NULL, ''),
-(35, 2, 'Gestión de Clientes', '/clientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 9, '2022-02-03 22:04:54', '2022-02-03 22:04:54', NULL, '');
+(35, 2, 'Gestión de Clientes', '/clientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 9, '2022-02-03 22:04:54', '2022-02-03 22:04:54', NULL, ''),
+(36, 3, 'Informe de Nominas', '/informeNomina', '_self', 'fa fa-university', '#000000', 37, 1, '2022-02-12 15:51:40', '2022-02-12 23:43:23', NULL, ''),
+(37, 3, 'Informes', '', '_self', 'fa fa-info-circle', '#000000', NULL, 3, '2022-02-12 23:41:14', '2022-02-12 23:43:21', NULL, ''),
+(38, 3, 'Repertorios y Musica', '', '_self', 'fa fa-folder', '#000000', NULL, 2, '2022-02-12 23:42:02', '2022-02-12 23:43:12', NULL, ''),
+(39, 3, 'Cargar Musica', '/cancion', '_self', 'fa fa-file-audio-o', '#000000', 38, 2, '2022-02-12 23:42:59', '2022-02-12 23:43:07', NULL, ''),
+(40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, ''),
+(41, 3, 'Gestión de Colaboradores', '/cancion_invitarcolab', '_self', 'voyager-group', '#000000', NULL, 10, '2022-02-12 23:45:06', '2022-02-12 23:45:06', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1396,7 +1402,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT de la tabla `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
