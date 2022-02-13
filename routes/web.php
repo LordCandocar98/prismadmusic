@@ -9,7 +9,9 @@ use App\Http\Controllers\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
+use App\Http\Controllers\Nominas\Informe\InformeNominaController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\Regalias\Informe\InformeRegaliaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +38,8 @@ Route::resource('registro', PersonaController::class); //Registro de Personas co
 Route::resource('repertorio', RepertorioController::class); //Repertorio
 Route::resource('cancion', CancionController::class); //Cancion
 Route::resource('cancion_invitarcolab', CancionInvitarController::class); //Canción con invitación
+Route::resource('informeNomina', InformeNominaController::class);
+Route::resource('informeRegalias', InformeRegaliaController::class);
 
 Route::get('profile', function () {
     return redirect('/admin');
