@@ -25,7 +25,7 @@ class InformeNominaController extends Controller
             ->select('users.*', 'persona.*', 'cliente.*', 'nomina.*')
             ->where('users.role_id',2)
             ->where('users.id', $sesion->id)
-            ->where('registro_confirmed', 1)
+            ->where('users.registro_confirmed', 1)
             ->get();
         // dd($nominas);
         return view('nomina.informe.index', compact('nominas'));

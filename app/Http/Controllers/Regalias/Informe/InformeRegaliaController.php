@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Regalias\Reporte;
+namespace App\Http\Controllers\Regalias\Informe;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class ReporteController extends Controller
+class InformeRegaliaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,17 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        //
+        $sesion = Auth::user();
+        $regalias = DB::table('users')
+        ->join('persona', 'users.id', '=', 'persona.user_id')
+        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+        ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
+        ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
+        ->where('users.role_id',2)
+        ->where('users.id', $sesion->id)
+        ->where('users.registro_confirmed', 1)
+        ->get();
+        return view('regalias.informe.index', compact('regalias'));
     }
 
     /**
