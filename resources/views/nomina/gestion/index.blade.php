@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('nomina.index') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Regalias</a>
+        <a href="{{ route('nomina.index') }}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Gestion de Nomina</a>
     </li>
 @endsection
 @section('page_header')
@@ -44,9 +44,9 @@
                                         <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
                                     </a>
                                     <a href="{{ url('nomina/'.$nomina->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
-                                        <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
+                                        <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Cargar</span>
                                     </a>
-                                    <a href="{{ url('Storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
+                                    <a href="{{ url('storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
                                 </td>

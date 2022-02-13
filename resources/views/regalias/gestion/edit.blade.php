@@ -19,6 +19,17 @@
             <div class="panel-body">
                 <form enctype="multipart/form-data" action="{{ url('regalias/'.$regalia->id)}}" method="post" >
                     {!! method_field('PUT') !!}
+                    <div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all('<li>:message</li>') as $message)
+                                        {!! $message !!}
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                     @csrf                        
                     <fieldset>
                         <legend>CARGA DE INFORME</legend>

@@ -109,7 +109,21 @@ $(document).ready(function () {
         $('.ciudad').val('-1').trigger('change');
     }
 
+    $('#tipo_documento').select2({
+        allowClear: false,
+        placeholder: 'Selecciona una opción'
+    });
+
     const limpiar = () => {
         $select.empty();
     };
+
+    $('#acepta_Contrato').on('change', function() {
+        if ($(this).is(':checked') ) {
+            $('#modalContrato').modal('show');
+        }else{
+            console.log("No select");
+        }
+    });
+
 });

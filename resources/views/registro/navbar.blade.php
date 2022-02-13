@@ -35,7 +35,7 @@
                     </li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
-                            <input type="hidden" name="_token" value="p3jldm5HVwhHCwEEoysuNeNSfELwaS4RV4uHtyXS">
+                            @csrf
                             <button type="submit" class="btn btn-danger btn-block">
                                 <i class="fa fa-power-off"></i>
                                 Cerrar sesión

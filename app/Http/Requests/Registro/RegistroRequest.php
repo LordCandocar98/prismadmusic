@@ -33,13 +33,9 @@ class RegistroRequest extends FormRequest
             'numero_identificacion' =>'required|min:3|max:20',
             'telefono'              =>'required|min:10|max:10',
             'nombre_artistico'      =>'required|min:3|max:20',
-            'link_spoty'            =>'required|min:2|max:255',
-            'numero_cuenta_bancaria'=>'required|min:3|max:20',
-            'tipo_cuenta_bancaria'  =>'required|min:1|max:20',
+            'link_spoty'            =>'max:255',
             'acepta_TermsPrivCond'  =>'required',
             'acepta_Contrato'       =>'required',
-            'nombre_banco'          =>'required',
-            'archivo_banco'         =>'required',
         ];
     }
 
@@ -66,10 +62,6 @@ class RegistroRequest extends FormRequest
             'telefono'              =>'Teléfono',
             'nombre_artistico'      =>'Nombre artístico',
             'link_spoty'            =>'Link Spotify',
-            'numero_cuenta_bancaria'=>'Número de cuenta bancaria',
-            'tipo_cuenta_bancaria'  =>'Tipo de cuenta bancaria',
-            'nombre_banco'          =>'Nombre del Banco',
-            'archivo_banco'          =>'Certificación Bancaria',
             'acepta_TermsPrivCond'  =>'Políticas de Privacidad y Términos/Condiciones',
             'acepta_Contrato'       =>'Contrato web Prismad Music',
         ];

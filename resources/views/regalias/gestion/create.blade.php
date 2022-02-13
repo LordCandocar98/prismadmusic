@@ -18,6 +18,17 @@
         <div class="panel panel-bordered">
             <div class="panel-body">
                 <form enctype="multipart/form-data" action="{{ route('regalias.store') }}" method="POST">
+                    <div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all('<li>:message</li>') as $message)
+                                        {!! $message !!}
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                     @csrf                        
                     <fieldset>
                         <legend>CARGA DE INFORME</legend>

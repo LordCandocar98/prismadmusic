@@ -25,19 +25,20 @@ class RepertorioRequest extends FormRequest
     {
         return [
             'titulo'                =>'required|min:1|max:255',
-            'version'               =>'required|min:3|max:255',
+            'version'               =>'min:3|max:255',
             'artista_principal'     =>'required',
             'genero'                =>'required',
             'subgenero'             =>'required',
             'nombre_sello'          =>'required',
             'formato'               =>'required',
             'fecha_salida'          =>'required|min:1|max:255',
+            'fecha_lanzamiento'     =>'required|after:tomorrow',
             'productor'             =>'required|min:1|max:255',
             'copyright'             =>'required|min:1|max:255',
             'annio_produccion'      =>'required|digits:4|integer|min:1900|max:'.(date('Y')+1),
-            'upc_ean'               =>'required|min:1|max:255',
-            'numero_catalogo'       =>'required|numeric',
-            'portada'               =>'required|image|mimes:jpg,png,jpeg|max:35000|dimensions:max_width=3000,max_height=3000',
+            'upc_ean'               =>'min:1|max:255',
+            'numero_catalogo'       =>'numeric',
+            'portada'               =>'image|mimes:jpg,png|max:35000|dimensions:max_width=3000,max_height=3000',
         ];
     }
 
@@ -63,6 +64,7 @@ class RepertorioRequest extends FormRequest
             'nombre_sello'      =>'Nombre del Sello',
             'formato'           =>'Formato',
             'fecha_salida'      =>'Fecha de salida',
+            'fecha_lanzamiento' =>'Fecha de lanzamiento',
             'productor'         =>'Productor',
             'copyright'         =>'Copyright',
             'annio_produccion'  =>'Año de producción',

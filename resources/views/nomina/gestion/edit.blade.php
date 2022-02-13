@@ -19,9 +19,20 @@
             <div class="panel-body">
                 <form enctype="multipart/form-data" action="{{ url('nomina/'.$regalia->id)}}" method="post" >
                     {!! method_field('PUT') !!}
+                    <div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all('<li>:message</li>') as $message)
+                                        {!! $message !!}
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                     @csrf                        
                     <fieldset>
-                        <legend>CARGA DE DESPRENDIVLE</legend>
+                        <legend>CARGA DE DESPRENDIBLE</legend>
                         <div class="form-group  col-md-12 ">
                             <label for="forNombres">Cliente</label>
                             <select class="cliente col-md-12" name="idCliente" id="idCliente">

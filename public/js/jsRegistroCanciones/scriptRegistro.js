@@ -7,6 +7,14 @@ $(document).ready(function () {
     });
     $('.cliente_id').val('-1').trigger('change');
 
+    $('.repertorio_id').select2({
+        allowClear: true,
+        placeholder: {
+            id: -1,
+        },
+    });
+    $('.repertorio_id').val('-1').trigger('change');
+
     $('.featuring').select2({
         allowClear: true,
         placeholder: {

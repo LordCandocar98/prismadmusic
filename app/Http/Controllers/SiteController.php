@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Repertorio\CompartirMusicaRequest;
+use App\Mail\CorreoPrismadMusic;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
@@ -16,73 +20,30 @@ class SiteController extends Controller
         return view('site.home');
     }
 
-    public function nosotros(){
+    public function nosotros()
+    {
         return view('site.nosotros');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function compartir()
     {
-        //
+        return view('site.compartir');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function postCompartir(CompartirMusicaRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $users = User::whereIn('role_id', [1, 3])->get();
+        foreach ($users as $moderador) {
+            $details = [
+                'title' => 'Asunto: Artista quiere contactarse',
+                'subtitle' => 'Sr(a). '.$moderador->name.'. Un nuevo artista busca conctactarse contigo con nombre artístico: ' . $request->nombre_artista,
+                'body' => 'El artista ha compartido la siguiente información.' .
+                    'Link spotify: ' . $request->link_spotify . ', Celular: ' . $request->num_celular . ', Correo electrónico: ' . $request->email,
+                'descripcion' => $request->descripcion,
+                'button' => 'Ingresa al portal',
+                'enlace' => url('/')
+            ];
+            Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+        }
+        return back()->with("Success", 'Mensaje exitoso');
     }
 }

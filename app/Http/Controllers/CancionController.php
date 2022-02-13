@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cancion;
+use App\Models\Colaboracion;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Cancion\CancionRequest;
 
@@ -29,17 +30,24 @@ class CancionController extends Controller
             ->select('cliente.nombre_artistico','cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
+        $repertorios = \DB::table('repertorio')
+            ->select('repertorio.titulo','repertorio.id')
+            ->orderBy('id', 'DESC')
+            ->get('');
+
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
             return view('gestionClientes/gestionCancion/index')
                         ->with('clientes', $clientes)
                         ->with('clientes2', $clientes2)
-                        ->with('clientes3', $clientes3);
+                        ->with('clientes3', $clientes3)
+                        ->with('repertorios', $repertorios);
         }
         //return redirect('admin');
         return view('gestionClientes/gestionCancion/index')
                     ->with('clientes', $clientes)
                     ->with('clientes2', $clientes2)
-                    ->with('clientes3', $clientes3);
+                    ->with('clientes3', $clientes3)
+                    ->with('repertorios', $repertorios);
     }
     /**
      * Show the form for creating a new resource.
@@ -59,13 +67,13 @@ class CancionController extends Controller
      */
     public function store(CancionRequest $request)
     {
+        //dd($request);
         if($image = $request->file('portada')){
             $destinoPortada = 'portadas/' . date('FY') . '/';
             $profileImage  = time() . '.' . $image->getClientOriginalExtension();
             $filename = $destinoPortada . $profileImage ;
             $image->move('storage/' . $destinoPortada, $profileImage);
         };
-
         $cancion = Cancion::create([
             'tipo_secundario'         => $request->tipo_secundario,
             'instrumental'            => $request->instrumental,
@@ -89,7 +97,30 @@ class CancionController extends Controller
             'idioma_titulo'           => $request->idioma_titulo,
             'idioma_letra'            => $request->idioma_letra,
             'fecha_principal_salida'  => $request->fecha_principal_salida,
+            'repertorio_id'           => $request->repertorio_id,
         ]);
+        Colaboracion::create([
+            'nombre_colaboracion'     => $request->nombre_colaboracion,
+            'cancion_id'              => $cancion->id,
+            'porcentaje_intelectual'  => $request->porcentaje_artistaPr,
+            'cliente_id'              => $request->cliente_id,
+        ]);
+        if($request->featuring){
+            Colaboracion::create([
+                'nombre_colaboracion'     => $request->nombre_colaboracion,
+                'cancion_id'              => $cancion->id,
+                'porcentaje_intelectual'  => $request->porcentaje_featuring,
+                'cliente_id'              => $request->featuring,
+            ]);
+        }
+        if($request->remixer){
+            Colaboracion::create([
+                'nombre_colaboracion'     => $request->nombre_colaboracion,
+                'cancion_id'              => $cancion->id,
+                'porcentaje_intelectual' => $request->porcentaje_remix,
+                'cliente_id'              => $request->remixer,
+            ]);
+        }
         $notification = array(
             'message' => 'Canción añadida exitosamente!',
             'alert-type' => 'success'

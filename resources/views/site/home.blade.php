@@ -27,8 +27,8 @@
                         target="_blank"></a></li>
                 <li><a class="icon icon-meta mdi mdi-facebook-messenger"
                         href="https://web.facebook.com/messages/t/231338047199947" target="_blank"></a></li>
-                <!-- <li><a class="icon icon-meta mdi mdi-linkedin" href="#" target="_blank"></a></li>
-          <li><a class="icon icon-meta mdi mdi-snapchat" href="#" target="_blank"></a></li> -->
+                {{-- <li><a class="icon icon-meta mdi mdi-linkedin" href="#" target="_blank"></a></li>
+          <li><a class="icon icon-meta mdi mdi-snapchat" href="#" target="_blank"></a></li> --}}
             </ul>
         </div>
     </section>
