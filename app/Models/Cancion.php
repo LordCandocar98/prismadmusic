@@ -36,5 +36,6 @@ class Cancion extends Model
         'idioma_titulo',
         'idioma_letra',
         'fecha_principal_salida',
+        'pista_mp3',
     ];
 }

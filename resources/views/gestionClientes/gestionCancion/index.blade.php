@@ -1271,6 +1271,22 @@
                             </div>
                         </div>
 
+                        <div class="text-start font-weight-bold">
+                            <p>Puede importar los siguientes formatos:</p>
+                            <p>- WAV</p>
+                            <p>- FLAC</p>
+                            <p>- AIFF</p>
+                            <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la subida del archivo o directamente no ocurrir la misma.</p>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="pista_mp3">Carga la canción/pista</label>
+                                <br>
+                                <input type="file" class="form-control" id="pista_mp3" name="pista_mp3"
+                                    value="{{ old('pista_mp3') }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12">
@@ -1307,99 +1323,6 @@
                     <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
                 </div>
             </form>
-        </div>
-        </div>
-    </div>
-    <!-- Modal NO ESTÁ REGISTRADO EN PRISMAD-->
-    <div class="modal fade" id="modalInvitar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">INVITAR A UN COLABORADOR</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <!-- Form registro de usuario, persona, cliente y colaboración-->
-                <form action="/cancion" method="POST" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="col-md-12">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all('<li>:message</li>') as $message)
-                                        {!! $message !!}
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                    </div>
-                    @csrf
-
-                    <div class="modal-body">
-                        @if ($message = Session::get('ErrorInsert'))
-                            <div class="col-12 alert-danger alert-dissmissable fade show" role="alert">
-                                <h5>Errores:</h5>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="name">Nombre</label>
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="password">Contraseña</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <label for="password">Confirmar contraseña</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Invitar colaborador</button>
-                    </div>
-                </form>
-            </div>
-        </div>
         </div>
         </div>
     </div>

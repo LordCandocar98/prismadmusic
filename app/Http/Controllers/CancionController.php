@@ -67,12 +67,11 @@ class CancionController extends Controller
      */
     public function store(CancionRequest $request)
     {
-        //dd($request);
-        if($image = $request->file('portada')){
-            $destinoPortada = 'portadas/' . date('FY') . '/';
-            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
-            $filename = $destinoPortada . $profileImage ;
-            $image->move('storage/' . $destinoPortada, $profileImage);
+        if($song = $request->file('pista_mp3')){
+            $destinoCancion = 'canciones/' . date('FY') . '/';
+            $cancionArchivo  = time() . '.' . $song->getClientOriginalExtension();
+            $filename = $destinoCancion . $cancionArchivo ;
+            $song->move('storage/' . $destinoCancion, $cancionArchivo);
         };
         $cancion = Cancion::create([
             'tipo_secundario'         => $request->tipo_secundario,
@@ -98,6 +97,7 @@ class CancionController extends Controller
             'idioma_letra'            => $request->idioma_letra,
             'fecha_principal_salida'  => $request->fecha_principal_salida,
             'repertorio_id'           => $request->repertorio_id,
+            'pista_mp3'               => $filename,
         ]);
         Colaboracion::create([
             'nombre_colaboracion'     => $request->nombre_colaboracion,

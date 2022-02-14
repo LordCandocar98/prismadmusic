@@ -53,11 +53,13 @@ class CancionInvitarRequest extends FormRequest
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
 
-            'nombre_artistico'         =>'required|min:1|max:255',
+            'nombre_artistico'         =>'',
 
             'name'                     => '',
-            'email'                    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email'                    => ['string', 'email', 'max:255', 'unique:users'],
             'password'                 => '',
+
+            'pista_mp3'                => 'required|mimes:wav,aiff,flac',
         ];
     }
 
@@ -100,6 +102,7 @@ class CancionInvitarRequest extends FormRequest
             'idioma_letra'             =>'Idioma letra',
             'fecha_principal_salida'   =>'Fecha principal de salida',
             'acepta_riesgo'            =>'Acepto responsabilidad de creación de la canción',
+            'pista_mp3'                => 'Pista canción',
 
             'nombre_artistico'         =>'Nombre artístico colaborador',
 

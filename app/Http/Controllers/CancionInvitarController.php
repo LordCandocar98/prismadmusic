@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Persona;
@@ -12,7 +11,8 @@ use App\Models\Colaboracion;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Registro\CancionInvitarRequest;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CorreoPrismadMusic;
 
 class CancionInvitarController extends Controller
 {
@@ -61,12 +61,14 @@ class CancionInvitarController extends Controller
      */
     public function store(CancionInvitarRequest $request)
     {
-        //dd($request);
-        if($image = $request->file('portada')){
-            $destinoPortada = 'portadas/' . date('FY') . '/';
-            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
-            $filename = $destinoPortada . $profileImage ;
-            $image->move('storage/' . $destinoPortada, $profileImage);
+
+        $colaboraciones = json_decode($request->colaboradores);
+
+        if($song = $request->file('pista_mp3')){
+            $destinoCancion = 'canciones/' . date('FY') . '/';
+            $cancionArchivo  = time() . '.' . $song->getClientOriginalExtension();
+            $filename = $destinoCancion . $cancionArchivo ;
+            $song->move('storage/' . $destinoCancion, $cancionArchivo);
         };
         //dd($request);
         $cancion = Cancion::create([
@@ -93,6 +95,7 @@ class CancionInvitarController extends Controller
             'idioma_letra'            => $request->idioma_letra,
             'fecha_principal_salida'  => $request->fecha_principal_salida,
             'repertorio_id'           => $request->repertorio_id,
+            'pista_mp3'               => $filename,
         ]);
 
         Colaboracion::create([
@@ -101,40 +104,41 @@ class CancionInvitarController extends Controller
             'porcentaje_intelectual'  => $request->porcentaje_artistaPr,
             'cliente_id'              => $request->cliente_id,
         ]);
-
-        $usuario = User::create([
-            'email' => $request['email'],
-            'name' => $request['email'], //Registrarse con el mismo email como nombre de usuario
-            'password' => 'password',
-        ]);
-
-        // Send confirmation code
-
-        $persona = Persona::create([
-            'user_id'               => $usuario->id, //AGARRA EL ID DE LA SESIÓN ACTUAL
-            'role_id'               => 2, //2 de usuario normal, 3 para moderador
-        ]);
-
-        $cliente = Cliente::create([
-            'nombre_artistico'        => 'ArtistaInvitado', //Poner actualizar en cascada al nombre artístico
-            'persona_id'              => $persona->id,
-        ]);
-
-        if($request->tipo_colaboracion == "featuring"){
-            Colaboracion::create([
-                'nombre_colaboracion'     => $request->nombre_colaboracion,
-                'cancion_id'              => $cancion->id,
-                'porcentaje_intelectual'  => $request->porcentaje_featuring,
-                'cliente_id'              => $cliente->id,
-            ]);
-        }
-        if($request->tipo_colaboracion == "remix"){
-            Colaboracion::create([
-                'nombre_colaboracion'     => $request->nombre_colaboracion,
-                'cancion_id'              => $cancion->id,
-                'porcentaje_intelectual'  => $request->porcentaje_remix,
-                'cliente_id'              => $cliente->id,
-            ]);
+        foreach($colaboraciones as $colaborador){
+            //dd($colaborador->email);
+            if($colaborador->email != NULL){
+                $usuario = User::create([
+                    'email' => $colaborador->email,
+                    'name' => $colaborador->email,
+                    'password' => Hash::make('password'),
+                ]);
+                // Send confirmation code---------------------------------------------------------------
+                $artista = Cliente::find($request->cliente_id);
+                $details = [
+                    'title' => 'Asunto: ¡Te invito a Prismad Music!',
+                    'subtitle' => $artista->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $request->titulo.'"',
+                    'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, Acepta a continuación.',
+                    'descripcion' => '',
+                    'button' => 'Ingresa al portal',
+                    'enlace' => url('/registro'),
+                ];
+                Mail::to($request->email)->send(new CorreoPrismadMusic($details));
+                //---------------------------------------------------------------------------------------
+                $persona = Persona::create([
+                    'user_id'               => $usuario->id,
+                    'role_id'               => 2,
+                ]);
+                $cliente = Cliente::create([
+                    'nombre_artistico'        => 'ArtistaInvitado', //Poner actualizar en cascada al nombre artístico
+                    'persona_id'              => $persona->id,
+                ]);
+                Colaboracion::create([
+                    'nombre_colaboracion'     => $request->nombre_colaboracion,
+                    'cancion_id'              => $cancion->id,
+                    'porcentaje_intelectual'  => $request->porcentaje_intelectual,
+                    'cliente_id'              => $cliente->id,
+                ]);
+            }
         }
         $notification = array(
             'message' => 'Canción añadida exitosamente!',

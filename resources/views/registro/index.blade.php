@@ -148,22 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="nombre_banco">Nombre del Banco</label>
-                            <br>
-                            <input type="text" class="form-control" id="nombre_banco" name="nombre_banco"
-                                placeholder="Ejemplo: Bancolombia" value="{{ old('nombre_banco') }}">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="archivo_banco">Certificación Bancaria</label>
-                            <br>
-                            <input type="text" class="form-control" id="archivo_banco" name="archivo_banco"
-                                value="{{ old('archivo_banco') }}">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="tipoCuenta">Tipo de cuenta bancaria</label>
                             <br>
@@ -207,7 +192,8 @@
                         </div>
                         <div class="modal-footer">
                         </div>
-                    </div>
+                    </div> --}}
+
                     <div class="modal-footer">
                         <button id="btn-snd" type="submit" class="btn btn-primary">Aceptar</button>
                     </div>

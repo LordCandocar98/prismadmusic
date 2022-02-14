@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-<link href="{{asset('multiinput/css/jq.multiinput.min.css')}}" rel="stylesheet">
 
 @section('page_header')
     <h1 class="page-title">
@@ -10,6 +9,7 @@
 @endsection
 
 @section('css')
+<link href="{{asset('multiinput/css/jq.multiinput.min.css')}}" rel="stylesheet">
 <style>
     .parrafo{
     font-size: 80%;
@@ -1235,21 +1235,33 @@
                             </div>
                         </div>
 
+                        <div class="text-start font-weight-bold">
+                            <p>Puede importar los siguientes formatos:</p>
+                            <p>- WAV</p>
+                            <p>- FLAC</p>
+                            <p>- AIFF</p>
+                            <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la subida del archivo o directamente no ocurrir la misma.</p>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label for="pista_mp3">Carga la canción/pista</label>
+                                <br>
+                                <input type="file" class="form-control" id="pista_mp3" name="pista_mp3"
+                                    value="{{ old('pista_mp3') }}">
+                            </div>
+                        </div>
+
                         <div class="text-center font-weight-bold">
                             <p>¿Tu compañero no pertenece a Prismad? ¡Invítalo!</p><br>
                         </div>
 
                         <textarea
                             class="form-control multi"
-                            name="{{ $row->field }}"
-                            data-name="{{ $row->display_name }}"
-                            @if($row->required == 1) required @endif
+                            name="colaboradores"
+                            data-name="colaboradores"
                         >
-                        @if(isset($dataTypeContent->{$row->field}))
-                        {{ old($row->field, $dataTypeContent->{$row->field}) }}
-                        @else
                         []
-                        @endif
                         </textarea>
                         <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
                         <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
@@ -1268,7 +1280,7 @@
                                     '</div>\n' +
 
                                     '</div>\n'),
-                                limit: 10,
+                                limit: 4,
                                 onElementAdd: function (el, plugin) {
                                     console.log(plugin.elementCount);
                                 },
@@ -1277,56 +1289,6 @@
                                 }
                             });
                         </script>
-
-                        {{-- <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label>Correo Electrónico</label>
-                                <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Pepito@gmail.com" class="form-control">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="nombre_artistico">Nombre artístico temporal del colaborador</label>
-                                <br>
-                                <input type="text" class="form-control" id="nombre_artistico" name="nombre_artistico"
-                                    value="{{ old('nombre_artistico') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="porcentaje_intelectual">Tipo de colaboración</label>
-                                <br>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="remix">
-                                    <label class="form-check-label" for="tipo_colaboracion">
-                                        Remix
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_colaboracion" id="tipo_colaboracion" value="featuring">
-                                    <label class="form-check-label" for="tipo_colaboracion">
-                                        Featuring
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="porcentaje_featuring">Porcentaje intelectual Featuring</label>
-                                <br>
-                                <input type="text" class="form-control" id="porcentaje_featuring" name="porcentaje_featuring" placeholder="Ej: 60"
-                                value="{{ old('porcentaje_featuring') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="porcentaje_remix">Porcentaje intelectual Remixer</label>
-                                <br>
-                                <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix" placeholder="Ej: 40"
-                                value="{{ old('porcentaje_remix') }}">
-                            </div>
-                        </div> --}}
 
                     </div>
                     <div class="col-md-12">
