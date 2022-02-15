@@ -41,7 +41,7 @@
                                     data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                                 <!-- RD Navbar Brand-->
                                 <div class="rd-navbar-brand"><a class="brand" href="{{ url('/') }}"><img
-                                            src="{{ asset('logo.jpg') }}" alt="" width="151" height="22" /></a>
+                                            src="{{ asset('logo_prismad.png') }}" class="rounded mx-auto d-block" alt="" width="80" height="22" /></a>
                                 </div>
                             </div>
                             <div class="rd-navbar-main-element">
@@ -91,8 +91,8 @@
         <footer class="section footer-2">
             <div class="container">
                 <div class="row row-40">
-                    <div class="col-md-6 col-lg-3"><a class="footer-logo" href="index.html"><img
-                                src="{{ asset('logo.jpg') }}" alt="" width="180" height="26" /></a>
+                    <div class="col-md-6 col-lg-3"><a class="footer-logo" href="{{ url('/') }}"><img
+                                src="{{ asset('logo_prismad.png') }}" class="rounded mx-auto d-block" alt="" width="120" height="auto" /></a>
                         <p>Sello discográfico.
                             Editora digital, gestión de playlist y manejo digital para artistas y productos
                             empresariales.</p>

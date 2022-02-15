@@ -4,13 +4,13 @@
     <section class="section swiper-container swiper-slider swiper-slider-2" data-loop="false" data-autoplay="false"
         data-simulate-touch="false" data-slide-effect="fade">
         <div class="swiper-wrapper">
-            <div class="swiper-slide context-dark" data-slide-bg="{{ asset('logo.jpg') }}">
+            <div class="swiper-slide context-dark" data-slide-bg="{{ asset('portada_prismad.jpg') }}">
                 <div class="swiper-slide-caption">
                     <div class="container">
                         <div class="row justify-content-lg-left">
                             <div class="col-md-12 col-xl-10">
-                                <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Prismad Music - WEB</h1><a
-                                    class="button button-lg button-primary" href="about.html" data-caption-animate="fadeInUp"
+                                <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Prismad Music</h1><a
+                                    class="button button-lg button-primary" href="{{ url('/compartir-musica') }}" data-caption-animate="fadeInUp"
                                     data-caption-delay="450">Envíanos tu canción</a>
                             </div>
                         </div>
