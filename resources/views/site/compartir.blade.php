@@ -24,9 +24,9 @@
             <div class="row row-30 row-md-60 justify-content-between">
                 <div class="col-md-6">
                     <h2>Envíanos tu canción</h2>
-                    <div class="heading-6">Desde prismad music buscamos relacionarnos de la mejor forma con la musica,
-                        por ello es posible que nos hagas una muestra de tu perfil de musica con tus datos personales, así
-                        nos comunicaremos contigo para comenzar a relacionarnos.
+                    <div class="heading-6">Desde prismad music buscamos relacionarnos de la mejor forma con la música,
+                        por ello es posible que nos hagas una muestra de tu perfil de música con tus datos artísticos, así
+                        nos comunicaremos contigo lo más pronto posible.
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5">
