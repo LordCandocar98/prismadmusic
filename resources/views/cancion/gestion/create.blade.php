@@ -15,25 +15,27 @@
 @endsection
 
 @section('css')
-<style>
-    .parrafo{
-    font-size: 80%;
-    text-align: justify;
-    text-justify: inter-word;
-    color: gray;
-    }
+    <style>
+        .parrafo {
+            font-size: 80%;
+            text-align: justify;
+            text-justify: inter-word;
+            color: gray;
+        }
 
-    .identado {
-        text-indent: 10px;
-    }
-</style>
+        .identado {
+            text-indent: 10px;
+        }
+
+    </style>
 @endsection
 
 @section('content')
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                <form action="{{ route('cancion.store') }}" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
+                <form action="{{ route('cancion.store') }}" method="post" id="formRegistro" name="formRegistro"
+                    enctype="multipart/form-data">
                     <div class="col-md-12">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -77,31 +79,36 @@
                                 <label for="titulo">Tipo secundario</label>
                                 <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" value="original">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
+                                        value="original">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Original
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" value="karaoke">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
+                                        value="karaoke">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Karaoke
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" value="medley">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
+                                        value="medley">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Medley
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" value="cover">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
+                                        value="cover">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Cover
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" value="otrogrupo">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
+                                        value="otrogrupo">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Versión por otro grupo
                                     </label>
@@ -111,13 +118,15 @@
                                 <label for="version">Instrumental</label>
                                 <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="instrumental" id="instrumental" value="si">
+                                    <input class="form-check-input" type="radio" name="instrumental" id="instrumental"
+                                        value="si">
                                     <label class="form-check-label" for="tipo_secundario">
                                         Sí
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="instrumental" id="instrumental" value="no">
+                                    <input class="form-check-input" type="radio" name="instrumental" id="instrumental"
+                                        value="no">
                                     <label class="form-check-label" for="instrumental">
                                         No
                                     </label>
@@ -144,8 +153,8 @@
                             <div class="col-md-12">
                                 <label for="porcentaje_artistaPr">Porcentaje intelectual Artista Principal</label>
                                 <br>
-                                <input type="text" class="form-control" id="porcentaje_artistaPr" name="porcentaje_artistaPr"
-                                value="{{ old('porcentaje_artistaPr') }}">
+                                <input type="text" class="form-control" id="porcentaje_artistaPr"
+                                    name="porcentaje_artistaPr" value="{{ old('porcentaje_artistaPr') }}">
                             </div>
                         </div>
 
@@ -159,8 +168,8 @@
                             <div class="col-sm-6">
                                 <label for="nombre_colaboracion">Nombre de la Colaboración</label>
                                 <br>
-                                <input type="text" class="form-control" id="nombre_colaboracion" name="nombre_colaboracion"
-                                    value="{{ old('nombre_colaboracion') }}">
+                                <input type="text" class="form-control" id="nombre_colaboracion"
+                                    name="nombre_colaboracion" value="{{ old('nombre_colaboracion') }}">
                             </div>
                         </div>
 
@@ -168,14 +177,14 @@
                             <div class="col-sm-6">
                                 <label for="productor">Compositor</label>
                                 <br>
-                                <input type="text" class="form-control" id="compositor" name="compositor" placeholder="..."
-                                    value="{{ old('compositor') }}">
+                                <input type="text" class="form-control" id="compositor" name="compositor"
+                                    placeholder="..." value="{{ old('compositor') }}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="copyright">Arreglista</label>
                                 <br>
-                                <input type="text" class="form-control" id="arreglista" name="arreglista" placeholder="..."
-                                    value="{{ old('arreglista') }}">
+                                <input type="text" class="form-control" id="arreglista" name="arreglista"
+                                    placeholder="..." value="{{ old('arreglista') }}">
                             </div>
                         </div>
 
@@ -198,14 +207,15 @@
                             <div class="col-sm-6">
                                 <label for="productor">Año de producción</label>
                                 <br>
-                                <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
-                                    value="{{ old('annio_produccion') }}">
+                                <input type="number" step="1" value="2022" class="form-control" id="annio_produccion"
+                                    name="annio_produccion" value="{{ old('annio_produccion') }}">
                             </div>
                             <div class="col-sm-6">
-                                <label for="genero">Selecciona una fecha principal de salida al mercado (*para vídeo horarios CET)</label>
+                                <label for="genero">Selecciona una fecha principal de salida al mercado (*para vídeo
+                                    horarios CET)</label>
                                 <br>
-                                <input type="date" class="form-control" id="fecha_principal_salida" name="fecha_principal_salida"
-                                    value="{{ old('fecha_principal_salida') }}">
+                                <input type="date" class="form-control" id="fecha_principal_salida"
+                                    name="fecha_principal_salida" value="{{ old('fecha_principal_salida') }}">
                             </div>
                         </div>
 
@@ -213,8 +223,7 @@
                             <div class="col-sm-6">
                                 <label for="genero">Género</label>
                                 <br>
-                                <select class="genero col-md-12" name="genero" id="genero"
-                                    value="{{ old('genero') }}">
+                                <select class="genero col-md-12" name="genero" id="genero" value="{{ old('genero') }}">
                                     <option value="Afoxé">Afoxé</option>
                                     <option value="Alternative">Alternative</option>
                                     <option value="Alternative & Rock in Spanish">Alternative & Rock in Spanish</option>
@@ -823,8 +832,8 @@
                             <div class="col-sm-6">
                                 <label for="subgenero_secundario">Sub-género secundario</label>
                                 <br>
-                                <select class="subgenero_secundario col-md-12" name="subgenero_secundario" id="subgenero_secundario"
-                                    value="{{ old('genero') }}">
+                                <select class="subgenero_secundario col-md-12" name="subgenero_secundario"
+                                    id="subgenero_secundario" value="{{ old('genero') }}">
                                     <option value="Acid">Acid</option>
                                     <option value="Acid house">Acid house</option>
                                     <option value="Acid Jazz">Acid Jazz</option>
@@ -1163,19 +1172,22 @@
                                 <label for="genero">Letra chocante o vulgar</label>
                                 <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar" id="letra_chocante_vulgar" value="si">
+                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
+                                        id="letra_chocante_vulgar" value="si">
                                     <label class="form-check-label" for="letra_chocante_vulgar">
                                         Sí
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar" id="letra_chocante_vulgar" value="no">
+                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
+                                        id="letra_chocante_vulgar" value="no">
                                     <label class="form-check-label" for="no">
                                         No
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar" id="letra_chocante_vulgar" value="cleaned_version">
+                                    <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
+                                        id="letra_chocante_vulgar" value="cleaned_version">
                                     <label class="form-check-label" for="no">
                                         Cleaned Version
                                     </label>
@@ -1184,7 +1196,8 @@
                             <div class="col-sm-6">
                                 <label for="subgenero">Inicio de la previsualización</label>
                                 <br>
-                                <input type="text" class="form-control" id="inicio_previsualizacion" name="inicio_previsualizacion" placeholder="..."
+                                <input type="text" class="form-control" id="inicio_previsualizacion"
+                                    name="inicio_previsualizacion" placeholder="..."
                                     value="{{ old('inicio_previsualizacion') }}">
                             </div>
                         </div>
@@ -1230,21 +1243,18 @@
                             </div>
                         </div>
 
-                        <textarea
-                            class="form-control multi_existentes"
-                            name="colaboradores_existentes"
-                            data-name="colaboradores_existentes"
-                        >
-                        []
-                        </textarea>
-                        <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
-                        <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
+                        <textarea class="form-control multi_existentes" name="colaboradores_existentes"
+                            data-name="colaboradores_existentes">
+                            []
+                            </textarea>
+                        <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
+                        <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
 
                         <script>
                             var clienteAux = <?php echo json_encode($clientes); ?>;
-                            var auxiliar = '<select class="multiinput-title col-xs-12" name="cliente_id" id="cliente_id">';
-                            for(var i=0; i < clienteAux.length; i++){
-                                auxiliar += '<option value="'+clienteAux[i].id+'">'+clienteAux[i].nombre_artistico+'</option>'
+                            var auxiliar = '<select class="multiinput-title col-xs-12 cliente_id" name="cliente_id" id="cliente_id">';
+                            for (var i = 0; i < clienteAux.length; i++) {
+                                auxiliar += '<option value="' + clienteAux[i].id + '">' + clienteAux[i].nombre_artistico + '</option>'
                             }
                             auxiliar += '</select>\n';
                             $('.multi_existentes').multiInput({
@@ -1263,24 +1273,36 @@
                                     '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
-                                onElementAdd: function (el, plugin) {
+                                onElementAdd: function(el, plugin) {
                                     console.log(plugin.elementCount);
+                                    if ($(".cliente_id").length > 0) {
+                                        $('.cliente_id').select2({
+                                            allowClear: true,
+                                            placeholder: {
+                                                id: -1,
+                                            },
+                                        });
+                                    }
                                 },
-                                onElementRemove: function (el, plugin) {
+                                onElementRemove: function(el, plugin) {
                                     console.log(plugin.elementCount);
+                                    if ($(".cliente_id").length > 0) {
+                                        $('.cliente_id').select2({
+                                            allowClear: true,
+                                            placeholder: {
+                                                id: -1,
+                                            },
+                                        });
+                                    }
                                 }
                             });
                         </script>
 
-                        <textarea
-                            class="form-control multi"
-                            name="colaboradores"
-                            data-name="colaboradores"
-                        >
-                        []
-                        </textarea>
-                        <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
-                        <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
+                        <textarea class="form-control multi" name="colaboradores" data-name="colaboradores">
+                            []
+                            </textarea>
+                        <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
+                        <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
 
                         <script>
                             $('.multi').multiInput({
@@ -1299,10 +1321,10 @@
                                     '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
-                                onElementAdd: function (el, plugin) {
+                                onElementAdd: function(el, plugin) {
                                     console.log(plugin.elementCount);
                                 },
-                                onElementRemove: function (el, plugin) {
+                                onElementRemove: function(el, plugin) {
                                     console.log(plugin.elementCount);
                                 }
                             });
@@ -1317,7 +1339,8 @@
                                         <li>FLAC</li>
                                         <li>AIFF</li>
                                     </ul>
-                                    <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la subida del archivo o directamente no ocurrir la misma.</p>
+                                    <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la
+                                        subida del archivo o directamente no ocurrir la misma.</p>
                                 </div>
                             </div>
                         </div>
@@ -1334,8 +1357,11 @@
 
                     <div class="col-md-12">
                         <div class="input-group-text">
-                            <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" data-toggle="modal" data-target="#modalAlerta" value="1"/>
-                            <label for="Contrato" data-toggle="modal" data-target="#modalAlerta"><a class="font-weight-bold">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer modificaciones a la misma.</a></label>
+                            <input type="checkbox" id="acepta_riesgo" name="acepta_riesgo" data-toggle="modal"
+                                data-target="#modalAlerta" value="1" />
+                            <label for="Contrato" data-toggle="modal" data-target="#modalAlerta"><a
+                                    class="font-weight-bold">Soy consciente de que una vez añadida la canción al Repertorio
+                                    no podré hacer modificaciones a la misma.</a></label>
                         </div>
                     </div>
 
@@ -1348,25 +1374,27 @@
     </div>
 
     <!-- Modal Estás Seguro de Crear la canción-->
-    <div class="modal fade" id="modalAlerta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAlerta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- MENSAJE LARGO -->
+                <form action="">
+                    <div class="modal-body parrafo">
+                        ¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
+                        puedes hacer cambios.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+                    </div>
+                </form>
             </div>
-            <!-- MENSAJE LARGO -->
-            <form action="">
-                <div class="modal-body parrafo">
-                    ¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no puedes hacer cambios.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
-                </div>
-            </form>
-        </div>
         </div>
     </div>
 

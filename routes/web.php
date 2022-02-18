@@ -4,7 +4,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\Cancion\Gestion\CancionController;
-use App\Http\Controllers\Cancion\Gestion\CancionInvitarController;
+use App\Http\Controllers\CancionInvitarController;
 use App\Http\Controllers\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;

@@ -6,6 +6,14 @@ $(document).ready(function () {
         },
     });
     $('.cliente_id').val('-1').trigger('change');
+   /*  $('.cliente_id').on('change', function () {
+        $('.cliente_id').select2({
+            allowClear: true,
+            placeholder: {
+                id: -1,
+            },
+        });
+    }); */
 
     $('.repertorio_id').select2({
         allowClear: true,
