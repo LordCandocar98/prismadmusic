@@ -41,7 +41,7 @@
                                     data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                                 <!-- RD Navbar Brand-->
                                 <div class="rd-navbar-brand"><a class="brand" href="{{ url('/') }}"><img
-                                            src="{{ asset('logo.jpg') }}" alt="" width="151" height="22" /></a>
+                                            src="{{ asset('logo_prismad.png') }}" class="rounded mx-auto d-block" alt="" width="80" height="22" /></a>
                                 </div>
                             </div>
                             <div class="rd-navbar-main-element">
@@ -91,8 +91,9 @@
         <footer class="section footer-2">
             <div class="container">
                 <div class="row row-40">
-                    <div class="col-md-6 col-lg-3"><a class="footer-logo" href="index.html"><img
-                                src="{{ asset('logo.jpg') }}" alt="" width="180" height="26" /></a>
+                    <div class="col-md-6 col-lg-3"></div>
+                    <div class="col-md-6 col-lg-3"><a class="footer-logo" href="{{ url('/') }}"><img
+                                src="{{ asset('logo_prismad.png') }}" class="rounded mx-auto d-block" alt="" width="120" height="auto" /></a>
                         <p>Sello discográfico.
                             Editora digital, gestión de playlist y manejo digital para artistas y productos
                             empresariales.</p>
@@ -139,7 +140,8 @@
                                 class="icon icon-md novi-icon mdi mdi-linkedin" href="#" target="_blank"></a><a
                                 class="icon icon-md novi-icon mdi mdi-snapchat" href="#" target="_blank"></a></div>
                     </div>
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-3"></div>
+                    {{-- <div class="col-md-6 col-lg-3">
                         <h5 class="title">Galería</h5>
                         <ul class="instafeed instagram-gallery" data-lightgallery="group">
                             <li><a class="instagram-item" data-lightgallery="item"
@@ -173,8 +175,8 @@
                                         width="72" height="72" /></a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
+                    </div> --}}
+                    {{-- <div class="col-md-6 col-lg-3">
                         <h5 class="text-white title">Boletín informátivo</h5>
                         <p>Manténgase al día con nuestras noticias y actualizaciones siempre próximas.
                             Ingrese su correo electrónico y suscríbase.</p>
@@ -188,7 +190,7 @@
                             </div>
                             <button class="button button-primary" type="submit">Suscribirse</button>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- Rights-->
                 <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span>
