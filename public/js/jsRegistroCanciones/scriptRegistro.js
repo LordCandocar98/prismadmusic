@@ -86,4 +86,5 @@ $(document).ready(function () {
         },
     });
     $('.idioma_letra').val('-1').trigger('change');
+
 });

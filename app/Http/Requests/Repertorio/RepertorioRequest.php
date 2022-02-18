@@ -38,7 +38,7 @@ class RepertorioRequest extends FormRequest
             'annio_produccion'      =>'required|digits:4|integer|min:1900|max:'.(date('Y')+1),
             'upc_ean'               =>'',
             'numero_catalogo'       =>'',
-            'portada'               =>'image|mimes:jpg,png|max:35000|dimensions:max_width=3000,max_height=3000',
+            'portada'               =>'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000',
         ];
     }
 

@@ -1,9 +1,16 @@
 @extends('layouts.master')
-
+@section('addBreadcrumbs')
+    <li class="active">
+        <a href="{{ route('cancion.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Canciones</a>
+    </li>
+    <li class="active">
+        <a href="{{ route('cancion.create') }}"><i class="voyager-plus" aria-hidden="true"></i> Crear</a>
+    </li>
+@endsection
 @section('page_header')
     <h1 class="page-title">
-        <i class="fa fa-music" aria-hidden="true"></i>
-        Información sobre la pista
+        <i class="voyager-plus" aria-hidden="true"></i>
+        Cargar canción
     </h1>
 @endsection
 
@@ -23,10 +30,10 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <form action="/cancion" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <div class="panel panel-bordered">
+            <div class="panel-body">
+                <form action="{{ route('cancion.store') }}" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
                     <div class="col-md-12">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -134,17 +141,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="cliente_id">Artista principal</label>
-                                <br>
-                                <select class="cliente_id col-md-12" name="cliente_id" id="cliente_id"
-                                    value="{{ old('cliente_id') }}">
-                                    @foreach ($clientes as $clientes)
-                                        <option value="{{ $clientes->id }}">{{ $clientes->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-12">
                                 <label for="porcentaje_artistaPr">Porcentaje intelectual Artista Principal</label>
                                 <br>
                                 <input type="text" class="form-control" id="porcentaje_artistaPr" name="porcentaje_artistaPr"
@@ -1233,50 +1230,96 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="featuring">Featuring</label>
-                                <br>
-                                <select class="featuring col-md-12" name="featuring" id="featuring"
-                                    value="{{ old('featuring') }}">
-                                    @foreach ($clientes2 as $clientes2)
-                                        <option value="{{ $clientes2->id }}">{{ $clientes2->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="porcentaje_featuring">Porcentaje intelectual Featuring</label>
-                                <br>
-                                <input type="text" class="form-control" id="porcentaje_featuring" name="porcentaje_featuring"
-                                value="{{ old('porcentaje_featuring') }}">
-                            </div>
-                        </div>
+                        <textarea
+                            class="form-control multi_existentes"
+                            name="colaboradores_existentes"
+                            data-name="colaboradores_existentes"
+                        >
+                        []
+                        </textarea>
+                        <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
+                        <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
+
+                        <script>
+                            var clienteAux = <?php echo json_encode($clientes); ?>;
+                            var auxiliar = '<select class="multiinput-title col-xs-12" name="cliente_id" id="cliente_id">';
+                            for(var i=0; i < clienteAux.length; i++){
+                                auxiliar += '<option value="'+clienteAux[i].id+'">'+clienteAux[i].nombre_artistico+'</option>'
+                            }
+                            auxiliar += '</select>\n';
+                            $('.multi_existentes').multiInput({
+                                json: true,
+                                input: $(
+                                    '<div class="row inputElement">\n' +
+                                    '<div class="multiinput-title col-xs-12"> Colaborador <span class="number">1</span></div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    auxiliar +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Ejemplo: Remixer, Featuring" type="text">\n' +
+                                    '</div>\n' +
+                                    '</div>\n'),
+                                limit: 4,
+                                onElementAdd: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                },
+                                onElementRemove: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                }
+                            });
+                        </script>
+
+                        <textarea
+                            class="form-control multi"
+                            name="colaboradores"
+                            data-name="colaboradores"
+                        >
+                        []
+                        </textarea>
+                        <script src="{{asset('assets_reports/js/jquery.min.js')}}"></script>
+                        <script src="{{asset('multiinput/js/jq.multiinput.min.js')}}"></script>
+
+                        <script>
+                            $('.multi').multiInput({
+                                json: true,
+                                input: $(
+                                    '<div class="row inputElement">\n' +
+                                    '<div class="multiinput-title col-xs-12">Invitar Colaborador <span class="number">1</span></div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Ejemplo: Remixer, Featuring" type="text">\n' +
+                                    '</div>\n' +
+                                    '</div>\n'),
+                                limit: 4,
+                                onElementAdd: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                },
+                                onElementRemove: function (el, plugin) {
+                                    console.log(plugin.elementCount);
+                                }
+                            });
+                        </script>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="formato">Remixer</label>
-                                <br>
-                                <select class="remixer col-md-12" name="remixer" id="remixer"
-                                    value="{{ old('remixer') }}">
-                                    @foreach ($clientes3 as $clientes3)
-                                        <option value="{{ $clientes3->id }}">{{ $clientes3->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-12">
+                                <div class="alert alert-warning text-start font-weight-bold" role="alert">
+                                    <p>Puede importar los siguientes formatos:</p>
+                                    <ul>
+                                        <li>WAV</li>
+                                        <li>FLAC</li>
+                                        <li>AIFF</li>
+                                    </ul>
+                                    <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la subida del archivo o directamente no ocurrir la misma.</p>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label for="porcentaje_remix">Porcentaje intelectual Remixer</label>
-                                <br>
-                                <input type="text" class="form-control" id="porcentaje_remix" name="porcentaje_remix"
-                                value="{{ old('porcentaje_remix') }}">
-                            </div>
-                        </div>
-
-                        <div class="text-start font-weight-bold">
-                            <p>Puede importar los siguientes formatos:</p>
-                            <p>- WAV</p>
-                            <p>- FLAC</p>
-                            <p>- AIFF</p>
-                            <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la subida del archivo o directamente no ocurrir la misma.</p>
                         </div>
 
                         <div class="form-group row">

@@ -33,12 +33,12 @@ class CancionInvitarController extends Controller
             ->get('');
 
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('gestionClientes/gestionCancion/invitar')
+            return view('cancion/gestion/invitar')
                         ->with('clientes', $clientes)
                         ->with('repertorios', $repertorios);
         }
         //return redirect('admin');
-        return view('gestionClientes/gestionCancion/invitar')
+        return view('cancion/gestion/invitar')
                     ->with('clientes', $clientes)
                     ->with('repertorios', $repertorios);
     }
@@ -145,7 +145,7 @@ class CancionInvitarController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect('admin')->with($notification);
+        return redirect('/cancion_invitarcolab')->with($notification);
     }
 
     /**
@@ -156,7 +156,8 @@ class CancionInvitarController extends Controller
      */
     public function show($id)
     {
-        //
+        // cancion_invitarcolab/{cancion_invitarcolab}
+        //return view('registro.modal.index', compact('regalia','persona', 'clientes','client'));
     }
 
     /**
