@@ -150,15 +150,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="porcentaje_artistaPr">Porcentaje intelectual Artista Principal</label>
-                                <br>
-                                <input type="text" class="form-control" id="porcentaje_artistaPr"
-                                    name="porcentaje_artistaPr" value="{{ old('porcentaje_artistaPr') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="autor">Autor</label>
                                 <br>
@@ -1269,7 +1260,7 @@
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Ejemplo: Remixer, Featuring" type="text">\n' +
+                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Colaboración tipo: Remixer, Featuring, Principal" type="text">\n' +
                                     '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
@@ -1317,7 +1308,7 @@
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Ejemplo: Remixer, Featuring" type="text">\n' +
+                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Colaboración tipo: Remixer, Featuring, Principal" type="text">\n' +
                                     '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,

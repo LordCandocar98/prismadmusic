@@ -14,6 +14,7 @@ class Colaboracion extends Model
 
     protected $fillable = [
         'nombre_colaboracion',
+        'tipo_colaboracion',
         'porcentaje_intelectual',
         'cliente_id',
         'cancion_id',

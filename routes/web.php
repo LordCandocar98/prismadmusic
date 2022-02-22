@@ -4,8 +4,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\Cancion\Gestion\CancionController;
-use App\Http\Controllers\CancionInvitarController;
-use App\Http\Controllers\RepertorioController;
+use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
@@ -37,7 +36,6 @@ Route::resource('registro', PersonaController::class); //Registro de Personas co
 //Gestión de Repertorios para los rol: Cliente.
 Route::resource('repertorio', RepertorioController::class); //Repertorio
 Route::resource('cancion', CancionController::class); //Cancion
-Route::resource('cancion_invitarcolab', CancionInvitarController::class); //Canción con invitación
 Route::resource('informeNomina', InformeNominaController::class);
 Route::resource('informeRegalias', InformeRegaliaController::class);
 
