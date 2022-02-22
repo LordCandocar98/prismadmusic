@@ -32,12 +32,11 @@ class RepertorioController extends Controller
         $sesion = Auth::user();
         $repertorios = DB::table('repertorio')
         ->join('cliente', 'repertorio.artista_principal', '=', 'cliente.id')
-        ->join('persona', 'cliente.id', '=', 'persona.id')
+        ->join('persona', 'cliente.persona_id', '=', 'persona.id')
         ->join('users', 'persona.user_id', '=', 'users.id')
         ->where('users.role_id',2)
         ->where('users.id',$sesion->id)
         ->get();
-        dd($repertorios);
         return view('repertorio.gestion.index', compact('repertorios'));
     }
 
