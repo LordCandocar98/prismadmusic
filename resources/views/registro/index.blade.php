@@ -147,7 +147,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="form-group row">
+                    <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="tipoCuenta">Tipo de cuenta bancaria</label>
                             <br>
@@ -165,7 +165,7 @@
                                 value="{{ old('numero_cuenta_bancaria') }}">
                         </div> --}}
 
-                        <input type="hidden" id="firma" name="firma" value="">
+                        <input type="hidden" id="firma" name="firma" value="{{ old('firma') }}">
 
                         <!-- Checkboxes of Privacidad, TérminosyCond, Contratos -->
                         <div class="form-group row">
