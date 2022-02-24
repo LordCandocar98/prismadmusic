@@ -14,13 +14,12 @@ class Cancion extends Model
 
     protected $fillable = [
         'repertorio_id',
+        //'colaboracion_id', //Añadí esto
         'tipo_secundario',
         'instrumental',
         'titulo',
         'version_subtitulo',
         'cliente_id',
-        'featuring',
-        'remixer',
         'autor',
         'compositor',
         'arreglista',

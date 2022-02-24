@@ -101,9 +101,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="ciudad">Ciudad</label>
-                            <br>{{--
-                            <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Bogotá"
-                                value="{{ old('ciudad') }}"> --}}
+                            <br>
                             <select class="ciudad form-control" name="ciudad"></select>
                         </div>
                         <div class="col-sm-6">
@@ -164,7 +162,7 @@
                             <input type="text" class="form-control" id="numero_cuenta_bancaria"
                                 name="numero_cuenta_bancaria" placeholder="Ejemplo: 05700002715"
                                 value="{{ old('numero_cuenta_bancaria') }}">
-                        </div>
+                        </div> --}}
 
                         <input type="hidden" id="firma" name="firma" value="{{ old('firma') }}">
 

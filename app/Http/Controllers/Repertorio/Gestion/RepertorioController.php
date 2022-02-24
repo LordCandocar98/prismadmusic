@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Repertorio\Gestion;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Repertorio;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
+
 class RepertorioController extends Controller
 {
     public function __construct()
@@ -26,16 +29,15 @@ class RepertorioController extends Controller
 
     public function index()
     {
-        $clientes = \DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
-            ->orderBy('id', 'DESC')
-            ->get('');
-        //dd($clientes);
-        if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('gestionClientes/gestionRepertorio/index')->with('clientes', $clientes);
-        }
-        //return redirect('admin');
-        return view('gestionClientes/gestionRepertorio/index')->with('clientes', $clientes);
+        $sesion = Auth::user();
+        $repertorios = DB::table('repertorio')
+        ->join('cliente', 'repertorio.artista_principal', '=', 'cliente.id')
+        ->join('persona', 'cliente.persona_id', '=', 'persona.id')
+        ->join('users', 'persona.user_id', '=', 'users.id')
+        ->where('users.role_id',2)
+        ->where('users.id',$sesion->id)
+        ->get();
+        return view('repertorio.gestion.index', compact('repertorios'));
     }
 
     /**
@@ -45,7 +47,15 @@ class RepertorioController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = \DB::table('cliente')
+            ->select('cliente.nombre_artistico','cliente.id')
+            ->orderBy('id', 'DESC')
+            ->get('');
+
+        if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
+            return view('repertorio.gestion.create')->with('clientes', $clientes);
+        }
+        return view('repertorio.gestion.create')->with('clientes', $clientes);
     }
 
     /**
@@ -78,6 +88,7 @@ class RepertorioController extends Controller
             'upc_ean'              => $request->upc_ean,
             'numero_catalogo'      => $request->numero_catalogo,
             'portada'              => $filename,
+            'fecha_lanzamiento'    => $request->fecha_lanzamiento,
         ]);
         $notification = array(
             'message' => 'Repertorio creado exitosamente!',

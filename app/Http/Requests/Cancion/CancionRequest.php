@@ -47,9 +47,6 @@ class CancionRequest extends FormRequest
             'idioma_letra'             =>'required',
             'fecha_principal_salida'   =>'required',
             'acepta_riesgo'            =>'required',
-            'porcentaje_artistaPr'     =>'required|numeric',
-            'porcentaje_featuring'     =>'',
-            'porcentaje_remix'         =>'',
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
             'pista_mp3'                =>'required|mimes:wav,aiff,flac',
@@ -74,7 +71,7 @@ class CancionRequest extends FormRequest
             'instrumental'             =>'Instrumental',
             'titulo'                   =>'Título',
             'version_subtitulo'        =>'Versión/Subtítulo',
-            'cliente_id'               =>'Artista principal',
+            'cliente_id'               =>'Artista',
             'featuring'                =>'Featuring',
             'remixer'                  =>'Remixer',
             'autor'                    =>'Autor',
@@ -93,7 +90,7 @@ class CancionRequest extends FormRequest
             'idioma_letra'             =>'Idioma letra',
             'fecha_principal_salida'   =>'Fecha principal de salida',
             'acepta_riesgo'            =>'Acepto responsabilidad de creación de la canción',
-            'pista_mp3'                => 'Pista canción',
+            'pista_mp3'                =>'Pista canción',
         ];
     }
 
