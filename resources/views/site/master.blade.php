@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900">
+        <link rel="stylesheet" href="{{ asset('css/general.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/style.css') }}" id="main-styles-link">
-    <link rel="icon" href="{{ asset('onwave/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('logo_prismad.png') }}" type="image/x-icon">
     <!-- Hola soy candido -->
 </head>
 

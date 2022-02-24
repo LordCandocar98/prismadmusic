@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'msyi';
+    src: url('../msyi.ttf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+     /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }  
+
+  @font-face {
+    font-family: 'myriadpro';
+    src: url('../myriadpro.otf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+     /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }  
