@@ -36,6 +36,7 @@ class RegistroRequest extends FormRequest
             'link_spoty'            =>'max:255',
             'acepta_TermsPrivCond'  =>'required',
             'acepta_Contrato'       =>'required',
+            'firma'                 =>'required'
         ];
     }
 
@@ -64,6 +65,7 @@ class RegistroRequest extends FormRequest
             'link_spoty'            =>'Link Spotify',
             'acepta_TermsPrivCond'  =>'Políticas de Privacidad y Términos/Condiciones',
             'acepta_Contrato'       =>'Contrato web Prismad Music',
+            'firma'                 =>'Firma en el Acuerdo exclusivo de administración de derechos fonográficos'
         ];
     }
 

@@ -4,6 +4,7 @@ jQuery(document).ready(function($){
 
   $('#limpiar').on('click', function(){
       signaturePad.clear();
+      $("#firma").val("");
   });
 
   $('#btn-firma,#btn-close,#btn-snd').click(function (){
