@@ -96,7 +96,7 @@ class CancionController extends Controller
         $cancion = [];
 
         $contadorPrincipal = 0;
-        $contadorArtistas = 0;
+        $contadorArtistas = -1;
         foreach($colaboraciones_existentes as $colaborador_especifico){
             if($colaborador_especifico->tipo_colaboracion == "Principal"){
                 $contadorPrincipal += 1;
@@ -118,9 +118,9 @@ class CancionController extends Controller
         }
         foreach($colaboraciones as $colaborador_invitado){
             if($colaborador_invitado->email != NULL){
-                $auxID2 = $colaborador_especifico->email;
+                $auxID2 = $colaborador_invitado->email;
                 foreach($colaboraciones as $j){
-                    if($j->email == $auxID2){
+                    if($j->email == $auxID2){ //Tal vez se pregunta con él mísmo
                         $contadorArtistas += 1;
                     }
                 }
@@ -129,9 +129,11 @@ class CancionController extends Controller
 
         if($contadorPrincipal == 0){ //No hay Principal
             dd("No hay artista Principal");
-        }else if($contadorPrincipal > 1){ //Hay más de un Principal
+        }
+        if($contadorPrincipal > 1){ //Hay más de un Principal
             dd("Hay más de 1 artista Principal");
-        }else if($contadorArtistas > 1){ //Hay más de un Artista o Email
+        }
+        if($contadorArtistas > 1){ //Hay más de un Artista o Email
             dd("Emails repetidos ..... Artistas repetidos");
         }else{
         //Ciclo perrón
@@ -220,19 +222,19 @@ class CancionController extends Controller
                                     ]);
                                 }
                             }
-                            foreach($colaboraciones_existentes as $colaborador_especifico){
-                                if($colaborador_especifico->cliente_id != NULL){
-                                    if($colaborador_especifico->tipo_colaboracion != "Principal"){
-                                        Colaboracion::create([
-                                            'nombre_colaboracion'     => $request->nombre_colaboracion,
-                                            'cancion_id'              => $cancion->id,
-                                            'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                                            'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                                            'cliente_id'              => $colaborador_especifico->cliente_id,
-                                        ]);
-                                    }
-                                }
-                            }
+                            // foreach($colaboraciones_existentes as $colaborador_especifico){
+                            //     if($colaborador_especifico->cliente_id != NULL){
+                            //         if($colaborador_especifico->tipo_colaboracion != "Principal"){
+                            //             Colaboracion::create([
+                            //                 'nombre_colaboracion'     => $request->nombre_colaboracion,
+                            //                 'cancion_id'              => $cancion->id,
+                            //                 'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                            //                 'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
+                            //                 'cliente_id'              => $colaborador_especifico->cliente_id,
+                            //             ]);
+                            //         }
+                            //     }
+                            // }
                         }
                         break;
                     }else{
@@ -349,29 +351,29 @@ class CancionController extends Controller
                                                 ]);
                                             }
                                         }
-                                        foreach($colaboraciones_existentes as $colaborador_especifico){
-                                            if($colaborador_especifico->cliente_id != NULL){
-                                                if($colaborador_especifico->tipo_colaboracion != "Principal"){
-                                                    Colaboracion::create([
-                                                        'nombre_colaboracion'     => $request->nombre_colaboracion,
-                                                        'cancion_id'              => $cancion->id,
-                                                        'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                                                        'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                                                        'cliente_id'              => $colaborador_especifico->cliente_id,
-                                                    ]);
-                                                }
-                                            }
-                                        }
+                                        // foreach($colaboraciones_existentes as $colaborador_especifico){
+                                        //     if($colaborador_especifico->cliente_id != NULL){
+                                        //         if($colaborador_especifico->tipo_colaboracion != "Principal"){
+                                        //             Colaboracion::create([
+                                        //                 'nombre_colaboracion'     => $request->nombre_colaboracion,
+                                        //                 'cancion_id'              => $cancion->id,
+                                        //                 'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                                        //                 'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
+                                        //                 'cliente_id'              => $colaborador_especifico->cliente_id,
+                                        //             ]);
+                                        //         }
+                                        //     }
+                                        // }
                                     }
+                                    break;
                                 }
                             }
                         }
                     }
                 }
             }
-        //----------------------------------------------------------------------------------------------------- Fin ciclo perrón
         }
-
+        //----------------------------------------------------------------------------------------------------- Fin ciclo perrón
         $notification = array(
             'message' => 'Canción añadida exitosamente!',
             'alert-type' => 'success'

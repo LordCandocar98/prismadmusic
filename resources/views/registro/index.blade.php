@@ -47,7 +47,8 @@
 <div class="col-md-12">
     <div class="panel panel-bordered">
         <div class="panel-body">
-            <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro">
+            {{-- <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro"> --}}
+            <form action="{{route($accion)}}" method="{{ $metodo }}" id="formRegistro" name="formRegistro">
                 <div class="col-md-12">
                     @if ($errors->any())
                     <div class="alert alert-danger">
