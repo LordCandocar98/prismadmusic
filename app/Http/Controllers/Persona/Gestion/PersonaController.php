@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Persona\Gestion;
 
-
-use App\Models\Persona; //Importamos User para poder añadir datos a la DB
+use App\Http\Controllers\Controller;
+use App\Models\Persona;
 use App\Models\User;
 use App\Models\Cliente;
 use Illuminate\Support\Str;
@@ -25,16 +25,16 @@ class PersonaController extends Controller
     public function index()
     { //Index retorna la vista de Usuarios, por ende, acá crearemos la consulta SQL para mostrar datos de la DB
         $personas = \DB::table('persona')
-            ->select('persona.*') //Seleccionamos todos los campos
+            ->select('persona.*')
             ->orderBy('id', 'DESC')
             ->get('');
         if (Auth::user()->registro_confirmed == 0){
-            return view('registro/index')->with('personas', $personas); //ACÁ REDIRIGE A LA VISTA*******************************************
+            return view('registro/index')->with('personas', $personas);
         }
         return redirect('admin');
     }
 
-    public function store(RegistroRequest $request) //ACÁ REDIRIGE AL VALIDATOR*******************************
+    public function store(RegistroRequest $request)
     {
         // Pasar a usuario verificado
         User::where('id', Auth::user()->id)->update([

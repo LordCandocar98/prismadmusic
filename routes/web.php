@@ -9,7 +9,7 @@ use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
 use App\Http\Controllers\Nominas\Informe\InformeNominaController;
-use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\Persona\Gestion\PersonaController;
 use App\Http\Controllers\Regalias\Informe\InformeRegaliaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
