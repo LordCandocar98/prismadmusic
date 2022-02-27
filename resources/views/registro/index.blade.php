@@ -48,7 +48,7 @@
     <div class="panel panel-bordered">
         <div class="panel-body">
             {{-- <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro"> --}}
-            <form action="{{route($accion)}}" method="{{ $metodo }}" id="formRegistro" name="formRegistro">
+            <form action="{{route($accion)}}" method="{{ $metodo }}" id="formRegistro" name="formRegistro"  enctype="multipart/form-data">
                 <div class="col-md-12">
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -110,10 +110,9 @@
                             <br>
                             <select class="tipoDNI col-md-12" name="tipo_documento" id="tipo_documento"
                                 value="{{ old('tipo_documento') }}">
-                                <option value="cc">CC</option>
-                                <option value="ti">TI</option>
-                                <option value="tp">TP</option>
-                                <option value="ce">CE</option>
+                                <option value="cc">Cédula de Ciudadanía</option>
+                                <option value="tp">Pasaporte</option>
+                                <option value="ce">Cédula de Extranjería</option>
                             </select>
                         </div>
                     </div>
@@ -163,7 +162,21 @@
                             <input type="text" class="form-control" id="numero_cuenta_bancaria"
                                 name="numero_cuenta_bancaria" placeholder="Ejemplo: 05700002715"
                                 value="{{ old('numero_cuenta_bancaria') }}">
-                        </div> --}}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="nombre_banco">Nombre del banco</label>
+                            <br>
+                            <input type="text" class="form-control" id="nombre_banco"
+                                name="nombre_banco" placeholder="Ejemplo: Bancolombia"
+                                value="{{ old('nombre_banco') }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="archivo_banco">Certifiado bancario</label>
+                            <br>
+                            <input type="file" class="form-control" id="archivo_banco"
+                                name="archivo_banco" value="{{ old('archivo_banco') }}">
+                        </div>
 
                         <input type="hidden" id="firma" name="firma" value="{{ old('firma') }}">
 

@@ -7,6 +7,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+## Carpetas necesarias
+- public/storage/certificado
+- public/storage/contratos
+- public/storage/firma
+- public/storage/plantilla
+
+## Archivo plantilla
+- El archivo plantila para el contrato esta guardado en el storage de plantilla con el nombre de contrato_prismad_music.docx
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
