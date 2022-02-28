@@ -147,4 +147,7 @@
         </div>
     </div>
 </section>
+
+@include('site.section.banner4')
+
 @endsection

@@ -1,7 +1,7 @@
 <section class="section texto-flotante-padre">
     <div class="franja-dorada alto-1"></div>
     <div class="row margin0 bg-white">
-        <div class="col-md-6 padding0">
+        <div class="col-md-6 padding0 center">
             <img src="{{ asset('slider2.png') }}" alt="Imagen del slider 2">
         </div>
         <div class="col-md-6 bg-white">

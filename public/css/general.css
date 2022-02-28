@@ -1,157 +1,185 @@
 @font-face {
     font-family: 'msyi';
-    src: url('../msyi.ttf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-     /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  }
+    src: url('../msyi.ttf');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    /* url('myfont.ttf') format('truetype'); */
+    /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
-  @font-face {
+@font-face {
     font-family: 'myriadpro';
-    src: url('../myriadpro.otf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-     /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  }
+    src: url('../myriadpro.otf');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    /* url('myfont.ttf') format('truetype'); */
+    /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
-body{
-   background-color: black;
+body {
+    background-color: black;
 }
 
 .rd-navbar-wrap {
-   background-color: black;
+    background-color: black;
 }
 
-.franja-dorada{
-   background: rgb(236,211,122);
-   background: linear-gradient(90deg, rgba(236,211,122,1) 23%, rgba(211,160,26,1) 47%, rgba(211,160,26,1) 100%);
+.franja-dorada {
+    background: rgb(236, 211, 122);
+    background: linear-gradient(90deg, rgba(236, 211, 122, 1) 23%, rgba(211, 160, 26, 1) 47%, rgba(211, 160, 26, 1) 100%);
 }
 
-.alto-1{
-   width: auto;
-   height: 6px;
+.alto-1 {
+    width: auto;
+    height: 6px;
 }
 
-.alto-2{
-   width: auto;
-   height: 4px;
+.alto-2 {
+    width: auto;
+    height: 4px;
 }
 
-.margin0{
-   margin: 0 !important;
+.margin0 {
+    margin: 0 !important;
 }
 
-.margin1{
-   margin-top: 1em !important;
-   margin-bottom: 1em !important;
+.margin1 {
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
 }
 
-.padding0{
-   padding: 0 !important;
+.padding0 {
+    padding: 0 !important;
 }
 
-.bg-dark{
-   background-color: black;
+.bg-dark {
+    background-color: black;
 }
 
-.bg-white{
-   background-color: white;
+.bg-white {
+    background-color: white;
 }
 
 .bg-white .container {
-   text-align: center;
+    text-align: center;
 }
 
 .container-slider {
-   font-size: 2em;
-   padding-left: 2em !important;
-   padding-right: 2em !important;
+    font-size: 2em;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
 }
 
 .bg-white .container h3 {
-   font-size: 2em;
-   font-weight: bold;
-   line-height: 0.8em;
-   color:  #e4a40c;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 0.8em;
+    color: #e4a40c;
 }
 
 .container p {
-   text-align: left;
-   color: black;
-   line-height: 1em;
+    text-align: left;
+    color: black;
+    line-height: 1em;
 }
 
 .text {
-   color: white;
-   font-size: 3em;
-   line-height: 0.8em;
-   text-align: center;
-   font-family: 'myriadpro';
-   width: 100%;
-   height: auto;
+    color: white;
+    font-size: 3em;
+    line-height: 0.8em;
+    text-align: center;
+    font-family: 'myriadpro';
+    width: 100%;
+    height: auto;
 }
 
-.text p{
-   font-weight: bold;
+.text p {
+    font-weight: bold;
 }
 
 .btn-outline-primary {
-   border: 3px solid !important;
-   background-color: black;
-   font-weight: bold;
+    border: 3px solid !important;
+    background-color: black;
+    font-weight: bold;
 }
 
 .btn-da {
-   font-size: 1.5rem !important;
-   margin-top: 1rem;
-   background-color: black;
+    font-size: 1.5rem !important;
+    margin-top: 1rem;
+    background-color: black;
 }
 
 .btn-da2 {
-   font-size: 1.5rem !important;
-   margin-top: 1rem;
-   margin-bottom: 1rem;
-   background-color: white;
+    font-size: 1.5rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
 }
 
 .right {
-   text-align: center;
+    text-align: center;
 }
 
-.btn-fondo{
-   background-color: black;
+.center {
+    text-align: center;
+}
+
+.btn-fondo {
+    background-color: black;
 }
 
 .texto-flotante-hijo {
-   padding-top: 1em;
-   padding-bottom: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.image-flotante {
+   width: 150px;
+   height: auto;
 }
 
 @media (min-width:1200px) {
-   .right{
-      text-align: end;
-   }
+    .right {
+        text-align: end;
+    }
 
-   .texto-flotante-padre{
-      position: relative;
-   }
+    .texto-flotante-padre {
+        position: relative;
+    }
 
-   .texto-flotante-hijo {
-      position: absolute;
-      bottom: 5%;
-      left: 50%;
-      transform: translate(-50%, 0%);
-   }
+    .image-flotante {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 150px;
+        height: auto;
+    }
 
-   .texto-flotante-hijo2{
-      position: absolute;
-      bottom: 5%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-   }
+    .texto-flotante-hijo {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
 
-   .abajo{
-      top: 85% !important;
-   }
+    .texto-flotante-hijo2 {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-   .btn-fondo{
-      background-color: transparent;
-   }
+    .texto-flotante-hijo3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .abajo {
+        top: 85% !important;
+    }
+
+    .btn-fondo {
+        background-color: transparent;
+    }
 
 }

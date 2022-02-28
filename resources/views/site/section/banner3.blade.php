@@ -21,7 +21,7 @@
                     actualmente cuentan con miles de oyentes.</p>
             </div>
         </div>
-        <div class="col-md-6 padding0">
+        <div class="col-md-6 padding0 center">
             <img src="{{ asset('slider3.png') }}" alt="Imagen del slider 2">
             <div class="texto-flotante-hijo2 text abajo">
             <a href="" class="btn btn-outline-primary btn-da2">DISTRIBUYE AHORA</a>
