@@ -2,10 +2,80 @@
     font-family: 'msyi';
     src: url('../msyi.ttf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
      /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  }  
+  }
 
   @font-face {
     font-family: 'myriadpro';
     src: url('../myriadpro.otf'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
      /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  }  
+  }
+
+.rd-navbar-wrap {
+   background-color: black;
+}
+
+.franja-dorada{
+   background: rgb(236,211,122);
+   background: linear-gradient(90deg, rgba(236,211,122,1) 23%, rgba(211,160,26,1) 47%, rgba(211,160,26,1) 100%);
+}
+
+.alto-1{
+   width: auto;
+   height: 6px;
+}
+
+.alto-2{
+   width: auto;
+   height: 4px;
+}
+
+.margin0{
+   margin: 0 !important;
+}
+
+.padding0{
+   padding: 0 !important;
+}
+
+.bg-dark{
+   background-color: black;
+}
+
+.right{
+   text-align: end;
+}
+
+.texto-flotante-padre{
+   position: relative;
+}
+
+.texto-flotante-hijo {
+   position: absolute;
+   top: 70%;
+   left: 50%;
+   transform: translate(-50%, 0%);
+}
+
+.text {
+   color: white;
+   font-size: 3em;
+   line-height: 0.8em;
+   text-align: center;
+   font-family: 'myriadpro';
+   width: 100%;
+   height: auto;
+}
+
+.text p{
+   font-weight: bold;
+}
+
+.btn-outline-primary {
+   border: 3px solid !important;
+   background-color: black;
+}
+
+.btn-da {
+   font-size: 1.5rem !important;
+   margin-top: 1rem;
+}
