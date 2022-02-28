@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="texto-flotante-hijo2 text abajo">
-        <a href="" class="btn btn-outline-primary btn-da2">DISTRIBUYE AHORA</a>
+        <a href="{{ url('/compartir-musica') }}" class="btn btn-outline-primary btn-da2">DISTRIBUYE AHORA</a>
     </div>
     <div class="franja-dorada alto-2"></div>
 </section>
