@@ -3,7 +3,8 @@
 @section('contenido')
 
 @include('site.section.banner1')
-
+@include('site.section.banner2')
+@include('site.section.banner3')
 <!--Player-->
 {{-- <section class="section section-xs bg-primary-gradient wave-pattern">
         <div class="container">

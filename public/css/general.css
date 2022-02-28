@@ -10,6 +10,10 @@
      /* url('myfont.ttf') format('truetype'); */ /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   }
 
+body{
+   background-color: black;
+}
+
 .rd-navbar-wrap {
    background-color: black;
 }
@@ -33,6 +37,11 @@
    margin: 0 !important;
 }
 
+.margin1{
+   margin-top: 1em !important;
+   margin-bottom: 1em !important;
+}
+
 .padding0{
    padding: 0 !important;
 }
@@ -41,19 +50,31 @@
    background-color: black;
 }
 
-.right{
-   text-align: end;
+.bg-white{
+   background-color: white;
 }
 
-.texto-flotante-padre{
-   position: relative;
+.bg-white .container {
+   text-align: center;
 }
 
-.texto-flotante-hijo {
-   position: absolute;
-   top: 70%;
-   left: 50%;
-   transform: translate(-50%, 0%);
+.container-slider {
+   font-size: 2em;
+   padding-left: 2em !important;
+   padding-right: 2em !important;
+}
+
+.bg-white .container h3 {
+   font-size: 2em;
+   font-weight: bold;
+   line-height: 0.8em;
+   color:  #e4a40c;
+}
+
+.container p {
+   text-align: left;
+   color: black;
+   line-height: 1em;
 }
 
 .text {
@@ -73,9 +94,64 @@
 .btn-outline-primary {
    border: 3px solid !important;
    background-color: black;
+   font-weight: bold;
 }
 
 .btn-da {
    font-size: 1.5rem !important;
    margin-top: 1rem;
+   background-color: black;
+}
+
+.btn-da2 {
+   font-size: 1.5rem !important;
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+   background-color: white;
+}
+
+.right {
+   text-align: center;
+}
+
+.btn-fondo{
+   background-color: black;
+}
+
+.texto-flotante-hijo {
+   padding-top: 1em;
+   padding-bottom: 1em;
+}
+
+@media (min-width:1200px) {
+   .right{
+      text-align: end;
+   }
+
+   .texto-flotante-padre{
+      position: relative;
+   }
+
+   .texto-flotante-hijo {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+   }
+
+   .texto-flotante-hijo2{
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+   .abajo{
+      top: 85% !important;
+   }
+
+   .btn-fondo{
+      background-color: transparent;
+   }
+
 }
