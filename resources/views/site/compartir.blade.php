@@ -7,17 +7,8 @@
 </style>
 @section('contenido')
 
-    <!-- Breadcrumbs -->
-    <section class="section section-bredcrumbs"
-        style="background: url(https://images.unsplash.com/photo-1468164016595-6108e4c60c8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80) no-repeat center / cover">
-        <div class="container context-dark breadcrumb-wrapper text-left">
-            <h1>Compartir música</h1>
-            <ul class="breadcrumbs-custom">
-                <li><a href="{{ url('/') }}">Inicio</a></li>
-                <li class="active">Compartir música</li>
-            </ul>
-        </div>
-    </section>
+@include('site.section.banner1')
+
     <!-- Join Our Team-->
     <section class="section section-lg custom-image-section">
         <div class="container relative-container">

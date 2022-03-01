@@ -28,6 +28,10 @@ class SiteController extends Controller
     {
         return view('site.compartir');
     }
+    public function articulo()
+    {
+        return view('site.articulo');
+    }
 
     public function postCompartir(CompartirMusicaRequest $request)
     {

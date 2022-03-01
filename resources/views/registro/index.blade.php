@@ -47,7 +47,8 @@
 <div class="col-md-12">
     <div class="panel panel-bordered">
         <div class="panel-body">
-            <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro">
+            {{-- <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro"> --}}
+            <form action="{{route($accion)}}" method="{{ $metodo }}" id="formRegistro" name="formRegistro"  enctype="multipart/form-data">
                 <div class="col-md-12">
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -101,9 +102,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="ciudad">Ciudad</label>
-                            <br>{{--
-                            <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Bogotá"
-                                value="{{ old('ciudad') }}"> --}}
+                            <br>
                             <select class="ciudad form-control" name="ciudad"></select>
                         </div>
                         <div class="col-sm-6">
@@ -111,10 +110,9 @@
                             <br>
                             <select class="tipoDNI col-md-12" name="tipo_documento" id="tipo_documento"
                                 value="{{ old('tipo_documento') }}">
-                                <option value="cc">CC</option>
-                                <option value="ti">TI</option>
-                                <option value="tp">TP</option>
-                                <option value="ce">CE</option>
+                                <option value="cc">Cédula de Ciudadanía</option>
+                                <option value="tp">Pasaporte</option>
+                                <option value="ce">Cédula de Extranjería</option>
                             </select>
                         </div>
                     </div>
@@ -148,7 +146,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="form-group row">
+                    <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="tipoCuenta">Tipo de cuenta bancaria</label>
                             <br>
@@ -166,7 +164,21 @@
                                 value="{{ old('numero_cuenta_bancaria') }}">
                         </div>
 
-                        <input type="hidden" id="firma" name="firma" value="">
+                        <div class="col-sm-6">
+                            <label for="nombre_banco">Nombre del banco</label>
+                            <br>
+                            <input type="text" class="form-control" id="nombre_banco"
+                                name="nombre_banco" placeholder="Ejemplo: Bancolombia"
+                                value="{{ old('nombre_banco') }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="archivo_banco">Certifiado bancario</label>
+                            <br>
+                            <input type="file" class="form-control" id="archivo_banco"
+                                name="archivo_banco" value="{{ old('archivo_banco') }}">
+                        </div>
+
+                        <input type="hidden" id="firma" name="firma" value="{{ old('firma') }}">
 
                         <!-- Checkboxes of Privacidad, TérminosyCond, Contratos -->
                         <div class="form-group row">
@@ -192,7 +204,7 @@
                         </div>
                         <div class="modal-footer">
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="modal-footer">
                         <button id="btn-snd" type="submit" class="btn btn-primary">Aceptar</button>

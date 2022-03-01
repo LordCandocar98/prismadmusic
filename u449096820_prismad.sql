@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
-<<<<<<< HEAD
--- Tiempo de generación: 27-01-2022 a las 04:42:18
-=======
--- Tiempo de generación: 13-02-2022 a las 04:51:56
->>>>>>> Desarrollo
+-- Tiempo de generación: 27-02-2022 a las 20:36:59
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -71,7 +67,8 @@ CREATE TABLE `cancion` (
   `idioma_titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `idioma_letra` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_principal_salida` date DEFAULT NULL,
-  `colaboracion_id` bigint(20) NOT NULL
+  `colaboracion_id` bigint(20) NOT NULL,
+  `pista_mp3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -136,7 +133,8 @@ CREATE TABLE `colaboracion` (
   `cliente_id` bigint(20) NOT NULL,
   `porcentaje_intelectual` double NOT NULL,
   `cancion_id` bigint(20) NOT NULL,
-  `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -909,15 +907,16 @@ CREATE TABLE `repertorio` (
   `copyright` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `annio_produccion` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `upc_ean` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_catalogo` bigint(20) DEFAULT NULL
+  `numero_catalogo` bigint(20) DEFAULT NULL,
+  `fecha_lanzamiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `repertorio`
 --
 
-INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `artista_principal`, `genero`, `subgenero`, `nombre_sello`, `formato`, `fecha_salida`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`) VALUES
-(1, 'portadas/February2022/1643948013.jpeg', 'Loley', 'fdasfsda', 8, 'g45', 'sg2', 'ns1', 'f1', '2022-02-09', 'Dennys', 'javox intc', '1994', 'sdafsdaf', 23413124);
+INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `artista_principal`, `genero`, `subgenero`, `nombre_sello`, `formato`, `fecha_salida`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
+(1, 'portadas/February2022/1643948013.jpeg', 'Loley', 'fdasfsda', 8, 'g45', 'sg2', 'ns1', 'f1', '2022-02-09', 'Dennys', 'javox intc', '1994', 'sdafsdaf', 23413124, NULL);
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1133,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'wuaeXdYeRzYTbBq8zjLlFY5tUWSu1hnyU0gURHya2sVDGz5pVrJA8HnUlnOp', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', '4oI9Ilx6rnLP91aGV1cXMUiag7klC3Kgqks1xBbblDJMog2itscArj6CA25T', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1),
 (21, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/February2022/i7RRngz5d7G0r48MjIo0.jpg', '2022-01-15 20:34:30', '$2y$10$Ke5w/9eWb5j4wYYSbSZ3z.6ckFdDsARb0iA51kwac9tWDMecxqK22', 'mwvr41HrSDCOz0z0xJQaLI0aYn13SFc3rQGLQb0BMWk8h8MaW9d32xmO0qkY', '{\"locale\":\"es\"}', '2022-01-15 18:22:57', '2022-02-03 22:18:59', 1),
 (25, 2, 'Javier', 'javoxdaemon@gmail.com', 'users/default.png', '2022-02-03 23:01:38', '$2y$10$XjosMoaEGJq6vCq4VwXtl.R/SGSLpQPocfN2PBLsEWDQKb99Dq5Oa', NULL, NULL, '2022-02-03 23:01:01', '2022-02-03 23:07:28', 1),
 (26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$zqDFxyQqrWlocRE9jZ.p4eEdcKW.VVi2pMCF3tk9sXtQgOZSkFRGC', 'UqhNpi6Rtca2Xfra3Ar0gbTIQbthiuLvQfM3Uayjvr7D4YWxJ90n3KieJYrh', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-02-03 23:16:08', 1);
