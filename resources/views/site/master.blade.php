@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('onwave/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/style.css') }}" id="main-styles-link">
-    <link rel="icon" href="{{ asset('logo_prismad.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <!-- Hola soy candido -->
 </head>
 
