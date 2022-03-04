@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('onwave/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('onwave/css/style.css') }}" id="main-styles-link">
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
-    <!-- Hola soy candido -->
 </head>
 
 <body>
