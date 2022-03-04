@@ -50,6 +50,7 @@ class CancionRequest extends FormRequest
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
             'pista_mp3'                =>'required|mimes:wav,aiff,flac',
+            'confirmation_code'        =>'',
         ];
     }
 

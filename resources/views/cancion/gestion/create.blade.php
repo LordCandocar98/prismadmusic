@@ -1260,8 +1260,8 @@
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Colaboración tipo: Remixer, Featuring, Principal" type="text">\n' +
-                                    '</div>\n' +
+                                    '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
+                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
                                 onElementAdd: function(el, plugin) {
@@ -1308,8 +1308,8 @@
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="tipo_colaboracion" placeholder="Colaboración tipo: Remixer, Featuring, Principal" type="text">\n' +
-                                    '</div>\n' +
+                                    '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
+                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
                                 onElementAdd: function(el, plugin) {

@@ -22,6 +22,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'autenticado'], function () {
 Auth::routes();
 Auth::routes(['verify' => true]);
 
+Route::get('register/verify/{code}','App\Http\Controllers\Cancion\Gestion\CancionController@verify'); //Vacca
+//Route::get('/registro', 'App\Http\Controllers\Persona\Gestion\PersonaController@store');
+
 Route::get('/register', function () {
     auth()->logout();
     return view('auth.registro');

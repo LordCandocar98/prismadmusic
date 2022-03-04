@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth; // LINEA DE CODIGO SUPREMA PARA OBTENER EL ROL DE VOYAGER
 use App\Http\Requests\Registro\RegistroRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\Settings;
@@ -28,25 +29,22 @@ class PersonaController extends Controller
     public function index()
     {
         $accion="";
-        $metodo="";
         $user = Auth::user();
-        $persona = Persona::find($user->id);
-        if($persona != null){
-            $cliente = Cliente::find($persona->id);
-            if($cliente->nombre_artistico == $user->email){ //Es colaborador
-                $metodo="PATCH";
-                $accion="registro/{".$persona->id."}";
-            }else{
-                $metodo="post";
-                $accion="registro.store";
-            }
-        }else{
-            $metodo="post";
-            $accion="registro.store";
+        if(! DB::table("persona")->where('user_id', $user->id)->first()){
+            $condicional_metodo = 0;
+            $accion="registro";
+            return view('registro/index',compact('accion','condicional_metodo'));
+        }
+        $persona = DB::table("persona")->where('user_id', $user->id)->first();
+        $cliente = DB::table("cliente")->where('persona_id', $persona->id)->first();
+
+        if($cliente->nombre_artistico == $user->email){ //Es colaborador
+            $condicional_metodo = 1;
+            $accion="registro/".$persona->id;
         }
 
         if (Auth::user()->registro_confirmed == 0){
-            return view('registro/index',compact('accion','metodo'));
+            return view('registro/index',compact('accion','condicional_metodo'));
         }
         return redirect('admin');
     }
@@ -56,7 +54,7 @@ class PersonaController extends Controller
         $accion="registro.store";
         $metodo="PATCH";
         // $user = Auth::user();
-        // $persona = Persona::find($user->id);
+        // $persona = Persona::find($user->id); NO ESTÁ HACIENDO NADA ESTO ASDSAD
         // $cliente = Cliente::find($persona->id);
         if (Auth::user()->registro_confirmed == 0){
             return view('registro/index',compact('accion','metodo'));
@@ -132,6 +130,11 @@ class PersonaController extends Controller
         $file = public_path(). '/storage'. '/firma' . '/'. $imageName;
         $firma = file_put_contents($file, base64_decode($image));
 
+        $sesion = Auth::users();
+        $user = User::find($sesion->id);
+
+        $user->registro_confirmed = 1;
+
         $persona = Persona::find($id);
         $persona->nombre = $request->nombre;
         $persona->apellido            = $request->apellido;
@@ -143,11 +146,11 @@ class PersonaController extends Controller
         $persona->telefono            = $request->telefono;
         $persona->firma               = storage_path(). '/' . $imageName;
         $persona->user_id             = auth()->id();
-        $persona->role_id             = 2;
         $persona->save();
 
-        $cliente = Cliente::find($persona->id);
-        $cliente->nombre_artistico       = $request->nombre_artistico;
+        //DB::table("cliente")->where('persona_id', $persona->id)->first();
+        $cliente = Cliente::where('persona_id', $persona->id)->first();
+        $cliente->nombre_artistico       =$request->nombre_artistico;
         $cliente->link_spoty             =$request->link_spoty;
         $cliente->numero_cuenta_bancaria =$request->numero_cuenta_bancaria;
         $cliente->tipo_cuenta_bancaria   =$request->tipo_cuenta_bancaria;
@@ -162,9 +165,7 @@ class PersonaController extends Controller
         );
         return redirect('admin')->with($notification);
     }
-
-    public function generarDocumento(Request $request, $id)
-    {
+    public function generarDocumento(Request $request, $id){
         $templateProcessor = new TemplateProcessor(public_path(). '/storage'. '/plantilla' . '/contrato_prismad_music.docx');
         $templateProcessor->setValues(
             array(
