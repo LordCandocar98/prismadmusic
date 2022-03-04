@@ -199,7 +199,7 @@ class CancionController extends Controller
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                         'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
-                                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, Acepta a continuación.',
+                                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                         'descripcion' => '',
                                         'button' => 'Ingresa al portal',
                                         'enlace' => url('register/verify/'.$usuario->confirmation_code),
