@@ -71,3 +71,11 @@ Route::get('/config-cache', function () {
     Artisan::call('cache:config');
     return "Cache is cleared";
 });
+
+Route::get('/terminos-y-condiciones', function (){
+    return view('site.termino_uso.tcondiciones');
+})->name('tcondiciones');
+
+Route::get('/politicas-de-privacidad', function (){
+    return view('site.termino_uso.privacidad');
+})->name('privacidad');

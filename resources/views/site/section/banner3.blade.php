@@ -1,7 +1,7 @@
 <section class="section texto-flotante-padre">
     <div class="franja-dorada alto-1"></div>
     <div class="row margin0 bg-white">
-        <div class="col-md-6 bg-white">
+        <div class="col-md-6 bg-white centrar">
             <div class="container container-slider margin1">
                 <p>- Podras generar automaticamente informes
                     de ingresos, recibos de pago, y tendras el
@@ -24,7 +24,7 @@
         <div class="col-md-6 padding0 center">
             <img src="{{ asset('slider3.png') }}" alt="Imagen del slider 2">
             <div class="texto-flotante-hijo2 text abajo">
-            <a href="{{ url('/compartir-musica') }}" class="btn btn-outline-primary btn-da2">DISTRIBUYE AHORA</a>
+            <a href="{{ route('register') }}" class="button button-lg button-primary">DISTRIBUYE AHORA</a>
         </div>
         </div>
     </div>
