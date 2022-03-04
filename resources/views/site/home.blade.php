@@ -60,8 +60,6 @@
 <section class="section section-lg bg-gray-100">
     <div class="container text-center">
         <h2>Noticias Prismad editorial digital</h2>
-        <p>Nuestro sello busca plenitud de información.<br class="d-none d-lg-block">Algunas noticias prismad
-            management.</p>
         <div class="row row-30 row-offset-4 text-left">
             <div class="col-md-6 col-lg-4 wow fadeInRight">
                 <article class="post-boxed">

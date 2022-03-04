@@ -97,7 +97,7 @@
                     <div class="col-md-6 col-lg-3"><a class="footer-logo" href="{{ url('/') }}"><img
                                 src="{{ asset('logo_prismad.png') }}" class="rounded mx-auto d-block" alt="" width="120"
                                 height="auto" /></a>
-                        <p>Sello discográfico.
+                        <p class="bg-dark center">Sello discográfico.
                             Editora digital, gestión de playlist y manejo digital para artistas y productos
                             empresariales.</p>
                     </div>
