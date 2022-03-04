@@ -56,10 +56,13 @@
                                             <a class="rd-nav-link" href="{{ url('/nosotros') }}">Quienes somos</a>
                                         </li>
                                         <li class="rd-nav-item"><a class="rd-nav-link"
-                                                href="{{ url('/login') }}">Login</a>
+                                                href="{{ url('/compartir-musica') }}">Envíanos tu canción</a>
                                         </li>
                                         <li class="rd-nav-item"><a class="rd-nav-link"
-                                                href="{{ url('/compartir-musica') }}">Envíanos tu canción</a>
+                                                href="{{ url('/login') }}">Inicia sesión</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link"
+                                                href="{{ url('/register') }}">Registrarse</a>
                                         </li>
                                     </ul>
                                 </div>
