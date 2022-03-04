@@ -30,19 +30,22 @@ class PersonaController extends Controller
     {
         $accion="";
         $user = Auth::user();
+
         if(! DB::table("persona")->where('user_id', $user->id)->first()){
             $condicional_metodo = 0;
             $accion="registro";
             return view('registro/index',compact('accion','condicional_metodo'));
+        }else{
+            if(DB::table("persona")->where('user_id', $user->id)->first()){
+                $persona = DB::table("persona")->where('user_id', $user->id)->first();
+                $cliente = DB::table("cliente")->where('persona_id', $persona->id)->first();
+                if($cliente->nombre_artistico == $user->email){ //Es colaborador
+                    $condicional_metodo = 1;
+                    $accion="registro/".$persona->id;
+                    return view('registro/index',compact('accion','condicional_metodo'));
+                }
+            }
         }
-        $persona = DB::table("persona")->where('user_id', $user->id)->first();
-        $cliente = DB::table("cliente")->where('persona_id', $persona->id)->first();
-
-        if($cliente->nombre_artistico == $user->email){ //Es colaborador
-            $condicional_metodo = 1;
-            $accion="registro/".$persona->id;
-        }
-
         if (Auth::user()->registro_confirmed == 0){
             return view('registro/index',compact('accion','condicional_metodo'));
         }
@@ -130,10 +133,11 @@ class PersonaController extends Controller
         $file = public_path(). '/storage'. '/firma' . '/'. $imageName;
         $firma = file_put_contents($file, base64_decode($image));
 
-        $sesion = Auth::users();
+        $sesion = Auth::user();
         $user = User::find($sesion->id);
 
         $user->registro_confirmed = 1;
+        $user->save();
 
         $persona = Persona::find($id);
         $persona->nombre = $request->nombre;
