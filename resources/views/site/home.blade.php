@@ -136,6 +136,9 @@
         <div class="button-wrap-lg"><a class="button button-lg button-primary" href="#">Ver más noticias</a></div>
     </div>
 </section>
+
+@include('site.section.banner4')
+
 <!-- Call to action-->
 <section class="section section-xs bg-primary-gradient">
     <div class="container">
@@ -147,7 +150,5 @@
         </div>
     </div>
 </section>
-
-@include('site.section.banner4')
 
 @endsection
