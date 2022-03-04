@@ -108,8 +108,7 @@
                                 <div class="unit unit-horizontal unit-spacing-xxs">
                                     <div class="unit-left"><span class="icon mdi mdi-map-marker accent-icon"></span>
                                     </div>
-                                    <div class="unit-body"><a href="#">Cll 76#12-86 oficina 204, <br
-                                                class="veil reveal-lg-inline">Bogotá, Bogotá DC</a></div>
+                                    <div class="unit-body">Bogotá, Bogotá DC</div>
                                 </div>
                             </li>
                             <li>
@@ -118,8 +117,7 @@
                                     </div>
                                     <div class="unit-body">
                                         <ul class="list-phones">
-                                            <li><a href="tel:#">300 357 7830</a></li>
-                                            <li><a href="tel:#">304 578 9392</a></li>
+                                            <li><a href="tel:3003577830">300 357 7830</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -128,7 +126,7 @@
                                 <div class="unit unit-horizontal unit-spacing-xxs">
                                     <div class="unit-left"><span class="icon mdi mdi-email-outline accent-icon"></span>
                                     </div>
-                                    <div class="unit-body"><a href="mailto:#">prismadmusic@gmail.com</a></div>
+                                    <div class="unit-body"><a href="mailto:admin@prismadmusic.com">admin@prismadmusic.com</a></div>
                                 </div>
                             </li>
                         </ul>
