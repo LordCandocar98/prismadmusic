@@ -168,18 +168,10 @@ class PersonaController extends Controller
         $templateProcessor = new TemplateProcessor(public_path(). '/storage'. '/plantilla' . '/contrato_prismad_music.docx');
         $templateProcessor->setValues(
             array(
-                'username'      => Auth::user()->name,
-                'email'         => Auth::user()->email,
-                'name'          => $request->nombre,
-                'lastname'      => $request->apellido,
-                'country'       => $request->pais,
-                'department'    => $request->departamento,
-                'town'          => $request->ciudad,
-                'id_type'       => $request->tipo_documento,
-                'id'            => $request->numero_identificacion,
-                'phone_number'  => $request->telefono,
-                'stage_name'    => $request->nombre_artistico,
-                'link_spotify'  => $request->link_spoty
+                'name'              => Auth::user()->name,
+                'url_condiciones'   => env('APP_URL').'/terminos-y-condiciones',
+                'url_privacidad'    => env('APP_URL').'/politicas-de-privacidad',
+                'fecha'             => date("Y-m-d H:i:s")
             )
         );
         $templateProcessor->setImageValue('firm', public_path(). '/storage'. '/firma' . '/'. $id.'.'.'png');
