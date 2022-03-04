@@ -47,8 +47,10 @@
 <div class="col-md-12">
     <div class="panel panel-bordered">
         <div class="panel-body">
-            {{-- <form action="{{route('registro.store')}}" method="post" id="formRegistro" name="formRegistro"> --}}
-            <form action="{{route($accion)}}" method="{{ $metodo }}" id="formRegistro" name="formRegistro">
+            <form enctype="multipart/form-data" action="{{ url($accion)}}" method="post" id="formRegistro" name="formRegistro">
+            @if ($condicional_metodo == 1)
+                {!! method_field('PATCH') !!}
+            @endif
                 <div class="col-md-12">
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -148,23 +150,6 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-6">
-                            <label for="tipoCuenta">Tipo de cuenta bancaria</label>
-                            <br>
-                            <select class="tipoDeCuentaBanco form-select col-md-12" name="tipo_cuenta_bancaria"
-                                id="tipo_cuenta_bancaria" value="{{ old('tipo_cuenta_bancaria') }}">
-                                <option value="ahorros">Ahorros</option>
-                                <option value="corriente">Corriente</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="numeroCuenta">Número de cuenta bancaria</label>
-                            <br>
-                            <input type="text" class="form-control" id="numero_cuenta_bancaria"
-                                name="numero_cuenta_bancaria" placeholder="Ejemplo: 05700002715"
-                                value="{{ old('numero_cuenta_bancaria') }}">
-                        </div> --}}
-
                         <input type="hidden" id="firma" name="firma" value="{{ old('firma') }}">
 
                         <!-- Checkboxes of Privacidad, TérminosyCond, Contratos -->

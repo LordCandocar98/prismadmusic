@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class CancionController extends Controller
 {
@@ -192,9 +193,10 @@ class CancionController extends Controller
                                         'name'     => $colaborador_invitado->email,
                                         'password' => Hash::make('password'),
                                         'role_id'  => 2,
+                                        'confirmation_code' => Str::random(40), //Vacca
                                     ]);
                                     // Send confirmation code---------------------------------------------------------------
-                                    $artista = Cliente::find($request->cliente_id);
+                                    /*$artista = Cliente::find($request->cliente_id);
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                         'subtitle' => $artista->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $request->titulo.'"',
@@ -203,7 +205,13 @@ class CancionController extends Controller
                                         'button' => 'Ingresa al portal',
                                         'enlace' => url('/registro'),
                                     ];
-                                    Mail::to($request->email)->send(new CorreoPrismadMusic($details));
+                                    Mail::to($request->email)->send(new CorreoPrismadMusic($details));*/
+                                    //dd($colaborador_invitado);
+                                    $usuario_array = json_decode(json_encode($usuario), true);
+                                    //dd($colaborador_invitado_array);
+                                    Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
+                                        $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
+                                    });
                                     //---------------------------------------------------------------------------------------
                                     $persona = Persona::create([
                                         'user_id'               => $usuario->id,
@@ -246,9 +254,10 @@ class CancionController extends Controller
                                         'name'     => $colaborador_invitado->email,
                                         'password' => Hash::make('password'),
                                         'role_id'  => 2,
+                                        'confirmation_code' => Str::random(40), //Vacca
                                     ]);
                                     // Send confirmation code---------------------------------------------------------------
-                                    $artista = Cliente::find($request->cliente_id);
+                                    /*$artista = Cliente::find($request->cliente_id);
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                         'subtitle' => $artista->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $request->titulo.'"',
@@ -257,7 +266,11 @@ class CancionController extends Controller
                                         'button' => 'Ingresa al portal',
                                         'enlace' => url('/registro'),
                                     ];
-                                    Mail::to($request->email)->send(new CorreoPrismadMusic($details));
+                                    Mail::to($request->email)->send(new CorreoPrismadMusic($details));*/
+                                    $usuario_array = json_decode(json_encode($usuario), true);
+                                    Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
+                                        $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
+                                    });
                                     //---------------------------------------------------------------------------------------
                                     $persona = Persona::create([
                                         'user_id'               => $usuario->id,
@@ -322,18 +335,23 @@ class CancionController extends Controller
                                                     'name'     => $colaborador_invitado->email,
                                                     'password' => Hash::make('password'),
                                                     'role_id'  => 2,
+                                                    'confirmation_code' => Str::random(40), //Vacca
                                                 ]);
                                                 // Send confirmation code---------------------------------------------------------------
-                                                $artista = Cliente::find($request->cliente_id);
+                                                /*$artista = Cliente::find($request->cliente_id);
                                                 $details = [
                                                     'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                                     'subtitle' => $artista->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $request->titulo.'"',
                                                     'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, Acepta a continuación.',
                                                     'descripcion' => '',
                                                     'button' => 'Ingresa al portal',
-                                                    'enlace' => url('/registro'),
+                                                    'enlace' => url('/register/verify/'.$usuario->confirmation_code),
                                                 ];
-                                                Mail::to($request->email)->send(new CorreoPrismadMusic($details));
+                                                Mail::to($request->email)->send(new CorreoPrismadMusic($details));*/
+                                                $usuario_array = json_decode(json_encode($usuario), true);
+                                                Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
+                                                    $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
+                                                });
                                                 //---------------------------------------------------------------------------------------
                                                 $persona = Persona::create([
                                                     'user_id'               => $usuario->id,
@@ -380,6 +398,17 @@ class CancionController extends Controller
         );
 
         return redirect('/cancion')->with($notification);
+    }
+
+    public function verify($code){ //VACCA
+        $user = User::where('confirmation_code', $code)->first();
+        if(! $user){
+            return redirect('/');
+        }
+        $user->email_verified_at = date('Y-m-d H:i:s');
+        $user->save();
+
+        return redirect('/registro')->with('notification','Has confirmado exitosamente tu correo!');
     }
 
     /**
