@@ -50,6 +50,7 @@ Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/nosotros', [SiteController::class, 'nosotros'])->name('nosotros');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('inicio');
 Route::get('/compartir-musica', [SiteController::class, 'compartir'])->name('compartir');
+Route::get('/articulo', [SiteController::class, 'articulo'])->name('articulo');
 Route::post('/compartir-musica', [SiteController::class, 'postCompartir'])->name('compartirMusica');
 
 //Gestión de clientes para los roles: AMIN y Moderadores.

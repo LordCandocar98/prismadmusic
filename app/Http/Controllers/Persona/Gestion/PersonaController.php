@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Settings;
 
 class PersonaController extends Controller
 {
@@ -41,6 +42,7 @@ class PersonaController extends Controller
             $condicional_metodo = 1;
             $accion="registro/".$persona->id;
         }
+
         if (Auth::user()->registro_confirmed == 0){
             return view('registro/index',compact('accion','condicional_metodo'));
         }
@@ -66,8 +68,15 @@ class PersonaController extends Controller
         $id = Auth::user()->id;
         // Pasar a usuario verificado
         User::where('id', $id)->update([
-            'registro_confirmed'    => 0,
+            'registro_confirmed'    => 1,
         ]);
+
+        if($request->hasFile('archivo_banco')){
+            $file = $request->file('archivo_banco');
+            $nombre = 'certificado'.$id.'.'.$file->guessExtension();
+            $ruta = public_path(). '/storage'. '/certificado' . '/'. $nombre;
+            copy($file, $ruta);
+        }
 
         // Pasar imagen de formato base64/png a png y guardar
         $image = $request->firma;  // your base64 encoded
@@ -176,8 +185,16 @@ class PersonaController extends Controller
         );
         $templateProcessor->setImageValue('firm', public_path(). '/storage'. '/firma' . '/'. $id.'.'.'png');
 
-        $pathToSave = public_path(). '/storage'. '/contratos'.'/'.$id.'.pdf';
+        $pathToSave = public_path(). '/storage'. '/contratos'.'/'.$id.'.docx';
         $templateProcessor->saveAs($pathToSave);
+
+        // Make sure you have `dompdf/dompdf` in your composer dependencies.
+        Settings::setPdfRendererName(Settings::PDF_RENDERER_DOMPDF);
+        // Any writable directory here. It will be ignored.
+        Settings::setPdfRendererPath('.');
+
+        $phpWord = IOFactory::load($pathToSave, 'Word2007');
+        $phpWord->save(public_path(). '/storage'. '/contratos'.'/'.$id.'.pdf', 'PDF');
 
         return $pathToSave;
     }

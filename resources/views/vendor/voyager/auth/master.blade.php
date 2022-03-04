@@ -61,16 +61,16 @@
                 <div class="clearfix">
                     <div class="col-sm-12 col-md-10 col-md-offset-2">
                         <div class="logo-title-container">
-                            <?php $admin_logo_img = Voyager::setting('admin.icon_image', ''); ?>
+                            <?php $admin_logo_img = Voyager::setting('admin.icon_image', '');  ?>
                             @if ($admin_logo_img == '')
                                 <img class="img-responsive pull-left flip logo hidden-xs animated fadeIn"
                                     src="{{ voyager_asset('images/logo-icon-light.png') }}" alt="Logo Icon">
                             @else
-                                <img class="img-responsive pull-left flip logo hidden-xs animated fadeIn"
-                                    src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
+                                <a href="{{ url('/') }}"><img class="img-responsive pull-left flip logo hidden-xs animated fadeIn"
+                                    src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon"></a>
                             @endif
                             <div class="copy animated fadeIn">
-                                <h1>{{ Voyager::setting('admin.title', 'Voyager') }}</h1>
+                                <h1><a href="{{ url('/') }}" style="color:#ffffff">{{ Voyager::setting('admin.title', 'Voyager') }}</a></h1>
                                 <p>{{ Voyager::setting('admin.description', __('voyager::login.welcome')) }}</p>
                             </div>
                         </div> <!-- .logo-title-container -->

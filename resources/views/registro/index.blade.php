@@ -112,10 +112,9 @@
                             <br>
                             <select class="tipoDNI col-md-12" name="tipo_documento" id="tipo_documento"
                                 value="{{ old('tipo_documento') }}">
-                                <option value="cc">CC</option>
-                                <option value="ti">TI</option>
-                                <option value="tp">TP</option>
-                                <option value="ce">CE</option>
+                                <option value="cc">Cédula de Ciudadanía</option>
+                                <option value="tp">Pasaporte</option>
+                                <option value="ce">Cédula de Extranjería</option>
                             </select>
                         </div>
                     </div>
