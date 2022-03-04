@@ -123,6 +123,12 @@ body {
     text-align: center !important;
 }
 
+.centrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .btn-fondo {
     background-color: black;
 }

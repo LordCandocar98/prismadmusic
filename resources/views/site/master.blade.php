@@ -50,7 +50,7 @@
                                     <!-- RD Navbar Nav-->
                                     <ul class="rd-navbar-nav">
                                         <li class="rd-nav-item {{ request()->routeIs('home') ? 'active' : '' }}"><a
-                                                class="rd-nav-link" href="{{ url('/') }}">Home</a>
+                                                class="rd-nav-link" href="{{ url('/') }}">Inicio</a>
                                         </li>
                                         <li class="rd-nav-item {{ request()->routeIs('nosotros') ? 'active' : '' }}">
                                             <a class="rd-nav-link" href="{{ url('/nosotros') }}">Quienes somos</a>
@@ -136,7 +136,11 @@
                             <a class="icon icon-md novi-icon mdi mdi-facebook-messenger" href="https://web.facebook.com/messages/t/231338047199947" target="_blank"></a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3"></div>
+                    <div class="col-md-6 col-lg-3">
+                        <h5 class="title">Términos y condiciones de uso</h5>
+                        <p style="color: #aeb1be"><a href="{{ route('tcondiciones') }}">Términos y Condiciones</a></p>
+                        <p style="color: #aeb1be"><a href="{{ route('privacidad') }}">Política de privacidad</a></p>
+                    </div>
                     {{-- <div class="col-md-6 col-lg-3">
                         <h5 class="title">Galería</h5>
                         <ul class="instafeed instagram-gallery" data-lightgallery="group">

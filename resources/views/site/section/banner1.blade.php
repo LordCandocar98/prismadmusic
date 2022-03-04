@@ -10,7 +10,7 @@
     </div>
     <div class="texto-flotante-hijo text btn-fondo">
         <p>DISTRIBUYE TU MUSICA<br>EN LAS PRINCIPALES PLATAFORMAS DIGITALES<br>Y MONETIZA EN TODO EL MUNDO</p>
-        <a href="{{ url('/compartir-musica') }}" class="btn btn-outline-primary btn-da">DISTRIBUYE AHORA</a>
+        <a href="{{ route('register') }}" class="button button-lg button-primary">DISTRIBUYE AHORA</a>
     </div>
     <div class="franja-dorada alto-2"></div>
 </section>
