@@ -36,6 +36,7 @@
             <div class="panel-body">
                 <form action="{{ route('cancion.store') }}" method="post" id="formRegistro" name="formRegistro"
                     enctype="multipart/form-data">
+                    @csrf
                     <div class="col-md-12">
                         @if ($errors->any())
                             <div class="alert alert-danger">

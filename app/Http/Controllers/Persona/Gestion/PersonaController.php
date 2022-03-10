@@ -109,11 +109,7 @@ class PersonaController extends Controller
         Cliente::create([
             'nombre_artistico'        => $request->nombre_artistico,
             'link_spoty'              => $request->link_spoty,
-            'numero_cuenta_bancaria'  => $request->numero_cuenta_bancaria,
-            'tipo_cuenta_bancaria'    => $request->tipo_cuenta_bancaria,
             'persona_id'              => $persona->id,
-            'nombre_banco'            => $request->nombre_banco,
-            'archivo_banco'           => $request->archivo_banco,
         ]);
         $notification = array(
             'message' => 'Registro completado exitosamente!',
@@ -156,11 +152,7 @@ class PersonaController extends Controller
         $cliente = Cliente::where('persona_id', $persona->id)->first();
         $cliente->nombre_artistico       =$request->nombre_artistico;
         $cliente->link_spoty             =$request->link_spoty;
-        $cliente->numero_cuenta_bancaria =$request->numero_cuenta_bancaria;
-        $cliente->tipo_cuenta_bancaria   =$request->tipo_cuenta_bancaria;
         $cliente->persona_id             =$persona->id;
-        $cliente->nombre_banco           =$request->nombre_banco;
-        $cliente->archivo_banco          =$request->archivo_banco;
         $cliente->save();
 
         $notification = array(
