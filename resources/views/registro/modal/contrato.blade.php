@@ -20,7 +20,7 @@
                 <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
                     <font face="Helvetica Neue, serif">El siguiente Acuerdo exclusivo de
                         administración de derechos fonográficos (el &quot;Acuerdo&quot;),
-                        suscrito el {DateSigned} (la &quot;Fecha Efectiva&quot;), se produce
+                        suscrito el {{date('Y-m-d')}} (la &quot;Fecha Efectiva&quot;), se produce
                         por y entre Usted (el &quot;Licenciante&quot;) y Prismad Music y el
                         Licenciante (cada uno como se define abajo).&nbsp;Los términos en
                         mayúsculas no definidas de otra manera en los términos y
@@ -160,19 +160,6 @@
                         expresa expresamente su consentimiento y aprobación de la sección 9
                         (h) de los Términos y Condiciones Generales.</font>
                 </p>
-                <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
-                    <font face="Helvetica Neue, serif">{Firma}</font>
-                </p>
-                <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
-                    &nbsp;</p>
-                <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
-                    <font face="Helvetica Neue, serif">{Nombre completo}</font>
-                </p>
-                <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
-                    <font face="Helvetica Neue, serif">{DateSigned}</font>
-                </p>
-                <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
-                    &nbsp;</p>
                 <p align="justify" style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
                     <font face="Helvetica Neue, serif">Anexo A</font>
                 </p>
