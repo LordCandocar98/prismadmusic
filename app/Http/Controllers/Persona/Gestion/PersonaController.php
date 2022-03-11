@@ -30,20 +30,18 @@ class PersonaController extends Controller
     {
         $accion="";
         $user = Auth::user();
+        $persona = Persona::where('user_id', $user->id)->first();
 
-        if(! DB::table("persona")->where('user_id', $user->id)->first()){
+        if(! $persona){
             $condicional_metodo = 0;
             $accion="registro";
             return view('registro/index',compact('accion','condicional_metodo'));
         }else{
-            if(DB::table("persona")->where('user_id', $user->id)->first()){
-                $persona = DB::table("persona")->where('user_id', $user->id)->first();
-                $cliente = DB::table("cliente")->where('persona_id', $persona->id)->first();
-                if($cliente->nombre_artistico == $user->email){ //Es colaborador
-                    $condicional_metodo = 1;
-                    $accion="registro/".$persona->id;
-                    return view('registro/index',compact('accion','condicional_metodo'));
-                }
+            $cliente = Cliente::where('persona_id', $persona->id)->first();
+            if($cliente->nombre_artistico == $user->email){ //Es colaborador
+                $condicional_metodo = 1;
+                $accion="registro/".$persona->id;
+                return view('registro/index',compact('accion','condicional_metodo'));
             }
         }
         if (Auth::user()->registro_confirmed == 0){
@@ -74,13 +72,6 @@ class PersonaController extends Controller
             'registro_confirmed'    => 1,
         ]);
 
-        if($request->hasFile('archivo_banco')){
-            $file = $request->file('archivo_banco');
-            $nombre = 'certificado'.$id.'.'.$file->guessExtension();
-            $ruta = public_path(). '/storage'. '/certificado' . '/'. $nombre;
-            copy($file, $ruta);
-        }
-
         // Pasar imagen de formato base64/png a png y guardar
         $image = $request->firma;  // your base64 encoded
         $image = str_replace('data:image/png;base64,', '', $image);
@@ -109,12 +100,9 @@ class PersonaController extends Controller
         Cliente::create([
             'nombre_artistico'        => $request->nombre_artistico,
             'link_spoty'              => $request->link_spoty,
-            'numero_cuenta_bancaria'  => $request->numero_cuenta_bancaria,
-            'tipo_cuenta_bancaria'    => $request->tipo_cuenta_bancaria,
-            'persona_id'              => $persona->id,
-            'nombre_banco'            => $request->nombre_banco,
-            'archivo_banco'           => $request->archivo_banco,
+            'persona_id'              => $persona->id
         ]);
+
         $notification = array(
             'message' => 'Registro completado exitosamente!',
             'alert-type' => 'success'
@@ -125,13 +113,15 @@ class PersonaController extends Controller
     public function update($id,RegistroRequest $request)
     {
 
-        // Pasar imagen de formato base64/png a png
-        $image = $request->firma;  // your base64 encoded
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageName = Str::random(16).'.'.'png';
-        $file = public_path(). '/storage'. '/firma' . '/'. $imageName;
-        $firma = file_put_contents($file, base64_decode($image));
+       // Pasar imagen de formato base64/png a png y guardar
+       $image = $request->firma;  // your base64 encoded
+       $image = str_replace('data:image/png;base64,', '', $image);
+       $image = str_replace(' ', '+', $image);
+       $imageName = $id.'.'.'png';
+       $file = public_path(). '/storage'. '/firma' . '/'. $imageName;
+       file_put_contents($file, base64_decode($image));
+       // Generar documento
+       $rutaDocumento = $this->generarDocumento($request, $id);
 
         $sesion = Auth::user();
         $user = User::find($sesion->id);
@@ -148,7 +138,8 @@ class PersonaController extends Controller
         $persona->tipo_documento      = $request->tipo_documento;
         $persona->numero_identificacion = $request->numero_identificacion;
         $persona->telefono            = $request->telefono;
-        $persona->firma               = storage_path(). '/' . $imageName;
+        $persona->firma               = $file;
+        $persona->contrato            = $rutaDocumento;
         $persona->user_id             = auth()->id();
         $persona->save();
 
@@ -156,11 +147,7 @@ class PersonaController extends Controller
         $cliente = Cliente::where('persona_id', $persona->id)->first();
         $cliente->nombre_artistico       =$request->nombre_artistico;
         $cliente->link_spoty             =$request->link_spoty;
-        $cliente->numero_cuenta_bancaria =$request->numero_cuenta_bancaria;
-        $cliente->tipo_cuenta_bancaria   =$request->tipo_cuenta_bancaria;
         $cliente->persona_id             =$persona->id;
-        $cliente->nombre_banco           =$request->nombre_banco;
-        $cliente->archivo_banco          =$request->archivo_banco;
         $cliente->save();
 
         $notification = array(
@@ -169,6 +156,7 @@ class PersonaController extends Controller
         );
         return redirect('admin')->with($notification);
     }
+
     public function generarDocumento(Request $request, $id){
         $templateProcessor = new TemplateProcessor(public_path(). '/storage'. '/plantilla' . '/contrato_prismad_music.docx');
         $templateProcessor->setValues(

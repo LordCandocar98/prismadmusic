@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 27-02-2022 a las 20:36:59
+-- Tiempo de generación: 11-03-2022 a las 07:26:13
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -46,12 +46,10 @@ CREATE TABLE `cancion` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `repertorio_id` bigint(20) NOT NULL,
   `tipo_secundario` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instrumental` int(11) NOT NULL,
+  `instrumental` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `version_subtitulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cliente_id` bigint(20) NOT NULL,
-  `featuring` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remixer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `autor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `compositor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `arreglista` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -67,9 +65,16 @@ CREATE TABLE `cancion` (
   `idioma_titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `idioma_letra` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_principal_salida` date DEFAULT NULL,
-  `colaboracion_id` bigint(20) NOT NULL,
   `pista_mp3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cancion`
+--
+
+INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`, `titulo`, `version_subtitulo`, `cliente_id`, `autor`, `compositor`, `arreglista`, `productor`, `pline`, `annio_produccion`, `genero`, `subgenero`, `genero_secundario`, `subgenero_secundario`, `letra_chocante_vulgar`, `inicio_previsualizacion`, `idioma_titulo`, `idioma_letra`, `fecha_principal_salida`, `pista_mp3`) VALUES
+(1, 2, 'original', 'si', 'LaMejorCancion', 'Version_1', 9, 'Yohan', 'Fruco', 'Sus tesos', 'JYP', 'NoSeQueEsPline', 2022, 'Alternative & Rock in Spanish', 'Acid house', 'Alternative & Rock in Spanish', 'Acid house', 'si', '3', 'Español', 'Español', '2022-03-10', 'canciones/March2022/1646949889.wav'),
+(2, 2, 'karaoke', 'si', 'LaMejorCancion', 'Version_1', 9, 'CandidoPatatas', 'Fruco', 'Sus tesos', 'XD', 'NoSeQueEsPline', 2022, 'Afoxé', 'Acid', 'Afoxé', 'Acid', 'si', '4', 'Español', 'Español', '2022-03-10', 'canciones/March2022/1646950562.wav');
 
 -- --------------------------------------------------------
 
@@ -105,22 +110,19 @@ CREATE TABLE `cliente` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `persona_id` bigint(20) UNSIGNED NOT NULL,
   `nombre_artistico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_spoty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_cuenta_bancaria` bigint(20) NOT NULL,
-  `tipo_cuenta_bancaria` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nombre_banco` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `archivo_banco` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `link_spoty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`, `numero_cuenta_bancaria`, `tipo_cuenta_bancaria`, `nombre_banco`, `archivo_banco`) VALUES
-(2, 14, 'PrismadMusic', 'open.', 456123456748, 'ahorros', '', ''),
-(4, 16, 'LordCandocar', 'open', 114569541325, 'ahorros', '', ''),
-(5, 17, 'LordCandocar', 'open.', 114569541325, 'ahorros', '', ''),
-(8, 20, 'Javox', 'www.javox.com', 52454345235, 'ahorros', 'Nequi', 'archivoeqweqw');
+INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VALUES
+(5, 17, 'LordCandocar', 'open.'),
+(8, 20, 'Javox', 'www.javox.com'),
+(9, 26, 'YohanInstitucional', 'open.spotify/artist:yohanvacca'),
+(10, 27, 'Andorrano', 'open.spotify/artist:andorrano'),
+(11, 28, 'Facundochapa@yahoo.com.ar', NULL);
 
 -- --------------------------------------------------------
 
@@ -136,6 +138,16 @@ CREATE TABLE `colaboracion` (
   `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `colaboracion`
+--
+
+INSERT INTO `colaboracion` (`id`, `cliente_id`, `porcentaje_intelectual`, `cancion_id`, `nombre_colaboracion`, `tipo_colaboracion`) VALUES
+(1, 9, 50, 1, 'ColaboracionEspecial', 'Principal'),
+(2, 10, 50, 1, 'ColaboracionEspecial', 'Featuring'),
+(3, 9, 70, 2, 'PatatasANDxpeed', 'Principal'),
+(4, 11, 30, 2, 'PatatasANDxpeed', 'Featuring');
 
 -- --------------------------------------------------------
 
@@ -450,16 +462,15 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (28, 1, 'Gestión Clientes', '/gestionClientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 5, '2022-01-15 21:22:45', '2022-01-15 21:22:45', NULL, ''),
 (30, 3, 'Gestión de Repertorios', '/repertorio', '_self', 'voyager-music', '#000000', 38, 1, '2022-02-03 21:55:21', '2022-02-12 23:43:07', NULL, ''),
 (31, 3, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:56:24', '2022-02-03 21:56:37', NULL, ''),
-(32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 6, '2022-02-03 21:57:47', '2022-02-03 21:57:47', NULL, ''),
-(33, 2, 'Gestión de Nómina', '/nomina', '_self', 'fa fa-university', '#000000', NULL, 7, '2022-02-03 22:00:00', '2022-02-03 22:00:00', NULL, ''),
-(34, 2, 'Gestón de Regalías', '/regalias', '_self', 'voyager-wallet', '#000000', NULL, 8, '2022-02-03 22:01:50', '2022-02-03 22:01:50', NULL, ''),
-(35, 2, 'Gestión de Clientes', '/clientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 9, '2022-02-03 22:04:54', '2022-02-03 22:04:54', NULL, ''),
+(32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:57:47', '2022-02-28 04:00:31', NULL, ''),
+(33, 2, 'Gestión de Nómina', '/nomina', '_self', 'fa fa-university', '#000000', NULL, 2, '2022-02-03 22:00:00', '2022-02-28 04:00:50', NULL, ''),
+(34, 2, 'Gestón de Regalías', '/regalias', '_self', 'voyager-wallet', '#000000', NULL, 3, '2022-02-03 22:01:50', '2022-02-28 04:00:50', NULL, ''),
+(35, 2, 'Gestión de Clientes', '/clientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 4, '2022-02-03 22:04:54', '2022-02-28 04:00:50', NULL, ''),
 (36, 3, 'Informe de Nominas', '/informeNomina', '_self', 'fa fa-university', '#000000', 37, 1, '2022-02-12 15:51:40', '2022-02-12 23:43:23', NULL, ''),
 (37, 3, 'Informes', '', '_self', 'fa fa-info-circle', '#000000', NULL, 3, '2022-02-12 23:41:14', '2022-02-12 23:43:21', NULL, ''),
 (38, 3, 'Repertorios y Musica', '', '_self', 'fa fa-folder', '#000000', NULL, 2, '2022-02-12 23:42:02', '2022-02-12 23:43:12', NULL, ''),
 (39, 3, 'Cargar Musica', '/cancion', '_self', 'fa fa-file-audio-o', '#000000', 38, 2, '2022-02-12 23:42:59', '2022-02-12 23:43:07', NULL, ''),
-(40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, ''),
-(41, 3, 'Gestión de Colaboradores', '/cancion_invitarcolab', '_self', 'voyager-group', '#000000', NULL, 10, '2022-02-12 23:45:06', '2022-02-12 23:45:06', NULL, '');
+(40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -526,8 +537,7 @@ CREATE TABLE `nomina` (
 --
 
 INSERT INTO `nomina` (`id`, `cliente_id`, `desprendible`, `fecha_informe`, `valor`) VALUES
-(1, 5, '', '2022-02-03', '36'),
-(2, 4, 'Nomina/February2022/1643948785.pdf', '2022-02-10', '230');
+(1, 5, '', '2022-02-03', '36');
 
 -- --------------------------------------------------------
 
@@ -788,15 +798,15 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `persona` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pais` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_documento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `numero_identificacion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pais` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_documento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numero_identificacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `departamento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `departamento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `firma` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `contrato` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -806,10 +816,16 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_documento`, `numero_identificacion`, `telefono`, `user_id`, `departamento`, `firma`, `contrato`) VALUES
-(14, 'Prismad', 'Music', 'Colombia', 'Villavicencio', 'cc', '9000000000', '3003577830', 1, 'Meta', NULL, NULL),
-(16, 'Candido', 'Moreno', 'Colombia', 'Villavicencio', 'cc', '1121958055', '3138339062', 21, 'Meta', NULL, NULL),
-(17, 'Prismad', 'Music', 'Colombia', 'Villavicencio', 'cc', '1121958055', '3138339062', 1, 'Meta', NULL, NULL),
-(20, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '1121924426', '3192205400', 25, 'Antioquia', NULL, NULL);
+(17, 'Candido', 'Moreno', 'Colombia', 'Villavicencio', 'cc', '1121958055', '3138339062', 1, 'Meta', NULL, NULL),
+(20, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '1121924426', '3192205400', 25, 'Antioquia', NULL, NULL),
+(21, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '32432443543', '3192205400', 27, 'Antioquia', NULL, NULL),
+(22, 'Lamaca', 'Producciones', 'Colombia', 'Bogota', 'cc', '10192837465', '3048578933', 28, 'Cundinamarca', NULL, NULL),
+(23, 'Jonathan', 'Susana Collado', 'Dominican Republic', 'Concepción de La Vega', 'cc', '40234501308', '8492203449', 31, 'La Vega Province', NULL, NULL),
+(24, 'Johan Dayan', 'Vacca Vaca', 'Colombia', 'Villavicencio', 'cc', '1121962356', '3123254608', 33, 'Meta', NULL, NULL),
+(25, 'Johan Dayan', 'Vacca Vaca', 'Colombia', 'Villavicencio', 'cc', '1121962356', '3123254608', 34, 'Meta', NULL, NULL),
+(26, 'Yohan Dayan', 'Vacca Vaca', 'Argentina', 'Caimancito', 'cc', '1121962355', '3123254607', 35, 'Jujuy Province', NULL, NULL),
+(27, 'Johan Dayan', 'Chapas', 'Andorra', 'Andorra la Vella', 'cc', '1121962355', '3112223333', 37, 'Andorra la Vella', '/home/u449096820/domains/prismadmusic.com/storage/xjlx0UWMyHXbcZOW.png', NULL),
+(28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 38, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -879,13 +895,6 @@ CREATE TABLE `regalia` (
   `valor` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `regalia`
---
-
-INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `fecha_informe_final`, `nomina_id`, `valor`) VALUES
-(3, 4, 'Regalias/February2022/1643948491.xlsx', '2022-02-04', '2022-07-20', 1, '34');
-
 -- --------------------------------------------------------
 
 --
@@ -916,7 +925,8 @@ CREATE TABLE `repertorio` (
 --
 
 INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `artista_principal`, `genero`, `subgenero`, `nombre_sello`, `formato`, `fecha_salida`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
-(1, 'portadas/February2022/1643948013.jpeg', 'Loley', 'fdasfsda', 8, 'g45', 'sg2', 'ns1', 'f1', '2022-02-09', 'Dennys', 'javox intc', '1994', 'sdafsdaf', 23413124, NULL);
+(1, 'portadas/February2022/1643948013.jpeg', 'Loley', 'fdasfsda', 8, 'g45', 'sg2', 'ns1', 'f1', '2022-02-09', 'Dennys', 'javox intc', '1994', 'sdafsdaf', 23413124, NULL),
+(2, 'portadas/March2022/1646942529.jpg', 'The Álbum', 'Beta', 9, 'Afoxé', 'Acid', 'ns1', 'f1', '2022-03-10', 'JYP', '@Copyright', '2022', 'UPC EAN', 12, '2022-03-12');
 
 -- --------------------------------------------------------
 
@@ -971,7 +981,7 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (6, 'admin.title', 'Admin Title', 'Prismad Music', '', 'text', 1, 'Admin'),
 (7, 'admin.description', 'Admin Description', 'Editora digital, gestión de playlist y manejo digital para artistas y productos empresariales', '', 'text', 2, 'Admin'),
 (8, 'admin.loader', 'Admin Loader', '', '', 'image', 3, 'Admin'),
-(9, 'admin.icon_image', 'Admin Icon Image', 'settings/February2022/m3pglLimUB3DEssv351q.png', '', 'image', 4, 'Admin'),
+(9, 'admin.icon_image', 'Admin Icon Image', 'settings/March2022/4Wjdw2ejzVW61vk8jQh5.png', '', 'image', 4, 'Admin'),
 (10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', '376527473637-0c66akrj06fs2q9rqi6ahlpreul7e6sp.apps.googleusercontent.com', '', 'text', 1, 'Admin');
 
 -- --------------------------------------------------------
@@ -1116,27 +1126,40 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `settings` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `registro_confirmed` tinyint(4) DEFAULT 0
+  `registro_confirmed` tinyint(4) DEFAULT 0,
+  `confirmation_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', '4oI9Ilx6rnLP91aGV1cXMUiag7klC3Kgqks1xBbblDJMog2itscArj6CA25T', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1),
-(21, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/February2022/i7RRngz5d7G0r48MjIo0.jpg', '2022-01-15 20:34:30', '$2y$10$Ke5w/9eWb5j4wYYSbSZ3z.6ckFdDsARb0iA51kwac9tWDMecxqK22', 'mwvr41HrSDCOz0z0xJQaLI0aYn13SFc3rQGLQb0BMWk8h8MaW9d32xmO0qkY', '{\"locale\":\"es\"}', '2022-01-15 18:22:57', '2022-02-03 22:18:59', 1),
-(25, 2, 'Javier', 'javoxdaemon@gmail.com', 'users/default.png', '2022-02-03 23:01:38', '$2y$10$XjosMoaEGJq6vCq4VwXtl.R/SGSLpQPocfN2PBLsEWDQKb99Dq5Oa', NULL, NULL, '2022-02-03 23:01:01', '2022-02-03 23:07:28', 1),
-(26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$zqDFxyQqrWlocRE9jZ.p4eEdcKW.VVi2pMCF3tk9sXtQgOZSkFRGC', 'UqhNpi6Rtca2Xfra3Ar0gbTIQbthiuLvQfM3Uayjvr7D4YWxJ90n3KieJYrh', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-02-03 23:16:08', 1);
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'w3R1OTYeTboaL4xrOpd98SoZgRBPfYl6Irt7M1Q2FNU8nFNWaBD8BEKkj2fR', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(21, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/February2022/i7RRngz5d7G0r48MjIo0.jpg', '2022-01-15 20:34:30', '$2y$10$Ke5w/9eWb5j4wYYSbSZ3z.6ckFdDsARb0iA51kwac9tWDMecxqK22', 'VdQkSDIskyyrWoKnoZ20jA7GbruQKQqbuP7XF8ZoHbTr9H8UORQ39S1JxpUH', '{\"locale\":\"es\"}', '2022-01-15 18:22:57', '2022-02-03 22:18:59', 1, NULL),
+(25, 2, 'Javier', 'javoxdaemon@gmail.com', 'users/default.png', '2022-02-03 23:01:38', '$2y$10$XjosMoaEGJq6vCq4VwXtl.R/SGSLpQPocfN2PBLsEWDQKb99Dq5Oa', NULL, NULL, '2022-02-03 23:01:01', '2022-02-03 23:07:28', 1, NULL),
+(26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$zqDFxyQqrWlocRE9jZ.p4eEdcKW.VVi2pMCF3tk9sXtQgOZSkFRGC', 'UqhNpi6Rtca2Xfra3Ar0gbTIQbthiuLvQfM3Uayjvr7D4YWxJ90n3KieJYrh', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-02-03 23:16:08', 1, NULL),
+(27, 2, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/default.png', '2022-03-04 23:43:00', '$2y$10$ULvQTSJ0UGOMfs6yK4EzjuFltwdt1A666ukn9z.BlQ3gw1OMldz2u', NULL, NULL, '2022-03-04 23:40:59', '2022-03-04 23:48:33', 1, NULL),
+(28, 2, 'lamacaproducciones', 'lamacaproducciones@gmail.com', 'users/default.png', '2022-03-06 18:37:28', '$2y$10$bnPFS9fs/Ldgq5szw7Psj.VShqCQgNB8IGFf1g61ZHwzo6aSXrKT.', NULL, NULL, '2022-03-06 18:37:10', '2022-03-06 18:40:21', 1, NULL),
+(29, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2022-03-06 20:44:24', '$2y$10$2zw/Tjhwseaj5Qbm8bi6Uu5lN4zS2gdvJHci9blNQaj/eG2WSVo0S', NULL, NULL, '2022-03-06 20:44:06', '2022-03-06 20:44:24', 0, NULL),
+(30, 2, 'Rodyam Producer', 'mrodyam@gmail.com', 'users/default.png', '2022-03-07 14:38:40', '$2y$10$BUoyQQa3gC1ujJzx4aPH6urxh70KXERF4bJx2d.pvjtE7OultcUbW', NULL, NULL, '2022-03-07 14:37:03', '2022-03-07 14:38:40', 0, NULL),
+(31, 2, 'Jay es', 'jonathan_susana@hotmail.com', 'users/default.png', '2022-03-07 15:32:05', '$2y$10$dQZ6ZUtKF0m1i8ydTZMrdeEiQBd5n.Iojf1JDRUecUkQnxaBWzlbe', NULL, NULL, '2022-03-07 15:31:04', '2022-03-07 15:36:07', 1, NULL),
+(32, 2, 'alejocruz', 'alejocruzmusic@gmail.com', 'users/default.png', '2022-03-09 18:27:27', '$2y$10$P9AK9bdfreJjyj7tsADT5OkZhuXZ6YZtmpvLDxwyfw/mBRmSXEOHi', 'ksk4vuJUnKBzdpSKfe4bRu5DLGVa2K8Dv7g53Nok2lw0cGGhCYWd2oTHaVfu', NULL, '2022-03-09 18:27:03', '2022-03-09 18:31:19', 1, NULL),
+(33, 2, 'JohanVacca12', 'johan.vacca2@gmail.com', 'users/default.png', '2022-03-10 14:13:58', '$2y$10$STHnKrjHP2hGqV6S.rJ5Vu2APG28bH40IxhFdf76qw7JzlQvOjj06', NULL, NULL, '2022-03-10 14:13:39', '2022-03-10 14:15:31', 1, NULL),
+(34, 2, 'JohanVacca2', 'johan.vacca12@gmail.com', 'users/default.png', '2022-03-10 14:25:52', '$2y$10$VF2LS8dPnmWNQAqPMOg4FuanhBLxQjHnFvl7S5sfT7zgcTXPmOtgK', NULL, NULL, '2022-03-10 14:25:13', '2022-03-10 14:27:06', 1, NULL),
+(35, 2, 'YohanVacca', 'yohan.vacca@unillanos.edu.co', 'users/default.png', '2022-03-10 14:53:38', '$2y$10$jdMGzc3nsAgfCgJR3P.bzeWLR4igF7idsTxMuMULtKVQislTroYW6', NULL, NULL, '2022-03-10 14:53:17', '2022-03-10 14:54:42', 1, NULL),
+(36, 2, 'XDD', 'yohan.vacca@sasoftco.com', 'users/default.png', '2022-03-10 15:52:45', '$2y$10$HVPVWLRfSFleZdOoGo5C4uW7ZMitxODGOhk5D.xyNSNGjE5/ESTO6', '01DaoYDp3wDrs8k6rEzxBOJWZG784qwa8pGPeWJeHhTz0tsS0rYVzTarpM3g', NULL, '2022-03-10 15:51:16', '2022-03-10 15:52:45', 0, NULL),
+(37, 2, 'horaf34043@vapaka.com', 'horaf34043@vapaka.com', 'users/default.png', '2022-03-10 17:05:15', '$2y$10$LixSnnwrZZ/fctJQq30Yrej0gyj7FAqRh89a3Xjhn.f.SrEDFMKVO', 'eE1O70EEJ3Om28POEF9MtMrYWCvalumOw4ArodKSL4zVcvu03S3BQfhr3G1x', NULL, '2022-03-10 17:04:49', '2022-03-10 17:20:03', 1, 'VY9LnDXO7o4zfypgp7HhVawti673iNnh5MyjIQy0'),
+(38, 2, 'Facundochapa@yahoo.com.ar', 'Facundochapa@yahoo.com.ar', 'users/default.png', '2022-03-10 17:19:32', '$2y$10$ZqGCUivipMh9I3XaOM7WfekwTBtHMc.ng9ZidJNeYhKoWlelvr6T6', NULL, NULL, '2022-03-10 17:16:02', '2022-03-10 17:19:32', 0, '05E6rGWeTKh1YKV9aS3u3Oc8W5IU7BXjo0BdaAuK');
 
 -- --------------------------------------------------------
 
@@ -1166,8 +1189,7 @@ ALTER TABLE `articulo`
 ALTER TABLE `cancion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cancion_repertorio_id_index` (`repertorio_id`),
-  ADD KEY `cancion_user_id_index` (`cliente_id`),
-  ADD KEY `cancion_colaboracion_id_index` (`colaboracion_id`);
+  ADD KEY `cancion_user_id_index` (`cliente_id`);
 
 --
 -- Indices de la tabla `categories`
@@ -1357,7 +1379,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `cancion`
 --
 ALTER TABLE `cancion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -1369,13 +1391,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
 --
 ALTER TABLE `colaboracion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `data_rows`
@@ -1435,7 +1457,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -1459,7 +1481,7 @@ ALTER TABLE `regalia`
 -- AUTO_INCREMENT de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -1483,7 +1505,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
