@@ -894,18 +894,8 @@
                                 <p align="justify"
                                     style="line-height: 0.22in; orphans: 0; widows: 0; margin-bottom: 0.17in">
                                     <font face="Helvetica Neue, serif">El Licenciante acepta obligarse
-                                        a los Términos de Uso del (de los) Sitio (s) (en </font>
-                                    <font color="#ff0000">
-                                        <font face="Helvetica Neue, serif">AQUI
-                                            DEBES PONER EL LINK DE EL SITIO WEB TERMINOS Y CONDICIONES</font>
-                                    </font>
-                                    <font face="Helvetica Neue, serif">),
-                                        a la Política de Privacidad (en </font>
-                                    <font color="#ff0000">
-                                        <font face="Helvetica Neue, serif">LINK
-                                            EN EL SITIO DE LAS POLITICAS DE PRiVACIDAD</font>
-                                    </font>
-                                    <font face="Helvetica Neue, serif">),
+                                        a los Términos de Uso del (de los) Sitio (s) en <a href="https://prismadmusic.com/terminos-y-condiciones">prismadmusic.com/terminos-y-condiciones</a>,
+                                        a la Política de Privacidad en <a href="https://prismadmusic.com/politicas-de-privacidad">prismadmusic.com/politicas-de-privacidad</a>,
                                         y otros acuerdos relacionados ubicados en el (los) Sitio (s)
                                         aplicables al Licenciante (los “Acuerdos del Sitio”), en el
                                         entendido de que los mismos son modificados o actualizados de vez
