@@ -29,6 +29,8 @@
                                 <th class="text-center">Género</th>
                                 <th class="text-center">Productor</th>
                                 <th class="text-center">Año de producción</th>
+
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

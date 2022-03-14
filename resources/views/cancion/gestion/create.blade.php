@@ -170,13 +170,13 @@
                                 <label for="productor">Compositor</label>
                                 <br>
                                 <input type="text" class="form-control" id="compositor" name="compositor"
-                                    placeholder="..." value="{{ old('compositor') }}">
+                                    placeholder="Ejemplo: Wolfgang Amadeus Mozart " value="{{ old('compositor') }}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="copyright">Arreglista</label>
                                 <br>
                                 <input type="text" class="form-control" id="arreglista" name="arreglista"
-                                    placeholder="..." value="{{ old('arreglista') }}">
+                                    placeholder="Ejemplo: Cyro Pereira" value="{{ old('arreglista') }}">
                             </div>
                         </div>
 

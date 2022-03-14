@@ -47,7 +47,7 @@
 <div class="col-md-12">
     <div class="panel panel-bordered">
         <div class="panel-body">
-            <form action="{{ url($accion)}}" method="post" id="formRegistro" name="formRegistro">
+            <form enctype="multipart/form-data" action="{{ url($accion)}}" method="post" id="formRegistro" name="formRegistro">
             @if ($condicional_metodo == 1)
                 {!! method_field('PATCH') !!}
             @endif
