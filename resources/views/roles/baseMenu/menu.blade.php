@@ -1,68 +1,84 @@
 @if(!isset($innerLoop))
 <ul class="nav navbar-nav">
-@else
-<ul class="dropdown-menu">
-@endif
-
-@php
-
-    if (Voyager::translatable($items)) {
-        $items = $items->load('translations');
-    }
-@endphp
-
-@foreach ($items as $item)
+    @endif
 
     @php
 
-        $originalItem = $item;
-        if (Voyager::translatable($item)) {
-            $item = $item->translate($options->locale);
-        }
+    if (Voyager::translatable($items)) {
+    $items = $items->load('translations');
+    }
+    @endphp
 
-        $listItemClass = null;
-        $linkAttributes =  null;
-        $styles = null;
-        $icon = null;
-        $caret = null;
+    @foreach ($items as $item)
 
-        // Background Color or Color
-        if (isset($options->color) && $options->color == true) {
-            $styles = 'color:'.$item->color;
-        }
-        if (isset($options->background) && $options->background == true) {
-            $styles = 'background-color:'.$item->color;
-        }
+    @php
 
-        // With Children Attributes
-        if(!$originalItem->children->isEmpty()) {
-            $linkAttributes =  'class="dropdown-toggle" data-toggle="dropdown"';
-            $caret = '<span class="caret"></span>';
+    $originalItem = $item;
+    if (Voyager::translatable($item)) {
+    $item = $item->translate($options->locale);
+    }
 
-            if(url($item->link()) == url()->current()){
-                $listItemClass = 'dropdown active';
-            }else{
-                $listItemClass = 'dropdown';
-            }
-        }
+    $listItemClass = null;
+    $linkAttributes = null;
+    $styles = null;
+    $icon = null;
+    $caret = null;
 
-        // Set Icon
-        // if(isset($options->icon) && $options->icon == true){
-            $icon = '<span class="icon ' . $item->icon_class . '"></span>';
-        // }
+    // Background Color or Color
+    if (isset($options->color) && $options->color == true) {
+    $styles = 'color:'.$item->color;
+    }
+    if (isset($options->background) && $options->background == true) {
+    $styles = 'background-color:'.$item->color;
+    }
+
+    // With Children Attributes
+    if(!$originalItem->children->isEmpty()) {
+    $linkAttributes = 'class="dropdown-toggle" data-toggle="dropdown"';
+    $caret = '<span class="caret"></span>';
+
+    if(url($item->link()) == url()->current()){
+    $listItemClass = 'dropdown active';
+    }else{
+    $listItemClass = 'dropdown';
+    }
+    }
+
+    // Set Icon
+    // if(isset($options->icon) && $options->icon == true){
+    $icon = '<span class="icon ' . $item->icon_class . '"></span>';
+    // }
 
     @endphp
 
     <li class="{{ $listItemClass }}">
-        <a href="{{ url($item->link()) }}" target="{{ $item->target }}" style="{{ $styles }}" {!! $linkAttributes ?? '' !!}>
+
+        @if(count( $item->children ) <= 0) <a href="{{ url($item->link()) }}" target="{{ $item->target }}"
+            style="{{ $styles }}" {!! $linkAttributes ?? '' !!}>
             {!! $icon !!}
-            <span class="title">{{ $item->title }}</span>
+            <span class="s2 title">{{ $item->title }}</span>
             {!! $caret !!}
-        </a>
-        @if(!$originalItem->children->isEmpty())
-        @include('voyager::menu.bootstrap', ['items' => $originalItem->children, 'options' => $options, 'innerLoop' => true])
-        @endif
+            </a>
+            @else
+            <a href="#<?php echo $item->id ?>-dropdown-element" target="{{ $item->target }}" style="{{ $styles }}"
+                data-toggle="collapse" aria-expanded="false">
+                {!! $icon !!}
+                <span class="s2 title">{{ $item->title }}</span>
+            </a>
+            @endif
+
+            @if(!$originalItem->children->isEmpty())
+            <div id='<?php echo $item->id ?>-dropdown-element' class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ul class="nav navbar-nav">
+                        @foreach($originalItem->children as $menu_itemc)
+                        <li><a href="{{ $menu_itemc->url }}">{{ $menu_itemc->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
     </li>
-@endforeach
+    @endforeach
 
 </ul>
