@@ -628,7 +628,7 @@
                             <div class="col-md-12">
                                 <label for="sello">Fecha de Lanzamiento</label>
                                 <br>
-                                <input type="fecha_lanzamiento" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
+                                <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
                                     value="{{ old('fecha_lanzamiento') }}">
                             </div>
                         </div>
