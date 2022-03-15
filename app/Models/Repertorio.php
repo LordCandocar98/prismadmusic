@@ -20,7 +20,6 @@ class Repertorio extends Model
         'subgenero',
         'nombre_sello',
         'formato',
-        'fecha_salida',
         'fecha_lanzamiento',
         'productor',
         'copyright',

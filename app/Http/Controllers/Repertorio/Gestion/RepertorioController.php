@@ -37,6 +37,7 @@ class RepertorioController extends Controller
         ->where('users.role_id',2)
         ->where('users.id',$sesion->id)
         ->get();
+        //dd($repertorios);
         return view('repertorio.gestion.index', compact('repertorios'));
     }
 
@@ -81,7 +82,6 @@ class RepertorioController extends Controller
             'subgenero'            => $request->subgenero,
             'nombre_sello'         => $request->nombre_sello,
             'formato'              => $request->formato,
-            'fecha_salida'         => $request->fecha_salida,
             'productor'            => $request->productor,
             'copyright'            => $request->copyright,
             'annio_produccion'     => $request->annio_produccion,

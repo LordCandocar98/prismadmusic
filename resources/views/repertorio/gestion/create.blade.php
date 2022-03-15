@@ -563,13 +563,10 @@
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="nombre_sello">Nombre del sello</label>
+                                <label for="nombre_sello">Nombre del Sello discográfico</label>
                                 <br>
-                                <select class="tipoDNI col-md-12" name="nombre_sello" id="nombre_sello">
-                                <option value="none" selected disabled hidden>Seleccione una opción</option>
-                                    <option value="ns1" {{ old('nombre_sello') == "ns1" ? 'selected' : '' }}>Nombre sello 1</option>
-                                    <option value="ns2" {{ old('nombre_sello') == "ns2" ? 'selected' : '' }}>Nombre sello 2</option>
-                                </select>
+                                <input type="text" class="form-control" id="nombre_sello" name="nombre_sello" placeholder="Ejemplo: Rimas Entertainment"
+                                value="{{ old('nombre_sello') }}">
                             </div>
                         </div>
 
@@ -585,10 +582,10 @@
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="fecha_salida">Fecha de Salida Original</label>
+                                <label for="annio_produccion">Año de producción</label>
                                 <br>
-                                <input type="date" class="form-control" id="fecha_salida" name="fecha_salida"
-                                    value="{{ old('fecha_salida') }}">
+                                <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
+                                    value="{{ old('annio_produccion') }}">
                             </div>
                         </div>
 
@@ -602,23 +599,7 @@
                             <div class="col-sm-6">
                                 <label for="copyright">Copyright</label>
                                 <br>
-                                <input type="text" class="form-control" id="copyright" name="copyright" placeholder="Ejemplo: Lana del rey"
-                                    value="{{ old('copyright') }}">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="annio_produccion">Año de producción</label>
-                                <br>
-                                <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
-                                    value="{{ old('annio_produccion') }}">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="upc_ean">UPC/EAN</label>
-                                <br>
-                                <input type="text" class="form-control" id="upc_ean" name="upc_ean"
-                                    value="{{ old('upc_ean') }}">
+                                <input type="text" class="form-control" id="copyright" name="copyright" value="{{ old('copyright') }}">
                             </div>
                         </div>
 
@@ -630,6 +611,21 @@
                                     value="{{ old('numero_catalogo') }}">
                             </div>
                             <div class="col-sm-6">
+                                <label for="upc_ean">UPC/EAN</label>
+                                <br>
+                                <input type="text" class="form-control" id="upc_ean" name="upc_ean"
+                                    value="{{ old('upc_ean') }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="alert alert-success" role="alert">
+                                Si no sabes qué poner en UPC y Número de Catálogo <a class="alert-link">déjalo vacío</a>.
+                              </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <label for="sello">Fecha de Lanzamiento</label>
                                 <br>
                                 <input type="fecha_lanzamiento" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
@@ -639,7 +635,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <div class="alert alert-warning text-start font-weight-bold" role="alert">
+                                <div class="alert alert-success text-start font-weight-bold" role="alert">
                                     <p>Requisitos y especificaciones para la carátula:</p>
                                     <ul>
                                         <li>Formato de archivo: JPG, PNG</li>
@@ -662,6 +658,58 @@
                             </div>
                         </div>
 
+                        {{-- <textarea class="form-control multi_existentes" name="colaboradores_existentes"
+                            data-name="colaboradores_existentes">
+                            []
+                        </textarea>
+                        <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
+                        <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
+
+                    <script>
+                        var clienteAux = <?php echo json_encode($clientes); ?>;
+                        var auxiliar = '<select class="multiinput-title col-xs-12 clientesc" name="clientesc" id="clientesc">';
+                        for (var i = 0; i < clienteAux.length; i++) {
+                            auxiliar += '<option value="' + clienteAux[i].id + '">' + clienteAux[i].nombre_artistico + '</option>'
+                        }
+                        auxiliar += '</select>\n';
+                        $('.multi_existentes').multiInput({
+                            json: true,
+                            input: $(
+                                '<div class="row inputElement">\n' +
+                                '<div class="multiinput-title col-xs-12"> Colaborador <span class="number">1</span></div>\n' +
+                                '<div class="form-group col-xs-6">\n' +
+                                auxiliar +
+                                '</div>\n' +
+                                '<div class="form-group col-xs-6">\n' +
+                                '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
+                                '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
+                                '</div>\n'),
+                            limit: 4,
+                            onElementAdd: function(el, plugin) {
+                                console.log(plugin.elementCount);
+                                if ($(".clientesc").length > 0) {
+                                    $('.clientesc').select2({
+                                        allowClear: true,
+                                        placeholder: {
+                                            id: -1,
+                                        },
+                                    });
+                                }
+                            },
+                            onElementRemove: function(el, plugin) {
+                                console.log(plugin.elementCount);
+                                if ($(".clientesc").length > 0) {
+                                    $('.clientesc').select2({
+                                        allowClear: true,
+                                        placeholder: {
+                                            id: -1,
+                                        },
+                                    });
+                                }
+                            }
+                        });
+                    </script> --}}
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar Repertorio</button>
@@ -674,3 +722,4 @@
 @section('javascript')
     <script src="{{ asset('js/jsRegistroRepertorios/scriptRegistro.js') }}"></script>
 @endsection
+
