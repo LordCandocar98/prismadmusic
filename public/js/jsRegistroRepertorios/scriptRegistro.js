@@ -5,7 +5,10 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.genero').val('-1').trigger('change');
+
+    if($('.genero').val() == null){
+        $('.genero').val('-1').trigger('change');
+    }
 
     $('.subgenero').select2({
         allowClear: true,
@@ -13,7 +16,9 @@ $(document).ready(function () {
             id: -1,
         },
     });
+    if($('.subgenero').val() == null){
     $('.subgenero').val('-1').trigger('change');
+    }
 
     $('.formato').select2({
         allowClear: true,
@@ -21,7 +26,9 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.formato').val('-1').trigger('change');
+    if($('.formato').val() == null){
+        $('.formato').val('-1').trigger('change');
+    }
 
     $('.artista_principal').select2({
         allowClear: true,
@@ -29,13 +36,17 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.artista_principal').val('-1').trigger('change');
+    if($('.artista_principal').val() == null){
+        $('.artista_principal').val('-1').trigger('change');
+    }
 
-    $('.featuring').select2({
+    $('#nombre_sello').select2({
         allowClear: true,
         placeholder: {
             id: -1,
         },
     });
-    $('.featuring').val('-1').trigger('change');
+    if($('#nombre_sello').val() == null){
+        $('#nombre_sello').val('-1').trigger('change');
+    }
 });

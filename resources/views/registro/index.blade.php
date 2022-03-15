@@ -40,6 +40,10 @@
         max-height: 400px;
     }
 
+    body, html, .form-control{
+        color: #1e1f20!important;
+    }
+
 </style>
 @endsection
 
@@ -93,28 +97,39 @@
                             <label for="pais">País</label>
                             <br>
                             <select class="pais form-control" name="pais" id="pais">
+                                @if(old('pais'))
+                                    <option value="{{ old('pais') }}" selected>{{ old('pais') }}</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="departamento">Departamento</label>
                             <br>
-                            <select class="departamento form-control" name="departamento"></select>
+                            <select class="departamento form-control" name="departamento">
+                                @if(old('pais'))
+                                    <option value="{{ old('departamento') }}" selected>{{ old('departamento') }}</option>
+                                @endif
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6">
                             <label for="ciudad">Ciudad</label>
                             <br>
-                            <select class="ciudad form-control" name="ciudad"></select>
+                            <select class="ciudad form-control" name="ciudad">
+                                @if(old('ciudad'))
+                                    <option value="{{ old('ciudad') }}" selected>{{ old('ciudad') }}</option>
+                                @endif
+                            </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="tipoDoc">Tipo de documento de identificación</label>
                             <br>
-                            <select class="tipoDNI col-md-12" name="tipo_documento" id="tipo_documento"
-                                value="{{ old('tipo_documento') }}">
-                                <option value="cc">Cédula de Ciudadanía</option>
-                                <option value="tp">Pasaporte</option>
-                                <option value="ce">Cédula de Extranjería</option>
+                            <select class="tipoDNI col-md-12" name="tipo_documento" id="tipo_documento">
+                            <option value="none" selected disabled hidden>Seleccione una opción</option>
+                                <option value="cc" {{ old('tipo_documento') == "cc" ? 'selected' : '' }}>Cédula de Ciudadanía</option>
+                                <option value="tp" {{ old('tipo_documento') == "tp" ? 'selected' : '' }}>Pasaporte</option>
+                                <option value="ce" {{ old('tipo_documento') == "ce" ? 'selected' : '' }}>Cédula de Extranjería</option>
                             </select>
                         </div>
                     </div>
