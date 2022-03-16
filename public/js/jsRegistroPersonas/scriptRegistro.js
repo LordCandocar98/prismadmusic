@@ -8,15 +8,6 @@ $(document).ready(function () {
     });
     $('.tipoDeCuentaBanco').val('-1').trigger('change');
 
-    $('.tipoDNI').select2({
-        allowClear: true,
-        placeholder: {
-            id: -1,
-            text: "ejemplo: CC"
-        },
-    });
-    $('.tipoDNI').val('-1').trigger('change');
-
     $(".departamento").select2();
     $(".ciudad").select2();
 
@@ -74,7 +65,10 @@ $(document).ready(function () {
             data: data2
         });
 
-        $('.pais').val('-1').trigger('change');
+        if($('.pais').val() == null){
+            $('.pais').val('-1').trigger('change');
+        }
+
     }
     function setDepartamentos(text) {
         var data2 = $.map(text, function (obj) {
@@ -90,7 +84,9 @@ $(document).ready(function () {
             },
             data: data2
         });
-        $('.departamento').val('-1').trigger('change');
+        if($('.departamento').val() == null){
+            $('.departamento').val('-1').trigger('change');
+        }
     }
     function setCiudades(text) {
         var data2 = $.map(text, function (obj) {
@@ -106,13 +102,26 @@ $(document).ready(function () {
             },
             data: data2
         });
-        $('.ciudad').val('-1').trigger('change');
+        if($('.ciudad').val() == null){
+            $('.ciudad').val('-1').trigger('change');
+        }
     }
 
-    $('#tipo_documento').select2({
-        allowClear: false,
-        placeholder: 'Selecciona una opción'
-    });
+    function tipo_documento(){
+        $('#tipo_documento').select2({
+            allowClear: true,
+            placeholder: {
+                id: -1,
+                text: 'Selecciona una opción'
+            },
+        });
+
+        if($('.tipo_documento').val() == null){
+            $('.tipo_documento').val('-1').trigger('change');
+        }
+    }
+
+    tipo_documento();
 
     const limpiar = () => {
         $select.empty();

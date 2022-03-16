@@ -18,6 +18,10 @@ body {
     background-color: black;
 }
 
+body, html, .form-control{
+    color: #1e1f20!important;
+}
+
 .rd-navbar-wrap {
     background-color: black;
 }
