@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $('.clientesc').select2({
+    $('.tipo_colaboracion').select2({
         allowClear: true,
         placeholder: {
             id: -1,
         },
     });
-    $('.clientesc').val('-1').trigger('change');
+    $('.tipo_colaboracion').val('-1').trigger('change');
 
     $('.genero').select2({
         allowClear: true,

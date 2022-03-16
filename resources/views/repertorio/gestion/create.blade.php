@@ -76,16 +76,6 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="tipoDoc">Artista principal</label>
-                                <br>
-                                <select class="artista_principal col-md-12" name="artista_principal" id="artista_principal"
-                                    value="{{ old('artista_principal') }}">
-                                    @foreach ($clientes as $clientes)
-                                        <option value="{{ $clientes->id }}">{{ $clientes->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
                                 <label for="tipoDoc">Género</label>
                                 <br>
                                 <select class="genero col-md-12" name="genero" id="genero"
@@ -220,9 +210,6 @@
                                     <option value="Zydeco">Zydeco</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="tipoCuenta">Sub-género</label>
                                 <br>
@@ -558,7 +545,10 @@
                                     <option value="Zydeco">Zydeco</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6">
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <label for="nombre_sello">Nombre del Sello discográfico</label>
                                 <br>
                                 <input type="text" class="form-control" id="nombre_sello" name="nombre_sello" placeholder="Ejemplo: Rimas Entertainment"
@@ -654,57 +644,43 @@
                             </div>
                         </div>
 
-                        {{-- <textarea class="form-control multi_existentes" name="colaboradores_existentes"
-                            data-name="colaboradores_existentes">
+                        <div class="form-group row">
+                            <div class="alert alert-success" role="alert">
+                                Recuerda que el las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente el repertorio.
+                              </div>
+                        </div>
+
+                        <textarea class="form-control multi" name="colaboradores_repertorio" data-name="colaboradores_repertorio">
                             []
-                        </textarea>
+                            </textarea>
                         <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
                         <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
 
-                    <script>
-                        var clienteAux = <?php echo json_encode($clientes); ?>;
-                        var auxiliar = '<select class="multiinput-title col-xs-12 clientesc" name="clientesc" id="clientesc">';
-                        for (var i = 0; i < clienteAux.length; i++) {
-                            auxiliar += '<option value="' + clienteAux[i].id + '">' + clienteAux[i].nombre_artistico + '</option>'
-                        }
-                        auxiliar += '</select>\n';
-                        $('.multi_existentes').multiInput({
-                            json: true,
-                            input: $(
-                                '<div class="row inputElement">\n' +
-                                '<div class="multiinput-title col-xs-12"> Colaborador <span class="number">1</span></div>\n' +
-                                '<div class="form-group col-xs-6">\n' +
-                                auxiliar +
-                                '</div>\n' +
-                                '<div class="form-group col-xs-6">\n' +
-                                '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
-                                '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
-                                '</div>\n'),
-                            limit: 4,
-                            onElementAdd: function(el, plugin) {
-                                console.log(plugin.elementCount);
-                                if ($(".clientesc").length > 0) {
-                                    $('.clientesc').select2({
-                                        allowClear: true,
-                                        placeholder: {
-                                            id: -1,
-                                        },
-                                    });
+                        <script>
+                            $('.multi').multiInput({
+                                json: true,
+                                input: $(
+                                    '<div class="row inputElement">\n' +
+                                    '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="artista" placeholder="Nombre del artista" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
+                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
+                                    '</div>\n'),
+                                limit: 4,
+                                onElementAdd: function(el, plugin) {
+                                    console.log(plugin.elementCount);
+                                },
+                                onElementRemove: function(el, plugin) {
+                                    console.log(plugin.elementCount);
                                 }
-                            },
-                            onElementRemove: function(el, plugin) {
-                                console.log(plugin.elementCount);
-                                if ($(".clientesc").length > 0) {
-                                    $('.clientesc').select2({
-                                        allowClear: true,
-                                        placeholder: {
-                                            id: -1,
-                                        },
-                                    });
-                                }
-                            }
-                        });
-                    </script> --}}
+                            });
+                        </script>
 
                     </div>
                     <div class="modal-footer">
@@ -718,4 +694,3 @@
 @section('javascript')
     <script src="{{ asset('js/jsRegistroRepertorios/scriptRegistro.js') }}"></script>
 @endsection
-

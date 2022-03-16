@@ -26,11 +26,22 @@ class CancionController extends Controller
      */
     public function index()
     {
+        // $sesion = Auth::user();
+        // $canciones = DB::table('users')
+        // ->join('persona', 'users.id', '=', 'persona.user_id')
+        // ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+        // ->join('cancion', 'cliente.id', '=', 'cancion.cliente_id')
+        // ->where('users.role_id',2)
+        // ->where('users.id',$sesion->id)
+        // ->get();
+        // return view('cancion.gestion.index', compact('canciones'));
+        //--------------------------------------------------------
         $sesion = Auth::user();
         $canciones = DB::table('users')
         ->join('persona', 'users.id', '=', 'persona.user_id')
         ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        ->join('cancion', 'cliente.id', '=', 'cancion.cliente_id')
+        ->join('colaboracion', 'cliente.id', '=', 'colaboracion.cliente_id')
+        ->join('cancion', 'cancion.id', '=', 'colaboracion.cancion_id')
         ->where('users.role_id',2)
         ->where('users.id',$sesion->id)
         ->get();
@@ -129,7 +140,7 @@ class CancionController extends Controller
         }
 
         if($contadorPrincipal == 0){ //No hay Principal
-            dd("No hay artista Principal");
+            dd("No hay artista Principal"); //**********************************************************************MODIFICAR ALERTAS */
         }
         if($contadorPrincipal > 1){ //Hay más de un Principal
             dd("Hay más de 1 artista Principal");
@@ -416,7 +427,8 @@ class CancionController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
+        return view('cancion.gestion.show');
     }
 
     /**
