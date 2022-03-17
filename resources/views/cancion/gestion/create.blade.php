@@ -1324,7 +1324,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <div class="alert alert-warning text-start font-weight-bold" role="alert">
+                                <div class="alert alert-success text-start font-weight-bold" role="alert">
                                     <p>Puede importar los siguientes formatos:</p>
                                     <ul>
                                         <li>WAV</li>

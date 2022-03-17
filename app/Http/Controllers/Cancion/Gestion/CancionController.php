@@ -26,16 +26,6 @@ class CancionController extends Controller
      */
     public function index()
     {
-        // $sesion = Auth::user();
-        // $canciones = DB::table('users')
-        // ->join('persona', 'users.id', '=', 'persona.user_id')
-        // ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        // ->join('cancion', 'cliente.id', '=', 'cancion.cliente_id')
-        // ->where('users.role_id',2)
-        // ->where('users.id',$sesion->id)
-        // ->get();
-        // return view('cancion.gestion.index', compact('canciones'));
-        //--------------------------------------------------------
         $sesion = Auth::user();
         $canciones = DB::table('users')
         ->join('persona', 'users.id', '=', 'persona.user_id')
@@ -427,8 +417,9 @@ class CancionController extends Controller
      */
     public function show($id)
     {
-        dd($id);
-        return view('cancion.gestion.show');
+        $cancion = Cancion::find($id);
+        $colaboraciones = Colaboracion::where('cancion_id',$id)->get();
+        return view('cancion.gestion.show', compact('cancion',$cancion,'colaboraciones',$colaboraciones));
     }
 
     /**
