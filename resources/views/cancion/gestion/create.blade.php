@@ -1189,7 +1189,7 @@
                                 <label for="subgenero">Inicio de la previsualización</label>
                                 <br>
                                 <input type="text" class="form-control" id="inicio_previsualizacion"
-                                    name="inicio_previsualizacion" placeholder="..."
+                                    name="inicio_previsualizacion" placeholder="En segundos, ejemplo: 3"
                                     value="{{ old('inicio_previsualizacion') }}">
                             </div>
                         </div>

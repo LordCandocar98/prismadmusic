@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Repertorio;
+use App\Models\ColaboracionRepertorio;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
+use App\Models\Persona;
 
 class RepertorioController extends Controller
 {
@@ -67,29 +69,61 @@ class RepertorioController extends Controller
      */
     public function store(RepertorioRequest $request) //ACÁ REDIRIGE AL VALIDATOR*******************************
     {
+        $sesion = Auth::user();
+
+        $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
+        ->select("cliente.id")
+        ->first();
+
+        // $persona =  Persona::where('user_id', $sesion->id)->first();
+        // $cliente_sesion = Cliente::where('persona_id', $persona->id)->first();
+
+        $colaboraciones = json_decode($request->colaboradores_repertorio);
+
         if($image = $request->file('portada')){
             $destinoPortada = 'portadas/' . date('FY') . '/';
             $profileImage  = time() . '.' . $image->getClientOriginalExtension();
             $filename = $destinoPortada . $profileImage ;
             $image->move('storage/' . $destinoPortada, $profileImage);
         };
+        $contadorPrincipal = 0;
+        foreach($colaboraciones as $colaborador_especifico){
+            if($colaborador_especifico->tipo_colaboracion == "Principal"){
+                $contadorPrincipal += 1;
+            }
+        }
+        if($contadorPrincipal > 1){ //Hay más de un Principal
+            dd("Hay más de 1 artista como colaborador Principal");
+        }else{
+            $repertorio = Repertorio::create([
+                'titulo'               => $request->titulo,
+                'version'              => $request->version,
+                'artista_principal'    => $cliente_sesion->id,
+                'genero'               => $request->genero,
+                'subgenero'            => $request->subgenero,
+                'nombre_sello'         => $request->nombre_sello,
+                'formato'              => $request->formato,
+                'productor'            => $request->productor,
+                'copyright'            => $request->copyright,
+                'annio_produccion'     => $request->annio_produccion,
+                'upc_ean'              => $request->upc_ean,
+                'numero_catalogo'      => $request->numero_catalogo,
+                'portada'              => $filename,
+                'fecha_lanzamiento'    => $request->fecha_lanzamiento,
+            ]);
+            foreach($colaboraciones as $colaboracion_individual){
+                if($colaboracion_individual->artista != NULL){
+                    ColaboracionRepertorio::create([
+                        'repertorio_id'           => $repertorio->id,
+                        'artista'                 => $colaboracion_individual->artista,
+                        'tipo_colaboracion'       => $colaboracion_individual->tipo_colaboracion,
+                        'spotify_colaboracion'    => $colaboracion_individual->spotify_colaboracion,
+                    ]);
+                }
+            }
+        }
 
-        $repertorio = Repertorio::create([
-            'titulo'               => $request->titulo,
-            'version'              => $request->version,
-            'artista_principal'    => $request->artista_principal,
-            'genero'               => $request->genero,
-            'subgenero'            => $request->subgenero,
-            'nombre_sello'         => $request->nombre_sello,
-            'formato'              => $request->formato,
-            'productor'            => $request->productor,
-            'copyright'            => $request->copyright,
-            'annio_produccion'     => $request->annio_produccion,
-            'upc_ean'              => $request->upc_ean,
-            'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $filename,
-            'fecha_lanzamiento'    => $request->fecha_lanzamiento,
-        ]);
+//------------------------------------------------------------------------
         $notification = array(
             'message' => 'Repertorio creado exitosamente!',
             'alert-type' => 'success'

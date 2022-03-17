@@ -24,20 +24,16 @@ class RepertorioRequest extends FormRequest
     public function rules()
     {
         return [
-            //$date = date('Y-m-d H:i:s'),
-            //$date = strtotime($date."+ 5 days"),
-            //dd(date("d-m-Y",$date)),
             'titulo'                =>'required|min:1|max:255',
             'version'               =>'',
-            'artista_principal'     =>'required',
             'genero'                =>'required',
             'subgenero'             =>'required',
             'nombre_sello'          =>'required',
             'formato'               =>'required',
-            'fecha_lanzamiento'     =>'required|date|after:5 days',//.Carbon::now()->subDays(5), //(date('j')+5);
+            'fecha_lanzamiento'     =>'required|date|after:5 days',
             'productor'             =>'required|min:1|max:255',
             'copyright'             =>'required|min:1|max:255',
-            'annio_produccion'      =>'required|digits:4|integer|min:1900|before: 2023',
+            'annio_produccion'      =>'required|digits:4|integer|min:1900|before: 01-01-2023',
             'upc_ean'               =>'',
             'numero_catalogo'       =>'',
             'portada'               =>'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000',
@@ -60,7 +56,6 @@ class RepertorioRequest extends FormRequest
         return [
             'titulo'            =>'Título',
             'version'           =>'Versión',
-            'artista_principal' =>'Artista principal',
             'genero'            =>'Género',
             'subgenero'         =>'Sub-género',
             'nombre_sello'      =>'Nombre del Sello',

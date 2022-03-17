@@ -1,6 +1,10 @@
 @extends('voyager::auth.master')
 @section('pre_css')
 <style>
+    body, html, .form-control{
+        color: #1e1f20!important;
+    }
+
     body.login .login-container {
         position: absolute;
         z-index: 50;
