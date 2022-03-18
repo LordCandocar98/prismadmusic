@@ -35,7 +35,7 @@
                                 <td class="text-center">{{ $cancion->tipo_colaboracion }}</td>
 
                                 <td class="text-center">
-                                    <a href="{{ url('cancion/{'.$cancion->id.'}') }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
+                                    <a href="{{ url('cancion/'.$cancion->id) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
                                 </td>
