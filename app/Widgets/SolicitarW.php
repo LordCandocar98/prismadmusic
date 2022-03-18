@@ -34,7 +34,7 @@ class SolicitarW extends AbstractWidget
             'text'   => "Actualmente tu cuenta tiene un saldo de 0 dolares. Haga clic en el botón de abajo para solicitar pagos.",
             'button' => [
                 'text' => 'Solicitar Pago',
-                'link' => url("/admin"),
+                'link' => route('nomina.create'),
                 'color' => "#fff",
             ],
             'image' => '/images/dollar.jpg',

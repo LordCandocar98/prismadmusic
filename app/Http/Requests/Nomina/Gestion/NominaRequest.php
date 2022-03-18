@@ -24,29 +24,31 @@ class NominaRequest extends FormRequest
     public function rules()
     {
         return [
-            'idCliente'           =>'required',
-            'fileDesprendible'    =>'required|mimes:pdf|max:3000"',
-            'fecha_Desprendible'  =>'required',
-            'valor'               =>'required|numeric'
+            'idCliente'     => 'required',
+            'tipo_cuenta'   => 'required',
+            'nombre_banco'  => 'required',
+            'numero_cuenta' => 'required',
+            'valor'         => 'required|numeric|min:200'
         ];
     }
-    
+
     public function messages()
     {
         return [
             'required'  => 'El campo :attribute es requerido',
             'numeric'   => 'El campo :attribute debe ser numérico',
-            'mimes'     => 'Debe cargar en el campo :attribute un archivo pdf'
+            'mimes'     => 'Debe cargar en el campo :attribute un archivo pdf',
+            'valor.min'     => 'El campo :attribute debe ser mínimo :min dolares'
         ];
     }
 
     public function attributes()
     {
         return [
-            'idCliente'             =>'Cliente',
-            'fileDesprendible'      =>'Desprendible',
-            'fecha_Desprendible'    =>'Fecha Desprendible',
-            'valor'                 =>'Valor'
+            'idCliente'             => 'Cliente',
+            'fileDesprendible'      => 'Desprendible',
+            'fecha_Desprendible'    => 'Fecha Desprendible',
+            'valor'                 => 'Valor'
         ];
     }
 }
