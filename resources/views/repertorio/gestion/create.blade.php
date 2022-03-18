@@ -81,16 +81,6 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="artista_principal">Artista principal</label>
-                                <br>
-                                <select class="artista_principal col-md-12" name="artista_principal" id="artista_principal">
-                                <option value="none" selected disabled hidden>Seleccione una opción</option>
-                                    @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}" {{ old('artista_principal') == $cliente->id ? 'selected' : '' }}>{{ $cliente ->nombre_artistico }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
                                 <label for="genero">Género</label>
                                 <br>
                                 <select class="genero col-md-12" name="genero" id="genero">
@@ -620,7 +610,8 @@
 
                         <div class="form-group row">
                             <div class="alert alert-success" role="alert">
-                                Si no sabes qué poner en UPC y Número de Catálogo <a class="alert-link">déjalo vacío</a>.
+                                <p>Si no sabes qué poner en UPC y Número de Catálogo <a class="alert-link">déjalo vacío</a>.</p>
+                                <p>La fecha de lanzamiento debe ser al menos 5 días después de hoy</p>
                               </div>
                         </div>
 
@@ -660,7 +651,8 @@
 
                         <div class="form-group row">
                             <div class="alert alert-success" role="alert">
-                                Recuerda que el las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente el repertorio.
+                                <p>**Recuerda que en las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente el repertorio**</p>
+                                <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a></p>
                               </div>
                         </div>
 
@@ -677,7 +669,7 @@
                                     '<div class="row inputElement">\n' +
                                     '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="artista" placeholder="Nombre del artista" type="text">\n' +
+                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +

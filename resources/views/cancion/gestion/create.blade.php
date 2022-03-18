@@ -184,7 +184,7 @@
                             <div class="col-sm-6">
                                 <label for="productor">Productor musical</label>
                                 <br>
-                                <input type="text" class="form-control" id="productor" name="productor" placeholder="..."
+                                <input type="text" class="form-control" id="productor" name="productor" placeholder="George Martin"
                                     value="{{ old('productor') }}">
                             </div>
                             <div class="col-sm-6">
@@ -1235,6 +1235,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="alert alert-success" role="alert">
+                                <p>**Recuerda que en las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente la canción**</p>
+                                <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a></p>
+                              </div>
+                        </div>
+
                         <textarea class="form-control multi_existentes" name="colaboradores_existentes"
                             data-name="colaboradores_existentes">
                             []
@@ -1243,52 +1250,36 @@
                         <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
 
                         <script>
-                            var clienteAux = <?php echo json_encode($clientes); ?>;
-                            var auxiliar = '<select class="multiinput-title col-xs-12 cliente_id" name="cliente_id" id="cliente_id">';
-                            for (var i = 0; i < clienteAux.length; i++) {
-                                auxiliar += '<option value="' + clienteAux[i].id + '">' + clienteAux[i].nombre_artistico + '</option>'
-                            }
-                            auxiliar += '</select>\n';
                             $('.multi_existentes').multiInput({
                                 json: true,
                                 input: $(
                                     '<div class="row inputElement">\n' +
-                                    '<div class="multiinput-title col-xs-12"> Colaborador <span class="number">1</span></div>\n' +
+                                    '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    auxiliar +
+                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual numérico, ejemplo: 70" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
+                                    '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
                                     '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
                                 onElementAdd: function(el, plugin) {
                                     console.log(plugin.elementCount);
-                                    if ($(".cliente_id").length > 0) {
-                                        $('.cliente_id').select2({
-                                            allowClear: true,
-                                            placeholder: {
-                                                id: -1,
-                                            },
-                                        });
-                                    }
                                 },
                                 onElementRemove: function(el, plugin) {
                                     console.log(plugin.elementCount);
-                                    if ($(".cliente_id").length > 0) {
-                                        $('.cliente_id').select2({
-                                            allowClear: true,
-                                            placeholder: {
-                                                id: -1,
-                                            },
-                                        });
-                                    }
                                 }
                             });
                         </script>
+
+                        <div class="form-group row">
+                            <div class="alert alert-success" role="alert">
+                                <p>¿No pertenecen a Prismad? ¡INVÍTALOS!</p>
+                            </div>
+                        </div>
 
                         <textarea class="form-control multi" name="colaboradores" data-name="colaboradores">
                             []
@@ -1331,7 +1322,7 @@
                                         <li>FLAC</li>
                                         <li>AIFF</li>
                                     </ul>
-                                    <p>No importe canciones con símbolos especiales como &/%# y demás. Podría afectar la
+                                    <p>No importe canciones con símbolos especiales como '/%#' y demás. Podría afectar la
                                         subida del archivo o directamente no ocurrir la misma.</p>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@ class ColaboracionRepertorio extends Model
 
     protected $fillable = [
         'repertorio_id',
-        'artista',
+        'cliente_email',
         'tipo_colaboracion',
         'spotify_colaboracion',
     ];

@@ -2,10 +2,12 @@
 
 namespace App\Widgets;
 
+use App\Models\ColaboracionRepertorio;
 use App\Models\Repertorio;
 use Arrilot\Widgets\AbstractWidget;
 use App\Models\Tienda;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RepertorioW extends AbstractWidget
 {
@@ -23,12 +25,7 @@ class RepertorioW extends AbstractWidget
     public function run()
     {
         $user = Auth::user();
-        $repertorios = Repertorio::join('cliente', 'repertorio.artista_principal', '=', 'cliente.id')
-            ->join('persona', 'cliente.persona_id', '=', 'persona.id')
-            ->join('users', 'persona.user_id', '=', 'users.id')
-            ->where('users.role_id', 2)
-            ->where('users.id', $user->id)
-            ->get();
+        $repertorios = ColaboracionRepertorio::where('cliente_email',$user->email)->get();
         $repertorios = $user->role_id == 2 ? $repertorios : Repertorio::all();
         $count = count($repertorios);
 

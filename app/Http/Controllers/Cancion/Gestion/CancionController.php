@@ -28,10 +28,8 @@ class CancionController extends Controller
     {
         $sesion = Auth::user();
         $canciones = DB::table('users')
-        ->join('persona', 'users.id', '=', 'persona.user_id')
-        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        ->join('colaboracion', 'cliente.id', '=', 'colaboracion.cliente_id')
-        ->join('cancion', 'cancion.id', '=', 'colaboracion.cancion_id')
+        ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
+        ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
         ->where('users.role_id',2)
         ->where('users.id',$sesion->id)
         ->get();
@@ -57,10 +55,14 @@ class CancionController extends Controller
             ->select('cliente.nombre_artistico','cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
-        $repertorios = DB::table('repertorio')
-            ->select('repertorio.titulo','repertorio.id')
-            ->orderBy('id', 'DESC')
-            ->get('');
+
+        $sesion = Auth::user();
+        $repertorios = DB::table('users')
+        ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
+        ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
+        ->where('users.role_id',2)
+        ->where('users.id',$sesion->id)
+        ->get();
 
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
             return view('cancion.gestion.create')
@@ -111,9 +113,9 @@ class CancionController extends Controller
         }
 
         foreach($colaboraciones_existentes as $colaborador_especifico){
-            $auxID = $colaborador_especifico->cliente_id;
+            $auxID = $colaborador_especifico->cliente_email;
             foreach($colaboraciones_existentes as $i){
-                if($i->cliente_id == $auxID){
+                if($i->cliente_email == $auxID){
                     $contadorArtistas += 1;
                 }
             }
@@ -140,14 +142,13 @@ class CancionController extends Controller
         }else{
         //Ciclo perrón
             foreach($colaboraciones_existentes as $colaborador_especifico){
-                if($colaborador_especifico->cliente_id != NULL){
+                if($colaborador_especifico->cliente_email != NULL){
                     if($colaborador_especifico->tipo_colaboracion == "Principal"){
                         $cancion = Cancion::create([
                             'tipo_secundario'         => $request->tipo_secundario,
                             'instrumental'            => $request->instrumental,
                             'titulo'                  => $request->titulo,
                             'version_subtitulo'       => $request->version_subtitulo,
-                            'cliente_id'              => $colaborador_especifico->cliente_id,
                             'autor'                   => $request->autor,
                             'compositor'              => $request->compositor,
                             'arreglista'              => $request->arreglista,
@@ -171,17 +172,17 @@ class CancionController extends Controller
                             'cancion_id'              => $cancion->id,
                             'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
                             'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                            'cliente_id'              => $colaborador_especifico->cliente_id,
+                            'cliente_email'           => $colaborador_especifico->cliente_email,
                         ]);
                         foreach($colaboraciones_existentes as $colaborador_especifico){
-                            if($colaborador_especifico->cliente_id != NULL){
+                            if($colaborador_especifico->cliente_email != NULL){
                                 if($colaborador_especifico->tipo_colaboracion != "Principal"){
                                     Colaboracion::create([
                                         'nombre_colaboracion'     => $request->nombre_colaboracion,
                                         'cancion_id'              => $cancion->id,
                                         'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
                                         'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                                        'cliente_id'              => $colaborador_especifico->cliente_id,
+                                        'cliente_email'           => $colaborador_especifico->cliente_email,
                                     ]);
                                 }
                             }
@@ -194,7 +195,7 @@ class CancionController extends Controller
                                         'name'     => $colaborador_invitado->email,
                                         'password' => Hash::make('password'),
                                         'role_id'  => 2,
-                                        'confirmation_code' => Str::random(40), //Vacca
+                                        'confirmation_code' => Str::random(40),
                                     ]);
                                     // Send confirmation code---------------------------------------------------------------
                                     $details = [
@@ -207,11 +208,6 @@ class CancionController extends Controller
                                     ];
                                     Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
 
-                                    /*$usuario_array = json_decode(json_encode($usuario), true);
-                                    Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
-                                        $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
-                                    });*/
-                                    //---------------------------------------------------------------------------------------
                                     $persona = Persona::create([
                                         'user_id'               => $usuario->id,
                                     ]);
@@ -225,23 +221,10 @@ class CancionController extends Controller
                                         'cancion_id'              => $cancion->id,
                                         'tipo_colaboracion'       => $colaborador_invitado->tipo_colaboracion,
                                         'porcentaje_intelectual'  => $colaborador_invitado->porcentaje_intelectual,
-                                        'cliente_id'              => $cliente->id,
+                                        'cliente_email'           => $usuario->email,
                                     ]);
                                 }
                             }
-                            // foreach($colaboraciones_existentes as $colaborador_especifico){
-                            //     if($colaborador_especifico->cliente_id != NULL){
-                            //         if($colaborador_especifico->tipo_colaboracion != "Principal"){
-                            //             Colaboracion::create([
-                            //                 'nombre_colaboracion'     => $request->nombre_colaboracion,
-                            //                 'cancion_id'              => $cancion->id,
-                            //                 'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                            //                 'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                            //                 'cliente_id'              => $colaborador_especifico->cliente_id,
-                            //             ]);
-                            //         }
-                            //     }
-                            // }
                         }
                         break;
                     }else{
@@ -268,7 +251,6 @@ class CancionController extends Controller
                                         'instrumental'            => $request->instrumental,
                                         'titulo'                  => $request->titulo,
                                         'version_subtitulo'       => $request->version_subtitulo,
-                                        'cliente_id'              => $cliente->cliente_id,
                                         'autor'                   => $request->autor,
                                         'compositor'              => $request->compositor,
                                         'arreglista'              => $request->arreglista,
@@ -291,34 +273,30 @@ class CancionController extends Controller
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                         'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
-                                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, Acepta a continuación.',
+                                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                         'descripcion' => '',
                                         'button' => 'Ingresa al portal',
                                         'enlace' => url('register/verify/'.$usuario->confirmation_code),
                                     ];
                                     Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
-                                    /*$usuario_array = json_decode(json_encode($usuario), true);
-                                    Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
-                                        $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
-                                    });*/
                                     //---------------------------------------------------------------------------------------
                                     Colaboracion::create([
                                         'nombre_colaboracion'     => $request->nombre_colaboracion,
                                         'cancion_id'              => $cancion->id,
                                         'tipo_colaboracion'       => $colaborador_invitado->tipo_colaboracion,
                                         'porcentaje_intelectual'  => $colaborador_invitado->porcentaje_intelectual,
-                                        'cliente_id'              => $cliente->id,
+                                        'cliente_email'           => $usuario->email,
                                     ]);
 
                                     foreach($colaboraciones_existentes as $colaborador_especifico){
-                                        if($colaborador_especifico->cliente_id != NULL){
+                                        if($colaborador_especifico->cliente_email != NULL){
                                             if($colaborador_especifico->tipo_colaboracion != "Principal"){
                                                 Colaboracion::create([
                                                     'nombre_colaboracion'     => $request->nombre_colaboracion,
                                                     'cancion_id'              => $cancion->id,
                                                     'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
                                                     'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                                                    'cliente_id'              => $colaborador_especifico->cliente_id,
+                                                    'cliente_email'           => $colaborador_especifico->cliente_email,
                                                 ]);
                                             }
                                         }
@@ -335,21 +313,15 @@ class CancionController extends Controller
                                                     'confirmation_code' => Str::random(40), //Vacca
                                                 ]);
                                                 // Send confirmation code---------------------------------------------------------------
-
                                                 $details = [
                                                     'title' => 'Asunto: ¡Te invito a Prismad Music!',
                                                     'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
-                                                    'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, Acepta a continuación.',
+                                                    'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                                     'descripcion' => '',
                                                     'button' => 'Ingresa al portal',
                                                     'enlace' => url('register/verify/'.$usuario->confirmation_code),
                                                 ];
                                                 Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
-
-                                                /*$usuario_array = json_decode(json_encode($usuario), true);
-                                                Mail::send('emails.confirmation_code', $usuario_array, function($message) use($usuario){ //crear el campo en laravel
-                                                    $message->to($usuario['email'],$usuario['name'])->subject('¡Has sido invitado a Prismad Music!');
-                                                });*/
                                                 //---------------------------------------------------------------------------------------
                                                 $persona = Persona::create([
                                                     'user_id'               => $usuario->id,
@@ -363,23 +335,10 @@ class CancionController extends Controller
                                                     'cancion_id'              => $cancion->id,
                                                     'tipo_colaboracion'       => $colaborador_invitado->tipo_colaboracion,
                                                     'porcentaje_intelectual'  => $colaborador_invitado->porcentaje_intelectual,
-                                                    'cliente_id'              => $cliente->id,
+                                                    'cliente_email'           => $usuario->email,
                                                 ]);
                                             }
                                         }
-                                        // foreach($colaboraciones_existentes as $colaborador_especifico){
-                                        //     if($colaborador_especifico->cliente_id != NULL){
-                                        //         if($colaborador_especifico->tipo_colaboracion != "Principal"){
-                                        //             Colaboracion::create([
-                                        //                 'nombre_colaboracion'     => $request->nombre_colaboracion,
-                                        //                 'cancion_id'              => $cancion->id,
-                                        //                 'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                                        //                 'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                                        //                 'cliente_id'              => $colaborador_especifico->cliente_id,
-                                        //             ]);
-                                        //         }
-                                        //     }
-                                        // }
                                     }
                                     break;
                                 }

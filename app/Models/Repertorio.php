@@ -15,7 +15,6 @@ class Repertorio extends Model
     protected $fillable = [
         'titulo',
         'version',
-        'artista_principal',
         'genero',
         'subgenero',
         'nombre_sello',

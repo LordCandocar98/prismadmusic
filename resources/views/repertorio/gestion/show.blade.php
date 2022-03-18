@@ -2,15 +2,15 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('cancion.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Canciones</a>
+        <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Repertorios</a>
     </li>
 @endsection
 @section('page_header')
     <h1 class="page-title">
         <i class="fa fa-music" aria-hidden="true"></i>
-        Vista general de canción
+        Vista general de repertorio
     </h1>
-    <a href="{{ route('cancion.index') }}" class="btn btn-warning">
+    <a href="{{ route('repertorio.index') }}" class="btn btn-warning">
         <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">Volver a la lista</span>
     </a>
 @endsection
@@ -22,106 +22,77 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <h3>Título</h3><br>
-                        {{ $cancion->titulo }}
+                        {{ $repertorio->titulo }}
                     </div>
                     <div class="col-sm-6">
                         <h3>Versión / Subtítulo</h3><br>
-                        {{ $cancion->version_subtitulo }}
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <h3>Tipo secundario</h3><br>
-                        {{ $cancion->tipo_secundario }}
-                    </div>
-                    <div class="col-sm-6">
-                        <h3>Instrumental</h3><br>
-                        {{ $cancion->instrumental }}
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <h3>Autor</h3><br>
-                        {{ $cancion->autor }}
-                    </div>
-                    <div class="col-sm-6">
-                        <h3>Compositor</h3><br>
-                        {{ $cancion->compositor }}
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <h3>Arreglista</h3><br>
-                        {{ $cancion->arreglista }}
-                    </div>
-                    <div class="col-sm-6">
-                        <h3>Productor</h3><br>
-                        {{ $cancion->productor }}
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-6">
-                        <h3>Pline</h3><br>
-                        {{ $cancion->pline }}
-                    </div>
-                    <div class="col-sm-6">
-                        <h3>Año de producción</h3><br>
-                        {{ $cancion->annio_produccion }}
+                        {{ $repertorio->version }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <h3>Género</h3><br>
-                        {{ $cancion->genero }}
+                        {{ $repertorio->genero }}
                     </div>
                     <div class="col-sm-6">
                         <h3>Subgénero</h3><br>
-                        {{ $cancion->subgenero }}
+                        {{ $repertorio->subgenero }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <h3>Género secundario</h3><br>
-                        {{ $cancion->genero_secundario }}
+                        <h3>Nombre del sello</h3><br>
+                        {{ $repertorio->nombre_sello }}
                     </div>
                     <div class="col-sm-6">
-                        <h3>Subgénero secundario</h3><br>
-                        {{ $cancion->subgenero_secundario }}
+                        <h3>Formato</h3><br>
+                        {{ $repertorio->formato }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <h3>Letra chocante o vulgar</h3><br>
-                        {{ $cancion->letra_chocante_vulgar }}
+                        <h3>Productor</h3><br>
+                        {{ $repertorio->productor }}
                     </div>
                     <div class="col-sm-6">
-                        <h3>Inicio de la previsualización</h3><br>
-                        {{ $cancion->inicio_previsualizacion }}
+                        <h3>Copyright</h3><br>
+                        {{ $repertorio->copyright }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <h3>Idioma del título</h3><br>
-                        {{ $cancion->idioma_titulo }}
+                        <h3>Pline</h3><br>
+                        {{ $repertorio->pline }}
                     </div>
                     <div class="col-sm-6">
-                        <h3>Idioma de la letra</h3><br>
-                        {{ $cancion->idioma_letra }}
+                        <h3>Año de producción</h3><br>
+                        {{ $repertorio->annio_produccion }}
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-12">
-                        <h3>Fecha principal de salida</h3><br>
-                        {{ $cancion->fecha_principal_salida }}
+                    <div class="col-sm-6">
+                        <h3>Año de producción</h3><br>
+                        {{ $repertorio->annio_produccion }}
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>UPC/EAN</h3><br>
+                        {{ $repertorio->upc_ean }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <h3>Número de catálogo</h3><br>
+                        {{ $repertorio->numero_catalogo }}
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Fecha de lanzamiento</h3><br>
+                        {{ $repertorio->fecha_lanzamiento }}
                     </div>
                 </div>
 
@@ -137,25 +108,25 @@
                                               <th scope="col"><a class="alert-link">#</a></th>
                                               <th scope="col"><a class="alert-link">Artista</a></th>
                                               <th scope="col"><a class="alert-link">Tipo de colaboración</a></th>
-                                              <th scope="col"><a class="alert-link">Porcentaje intelectual</a></th>
+                                              <th scope="col"><a class="alert-link">Spotify</a></th>
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            @foreach ( $colaboraciones as $colaboracionesj)
-                                                @php
-                                                    $usuario = \App\Models\User::where('email', $colaboracionesj->cliente_email)->first();
-                                                    $persona = \App\Models\Persona::where('user_id',$usuario->id)->first();
-                                                    $cliente = \App\Models\Cliente::where('persona_id',$persona->id)->first();
-                                                @endphp
+                                        @foreach ( $colaboraciones as $colaboracionesj)
+                                            @php
+                                                $usuario = \App\Models\User::where('email', $colaboracionesj->cliente_email)->first();
+                                                $persona = \App\Models\Persona::where('user_id',$usuario->id)->first();
+                                                $cliente = \App\Models\Cliente::where('persona_id',$persona->id)->first();
+                                            @endphp
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>{{ $cliente->nombre_artistico }}</td>
                                                 <td>{{ $colaboracionesj->tipo_colaboracion }}</td>
-                                                <td>{{ $colaboracionesj->porcentaje_intelectual }}</td>
+                                                <td>{{ $colaboracionesj->spotify_colaboracion }}</td>
                                             </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </ul>
                         </div>
                     </div>

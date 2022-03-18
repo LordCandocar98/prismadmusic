@@ -32,14 +32,12 @@ class RepertorioController extends Controller
     public function index()
     {
         $sesion = Auth::user();
-        $repertorios = DB::table('repertorio')
-        ->join('cliente', 'repertorio.artista_principal', '=', 'cliente.id')
-        ->join('persona', 'cliente.persona_id', '=', 'persona.id')
-        ->join('users', 'persona.user_id', '=', 'users.id')
+        $repertorios = DB::table('users')
+        ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
+        ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
         ->where('users.role_id',2)
         ->where('users.id',$sesion->id)
         ->get();
-        //dd($repertorios);
         return view('repertorio.gestion.index', compact('repertorios'));
     }
 
@@ -98,7 +96,6 @@ class RepertorioController extends Controller
             $repertorio = Repertorio::create([
                 'titulo'               => $request->titulo,
                 'version'              => $request->version,
-                'artista_principal'    => $cliente_sesion->id,
                 'genero'               => $request->genero,
                 'subgenero'            => $request->subgenero,
                 'nombre_sello'         => $request->nombre_sello,
@@ -112,10 +109,10 @@ class RepertorioController extends Controller
                 'fecha_lanzamiento'    => $request->fecha_lanzamiento,
             ]);
             foreach($colaboraciones as $colaboracion_individual){
-                if($colaboracion_individual->artista != NULL){
+                if($colaboracion_individual->cliente_email != NULL){
                     ColaboracionRepertorio::create([
                         'repertorio_id'           => $repertorio->id,
-                        'artista'                 => $colaboracion_individual->artista,
+                        'cliente_email'           => $colaboracion_individual->cliente_email,
                         'tipo_colaboracion'       => $colaboracion_individual->tipo_colaboracion,
                         'spotify_colaboracion'    => $colaboracion_individual->spotify_colaboracion,
                     ]);
@@ -140,7 +137,11 @@ class RepertorioController extends Controller
      */
     public function show($id)
     {
-        //
+        $repertorio = Repertorio::find($id);
+        $colaboraciones = ColaboracionRepertorio::where('repertorio_id',$id)->get();
+        //dd($colaboraciones);
+        //dd($repertorio);
+        return view('repertorio.gestion.show', compact('repertorio',$repertorio,'colaboraciones',$colaboraciones));
     }
 
     /**

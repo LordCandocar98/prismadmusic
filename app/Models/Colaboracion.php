@@ -16,7 +16,7 @@ class Colaboracion extends Model
         'nombre_colaboracion',
         'tipo_colaboracion',
         'porcentaje_intelectual',
-        'cliente_id',
+        'cliente_email',
         'cancion_id',
     ];
 }
