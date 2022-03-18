@@ -42,6 +42,11 @@ class SolicitarW extends AbstractWidget
     }
     public function shouldBeDisplayed()
     {
-        return true;
+        $session = Auth::user();
+        if ($session->role_id == 1 ||  $session->role_id == 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
