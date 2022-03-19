@@ -28,11 +28,11 @@ class CancionController extends Controller
     {
         $sesion = Auth::user();
         $canciones = DB::table('users')
-        ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
-        ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-        ->where('users.role_id',2)
-        ->where('users.id',$sesion->id)
-        ->get();
+            ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
+            ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+            ->where('users.role_id', 2)
+            ->where('users.id', $sesion->id)
+            ->get();
         return view('cancion.gestion.index', compact('canciones'));
     }
 
@@ -44,39 +44,39 @@ class CancionController extends Controller
     public function create()
     {
         $clientes = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
         $clientes2 = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
         $clientes3 = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
 
         $sesion = Auth::user();
         $repertorios = DB::table('users')
-        ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
-        ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
-        ->where('users.role_id',2)
-        ->where('users.id',$sesion->id)
-        ->get();
+            ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
+            ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
+            ->where('users.role_id', 2)
+            ->where('users.id', $sesion->id)
+            ->get();
 
-        if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
+        if (Auth::user()->registro_confirmed == 0) { // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
             return view('cancion.gestion.create')
-                        ->with('clientes', $clientes)
-                        ->with('clientes2', $clientes2)
-                        ->with('clientes3', $clientes3)
-                        ->with('repertorios', $repertorios);
+                ->with('clientes', $clientes)
+                ->with('clientes2', $clientes2)
+                ->with('clientes3', $clientes3)
+                ->with('repertorios', $repertorios);
         }
 
         return view('cancion.gestion.create')
-                    ->with('clientes', $clientes)
-                    ->with('clientes2', $clientes2)
-                    ->with('clientes3', $clientes3)
-                    ->with('repertorios', $repertorios);
+            ->with('clientes', $clientes)
+            ->with('clientes2', $clientes2)
+            ->with('clientes3', $clientes3)
+            ->with('repertorios', $repertorios);
     }
 
     /**
@@ -91,64 +91,79 @@ class CancionController extends Controller
         $colaboraciones = json_decode($request->colaboradores);
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
 
-        if($song = $request->file('pista_mp3')){
+        if ($song = $request->file('pista_mp3')) {
             $destinoCancion = 'canciones/' . date('FY') . '/';
             $cancionArchivo  = time() . '.' . $song->getClientOriginalExtension();
-            $filename = $destinoCancion . $cancionArchivo ;
+            $filename = $destinoCancion . $cancionArchivo;
             $song->move('storage/' . $destinoCancion, $cancionArchivo);
         };
         $cancion = [];
 
         $contadorPrincipal = 0;
         $contadorArtistas = 0;
-        foreach($colaboraciones_existentes as $colaborador_especifico){
-            if($colaborador_especifico->tipo_colaboracion == "Principal"){
+        foreach ($colaboraciones_existentes as $colaborador_especifico) {
+            if ($colaborador_especifico->tipo_colaboracion == "Principal") {
                 $contadorPrincipal += 1;
             }
         }
-        foreach($colaboraciones as $colaborador_invitado){
-            if($colaborador_invitado->tipo_colaboracion == "Principal"){
+        foreach ($colaboraciones as $colaborador_invitado) {
+            if ($colaborador_invitado->tipo_colaboracion == "Principal") {
                 $contadorPrincipal += 1;
             }
         }
 
-        foreach($colaboraciones_existentes as $colaborador_especifico){
+        foreach ($colaboraciones_existentes as $colaborador_especifico) {
             $auxID = $colaborador_especifico->cliente_email;
             $auxCOL = $colaborador_especifico->cliente_email;
             $auxPOR = $colaborador_especifico->cliente_email;
 
-            foreach($colaboraciones_existentes as $i){
-                if($i->cliente_email == $auxID && !$i->porcentaje_intelectual == $auxPOR && !$i->tipo_colaboracion == $auxCOL ){
+            foreach ($colaboraciones_existentes as $i) {
+                if ($i->cliente_email == $auxID && !$i->porcentaje_intelectual == $auxPOR && !$i->tipo_colaboracion == $auxCOL) {
                     $contadorArtistas += 1;
                 }
             }
         }
-        foreach($colaboraciones as $colaborador_invitado){
-            if($colaborador_invitado->email != NULL){
+        foreach ($colaboraciones as $colaborador_invitado) {
+            if ($colaborador_invitado->email != NULL) {
                 $auxID2 = $colaborador_invitado->email;
                 $auxCOL2 = $colaborador_especifico->cliente_email;
                 $auxPOR2 = $colaborador_especifico->cliente_email;
-                foreach($colaboraciones as $j){
-                    if($j->email == $auxID2 && !$j->porcentaje_intelectual == $auxPOR2 && !$j->tipo_colaboracion == $auxCOL2){ //Tal vez se pregunta con él mísmo
+                foreach ($colaboraciones as $j) {
+                    if ($j->email == $auxID2 && !$j->porcentaje_intelectual == $auxPOR2 && !$j->tipo_colaboracion == $auxCOL2) { //Tal vez se pregunta con él mísmo
                         $contadorArtistas += 1;
                     }
                 }
             }
         }
 
-        if($contadorPrincipal == 0){ //No hay Principal
-            dd("No hay artista Principal"); //**********************************************************************MODIFICAR ALERTAS */
+        if ($contadorPrincipal == 0) { //No hay Principal
+            $notification = array(
+                'message' => 'No se especificó el artista principal',
+                'alert-type' => 'warning'
+            );
+            return back()->withInput()->with($notification);
+            //dd("No hay artista Principal"); //**********************************************************************MODIFICAR ALERTAS */
         }
-        if($contadorPrincipal > 1){ //Hay más de un Principal
-            dd("Hay más de 1 artista Principal");
+        if ($contadorPrincipal > 1) { //Hay más de un Principal
+            $notification = array(
+                'message' => 'Hay más de 1 artista principal',
+                'alert-type' => 'warning'
+            );
+            return back()->withInput()->with($notification);
+            //dd("Hay más de 1 artista Principal");
         }
-        if($contadorArtistas > 1){ //Hay más de un Artista o Email
-            dd("Emails repetidos ..... Artistas repetidos", $contadorArtistas);
-        }else{
-        //Ciclo perrón
-            foreach($colaboraciones_existentes as $colaborador_especifico){
-                if($colaborador_especifico->cliente_email != NULL){
-                    if($colaborador_especifico->tipo_colaboracion == "Principal"){
+        if ($contadorArtistas > 1) { //Hay más de un Artista o Email
+            $notification = array(
+                'message' => 'Los email no pueden ser repetidos',
+                'alert-type' => 'warning'
+            );
+            return back()->withInput()->with($notification);
+            //dd("Emails repetidos ..... Artistas repetidos", $contadorArtistas);
+        } else {
+            //Ciclo perrón
+            foreach ($colaboraciones_existentes as $colaborador_especifico) {
+                if ($colaborador_especifico->cliente_email != NULL) {
+                    if ($colaborador_especifico->tipo_colaboracion == "Principal") {
                         $cancion = Cancion::create([
                             'tipo_secundario'         => $request->tipo_secundario,
                             'instrumental'            => $request->instrumental,
@@ -179,9 +194,9 @@ class CancionController extends Controller
                             'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
                             'cliente_email'           => $colaborador_especifico->cliente_email,
                         ]);
-                        foreach($colaboraciones_existentes as $colaborador_especifico){
-                            if($colaborador_especifico->cliente_email != NULL){
-                                if($colaborador_especifico->tipo_colaboracion != "Principal"){
+                        foreach ($colaboraciones_existentes as $colaborador_especifico) {
+                            if ($colaborador_especifico->cliente_email != NULL) {
+                                if ($colaborador_especifico->tipo_colaboracion != "Principal") {
                                     Colaboracion::create([
                                         'nombre_colaboracion'     => $request->nombre_colaboracion,
                                         'cancion_id'              => $cancion->id,
@@ -192,9 +207,9 @@ class CancionController extends Controller
                                 }
                             }
                         }
-                        foreach($colaboraciones as $colaborador_invitado){
-                            if($colaborador_invitado->email != NULL){
-                                if($colaborador_invitado->tipo_colaboracion != "Principal"){
+                        foreach ($colaboraciones as $colaborador_invitado) {
+                            if ($colaborador_invitado->email != NULL) {
+                                if ($colaborador_invitado->tipo_colaboracion != "Principal") {
                                     $usuario = User::create([
                                         'email'    => $colaborador_invitado->email,
                                         'name'     => $colaborador_invitado->email,
@@ -205,11 +220,11 @@ class CancionController extends Controller
                                     // Send confirmation code---------------------------------------------------------------
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                                        'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
+                                        'subtitle' => $request->autor . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
                                         'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                         'descripcion' => '',
                                         'button' => 'Ingresa al portal',
-                                        'enlace' => url('register/verify/'.$usuario->confirmation_code),
+                                        'enlace' => url('register/verify/' . $usuario->confirmation_code),
                                     ];
                                     Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
 
@@ -232,10 +247,10 @@ class CancionController extends Controller
                             }
                         }
                         break;
-                    }else{
-                        foreach($colaboraciones as $colaborador_invitado){
-                            if($colaborador_invitado->email != NULL){
-                                if($colaborador_invitado->tipo_colaboracion == "Principal"){
+                    } else {
+                        foreach ($colaboraciones as $colaborador_invitado) {
+                            if ($colaborador_invitado->email != NULL) {
+                                if ($colaborador_invitado->tipo_colaboracion == "Principal") {
                                     $usuario = User::create([
                                         'email'    => $colaborador_invitado->email,
                                         'name'     => $colaborador_invitado->email,
@@ -277,11 +292,11 @@ class CancionController extends Controller
                                     // Send confirmation code---------------------------------------------------------------
                                     $details = [
                                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                                        'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
+                                        'subtitle' => $request->autor . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
                                         'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                         'descripcion' => '',
                                         'button' => 'Ingresa al portal',
-                                        'enlace' => url('register/verify/'.$usuario->confirmation_code),
+                                        'enlace' => url('register/verify/' . $usuario->confirmation_code),
                                     ];
                                     Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
                                     //---------------------------------------------------------------------------------------
@@ -293,9 +308,9 @@ class CancionController extends Controller
                                         'cliente_email'           => $usuario->email,
                                     ]);
 
-                                    foreach($colaboraciones_existentes as $colaborador_especifico){
-                                        if($colaborador_especifico->cliente_email != NULL){
-                                            if($colaborador_especifico->tipo_colaboracion != "Principal"){
+                                    foreach ($colaboraciones_existentes as $colaborador_especifico) {
+                                        if ($colaborador_especifico->cliente_email != NULL) {
+                                            if ($colaborador_especifico->tipo_colaboracion != "Principal") {
                                                 Colaboracion::create([
                                                     'nombre_colaboracion'     => $request->nombre_colaboracion,
                                                     'cancion_id'              => $cancion->id,
@@ -307,9 +322,9 @@ class CancionController extends Controller
                                         }
                                     }
 
-                                    foreach($colaboraciones as $colaborador_invitado){
-                                        if($colaborador_invitado->email != NULL){
-                                            if($colaborador_invitado->tipo_colaboracion != "Principal"){
+                                    foreach ($colaboraciones as $colaborador_invitado) {
+                                        if ($colaborador_invitado->email != NULL) {
+                                            if ($colaborador_invitado->tipo_colaboracion != "Principal") {
                                                 $usuario = User::create([
                                                     'email'    => $colaborador_invitado->email,
                                                     'name'     => $colaborador_invitado->email,
@@ -320,11 +335,11 @@ class CancionController extends Controller
                                                 // Send confirmation code---------------------------------------------------------------
                                                 $details = [
                                                     'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                                                    'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
+                                                    'subtitle' => $request->autor . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
                                                     'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                                                     'descripcion' => '',
                                                     'button' => 'Ingresa al portal',
-                                                    'enlace' => url('register/verify/'.$usuario->confirmation_code),
+                                                    'enlace' => url('register/verify/' . $usuario->confirmation_code),
                                                 ];
                                                 Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
                                                 //---------------------------------------------------------------------------------------
@@ -362,15 +377,16 @@ class CancionController extends Controller
         return redirect('/cancion')->with($notification);
     }
 
-    public function verify($code){ //VACCA
+    public function verify($code)
+    { //VACCA
         $user = User::where('confirmation_code', $code)->first();
-        if(! $user){
+        if (!$user) {
             return redirect('/');
         }
         $user->email_verified_at = date('Y-m-d H:i:s');
         $user->save();
 
-        return redirect('/registro')->with('notification','Has confirmado exitosamente tu correo!');
+        return redirect('/registro')->with('notification', 'Has confirmado exitosamente tu correo!');
     }
 
     /**
@@ -382,8 +398,8 @@ class CancionController extends Controller
     public function show($id)
     {
         $cancion = Cancion::find($id);
-        $colaboraciones = Colaboracion::where('cancion_id',$id)->get();
-        return view('cancion.gestion.show', compact('cancion',$cancion,'colaboraciones',$colaboraciones));
+        $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
+        return view('cancion.gestion.show', compact('cancion', $cancion, 'colaboraciones', $colaboraciones));
     }
 
     /**
