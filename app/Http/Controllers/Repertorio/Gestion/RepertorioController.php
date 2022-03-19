@@ -70,55 +70,41 @@ class RepertorioController extends Controller
         $sesion = Auth::user();
 
         $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
-        ->select("cliente.id")
+        ->select("cliente.*")
         ->first();
+        //dd($cliente_sesion);
 
         // $persona =  Persona::where('user_id', $sesion->id)->first();
         // $cliente_sesion = Cliente::where('persona_id', $persona->id)->first();
-
-        $colaboraciones = json_decode($request->colaboradores_repertorio);
-
         if($image = $request->file('portada')){
             $destinoPortada = 'portadas/' . date('FY') . '/';
             $profileImage  = time() . '.' . $image->getClientOriginalExtension();
             $filename = $destinoPortada . $profileImage ;
             $image->move('storage/' . $destinoPortada, $profileImage);
         };
-        $contadorPrincipal = 0;
-        foreach($colaboraciones as $colaborador_especifico){
-            if($colaborador_especifico->tipo_colaboracion == "Principal"){
-                $contadorPrincipal += 1;
-            }
-        }
-        if($contadorPrincipal > 1){ //Hay más de un Principal
-            dd("Hay más de 1 artista como colaborador Principal");
-        }else{
-            $repertorio = Repertorio::create([
-                'titulo'               => $request->titulo,
-                'version'              => $request->version,
-                'genero'               => $request->genero,
-                'subgenero'            => $request->subgenero,
-                'nombre_sello'         => $request->nombre_sello,
-                'formato'              => $request->formato,
-                'productor'            => $request->productor,
-                'copyright'            => $request->copyright,
-                'annio_produccion'     => $request->annio_produccion,
-                'upc_ean'              => $request->upc_ean,
-                'numero_catalogo'      => $request->numero_catalogo,
-                'portada'              => $filename,
-                'fecha_lanzamiento'    => $request->fecha_lanzamiento,
-            ]);
-            foreach($colaboraciones as $colaboracion_individual){
-                if($colaboracion_individual->cliente_email != NULL){
-                    ColaboracionRepertorio::create([
-                        'repertorio_id'           => $repertorio->id,
-                        'cliente_email'           => $colaboracion_individual->cliente_email,
-                        'tipo_colaboracion'       => $colaboracion_individual->tipo_colaboracion,
-                        'spotify_colaboracion'    => $colaboracion_individual->spotify_colaboracion,
-                    ]);
-                }
-            }
-        }
+        $repertorio = Repertorio::create([
+            'titulo'               => $request->titulo,
+            'version'              => $request->version,
+            'genero'               => $request->genero,
+            'subgenero'            => $request->subgenero,
+            'nombre_sello'         => $request->nombre_sello,
+            'formato'              => $request->formato,
+            'productor'            => $request->productor,
+            'copyright'            => $request->copyright,
+            'annio_produccion'     => $request->annio_produccion,
+            'upc_ean'              => $request->upc_ean,
+            'numero_catalogo'      => $request->numero_catalogo,
+            'portada'              => $filename,
+            'fecha_lanzamiento'    => $request->fecha_lanzamiento,
+        ]);
+        ColaboracionRepertorio::create([
+            'repertorio_id'           => $repertorio->id,
+            'cliente_email'           => $sesion->email,
+            'tipo_colaboracion'       => "Principal (1st)",
+            'spotify_colaboracion'    => $cliente_sesion->link_spoty,
+        ]);
+
+
 
 //------------------------------------------------------------------------
         $notification = array(

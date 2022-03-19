@@ -1236,8 +1236,27 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="productor">¿De cuánto será TU porcentaje intelectual?</label>
+                                <br>
+                                <input type="text" class="form-control" id="porcentaje_intelectualCreador" name="porcentaje_intelectualCreador"
+                                    placeholder="Numérico, ejemplo: 50 " value="{{ old('porcentaje_intelectualCreador') }}">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="productor">¿Cuál será TU tipo de colaboración?</label>
+                                <br>
+                                <select class="idioma_titulo col-md-12" name="tipo_colaboracionCreador" id="tipo_colaboracionCreador"
+                                    value="{{ old('tipo_colaboracionCreador') }}">
+                                    <option value="Principal">Principal</option>
+                                    <option value="Featuring">Featuring</option>
+                                    <option value="Remixer">Remixer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="alert alert-success" role="alert">
-                                <p>**Recuerda que en las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente la canción**</p>
+                                <p>**Recuerda que sólo debes registrar a los colaboradores <a class="alert-link">APARTE DE TI</a> para crear correctamente la canción**</p>
                                 <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a></p>
                               </div>
                         </div>
@@ -1298,6 +1317,9 @@
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +

@@ -649,7 +649,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="alert alert-success" role="alert">
                                 <p>**Recuerda que en las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente el repertorio**</p>
                                 <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a> deben existir en la plataforma</p>
@@ -686,7 +686,7 @@
                                     console.log(plugin.elementCount);
                                 }
                             });
-                        </script>
+                        </script> --}}
 
                     </div>
                     <div class="modal-footer">
