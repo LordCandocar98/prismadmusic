@@ -8,6 +8,7 @@ use App\Models\Cliente;
 use App\Models\Nomina;
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class NominaController extends Controller
@@ -16,7 +17,7 @@ class NominaController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-    */
+     */
     public function index()
     {
         $nominas = DB::table('users')
@@ -24,7 +25,7 @@ class NominaController extends Controller
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->join('nomina', 'cliente.id', '=', 'nomina.cliente_id')
             ->select('users.*', 'persona.*', 'cliente.*', 'nomina.*')
-            ->where('role_id',2)
+            ->where('role_id', 2)
             ->where('registro_confirmed', 1)
             ->get();
         return view('nomina.gestion.index', compact('nominas'));
@@ -37,14 +38,15 @@ class NominaController extends Controller
      */
     public function create()
     {
-        $clientes = DB::table('users')
-        ->join('persona', 'users.id', '=', 'persona.user_id')
-        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        ->select('users.*', 'persona.*', 'cliente.*')
-        ->where('role_id',2)
-        ->where('registro_confirmed', 1)
-        ->get();
-        return view('nomina.gestion.create', compact('clientes'));
+        $session = Auth::user();
+        $cliente = Cliente::join('persona', 'persona.id', 'cliente.persona_id')
+            ->join('users', 'users.id', '=', 'persona.user_id')
+            ->where('users.id', $session->id)
+            ->where('users.registro_confirmed', 1)
+            ->where('users.role_id', 2)
+            ->select('cliente.*', 'persona.*', 'cliente.id as id_cliente')
+            ->first();
+        return view('nomina.gestion.create', compact('cliente'));
     }
 
     /**
@@ -55,19 +57,21 @@ class NominaController extends Controller
      */
     public function store(NominaRequest $request)
     {
+       // dd($request);
         // dd($request);
         $filename = "";
-        if($pdfArchivo = $request->file('fileDesprendible')){
+        /* if ($pdfArchivo = $request->file('fileDesprendible')) {
             $destinoPdf = 'Nomina/' . date('FY') . '/';
             $profilePdf  = time() . '.' . $pdfArchivo->getClientOriginalExtension();
-            $filename = $destinoPdf . $profilePdf ;
+            $filename = $destinoPdf . $profilePdf;
             $pdfArchivo->move('storage/' . $destinoPdf, $profilePdf);
-        };
+        }; */
         $nomina = new Nomina;
-        $nomina->cliente_id         = $request->idCliente;
-        $nomina->desprendible       = $filename;
-        $nomina->fecha_informe      = $request->fecha_Desprendible;
-        $nomina->valor              = $request->valor;
+        $nomina->cliente_id     = $request->idCliente;
+        $nomina->nombre_banco   = $request->nombre_banco;
+        $nomina->numero_cuenta  = $request->numero_cuenta;
+        $nomina->tipo_cuenta    = $request->tipo_cuenta;
+        $nomina->valor          = $request->valor;
         $nomina->save();
         $notification = array(
             'message' => 'Nomina creada exitosamente!',
@@ -89,13 +93,13 @@ class NominaController extends Controller
         $client     = Cliente::find($nomina->cliente_id);
         $persona    = Persona::find($client->persona_id);
         $clientes   = DB::table('users')
-        ->join('persona', 'users.id', '=', 'persona.user_id')
-        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        ->select('users.*', 'persona.*', 'cliente.*')
-        ->where('role_id',2)
-        ->where('registro_confirmed', 1)
-        ->get();
-        return view('nomina.gestion.edit', compact('nomina','persona', 'clientes','client'));
+            ->join('persona', 'users.id', '=', 'persona.user_id')
+            ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+            ->select('users.*', 'persona.*', 'cliente.*')
+            ->where('role_id', 2)
+            ->where('registro_confirmed', 1)
+            ->get();
+        return view('nomina.gestion.edit', compact('nomina', 'persona', 'clientes', 'client'));
     }
 
     /**
@@ -121,18 +125,18 @@ class NominaController extends Controller
         $nomina = Nomina::find($id);
         //Guardado y path del archivo
         $filename = "";
-        if($xlsArchivo = $request->file('fileDesprendible')){
+        if ($xlsArchivo = $request->file('fileDesprendible')) {
             $destinoXls = 'Nomina/' . date('FY') . '/';
             $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
-            $filename = $destinoXls . $profileXls ;
+            $filename = $destinoXls . $profileXls;
             $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
         };
 
         //Control de archivos vacios
         $nomina->cliente_id = $request->idCliente;
-        if ($filename !="") {
+        if ($filename != "") {
             $nomina->desprendible = $filename;
-        }else {
+        } else {
             $nomina->desprendible = $nomina->desprendible;
         }
 
@@ -143,7 +147,7 @@ class NominaController extends Controller
             'message' => 'Nomina cargada exitosamente!',
             'alert-type' => 'success'
         );
-        
+
         return redirect('regalias')->with($notification);
     }
 

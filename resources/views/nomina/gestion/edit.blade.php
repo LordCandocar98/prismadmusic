@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('nomina.index') }}"><i class="fa fa-university" aria-hidden="true"></i></i> Gestion de Nominas</a>
+        <a href="{{ route('nomina.index') }}"><i class="fa fa-university" aria-hidden="true"></i></i> Gestion de
+            Nominas</a>
     </li>
     <li class="active">
         <a href="{{ route('nomina.create') }}"><i class="voyager-edit" aria-hidden="true"></i></i> Editar Nomina</a>
@@ -17,7 +18,7 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                <form enctype="multipart/form-data" action="{{ url('nomina/'.$regalia->id)}}" method="post" >
+                <form enctype="multipart/form-data" action="{{ url('nomina/' . $regalia->id) }}" method="post">
                     {!! method_field('PUT') !!}
                     <div>
                         @if ($errors->any())
@@ -30,29 +31,36 @@
                             </div>
                         @endif
                     </div>
-                    @csrf                        
+                    @csrf
                     <fieldset>
                         <legend>CARGA DE DESPRENDIBLE</legend>
                         <div class="form-group  col-md-12 ">
                             <label for="forNombres">Cliente</label>
                             <select class="cliente col-md-12" name="idCliente" id="idCliente">
-                                <option value="{{ $client->id }}" selected>{{ $persona->numero_identificacion." - ".$persona->nombre." ".$persona->apellido }}</option>
+                                <option value="{{ $client->id }}" selected>
+                                    {{ $persona->numero_identificacion . ' - ' . $persona->nombre . ' ' . $persona->apellido }}
+                                </option>
                                 @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->numero_identificacion." - ".$cliente->nombre." ".$cliente->apellido }}</option>
+                                    <option value="{{ $cliente->id }}">
+                                        {{ $cliente->numero_identificacion . ' - ' . $cliente->nombre . ' ' . $cliente->apellido }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group  col-md-12 ">
                             <label class="control-label" for="forDesprendible">Desprendible</label>
-                            <input type="file" class="form-control" name="fileDesprendible" id="fileDesprendible" accept="application/pdf" />
+                            <input type="file" class="form-control" name="fileDesprendible" id="fileDesprendible"
+                                accept="application/pdf" />
                         </div>
                         <div class="form-group  col-md-12 ">
                             <label class="control-label" for="name">Fecha Desprendible</label>
-                            <input type="date" class="form-control" name="fecha_Desprendible" id="fecha_Desprendible" placeholder="Fecha Desprendible" value="">
+                            <input type="date" class="form-control" name="fecha_Desprendible" id="fecha_Desprendible"
+                                placeholder="Fecha Desprendible" value="">
                         </div>
                         <div class="form-group  col-md-12 ">
                             <label class="control-label" for="name">Valor</label>
-                            <input type="number" class="form-control" name="valor" required="" step="any" placeholder="Valor" value="">
+                            <input type="number" class="form-control" name="valor" required="" step="any"
+                                placeholder="Valor" value="">
                         </div>
                         <div class="form-group  col-md-12 ">
                             <button type="submit" class="btn btn-primary save">Guardar</button>
