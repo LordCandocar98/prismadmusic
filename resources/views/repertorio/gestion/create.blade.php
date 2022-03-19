@@ -65,13 +65,13 @@
                         @endif
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('titulo') ? 'has-error' : '' }}">
                                 <label for="titulo">Título de salida al mercado</label>
                                 <br>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ejemplo: Lovely"
                                     value="{{ old('titulo') }}">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('version') ? 'has-error' : '' }}">
                                 <label for="version">Versión/Subtitulo</label>
                                 <br>
                                 <input type="text" class="form-control" id="version" name="version" placeholder="Ejemplo: Muse"
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('genero') ? 'has-error' : '' }}">
                                 <label for="genero">Género</label>
                                 <br>
                                 <select class="genero col-md-12" name="genero" id="genero">
@@ -214,7 +214,7 @@
                                     <option value="Zydeco" {{ old('genero') == "Zydeco" ? 'selected' : '' }}>Zydeco</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('subgenero') ? 'has-error' : '' }}">
                                 <label for="subgenero">Sub-género</label>
                                 <br>
                                 <select class="subgenero col-md-12" name="subgenero" id="subgenero">
@@ -551,7 +551,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" {{ $errors->has('nombre_sello') ? 'has-error' : '' }}>
                             <div class="col-md-12">
                                 <label for="nombre_sello">Nombre del Sello discográfico</label>
                                 <br>
@@ -561,7 +561,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('formato') ? 'has-error' : '' }}">
                                 <label for="formato">Formato</label>
                                 <br>
                                 <select class="formato col-md-12" name="formato" id="formato">
@@ -571,7 +571,7 @@
                                     <option value="f3"{{ old('formato') == "f3" ? 'selected' : '' }}>ALBUM</option>
                                 </select>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
                                 <label for="annio_produccion">Año de producción</label>
                                 <br>
                                 <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
@@ -580,13 +580,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('productor') ? 'has-error' : '' }}">
                                 <label for="productor">Productor</label>
                                 <br>
                                 <input type="text" class="form-control" id="productor" name="productor" placeholder="Ejemplo: Bad Bunny"
                                     value="{{ old('productor') }}">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('copyright') ? 'has-error' : '' }}">
                                 <label for="copyright">Copyright</label>
                                 <br>
                                 <input type="text" class="form-control" id="copyright" name="copyright" value="{{ old('copyright') }}">
@@ -594,13 +594,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('numero_catalogo') ? 'has-error' : '' }}">
                                 <label for="numero_catalogo">Num. de catálogo Productor</label>
                                 <br>
                                 <input type="text" class="form-control" id="numero_catalogo" name="numero_catalogo"
                                     value="{{ old('numero_catalogo') }}">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 {{ $errors->has('upc_ean') ? 'has-error' : '' }}">
                                 <label for="upc_ean">UPC/EAN</label>
                                 <br>
                                 <input type="text" class="form-control" id="upc_ean" name="upc_ean"
@@ -615,7 +615,7 @@
                               </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" {{ $errors->has('fecha_lanzamiento') ? 'has-error' : '' }}>
                             <div class="col-md-12">
                                 <label for="sello">Fecha de Lanzamiento</label>
                                 <br>
@@ -640,7 +640,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" {{ $errors->has('portada') ? 'has-error' : '' }}>
                             <div class="col-md-12">
                                 <label for="portada">Carga una Imagen de Portada</label>
                                 <br>
@@ -652,7 +652,7 @@
                         <div class="form-group row">
                             <div class="alert alert-success" role="alert">
                                 <p>**Recuerda que en las colaboraciones debes estar <a class="alert-link">al menos TÚ</a> para crear correctamente el repertorio**</p>
-                                <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a></p>
+                                <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO ELECTRÓNICO!</a> deben existir en la plataforma</p>
                               </div>
                         </div>
 

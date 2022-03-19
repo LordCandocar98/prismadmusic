@@ -100,7 +100,7 @@ class CancionController extends Controller
         $cancion = [];
 
         $contadorPrincipal = 0;
-        $contadorArtistas = -1;
+        $contadorArtistas = 0;
         foreach($colaboraciones_existentes as $colaborador_especifico){
             if($colaborador_especifico->tipo_colaboracion == "Principal"){
                 $contadorPrincipal += 1;
@@ -114,8 +114,11 @@ class CancionController extends Controller
 
         foreach($colaboraciones_existentes as $colaborador_especifico){
             $auxID = $colaborador_especifico->cliente_email;
+            $auxCOL = $colaborador_especifico->cliente_email;
+            $auxPOR = $colaborador_especifico->cliente_email;
+
             foreach($colaboraciones_existentes as $i){
-                if($i->cliente_email == $auxID){
+                if($i->cliente_email == $auxID && !$i->porcentaje_intelectual == $auxPOR && !$i->tipo_colaboracion == $auxCOL ){
                     $contadorArtistas += 1;
                 }
             }
@@ -123,8 +126,10 @@ class CancionController extends Controller
         foreach($colaboraciones as $colaborador_invitado){
             if($colaborador_invitado->email != NULL){
                 $auxID2 = $colaborador_invitado->email;
+                $auxCOL2 = $colaborador_especifico->cliente_email;
+                $auxPOR2 = $colaborador_especifico->cliente_email;
                 foreach($colaboraciones as $j){
-                    if($j->email == $auxID2){ //Tal vez se pregunta con él mísmo
+                    if($j->email == $auxID2 && !$j->porcentaje_intelectual == $auxPOR2 && !$j->tipo_colaboracion == $auxCOL2){ //Tal vez se pregunta con él mísmo
                         $contadorArtistas += 1;
                     }
                 }
@@ -138,7 +143,7 @@ class CancionController extends Controller
             dd("Hay más de 1 artista Principal");
         }
         if($contadorArtistas > 1){ //Hay más de un Artista o Email
-            dd("Emails repetidos ..... Artistas repetidos");
+            dd("Emails repetidos ..... Artistas repetidos", $contadorArtistas);
         }else{
         //Ciclo perrón
             foreach($colaboraciones_existentes as $colaborador_especifico){

@@ -68,6 +68,7 @@ class CancionRequest extends FormRequest
     public function attributes()
     {
         return [
+            'repertorio_id'            =>'Repertorio',
             'tipo_secundario'          =>'Tipo secundario',
             'instrumental'             =>'Instrumental',
             'titulo'                   =>'Título',
