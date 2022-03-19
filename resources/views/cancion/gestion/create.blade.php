@@ -1393,7 +1393,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h5>
+                    <h2 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1401,8 +1401,8 @@
                 <!-- MENSAJE LARGO -->
                 <form action="">
                     <div class="modal-body parrafo">
-                        ¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
-                        puedes hacer cambios.
+                        <h3>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
+                        puedes hacer cambios.</h3>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>

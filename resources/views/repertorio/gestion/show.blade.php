@@ -107,7 +107,6 @@
                                             <tr>
                                               <th scope="col"><a class="alert-link">#</a></th>
                                               <th scope="col"><a class="alert-link">Artista</a></th>
-                                              <th scope="col"><a class="alert-link">Tipo de colaboración</a></th>
                                               <th scope="col"><a class="alert-link">Spotify</a></th>
                                             </tr>
                                           </thead>
@@ -121,7 +120,6 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>{{ $cliente->nombre_artistico }}</td>
-                                                <td>{{ $colaboracionesj->tipo_colaboracion }}</td>
                                                 <td>{{ $colaboracionesj->spotify_colaboracion }}</td>
                                             </tr>
                                         @endforeach
