@@ -233,9 +233,13 @@ class CancionController extends Controller
                         'confirmation_code' => Str::random(40),
                     ]);
                     // Send confirmation code---------------------------------------------------------------
+                    $sesion = Auth::user();
+                    $persona = Persona::where('user_id',$sesion->id)->first();
+                    $cliente = Cliente::where('persona_id',$persona->id)->first();
+
                     $details = [
                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                        'subtitle' => $request->autor.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
+                        'subtitle' => $cliente->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
                         'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                         'descripcion' => '',
                         'button' => 'Ingresa al portal',
