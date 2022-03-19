@@ -184,8 +184,8 @@
                             <div class="col-sm-6">
                                 <label for="productor">Productor musical</label>
                                 <br>
-                                <input type="text" class="form-control" id="productor" name="productor" placeholder="George Martin"
-                                    value="{{ old('productor') }}">
+                                <input type="text" class="form-control" id="productor" name="productor"
+                                    placeholder="George Martin" value="{{ old('productor') }}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="pline">Pline</label>
@@ -1261,9 +1261,12 @@
                               </div>
                         </div>
 
-                        <textarea class="form-control multi_existentes" name="colaboradores_existentes"
-                            data-name="colaboradores_existentes">
+                        <textarea class="form-control multi_existentes" name="colaboradores_existentes" data-name="colaboradores_existentes">
+                            @if (old('colaboradores_existentes'))
+                            {{ old('colaboradores_existentes') }}
+                            @else
                             []
+                            @endif
                             </textarea>
                         <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
                         <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
@@ -1282,7 +1285,8 @@
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
-                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
+                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n' +
+                                    '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
                                 onElementAdd: function(el, plugin) {
@@ -1301,7 +1305,11 @@
                         </div>
 
                         <textarea class="form-control multi" name="colaboradores" data-name="colaboradores">
+                            @if (old('colaboradores'))
+                            {{ old('colaboradores') }}
+                            @else
                             []
+                            @endif
                             </textarea>
                         <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
                         <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
@@ -1323,7 +1331,8 @@
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
-                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n'+                                    '</div>\n' +
+                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n' +
+                                    '</div>\n' +
                                     '</div>\n'),
                                 limit: 4,
                                 onElementAdd: function(el, plugin) {

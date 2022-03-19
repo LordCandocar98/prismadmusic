@@ -29,11 +29,11 @@ class CancionController extends Controller
     {
         $sesion = Auth::user();
         $canciones = DB::table('users')
-        ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
-        ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-        ->where('users.role_id',2)
-        ->where('users.id',$sesion->id)
-        ->get();
+            ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
+            ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+            ->where('users.role_id', 2)
+            ->where('users.id', $sesion->id)
+            ->get();
         return view('cancion.gestion.index', compact('canciones'));
     }
 
@@ -45,39 +45,39 @@ class CancionController extends Controller
     public function create()
     {
         $clientes = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
         $clientes2 = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
         $clientes3 = DB::table('cliente')
-            ->select('cliente.nombre_artistico','cliente.id')
+            ->select('cliente.nombre_artistico', 'cliente.id')
             ->orderBy('id', 'DESC')
             ->get('');
 
         $sesion = Auth::user();
         $repertorios = DB::table('users')
-        ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
-        ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
-        ->where('users.role_id',2)
-        ->where('users.id',$sesion->id)
-        ->get();
+            ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
+            ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
+            ->where('users.role_id', 2)
+            ->where('users.id', $sesion->id)
+            ->get();
 
-        if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
+        if (Auth::user()->registro_confirmed == 0) { // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
             return view('cancion.gestion.create')
-                        ->with('clientes', $clientes)
-                        ->with('clientes2', $clientes2)
-                        ->with('clientes3', $clientes3)
-                        ->with('repertorios', $repertorios);
+                ->with('clientes', $clientes)
+                ->with('clientes2', $clientes2)
+                ->with('clientes3', $clientes3)
+                ->with('repertorios', $repertorios);
         }
 
         return view('cancion.gestion.create')
-                    ->with('clientes', $clientes)
-                    ->with('clientes2', $clientes2)
-                    ->with('clientes3', $clientes3)
-                    ->with('repertorios', $repertorios);
+            ->with('clientes', $clientes)
+            ->with('clientes2', $clientes2)
+            ->with('clientes3', $clientes3)
+            ->with('repertorios', $repertorios);
     }
 
     /**
@@ -92,10 +92,10 @@ class CancionController extends Controller
         $colaboraciones = json_decode($request->colaboradores);
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
 
-        if($song = $request->file('pista_mp3')){
+        if ($song = $request->file('pista_mp3')) {
             $destinoCancion = 'canciones/' . date('FY') . '/';
             $cancionArchivo  = time() . '.' . $song->getClientOriginalExtension();
-            $filename = $destinoCancion . $cancionArchivo ;
+            $filename = $destinoCancion . $cancionArchivo;
             $song->move('storage/' . $destinoCancion, $cancionArchivo);
         };
         $cancion = [];
@@ -124,13 +124,13 @@ class CancionController extends Controller
                 $contadorPrincipal += 1;
             }
         }
-        foreach($colaboraciones as $colaborador_invitado){
-            if($colaborador_invitado->tipo_colaboracion == "Principal"){
+        foreach ($colaboraciones as $colaborador_invitado) {
+            if ($colaborador_invitado->tipo_colaboracion == "Principal") {
                 $contadorPrincipal += 1;
             }
         }
 
-        foreach($colaboraciones_existentes as $colaborador_especifico){
+        foreach ($colaboraciones_existentes as $colaborador_especifico) {
             $auxID = $colaborador_especifico->cliente_email;
             $auxCOL = $colaborador_especifico->tipo_colaboracion;
             $auxPOR = $colaborador_especifico->porcentaje_intelectual;
@@ -140,8 +140,8 @@ class CancionController extends Controller
                 }
             }
         }
-        foreach($colaboraciones as $colaborador_invitado){
-            if($colaborador_invitado->email != NULL){
+        foreach ($colaboraciones as $colaborador_invitado) {
+            if ($colaborador_invitado->email != NULL) {
                 $auxID2 = $colaborador_invitado->email;
                 $auxCOL2 = $colaborador_invitado->tipo_colaboracion;
                 $auxPOR2 = $colaborador_invitado->porcentaje_intelectual;
@@ -275,15 +275,16 @@ class CancionController extends Controller
         return redirect('/cancion')->with($notification);
     }
 
-    public function verify($code){ //VACCA
+    public function verify($code)
+    { //VACCA
         $user = User::where('confirmation_code', $code)->first();
-        if(! $user){
+        if (!$user) {
             return redirect('/');
         }
         $user->email_verified_at = date('Y-m-d H:i:s');
         $user->save();
 
-        return redirect('/registro')->with('notification','Has confirmado exitosamente tu correo!');
+        return redirect('/registro')->with('notification', 'Has confirmado exitosamente tu correo!');
     }
 
     /**
@@ -295,8 +296,8 @@ class CancionController extends Controller
     public function show($id)
     {
         $cancion = Cancion::find($id);
-        $colaboraciones = Colaboracion::where('cancion_id',$id)->get();
-        return view('cancion.gestion.show', compact('cancion',$cancion,'colaboraciones',$colaboraciones));
+        $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
+        return view('cancion.gestion.show', compact('cancion', $cancion, 'colaboraciones', $colaboraciones));
     }
 
     /**

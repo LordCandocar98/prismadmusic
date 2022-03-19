@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-03-2022 a las 07:26:13
+-- Tiempo de generación: 19-03-2022 a las 05:19:30
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -49,7 +49,6 @@ CREATE TABLE `cancion` (
   `instrumental` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `version_subtitulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cliente_id` bigint(20) NOT NULL,
   `autor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `compositor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `arreglista` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -67,14 +66,6 @@ CREATE TABLE `cancion` (
   `fecha_principal_salida` date DEFAULT NULL,
   `pista_mp3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `cancion`
---
-
-INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`, `titulo`, `version_subtitulo`, `cliente_id`, `autor`, `compositor`, `arreglista`, `productor`, `pline`, `annio_produccion`, `genero`, `subgenero`, `genero_secundario`, `subgenero_secundario`, `letra_chocante_vulgar`, `inicio_previsualizacion`, `idioma_titulo`, `idioma_letra`, `fecha_principal_salida`, `pista_mp3`) VALUES
-(1, 2, 'original', 'si', 'LaMejorCancion', 'Version_1', 9, 'Yohan', 'Fruco', 'Sus tesos', 'JYP', 'NoSeQueEsPline', 2022, 'Alternative & Rock in Spanish', 'Acid house', 'Alternative & Rock in Spanish', 'Acid house', 'si', '3', 'Español', 'Español', '2022-03-10', 'canciones/March2022/1646949889.wav'),
-(2, 2, 'karaoke', 'si', 'LaMejorCancion', 'Version_1', 9, 'CandidoPatatas', 'Fruco', 'Sus tesos', 'XD', 'NoSeQueEsPline', 2022, 'Afoxé', 'Acid', 'Afoxé', 'Acid', 'si', '4', 'Español', 'Español', '2022-03-10', 'canciones/March2022/1646950562.wav');
 
 -- --------------------------------------------------------
 
@@ -118,11 +109,10 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VALUES
-(5, 17, 'LordCandocar', 'open.'),
-(8, 20, 'Javox', 'www.javox.com'),
-(9, 26, 'YohanInstitucional', 'open.spotify/artist:yohanvacca'),
-(10, 27, 'Andorrano', 'open.spotify/artist:andorrano'),
-(11, 28, 'Facundochapa@yahoo.com.ar', NULL);
+(5, 17, 'PrismadMusic', 'open.'),
+(12, 29, 'santiagoroncancio', 'open.santiagoroncancio.com'),
+(13, 30, 'maluma', NULL),
+(15, 32, 'LordCandocar', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=78a27f635d8c47ef');
 
 -- --------------------------------------------------------
 
@@ -132,22 +122,33 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 
 CREATE TABLE `colaboracion` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `cliente_id` bigint(20) NOT NULL,
+  `cliente_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `porcentaje_intelectual` double NOT NULL,
   `cancion_id` bigint(20) NOT NULL,
   `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `colaboracion`
+-- Estructura de tabla para la tabla `colaboracion_repertorio`
 --
 
-INSERT INTO `colaboracion` (`id`, `cliente_id`, `porcentaje_intelectual`, `cancion_id`, `nombre_colaboracion`, `tipo_colaboracion`) VALUES
-(1, 9, 50, 1, 'ColaboracionEspecial', 'Principal'),
-(2, 10, 50, 1, 'ColaboracionEspecial', 'Featuring'),
-(3, 9, 70, 2, 'PatatasANDxpeed', 'Principal'),
-(4, 11, 30, 2, 'PatatasANDxpeed', 'Featuring');
+CREATE TABLE `colaboracion_repertorio` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `repertorio_id` bigint(20) NOT NULL,
+  `cliente_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `spotify_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `colaboracion_repertorio`
+--
+
+INSERT INTO `colaboracion_repertorio` (`id`, `repertorio_id`, `cliente_email`, `tipo_colaboracion`, `spotify_colaboracion`) VALUES
+(1, 7, 'stiivenmoreno@gmail.com', 'Principal', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=df70056207424a55');
 
 -- --------------------------------------------------------
 
@@ -239,9 +240,9 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (61, 7, 'link', 'text', 'Link', 1, 1, 1, 1, 1, 1, '{}', 6),
 (62, 7, 'articulo_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\User\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"editor_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":null}', 7),
 (63, 8, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(64, 8, 'cliente_id', 'text', 'Cliente Id', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\",\"messages\":{\"required\":\"El cliente es obligatorio\"}}}', 2),
-(65, 8, 'desprendible', 'text', 'Desprendible', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|mimes:pdf\",\"messages\":{\"required\":\"El desprendible es obligatorio\",\"mimes\":\"El desprendible debe ser formato PDF\"}}}', 3),
-(66, 8, 'fecha_informe', 'text', 'Fecha Informe', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|mimes:pdf\",\"messages\":{\"required\":\"El desprendible es obligatorio\",\"mimes\":\"El desprendible debe ser formato PDF\"}}}', 4),
+(64, 8, 'cliente_id', 'text', 'Cliente Id', 0, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\",\"messages\":{\"required\":\"El cliente es obligatorio\"}}}', 2),
+(65, 8, 'desprendible', 'file', 'Desprendible', 0, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|mimes:pdf\",\"messages\":{\"required\":\"El desprendible es obligatorio\",\"mimes\":\"El desprendible debe ser formato PDF\"}}}', 3),
+(66, 8, 'fecha_informe', 'timestamp', 'Fecha Informe', 0, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\",\"messages\":{\"required\":\"La fecha de informe es requerida\"}}}', 4),
 (67, 8, 'nomina_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"cliente_id\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 5),
 (68, 9, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (69, 9, 'repertorio_id', 'text', 'Repertorio Id', 1, 1, 1, 1, 1, 1, '{}', 2),
@@ -274,7 +275,6 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (98, 10, 'tipo_cuenta_bancaria', 'text', 'Tipo Cuenta Bancaria', 1, 1, 1, 1, 1, 1, '{}', 6),
 (99, 10, 'cliente_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Persona\",\"table\":\"persona\",\"type\":\"belongsTo\",\"column\":\"persona_id\",\"key\":\"id\",\"label\":\"nombre\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
 (100, 11, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(101, 11, 'cliente_id', 'text', 'Cliente Id', 1, 1, 1, 1, 1, 1, '{}', 2),
 (102, 11, 'porcentaje_intelectual', 'text', 'Porcentaje Intelectual', 1, 1, 1, 1, 1, 1, '{}', 3),
 (103, 11, 'colaboracion_belongsto_cancion_relationship', 'relationship', 'cancion', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cancion\",\"table\":\"cancion\",\"type\":\"belongsTo\",\"column\":\"cancion_id\",\"key\":\"id\",\"label\":\"titulo\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 4),
 (104, 11, 'cancion_id', 'text', 'Cancion Id', 1, 1, 1, 1, 1, 1, '{}', 4),
@@ -322,9 +322,21 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (155, 13, 'regalium_belongsto_nomina_relationship', 'relationship', 'nomina', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Nomina\",\"table\":\"nomina\",\"type\":\"belongsTo\",\"column\":\"nomina_id\",\"key\":\"id\",\"label\":\"desprendible\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
 (156, 13, 'nomina_id', 'text', 'Nomina Id', 0, 1, 1, 1, 1, 1, '{}', 6),
 (157, 13, 'valor', 'number', 'Valor', 1, 1, 1, 1, 1, 1, '{}', 7),
-(158, 8, 'valor', 'number', 'Valor', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\",\"messages\":{\"required\":\"El valor es obligatorio\"}}}', 5),
+(158, 8, 'valor', 'number', 'Valor', 0, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required|numeric\",\"messages\":{\"required\":\"El valor es obligatorio\",\"numeric\":\"S\\u00f3lo se aceptan n\\u00fameros\"}}}', 5),
 (159, 9, 'cancion_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"id\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":null}', 28),
-(160, 11, 'colaboracion_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"id\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":null}', 6);
+(160, 11, 'colaboracion_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"cliente_email\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
+(161, 8, 'nombre_banco', 'text', 'Nombre Banco', 0, 1, 1, 1, 1, 1, '{}', 6),
+(162, 8, 'numero_cuenta', 'text', 'Numero Cuenta', 0, 1, 1, 1, 1, 1, '{}', 7),
+(163, 8, 'tipo_cuenta', 'select_dropdown', 'Tipo Cuenta', 0, 1, 1, 1, 1, 1, '{\"default\":\"Ahorros\",\"options\":{\"Ahorros\":\"Ahorros\",\"Corriente\":\"Corriente\"}}', 8),
+(164, 11, 'cliente_email', 'text', 'Cliente Email', 1, 1, 1, 1, 1, 1, '{}', 2),
+(165, 11, 'tipo_colaboracion', 'text', 'Tipo Colaboracion', 1, 1, 1, 1, 1, 1, '{}', 6),
+(166, 18, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(167, 18, 'repertorio_id', 'text', 'Repertorio Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(168, 18, 'cliente_email', 'text', 'Cliente Email', 1, 1, 1, 1, 1, 1, '{}', 3),
+(169, 18, 'tipo_colaboracion', 'text', 'Tipo Colaboracion', 0, 1, 1, 1, 1, 1, '{}', 4),
+(170, 18, 'spotify_colaboracion', 'text', 'Spotify Colaboracion', 0, 1, 1, 1, 1, 1, '{}', 5),
+(171, 18, 'colaboracion_repertorio_belongsto_repertorio_relationship', 'relationship', 'repertorio', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Repertorio\",\"table\":\"repertorio\",\"type\":\"belongsTo\",\"column\":\"id\",\"key\":\"id\",\"label\":\"titulo\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
+(172, 18, 'colaboracion_repertorio_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"cliente_email\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7);
 
 -- --------------------------------------------------------
 
@@ -362,13 +374,14 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (5, 'posts', 'posts', 'Post', 'Posts', 'voyager-news', 'TCG\\Voyager\\Models\\Post', 'TCG\\Voyager\\Policies\\PostPolicy', '', '', 1, 0, NULL, '2022-01-02 04:43:19', '2022-01-02 04:43:19'),
 (6, 'pages', 'pages', 'Page', 'Pages', 'voyager-file-text', 'TCG\\Voyager\\Models\\Page', NULL, '', '', 1, 0, NULL, '2022-01-02 04:43:20', '2022-01-02 04:43:20'),
 (7, 'articulo', 'articulo', 'Articulo', 'Articulos', 'voyager-news', 'App\\Models\\Articulo', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2022-01-02 01:44:23', '2022-01-02 01:44:23'),
-(8, 'nomina', 'nomina', 'Nomina', 'Nominas', 'fa fa-university', 'App\\Models\\Nomina', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:14:43', '2022-01-29 17:50:45'),
+(8, 'nomina', 'nomina', 'Nomina', 'Nominas', 'fa fa-university', 'App\\Models\\Nomina', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:14:43', '2022-03-14 23:54:28'),
 (9, 'cancion', 'cancion', 'Cancion', 'Canciones', 'voyager-music', 'App\\Models\\Cancion', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:18:22', '2022-01-02 17:47:17'),
 (10, 'cliente', 'cliente', 'Cliente', 'Clientes', 'voyager-smile', 'App\\Models\\Cliente', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:22:19', '2022-01-22 16:26:03'),
-(11, 'colaboracion', 'colaboracion', 'Colaboracion', 'Colaboraciones', 'voyager-people', 'App\\Models\\Colaboracion', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:26:02', '2022-01-02 17:36:36'),
+(11, 'colaboracion', 'colaboracion', 'Colaboracion', 'Colaboraciones', 'voyager-people', 'App\\Models\\Colaboracion', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:26:02', '2022-03-18 23:05:21'),
 (13, 'regalia', 'regalia', 'Regalia', 'Regalias', 'voyager-wallet', 'App\\Models\\Regalia', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:42:20', '2022-01-25 23:21:00'),
 (14, 'repertorio', 'repertorio', 'Repertorio', 'Repertorios', 'voyager-documentation', 'App\\Models\\Repertorio', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2022-01-02 17:49:10', '2022-01-02 17:49:10'),
-(15, 'persona', 'persona', 'Persona', 'Personas', NULL, 'App\\Models\\Persona', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-05 21:30:03', '2022-01-11 21:48:06');
+(15, 'persona', 'persona', 'Persona', 'Personas', NULL, 'App\\Models\\Persona', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-05 21:30:03', '2022-01-11 21:48:06'),
+(18, 'colaboracion_repertorio', 'colaboracion-repertorio', 'Colaboracion Repertorio', 'Colaboracion Repertorios', 'voyager-logbook', 'App\\Models\\ColaboracionRepertorio', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-03-18 23:07:56', '2022-03-18 23:10:05');
 
 -- --------------------------------------------------------
 
@@ -459,7 +472,6 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (22, 1, 'Administración', '', '_self', 'voyager-pirate', '#000000', NULL, 4, '2022-01-10 23:15:48', '2022-01-10 23:41:13', NULL, ''),
 (26, 1, 'Despliegue', '', '_blank', 'voyager-dot-3', '#000000', 25, 1, '2022-01-10 23:30:25', '2022-01-10 23:32:50', NULL, 'null'),
 (27, 1, 'Desarrollo', '', '_self', 'voyager-whale', '#000000', NULL, 2, '2022-01-10 23:38:07', '2022-01-10 23:41:13', NULL, ''),
-(28, 1, 'Gestión Clientes', '/gestionClientes', '_self', 'fa fa-user-circle-o', '#000000', NULL, 5, '2022-01-15 21:22:45', '2022-01-15 21:22:45', NULL, ''),
 (30, 3, 'Gestión de Repertorios', '/repertorio', '_self', 'voyager-music', '#000000', 38, 1, '2022-02-03 21:55:21', '2022-02-12 23:43:07', NULL, ''),
 (31, 3, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:56:24', '2022-02-03 21:56:37', NULL, ''),
 (32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:57:47', '2022-02-28 04:00:31', NULL, ''),
@@ -470,7 +482,8 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (37, 3, 'Informes', '', '_self', 'fa fa-info-circle', '#000000', NULL, 3, '2022-02-12 23:41:14', '2022-02-12 23:43:21', NULL, ''),
 (38, 3, 'Repertorios y Musica', '', '_self', 'fa fa-folder', '#000000', NULL, 2, '2022-02-12 23:42:02', '2022-02-12 23:43:12', NULL, ''),
 (39, 3, 'Cargar Musica', '/cancion', '_self', 'fa fa-file-audio-o', '#000000', 38, 2, '2022-02-12 23:42:59', '2022-02-12 23:43:07', NULL, ''),
-(40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, '');
+(40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, ''),
+(42, 1, 'Colaboracion Repertorios', '', '_self', 'voyager-logbook', NULL, NULL, 5, '2022-03-18 23:07:56', '2022-03-18 23:07:56', 'voyager.colaboracion-repertorio.index', NULL);
 
 -- --------------------------------------------------------
 
@@ -526,18 +539,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `nomina` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `cliente_id` bigint(20) UNSIGNED NOT NULL,
-  `desprendible` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_informe` date NOT NULL,
-  `valor` decimal(10,0) NOT NULL
+  `cliente_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `desprendible` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_informe` timestamp NULL DEFAULT NULL,
+  `valor` decimal(10,0) DEFAULT NULL,
+  `nombre_banco` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `numero_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `nomina`
---
-
-INSERT INTO `nomina` (`id`, `cliente_id`, `desprendible`, `fecha_informe`, `valor`) VALUES
-(1, 5, '', '2022-02-03', '36');
 
 -- --------------------------------------------------------
 
@@ -677,7 +686,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (77, 'read_persona', 'persona', '2022-01-05 21:30:03', '2022-01-05 21:30:03'),
 (78, 'edit_persona', 'persona', '2022-01-05 21:30:03', '2022-01-05 21:30:03'),
 (79, 'add_persona', 'persona', '2022-01-05 21:30:03', '2022-01-05 21:30:03'),
-(80, 'delete_persona', 'persona', '2022-01-05 21:30:03', '2022-01-05 21:30:03');
+(80, 'delete_persona', 'persona', '2022-01-05 21:30:03', '2022-01-05 21:30:03'),
+(81, 'browse_colaboracion_repertorio', 'colaboracion_repertorio', '2022-03-18 23:07:56', '2022-03-18 23:07:56'),
+(82, 'read_colaboracion_repertorio', 'colaboracion_repertorio', '2022-03-18 23:07:56', '2022-03-18 23:07:56'),
+(83, 'edit_colaboracion_repertorio', 'colaboracion_repertorio', '2022-03-18 23:07:56', '2022-03-18 23:07:56'),
+(84, 'add_colaboracion_repertorio', 'colaboracion_repertorio', '2022-03-18 23:07:56', '2022-03-18 23:07:56'),
+(85, 'delete_colaboracion_repertorio', 'colaboracion_repertorio', '2022-03-18 23:07:56', '2022-03-18 23:07:56');
 
 -- --------------------------------------------------------
 
@@ -788,7 +802,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (77, 1),
 (78, 1),
 (79, 1),
-(80, 1);
+(80, 1),
+(81, 1),
+(82, 1),
+(83, 1),
+(84, 1),
+(85, 1);
 
 -- --------------------------------------------------------
 
@@ -816,16 +835,12 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_documento`, `numero_identificacion`, `telefono`, `user_id`, `departamento`, `firma`, `contrato`) VALUES
-(17, 'Candido', 'Moreno', 'Colombia', 'Villavicencio', 'cc', '1121958055', '3138339062', 1, 'Meta', NULL, NULL),
-(20, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '1121924426', '3192205400', 25, 'Antioquia', NULL, NULL),
-(21, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '32432443543', '3192205400', 27, 'Antioquia', NULL, NULL),
+(17, 'Prismad', 'Music', 'Colombia', 'Bogotá', 'cc', '300357 7830', '3003577830', 1, 'Bogota DC', NULL, NULL),
 (22, 'Lamaca', 'Producciones', 'Colombia', 'Bogota', 'cc', '10192837465', '3048578933', 28, 'Cundinamarca', NULL, NULL),
 (23, 'Jonathan', 'Susana Collado', 'Dominican Republic', 'Concepción de La Vega', 'cc', '40234501308', '8492203449', 31, 'La Vega Province', NULL, NULL),
-(24, 'Johan Dayan', 'Vacca Vaca', 'Colombia', 'Villavicencio', 'cc', '1121962356', '3123254608', 33, 'Meta', NULL, NULL),
-(25, 'Johan Dayan', 'Vacca Vaca', 'Colombia', 'Villavicencio', 'cc', '1121962356', '3123254608', 34, 'Meta', NULL, NULL),
-(26, 'Yohan Dayan', 'Vacca Vaca', 'Argentina', 'Caimancito', 'cc', '1121962355', '3123254607', 35, 'Jujuy Province', NULL, NULL),
-(27, 'Johan Dayan', 'Chapas', 'Andorra', 'Andorra la Vella', 'cc', '1121962355', '3112223333', 37, 'Andorra la Vella', '/home/u449096820/domains/prismadmusic.com/storage/xjlx0UWMyHXbcZOW.png', NULL),
-(28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 38, NULL, NULL, NULL);
+(29, 'Santiago', 'Rocnancio', 'Colombia', 'Villavicencio', 'cc', '1121956650', '3188650760', 40, 'Meta', NULL, NULL),
+(30, 'dennis', 'corredor', 'Colombia', 'Restrepo', 'cc', '1019056933', '3045789392', 42, 'Meta', NULL, NULL),
+(32, 'Candido', 'Moreno', 'Argentina', NULL, 'cc', '1121958055', '3138339062', 46, 'Mendoza', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -906,12 +921,10 @@ CREATE TABLE `repertorio` (
   `portada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `artista_principal` bigint(20) DEFAULT NULL,
   `genero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subgenero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nombre_sello` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `formato` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha_salida` date NOT NULL,
   `productor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `copyright` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `annio_produccion` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -924,9 +937,8 @@ CREATE TABLE `repertorio` (
 -- Volcado de datos para la tabla `repertorio`
 --
 
-INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `artista_principal`, `genero`, `subgenero`, `nombre_sello`, `formato`, `fecha_salida`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
-(1, 'portadas/February2022/1643948013.jpeg', 'Loley', 'fdasfsda', 8, 'g45', 'sg2', 'ns1', 'f1', '2022-02-09', 'Dennys', 'javox intc', '1994', 'sdafsdaf', 23413124, NULL),
-(2, 'portadas/March2022/1646942529.jpg', 'The Álbum', 'Beta', 9, 'Afoxé', 'Acid', 'ns1', 'f1', '2022-03-10', 'JYP', '@Copyright', '2022', 'UPC EAN', 12, '2022-03-12');
+INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subgenero`, `nombre_sello`, `formato`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
+(7, 'portadas/March2022/1647664288.jpg', 'Las mañanitas', NULL, 'Britpop', 'Acid house', 'Prismad music', 'f1', 'CandidoM', 'copyrigth', '2022', NULL, NULL, '2022-03-24');
 
 -- --------------------------------------------------------
 
@@ -983,6 +995,17 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (8, 'admin.loader', 'Admin Loader', '', '', 'image', 3, 'Admin'),
 (9, 'admin.icon_image', 'Admin Icon Image', 'settings/March2022/4Wjdw2ejzVW61vk8jQh5.png', '', 'image', 4, 'Admin'),
 (10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', '376527473637-0c66akrj06fs2q9rqi6ahlpreul7e6sp.apps.googleusercontent.com', '', 'text', 1, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_colaboracion`
+--
+
+CREATE TABLE `tipo_colaboracion` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1144,22 +1167,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'w3R1OTYeTboaL4xrOpd98SoZgRBPfYl6Irt7M1Q2FNU8nFNWaBD8BEKkj2fR', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
-(21, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/February2022/i7RRngz5d7G0r48MjIo0.jpg', '2022-01-15 20:34:30', '$2y$10$Ke5w/9eWb5j4wYYSbSZ3z.6ckFdDsARb0iA51kwac9tWDMecxqK22', 'VdQkSDIskyyrWoKnoZ20jA7GbruQKQqbuP7XF8ZoHbTr9H8UORQ39S1JxpUH', '{\"locale\":\"es\"}', '2022-01-15 18:22:57', '2022-02-03 22:18:59', 1, NULL),
-(25, 2, 'Javier', 'javoxdaemon@gmail.com', 'users/default.png', '2022-02-03 23:01:38', '$2y$10$XjosMoaEGJq6vCq4VwXtl.R/SGSLpQPocfN2PBLsEWDQKb99Dq5Oa', NULL, NULL, '2022-02-03 23:01:01', '2022-02-03 23:07:28', 1, NULL),
-(26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$zqDFxyQqrWlocRE9jZ.p4eEdcKW.VVi2pMCF3tk9sXtQgOZSkFRGC', 'UqhNpi6Rtca2Xfra3Ar0gbTIQbthiuLvQfM3Uayjvr7D4YWxJ90n3KieJYrh', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-02-03 23:16:08', 1, NULL),
-(27, 2, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/default.png', '2022-03-04 23:43:00', '$2y$10$ULvQTSJ0UGOMfs6yK4EzjuFltwdt1A666ukn9z.BlQ3gw1OMldz2u', NULL, NULL, '2022-03-04 23:40:59', '2022-03-04 23:48:33', 1, NULL),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'FWhIb5AUfKIedVWrBbfOpix9tQCfgy38j0kQ1MXzdOASohyNS9QnWlTJqmm5', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$hx0M3CbnSnOiV591TTANv.AuOcSfDuE/JpQ6rFPflZJXgmAplAxDO', 'V4jAQKmMdL1KIxqcgEwtd7prK576kFkie9gc0vEx0w0BqfgEisMHWqUu31mk', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-03-17 12:21:48', 1, NULL),
 (28, 2, 'lamacaproducciones', 'lamacaproducciones@gmail.com', 'users/default.png', '2022-03-06 18:37:28', '$2y$10$bnPFS9fs/Ldgq5szw7Psj.VShqCQgNB8IGFf1g61ZHwzo6aSXrKT.', NULL, NULL, '2022-03-06 18:37:10', '2022-03-06 18:40:21', 1, NULL),
 (29, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2022-03-06 20:44:24', '$2y$10$2zw/Tjhwseaj5Qbm8bi6Uu5lN4zS2gdvJHci9blNQaj/eG2WSVo0S', NULL, NULL, '2022-03-06 20:44:06', '2022-03-06 20:44:24', 0, NULL),
 (30, 2, 'Rodyam Producer', 'mrodyam@gmail.com', 'users/default.png', '2022-03-07 14:38:40', '$2y$10$BUoyQQa3gC1ujJzx4aPH6urxh70KXERF4bJx2d.pvjtE7OultcUbW', NULL, NULL, '2022-03-07 14:37:03', '2022-03-07 14:38:40', 0, NULL),
 (31, 2, 'Jay es', 'jonathan_susana@hotmail.com', 'users/default.png', '2022-03-07 15:32:05', '$2y$10$dQZ6ZUtKF0m1i8ydTZMrdeEiQBd5n.Iojf1JDRUecUkQnxaBWzlbe', NULL, NULL, '2022-03-07 15:31:04', '2022-03-07 15:36:07', 1, NULL),
 (32, 2, 'alejocruz', 'alejocruzmusic@gmail.com', 'users/default.png', '2022-03-09 18:27:27', '$2y$10$P9AK9bdfreJjyj7tsADT5OkZhuXZ6YZtmpvLDxwyfw/mBRmSXEOHi', 'ksk4vuJUnKBzdpSKfe4bRu5DLGVa2K8Dv7g53Nok2lw0cGGhCYWd2oTHaVfu', NULL, '2022-03-09 18:27:03', '2022-03-09 18:31:19', 1, NULL),
-(33, 2, 'JohanVacca12', 'johan.vacca2@gmail.com', 'users/default.png', '2022-03-10 14:13:58', '$2y$10$STHnKrjHP2hGqV6S.rJ5Vu2APG28bH40IxhFdf76qw7JzlQvOjj06', NULL, NULL, '2022-03-10 14:13:39', '2022-03-10 14:15:31', 1, NULL),
-(34, 2, 'JohanVacca2', 'johan.vacca12@gmail.com', 'users/default.png', '2022-03-10 14:25:52', '$2y$10$VF2LS8dPnmWNQAqPMOg4FuanhBLxQjHnFvl7S5sfT7zgcTXPmOtgK', NULL, NULL, '2022-03-10 14:25:13', '2022-03-10 14:27:06', 1, NULL),
-(35, 2, 'YohanVacca', 'yohan.vacca@unillanos.edu.co', 'users/default.png', '2022-03-10 14:53:38', '$2y$10$jdMGzc3nsAgfCgJR3P.bzeWLR4igF7idsTxMuMULtKVQislTroYW6', NULL, NULL, '2022-03-10 14:53:17', '2022-03-10 14:54:42', 1, NULL),
-(36, 2, 'XDD', 'yohan.vacca@sasoftco.com', 'users/default.png', '2022-03-10 15:52:45', '$2y$10$HVPVWLRfSFleZdOoGo5C4uW7ZMitxODGOhk5D.xyNSNGjE5/ESTO6', '01DaoYDp3wDrs8k6rEzxBOJWZG784qwa8pGPeWJeHhTz0tsS0rYVzTarpM3g', NULL, '2022-03-10 15:51:16', '2022-03-10 15:52:45', 0, NULL),
-(37, 2, 'horaf34043@vapaka.com', 'horaf34043@vapaka.com', 'users/default.png', '2022-03-10 17:05:15', '$2y$10$LixSnnwrZZ/fctJQq30Yrej0gyj7FAqRh89a3Xjhn.f.SrEDFMKVO', 'eE1O70EEJ3Om28POEF9MtMrYWCvalumOw4ArodKSL4zVcvu03S3BQfhr3G1x', NULL, '2022-03-10 17:04:49', '2022-03-10 17:20:03', 1, 'VY9LnDXO7o4zfypgp7HhVawti673iNnh5MyjIQy0'),
-(38, 2, 'Facundochapa@yahoo.com.ar', 'Facundochapa@yahoo.com.ar', 'users/default.png', '2022-03-10 17:19:32', '$2y$10$ZqGCUivipMh9I3XaOM7WfekwTBtHMc.ng9ZidJNeYhKoWlelvr6T6', NULL, NULL, '2022-03-10 17:16:02', '2022-03-10 17:19:32', 0, '05E6rGWeTKh1YKV9aS3u3Oc8W5IU7BXjo0BdaAuK');
+(40, 2, 'santiagoroncancio', 'santiagoroncancio2108@gmail.com', 'users/default.png', '2022-03-12 12:38:08', '$2y$10$Tc5gUXSegnOfIOolpcy5.eQTwNcIwwrQP3mZOn.sByT/pJNY6ku.G', NULL, NULL, '2022-03-12 12:37:25', '2022-03-12 15:54:39', 1, NULL),
+(41, 2, 'dennis corredor', 'contcatodennisfernando@gmail.com', 'users/default.png', NULL, '$2y$10$QybFYmb2lYYk/Ler49aruO1WXNR5ptbIj5HVe/X6wfxdKiRhcxTQ2', NULL, NULL, '2022-03-12 22:34:38', '2022-03-12 22:34:38', 0, NULL),
+(42, 2, 'dennys fernando corredor', 'polappcolombia@gmail.com', 'users/default.png', '2022-03-12 22:38:26', '$2y$10$qbFMSHtfyu6YGf0/e3e.b.elbS5YtS9miB5dvn4hR1eRJWifthELq', NULL, NULL, '2022-03-12 22:37:39', '2022-03-12 22:40:44', 1, NULL),
+(43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$PJgbp3qe5rEhQtxucDZate46IbXExyrqsit2VNGfG69GWbzQomH16', 'iYvnvxcVz8KEhDoqxeqRjIWAGt19suo3VYkIA8D0fDDCa3YcGBpUXaF4ZmUZ', NULL, '2022-03-13 14:46:16', '2022-03-13 14:46:59', 0, NULL),
+(46, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/default.png', '2022-03-18 23:13:50', '$2y$10$abIYyDyEolpmJaAU5r4oR.BjVhYLdrkErb/6CX03HVH4SWW0RL2hO', NULL, NULL, '2022-03-18 23:11:01', '2022-03-18 23:17:14', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1188,8 +1207,7 @@ ALTER TABLE `articulo`
 --
 ALTER TABLE `cancion`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cancion_repertorio_id_index` (`repertorio_id`),
-  ADD KEY `cancion_user_id_index` (`cliente_id`);
+  ADD KEY `cancion_repertorio_id_index` (`repertorio_id`);
 
 --
 -- Indices de la tabla `categories`
@@ -1211,8 +1229,16 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `colaboracion`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `colaboracion_cliente_id_index` (`cliente_id`),
+  ADD KEY `colaboracion_cliente_id_index` (`cliente_email`),
   ADD KEY `colaboracion_cancion_id_index` (`cancion_id`);
+
+--
+-- Indices de la tabla `colaboracion_repertorio`
+--
+ALTER TABLE `colaboracion_repertorio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `colaboracion_repertorio_repertorio_id_index` (`repertorio_id`),
+  ADD KEY `colaboracion_repertorio_cliente_email_index` (`cliente_email`);
 
 --
 -- Indices de la tabla `data_rows`
@@ -1325,8 +1351,7 @@ ALTER TABLE `regalia`
 -- Indices de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `repertorio_artista_principal_index` (`artista_principal`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `roles`
@@ -1341,6 +1366,12 @@ ALTER TABLE `roles`
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `settings_key_unique` (`key`);
+
+--
+-- Indices de la tabla `tipo_colaboracion`
+--
+ALTER TABLE `tipo_colaboracion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `translations`
@@ -1379,7 +1410,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `cancion`
 --
 ALTER TABLE `cancion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -1391,25 +1422,31 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
 --
 ALTER TABLE `colaboracion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `colaboracion_repertorio`
+--
+ALTER TABLE `colaboracion_repertorio`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT de la tabla `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -1427,7 +1464,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT de la tabla `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -1439,7 +1476,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `nomina`
 --
 ALTER TABLE `nomina`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pages`
@@ -1451,13 +1488,13 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT de la tabla `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -1481,7 +1518,7 @@ ALTER TABLE `regalia`
 -- AUTO_INCREMENT de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -1496,6 +1533,12 @@ ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo_colaboracion`
+--
+ALTER TABLE `tipo_colaboracion`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `translations`
 --
 ALTER TABLE `translations`
@@ -1505,7 +1548,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Restricciones para tablas volcadas
