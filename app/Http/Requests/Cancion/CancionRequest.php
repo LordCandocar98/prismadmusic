@@ -42,7 +42,7 @@ class CancionRequest extends FormRequest
             'genero_secundario'        =>'',
             'subgenero_secundario'     =>'',
             'letra_chocante_vulgar'    =>'required',
-            'inicio_previsualizacion'  =>'numeric',
+            'inicio_previsualizacion'  =>'nullable|numeric',
             'idioma_titulo'            =>'required',
             'idioma_letra'             =>'required',
             'fecha_principal_salida'   =>'required',

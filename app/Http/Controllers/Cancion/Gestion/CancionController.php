@@ -90,7 +90,22 @@ class CancionController extends Controller
     {
         $colaboraciones = json_decode($request->colaboradores);
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
-
+        $contar_exist = 0;
+        foreach ($colaboraciones_existentes as $colaborador_especifico) {
+            if ($colaborador_especifico->cliente_email == "" || $colaborador_especifico->porcentaje_intelectual == "" || $colaborador_especifico->tipo_colaboracion == null) {
+                if ($colaborador_especifico->cliente_email == "" && $colaborador_especifico->porcentaje_intelectual == "" && $colaborador_especifico->tipo_colaboracion == null) {
+                    unset($colaboraciones_existentes[$contar_exist]);
+                    $contar_exist--;
+                } else {
+                    $notification = array(
+                        'message' => 'Debe llenar todos los datos del colaborador registrado en plataforma.',
+                        'alert-type' => 'warning'
+                    );
+                    return back()->withInput()->with($notification);
+                }
+            }
+            $contar_exist++;
+        }
         if ($song = $request->file('pista_mp3')) {
             $destinoCancion = 'canciones/' . date('FY') . '/';
             $cancionArchivo  = time() . '.' . $song->getClientOriginalExtension();
@@ -253,16 +268,12 @@ class CancionController extends Controller
                     ]);
                     // Send confirmation code---------------------------------------------------------------
                     $sesion = Auth::user();
-                    $persona = Persona::where('user_id',$sesion->id)->first();
-                    $cliente = Cliente::where('persona_id',$persona->id)->first();
+                    $persona = Persona::where('user_id', $sesion->id)->first();
+                    $cliente = Cliente::where('persona_id', $persona->id)->first();
 
                     $details = [
                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
-<<<<<<< HEAD
-                        'subtitle' => $request->autor . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
-=======
-                        'subtitle' => $cliente->nombre_artistico.' te invita a formar parte de su nuevo éxito "' . $cancion->titulo.'"',
->>>>>>> a6fc74e196d5c00614d57cb85bcd353acf785e7e
+                        'subtitle' => $cliente->nombre_artistico . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
                         'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
                         'descripcion' => '',
                         'button' => 'Ingresa al portal',

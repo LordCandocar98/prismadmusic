@@ -35,8 +35,8 @@ class RepertorioRequest extends FormRequest
             'copyright'             =>'required|min:1|max:255',
             'annio_produccion'      =>'required|digits:4|integer|min:1900|before: 01-01-2023',
             'upc_ean'               =>'',
-            'numero_catalogo'       =>'',
-            'portada'               =>'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000',
+            'numero_catalogo'       =>'nullable|numeric',
+            'portada'               =>'image|mimes:jpg,png,tif|max:35000|dimensions:min_width=3000,min_height=3000',
         ];
     }
 
@@ -47,7 +47,9 @@ class RepertorioRequest extends FormRequest
             'min'       => 'El campo :attribute debe tener como mínimo :min carácteres',
             'max'       => 'El campo :attribute puede tener como máximo :max carácteres',
             'numeric'   => 'El campo :attribute debe ser numérico',
-            'after'     => 'La fecha de lanzamiento debe ser después de los próximos 5 días a partir de hoy'
+            'after'     => 'La fecha de lanzamiento debe ser después de los próximos 5 días a partir de hoy',
+            'mimes'     => 'La :attribute debe ser de tipo jpg o png',
+            'portada.max'   => 'La :attribute debe ser máximo de 35 MB'
         ];
     }
 

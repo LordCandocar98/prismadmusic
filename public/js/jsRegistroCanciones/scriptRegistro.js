@@ -11,9 +11,13 @@ $(document).ready(function () {
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
-    $('.repertorio_id').val('-1').trigger('change');
+    
+    if ($('.repertorio_id').val() == null) {
+        $('.repertorio_id').val('-1').trigger('change');
+    }
 
     $('.featuring').select2({
         allowClear: true,
@@ -43,38 +47,49 @@ $(document).ready(function () {
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
-    $('.genero').val('-1').trigger('change');
-
+    if ($('.genero').val() == null) {
+        $('.genero').val('-1').trigger('change');
+    }
     $('.subgenero').select2({
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
-    $('.subgenero').val('-1').trigger('change');
-
+    if ($('.subgenero').val() == null) {
+        $('.subgenero').val('-1').trigger('change');
+    }
     $('.genero_secundario').select2({
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
-    $('.genero_secundario').val('-1').trigger('change');
 
+    if ($('.genero_secundario').val() == null) {
+        $('.genero_secundario').val('-1').trigger('change');
+    }
     $('.subgenero_secundario').select2({
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
-    $('.subgenero_secundario').val('-1').trigger('change');
 
+    if ($('.subgenero_secundario').val() == null) {
+        $('.subgenero_secundario').val('-1').trigger('change');
+    }
     $('.idioma_titulo').select2({
         allowClear: true,
         placeholder: {
             id: -1,
+            text: 'Seleccione una opción'
         },
     });
     $('.idioma_titulo').val('-1').trigger('change');

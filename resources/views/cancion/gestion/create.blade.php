@@ -58,6 +58,7 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
+                                    <li>
                                 </ul>
                             </div>
                         @endif
@@ -66,10 +67,10 @@
                             <div class="col-md-12">
                                 <label for="repertorio_id">Repertorio</label>
                                 <br>
-                                <select class="remixer col-md-12" name="repertorio_id" id="repertorio_id"
-                                    value="{{ old('repertorio_id') }}">
-                                    @foreach ($repertorios as $repertorios)
-                                        <option value="{{ $repertorios->id }}">{{ $repertorios->titulo }}</option>
+                                <select class="repertorio_id col-md-12" name="repertorio_id" id="repertorio_id">
+                                    <option value="null" selected disabled hidden>Seleccione una opción</option>
+                                    @foreach ($repertorios as $repertorio)
+                                        <option value="{{ $repertorio->id }}" {{ old('repertorio_id') == $repertorio->id ? 'selected' : '' }}>{{ $repertorio->titulo }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -80,36 +81,36 @@
                                 <label for="titulo">Tipo secundario</label>
                                 <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
-                                        value="original">
+                                    <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario" 
+                                        value="original" {{old('tipo_secundario') == 'original' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Original
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
-                                        value="karaoke">
+                                        value="karaoke" {{old('tipo_secundario') == 'karaoke' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Karaoke
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
-                                        value="medley">
+                                        value="medley" {{old('tipo_secundario') == 'medley' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Medley
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
-                                        value="cover">
+                                        value="cover" {{old('tipo_secundario') == 'cover' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Cover
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="tipo_secundario" id="tipo_secundario"
-                                        value="otrogrupo">
+                                        value="otrogrupo" {{old('tipo_secundario') == 'otrogrupo' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Versión por otro grupo
                                     </label>
@@ -120,14 +121,14 @@
                                 <br>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="instrumental" id="instrumental"
-                                        value="si">
+                                        value="si" {{old('instrumental') == 'si' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="tipo_secundario">
                                         Sí
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="instrumental" id="instrumental"
-                                        value="no">
+                                        value="no" {{old('instrumental') == 'no' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="instrumental">
                                         No
                                     </label>
@@ -1165,21 +1166,21 @@
                                 <br>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
-                                        id="letra_chocante_vulgar" value="si">
+                                        id="letra_chocante_vulgar" value="si" {{old('letra_chocante_vulgar') == 'si' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="letra_chocante_vulgar">
                                         Sí
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
-                                        id="letra_chocante_vulgar" value="no">
+                                        id="letra_chocante_vulgar" value="no" {{old('letra_chocante_vulgar') == 'no' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="no">
                                         No
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="letra_chocante_vulgar"
-                                        id="letra_chocante_vulgar" value="cleaned_version">
+                                        id="letra_chocante_vulgar" value="cleaned_version" {{old('letra_chocante_vulgar') == 'cleaned_version' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="no">
                                         Cleaned Version
                                     </label>
@@ -1188,7 +1189,7 @@
                             <div class="col-sm-6">
                                 <label for="subgenero">Inicio de la previsualización</label>
                                 <br>
-                                <input type="text" class="form-control" id="inicio_previsualizacion"
+                                <input type="number" class="form-control" id="inicio_previsualizacion"
                                     name="inicio_previsualizacion" placeholder="En segundos, ejemplo: 3"
                                     value="{{ old('inicio_previsualizacion') }}">
                             </div>
@@ -1198,8 +1199,7 @@
                             <div class="col-sm-6">
                                 <label for="idioma_titulo">Idioma del título</label>
                                 <br>
-                                <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo"
-                                    value="{{ old('idioma_titulo') }}">
+                                <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo">
                                     <option value="Español">Español</option>
                                     <option value="Inglés">Inglés</option>
                                     <option value="Portugués">Portugués</option>
@@ -1278,10 +1278,10 @@
                                     '<div class="row inputElement">\n' +
                                     '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="text">\n' +
+                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="email">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual numérico, ejemplo: 70" type="text">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual numérico, ejemplo: 70" type="number">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
@@ -1321,10 +1321,10 @@
                                     '<div class="row inputElement">\n' +
                                     '<div class="multiinput-title col-xs-12">Invitar Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="text">\n' +
+                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="email">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="text">\n' +
+                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="number">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +

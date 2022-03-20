@@ -66,7 +66,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6 {{ $errors->has('titulo') ? 'has-error' : '' }}">
-                                <label for="titulo">Título de salida al mercado</label>
+                                <label for="titulo" class="{{ $errors->has('titulo') ? 'text-danger' : '' }}">Título de salida al mercado</label>
                                 <br>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ejemplo: Lovely"
                                     value="{{ old('titulo') }}">
@@ -81,7 +81,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6 {{ $errors->has('genero') ? 'has-error' : '' }}">
-                                <label for="genero">Género</label>
+                                <label for="genero" class="{{ $errors->has('genero') ? 'text-danger' : '' }}">Género</label>
                                 <br>
                                 <select class="genero col-md-12" name="genero" id="genero">
                                     <option value="none" selected disabled hidden>Seleccione una opción</option>
@@ -215,7 +215,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-6 {{ $errors->has('subgenero') ? 'has-error' : '' }}">
-                                <label for="subgenero">Sub-género</label>
+                                <label for="subgenero" class="{{ $errors->has('subgenero') ? 'text-danger' : '' }}">Sub-género</label>
                                 <br>
                                 <select class="subgenero col-md-12" name="subgenero" id="subgenero">
                                 <option value="none" selected disabled hidden>Seleccione una opción</option>
@@ -551,9 +551,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row" {{ $errors->has('nombre_sello') ? 'has-error' : '' }}>
-                            <div class="col-md-12">
-                                <label for="nombre_sello">Nombre del Sello discográfico</label>
+                        <div class="form-group row">
+                            <div class="col-md-12 {{ $errors->has('nombre_sello') ? 'has-error' : '' }}">
+                                <label for="nombre_sello" class="{{ $errors->has('nombre_sello') ? 'text-danger' : '' }}">Nombre del Sello discográfico</label>
                                 <br>
                                 <input type="text" class="form-control" id="nombre_sello" name="nombre_sello" placeholder="Ejemplo: Rimas Entertainment"
                                 value="{{ old('nombre_sello') }}">
@@ -562,7 +562,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6 {{ $errors->has('formato') ? 'has-error' : '' }}">
-                                <label for="formato">Formato</label>
+                                <label for="formato" class="{{ $errors->has('formato') ? 'text-danger' : '' }}">Formato</label>
                                 <br>
                                 <select class="formato col-md-12" name="formato" id="formato">
                                 <option value="none" selected disabled hidden>Seleccione una opción</option>
@@ -572,7 +572,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-6 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
-                                <label for="annio_produccion">Año de producción</label>
+                                <label for="annio_produccion" class="{{ $errors->has('annio_produccion') ? 'text-danger' : '' }}">Año de producción</label>
                                 <br>
                                 <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
                                     value="{{ old('annio_produccion') }}">
@@ -581,13 +581,13 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6 {{ $errors->has('productor') ? 'has-error' : '' }}">
-                                <label for="productor">Productor</label>
+                                <label for="productor" class="{{ $errors->has('productor') ? 'text-danger' : '' }}">Productor</label>
                                 <br>
                                 <input type="text" class="form-control" id="productor" name="productor" placeholder="Ejemplo: Bad Bunny"
                                     value="{{ old('productor') }}">
                             </div>
                             <div class="col-sm-6 {{ $errors->has('copyright') ? 'has-error' : '' }}">
-                                <label for="copyright">Copyright</label>
+                                <label for="copyright" class="{{ $errors->has('copyright') ? 'text-danger' : '' }}">Copyright</label>
                                 <br>
                                 <input type="text" class="form-control" id="copyright" name="copyright" value="{{ old('copyright') }}">
                             </div>
@@ -595,13 +595,13 @@
 
                         <div class="form-group row">
                             <div class="col-sm-6 {{ $errors->has('numero_catalogo') ? 'has-error' : '' }}">
-                                <label for="numero_catalogo">Num. de catálogo Productor</label>
+                                <label for="numero_catalogo" class="{{ $errors->has('numero_catalogo') ? 'text-danger' : '' }}">Num. de catálogo Productor</label>
                                 <br>
-                                <input type="text" class="form-control" id="numero_catalogo" name="numero_catalogo"
+                                <input type="number" class="form-control" id="numero_catalogo" name="numero_catalogo"
                                     value="{{ old('numero_catalogo') }}">
                             </div>
                             <div class="col-sm-6 {{ $errors->has('upc_ean') ? 'has-error' : '' }}">
-                                <label for="upc_ean">UPC/EAN</label>
+                                <label for="upc_ean" class="{{ $errors->has('upc_ean') ? 'text-danger' : '' }}">UPC/EAN</label>
                                 <br>
                                 <input type="text" class="form-control" id="upc_ean" name="upc_ean"
                                     value="{{ old('upc_ean') }}">
@@ -617,7 +617,7 @@
 
                         <div class="form-group row" {{ $errors->has('fecha_lanzamiento') ? 'has-error' : '' }}>
                             <div class="col-md-12">
-                                <label for="sello">Fecha de Lanzamiento</label>
+                                <label for="fecha_lanzamiento" class="{{ $errors->has('fecha_lanzamiento') ? 'text-danger' : '' }}">Fecha de Lanzamiento</label>
                                 <br>
                                 <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
                                     value="{{ old('fecha_lanzamiento') }}">
@@ -642,10 +642,13 @@
 
                         <div class="form-group row" {{ $errors->has('portada') ? 'has-error' : '' }}>
                             <div class="col-md-12">
-                                <label for="portada">Carga una Imagen de Portada</label>
+                                <label for="portada" class="{{ $errors->has('portada') ? 'text-danger' : '' }}">Carga una Imagen de Portada</label>
                                 <br>
                                 <input type="file" class="form-control" id="portada" name="portada"
                                     value="{{ old('portada') }}">
+                                    @if ($errors->has('portada'))
+                                <span class="text-danger">**{{ $errors->first('portada') }}</span>
+                            @endif
                             </div>
                         </div>
 
