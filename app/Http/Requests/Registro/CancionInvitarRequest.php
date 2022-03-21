@@ -25,7 +25,6 @@ class CancionInvitarRequest extends FormRequest
     {
         return [
             'tipo_secundario'          =>'required',
-            'instrumental'             =>'',
             'titulo'                   =>'required|min:1|max:255',
             'version_subtitulo'        =>'max:255',
             'cliente_id'               =>'required',
@@ -39,8 +38,6 @@ class CancionInvitarRequest extends FormRequest
             'annio_produccion'         =>'required|numeric',
             'genero'                   =>'required',
             'subgenero'                =>'required',
-            'genero_secundario'        =>'',
-            'subgenero_secundario'     =>'',
             'letra_chocante_vulgar'    =>'required',
             'inicio_previsualizacion'  =>'numeric',
             'idioma_titulo'            =>'required',
@@ -48,17 +45,8 @@ class CancionInvitarRequest extends FormRequest
             'fecha_principal_salida'   =>'required',
             'acepta_riesgo'            =>'required',
             'porcentaje_artistaPr'     =>'required|numeric',
-            'porcentaje_featuring'     =>'',
-            'porcentaje_remix'         =>'',
-            'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
-
-            'nombre_artistico'         =>'',
-
-            'name'                     => '',
             'email'                    => ['string', 'email', 'max:255', 'unique:users'],
-            'password'                 => '',
-
             'pista_mp3'                => 'required|mimes:wav,aiff,flac',
         ];
     }
@@ -79,36 +67,31 @@ class CancionInvitarRequest extends FormRequest
     public function attributes()
     {
         return [
-            'tipo_secundario'          =>'Tipo secundario',
-            'instrumental'             =>'Instrumental',
-            'titulo'                   =>'Título',
-            'version_subtitulo'        =>'Versión/Subtítulo',
-            'cliente_id'               =>'Artista principal',
-            'featuring'                =>'Featuring',
-            'remixer'                  =>'Remixer',
-            'autor'                    =>'Autor',
-            'compositor'               =>'Compositor',
-            'arreglista'               =>'Arreglista',
-            'productor'                =>'Productor',
-            'pline'                    =>'Pline',
-            'annio_produccion'         =>'Año de producción',
-            'genero'                   =>'Género',
-            'subgenero'                =>'Subgénero',
-            'genero_secundario'        =>'Género secundario',
-            'subgenero_secundario'     =>'Sub-género secundario',
-            'letra_chocante_vulgar'    =>'Letra chocante o vulgar',
-            'inicio_previsualizacion'  =>'Inicio previsualización',
-            'idioma_titulo'            =>'Idioma título',
-            'idioma_letra'             =>'Idioma letra',
-            'fecha_principal_salida'   =>'Fecha principal de salida',
-            'acepta_riesgo'            =>'Acepto responsabilidad de creación de la canción',
+            'tipo_secundario'          => 'Tipo secundario',
+            'titulo'                   => 'Título',
+            'version_subtitulo'        => 'Versión/Subtítulo',
+            'cliente_id'               => 'Artista principal',
+            'featuring'                => 'Featuring',
+            'remixer'                  => 'Remixer',
+            'autor'                    => 'Autor',
+            'compositor'               => 'Compositor',
+            'arreglista'               => 'Arreglista',
+            'productor'                => 'Productor',
+            'pline'                    => 'Pline',
+            'annio_produccion'         => 'Año de producción',
+            'genero'                   => 'Género',
+            'subgenero'                => 'Subgenero',
+            'subgenero_secundario'     => 'Sub-género secundario',
+            'letra_chocante_vulgar'    => 'Letra chocante o vulgar',
+            'inicio_previsualizacion'  => 'Inicio previsualización',
+            'idioma_titulo'            => 'Idioma título',
+            'idioma_letra'             => 'Idioma letra',
+            'fecha_principal_salida'   => 'Fecha principal de salida',
+            'acepta_riesgo'            => 'Acepto responsabilidad de creación de la canción',
+            'porcentaje_artistaPr'     => 'Cuál será TU tipo de colaboración',
             'pista_mp3'                => 'Pista canción',
-
-            'nombre_artistico'         =>'Nombre artístico colaborador',
-
-            'name'                     => 'Nombre de usuario',
             'email'                    => 'Correo eletronico',
-            'password'                 => 'Contraseña'
+            'repertorio_id'            => 'Repertorio'
         ];
     }
 

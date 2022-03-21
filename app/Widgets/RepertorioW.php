@@ -5,9 +5,7 @@ namespace App\Widgets;
 use App\Models\ColaboracionRepertorio;
 use App\Models\Repertorio;
 use Arrilot\Widgets\AbstractWidget;
-use App\Models\Tienda;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class RepertorioW extends AbstractWidget
 {
@@ -44,7 +42,7 @@ class RepertorioW extends AbstractWidget
     public function shouldBeDisplayed()
     {
         $session = Auth::user();
-        if ($session->role_id == 1 ||  $session->role_id == 2) {
+        if ($session->role_id == 2) {
             return true;
         } else {
             return false;
