@@ -1200,37 +1200,36 @@
                                 <label for="idioma_titulo">Idioma del título</label>
                                 <br>
                                 <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo">
-                                    <option value="Español">Español</option>
-                                    <option value="Inglés">Inglés</option>
-                                    <option value="Portugués">Portugués</option>
-                                    <option value="Italiano">Italiano</option>
-                                    <option value="Francés">Francés</option>
-                                    <option value="Chino">Chino</option>
-                                    <option value="Japonés">Japonés</option>
-                                    <option value="Coreano">Coreano</option>
-                                    <option value="Alemán">Alemán</option>
-                                    <option value="Árabe">Árabe</option>
-                                    <option value="Hindi">Hindi</option>
-                                    <option value="Ruso">Ruso</option>
+                                    <option value="Español" {{ old('idioma_titulo') == "Español" ? 'selected' : '' }}>Español</option>
+                                    <option value="Inglés" {{ old('idioma_titulo') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                                    <option value="Portugués" {{ old('idioma_titulo') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                                    <option value="Italiano" {{ old('idioma_titulo') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                                    <option value="Francés" {{ old('idioma_titulo') == "Francés" ? 'selected' : '' }}>Francés</option>
+                                    <option value="Chino" {{ old('idioma_titulo') == "Chino" ? 'selected' : '' }}>Chino</option>
+                                    <option value="Japonés" {{ old('idioma_titulo') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                                    <option value="Coreano" {{ old('idioma_titulo') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                                    <option value="Alemán" {{ old('idioma_titulo') == "Alemán" ? 'selected' : '' }}>Alemán</option>
+                                    <option value="Árabe" {{ old('idioma_titulo') == "Árabe" ? 'selected' : '' }}>Árabe</option>
+                                    <option value="Hindi" {{ old('idioma_titulo') == "Hindi" ? 'selected' : '' }}>Hindi</option>
+                                    <option value="Ruso" {{ old('idioma_titulo') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="idioma_letra">Idioma de la letra</label>
                                 <br>
-                                <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra"
-                                    value="{{ old('idioma_letra') }}">
-                                    <option value="Español">Español</option>
-                                    <option value="Inglés">Inglés</option>
-                                    <option value="Portugués">Portugués</option>
-                                    <option value="Italiano">Italiano</option>
-                                    <option value="Francés">Francés</option>
-                                    <option value="Chino">Chino</option>
-                                    <option value="Japonés">Japonés</option>
-                                    <option value="Coreano">Coreano</option>
-                                    <option value="Alemán">Alemán</option>
-                                    <option value="Árabe">Árabe</option>
-                                    <option value="Hindi">Hindi</option>
-                                    <option value="Ruso">Ruso</option>
+                                <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra">
+                                    <option value="Español" {{ old('idioma_letra') == "Español" ? 'selected' : '' }}>Español</option>
+                                    <option value="Inglés" {{ old('idioma_letra') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                                    <option value="Portugués" {{ old('idioma_letra') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                                    <option value="Italiano" {{ old('idioma_letra') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                                    <option value="Francés" {{ old('idioma_letra') == "Francés" ? 'selected' : '' }}>Francés</option>
+                                    <option value="Chino" {{ old('idioma_letra') == "Chino" ? 'selected' : '' }}>Chino</option>
+                                    <option value="Japonés" {{ old('idioma_letra') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                                    <option value="Coreano" {{ old('idioma_letra') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                                    <option value="Alemán" {{ old('idioma_letra') == "Alemán" ? 'selected' : '' }}>Alemán</option>
+                                    <option value="Árabe" {{ old('idioma_letra') == "Árabe" ? 'selected' : '' }}>Árabe</option>
+                                    <option value="Hindi" {{ old('idioma_letra') == "Hindi" ? 'selected' : '' }}>Hindi</option>
+                                    <option value="Ruso" {{ old('idioma_letra') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                                 </select>
                             </div>
                         </div>
@@ -1393,7 +1392,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h2>
+                    <h3 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1401,8 +1400,8 @@
                 <!-- MENSAJE LARGO -->
                 <form action="">
                     <div class="modal-body parrafo">
-                        <h3>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
-                        puedes hacer cambios.</h3>
+                        <h4>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
+                        puedes hacer cambios.</h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>

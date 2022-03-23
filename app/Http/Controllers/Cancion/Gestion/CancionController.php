@@ -91,6 +91,7 @@ class CancionController extends Controller
         $colaboraciones = json_decode($request->colaboradores);
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
         $contar_exist = 0;
+
         foreach ($colaboraciones_existentes as $colaborador_especifico) {
             if ($colaborador_especifico->cliente_email == "" || $colaborador_especifico->porcentaje_intelectual == "" || $colaborador_especifico->tipo_colaboracion == null) {
                 if ($colaborador_especifico->cliente_email == "" && $colaborador_especifico->porcentaje_intelectual == "" && $colaborador_especifico->tipo_colaboracion == null) {
@@ -119,6 +120,22 @@ class CancionController extends Controller
         $porcentaje_total = $request->porcentaje_intelectualCreador;
         $porcentaje_total1 = 0;
         $porcentaje_total2 = 0;
+
+        //Validar que los correos a invitar NO existan en la base de datos
+        $usuarios_registrados = DB::table('users')->get();
+        //dd($usuarios_registrados);
+        foreach ($colaboraciones as $colaborador_especifico) {
+            foreach($usuarios_registrados as $usuario_registrado){
+                if ($colaborador_especifico->email == $usuario_registrado->email) {
+                    $notification = array(
+                        'message' => 'No puedes invitar a alguien que ya pertenece a Prismad Music, correo existente: '.$usuario_registrado->email,
+                        'alert-type' => 'warning'
+                    );
+                    return back()->withInput()->with($notification);
+                }
+            }
+        }
+        //---------------------------------------------------------------
 
         foreach ($colaboraciones_existentes as $colaborador_especifico) {
             $porcentaje_total1 += $colaborador_especifico->porcentaje_intelectual;
