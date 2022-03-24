@@ -10,6 +10,7 @@ use App\Models\Colaboracion;
 use App\Models\Persona;
 use App\Models\Cliente;
 use App\Models\ColaboracionRepertorio;
+use App\Models\Repertorio;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,7 +89,7 @@ class CancionController extends Controller
      */
     public function store(CancionRequest $request)
     {
-        $colaboraciones = json_decode($request->colaboradores);
+        $repertorio_colabs = ColaboracionRepertorio::where('repertorio_id',$request->repertorio_id)->get();
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
         $contar_exist = 0;
 
@@ -119,20 +120,23 @@ class CancionController extends Controller
         $contadorArtistas = 0;
         $porcentaje_total = $request->porcentaje_intelectualCreador;
         $porcentaje_total1 = 0;
-        $porcentaje_total2 = 0;
 
-        //Validar que los correos a invitar NO existan en la base de datos
-        $usuarios_registrados = DB::table('users')->get();
-        //dd($usuarios_registrados);
-        foreach ($colaboraciones as $colaborador_especifico) {
-            foreach($usuarios_registrados as $usuario_registrado){
-                if ($colaborador_especifico->email == $usuario_registrado->email) {
-                    $notification = array(
-                        'message' => 'No puedes invitar a alguien que ya pertenece a Prismad Music, correo existente: '.$usuario_registrado->email,
-                        'alert-type' => 'warning'
-                    );
-                    return back()->withInput()->with($notification);
-                }
+        if($request->tipo_colaboracionCreador == "Principal"){
+            $contadorPrincipal += 1;
+        }
+
+        //Validar que no se invite a sí mísmo
+        $usuario_registrado = Auth::user();
+        //dd($usuario_registrado);
+        //dd($usuario_registrado->email);
+        foreach ($colaboraciones_existentes as $colaborador_especifico) {
+            //dd($colaborador_especifico->email);
+            if ($colaborador_especifico->cliente_email == $usuario_registrado->email) {
+                $notification = array(
+                    'message' => 'No puedes invitarte a TÍ MÍSMO, correo existente: '.$usuario_registrado->email,
+                    'alert-type' => 'warning'
+                );
+                return back()->withInput()->with($notification);
             }
         }
         //---------------------------------------------------------------
@@ -140,23 +144,11 @@ class CancionController extends Controller
         foreach ($colaboraciones_existentes as $colaborador_especifico) {
             $porcentaje_total1 += $colaborador_especifico->porcentaje_intelectual;
         }
-        foreach ($colaboraciones as $colaborador_invitado) {
-            $porcentaje_total2 += $colaborador_invitado->porcentaje_intelectual;
-        }
 
-        $porcentaje_total = $porcentaje_total1 + $porcentaje_total2 + $porcentaje_total;
-
-        if ($request->tipo_colaboracionCreador == "Principal") {
-            $contadorPrincipal += 1;
-        }
+        $porcentaje_total = $porcentaje_total1 + $porcentaje_total;
 
         foreach ($colaboraciones_existentes as $colaborador_especifico) {
             if ($colaborador_especifico->tipo_colaboracion == "Principal") {
-                $contadorPrincipal += 1;
-            }
-        }
-        foreach ($colaboraciones as $colaborador_invitado) {
-            if ($colaborador_invitado->tipo_colaboracion == "Principal") {
                 $contadorPrincipal += 1;
             }
         }
@@ -171,18 +163,6 @@ class CancionController extends Controller
                 }
             }
         }
-        foreach ($colaboraciones as $colaborador_invitado) {
-            if ($colaborador_invitado->email != NULL) {
-                $auxID2 = $colaborador_invitado->email;
-                $auxCOL2 = $colaborador_invitado->tipo_colaboracion;
-                $auxPOR2 = $colaborador_invitado->porcentaje_intelectual;
-                foreach ($colaboraciones as $j) {
-                    if ($j->email == $auxID2 && !$j->porcentaje_intelectual == $auxPOR2 && !$j->tipo_colaboracion == $auxCOL2) {
-                        $contadorArtistas += 1;
-                    }
-                }
-            }
-        }
 
         if ($porcentaje_total > 100 || $porcentaje_total < 100) { //No coinciden los porcentajes
             $notification = array(
@@ -192,9 +172,9 @@ class CancionController extends Controller
             return back()->withInput()->with($notification);
             //dd("La suma total de los porcentajes intelectuales no coincide (Supera o es Menor a 100%)", $porcentaje_total);
         }
-        if ($contadorPrincipal == 0) { //No hay Principa
+        if ($contadorPrincipal == 0) { //No hay colaboración Principal
             $notification = array(
-                'message' => 'No ha especificado el artista principal',
+                'message' => 'No ha especificado el artista principal de la canción (colaboración)',
                 'alert-type' => 'warning'
             );
             return back()->withInput()->with($notification);
@@ -250,75 +230,92 @@ class CancionController extends Controller
                 'cliente_email'           => $sesion->email,
             ]);
             //----------
+            $usuarios_registrados = DB::table('users')->get();
+
             foreach ($colaboraciones_existentes as $colaborador_especifico) {
-                if ($colaborador_especifico->cliente_email != NULL) {
-                    $user_colaborador = User::where('email', $colaborador_especifico->cliente_email)->first();
-                    //dd($user_colaborador);
-                    $persona_colaborador = Persona::where('user_id', $user_colaborador->id)->first();
-                    //dd($persona_colaborador);
-                    $cliente_colaborador = Cliente::where('persona_id', $persona_colaborador->id)->first();
-                    //dd($cliente_colaborador);
+                if ($colaborador_especifico->cliente_email != NULL) { //Acá podemos hacer una validación para que no entre un usuario que no existe
+                    $puntaje_colab_especifico = 0;
+                    //Los correos *SÍ* existen en la base de datos
+                    foreach($usuarios_registrados as $usuario_registrado){
+                        if ($colaborador_especifico->cliente_email == $usuario_registrado->email) { //Acá sólo pregunta por 1 sólo email de la DB.. OJO
+                            //---------
+                            $user_colaborador = User::where('email', $colaborador_especifico->cliente_email)->first();
+                            $persona_colaborador = Persona::where('user_id', $user_colaborador->id)->first(); //Los usuarios que no existen suelta error, sí funciona para existentes
+                            $cliente_colaborador = Cliente::where('persona_id', $persona_colaborador->id)->first();
+                            //---------
+                            Colaboracion::create([
+                                'nombre_colaboracion'     => $request->nombre_colaboracion,
+                                'cancion_id'              => $cancion->id,
+                                'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                                'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
+                                'cliente_email'           => $colaborador_especifico->cliente_email,
+                            ]); //Crear un puntaje, si ya está en prismad +1, preguntar si puntaje es menor que 1, si sí, NO está en prismad
+                            //Implementar un IF que valide si ya existe en la colaboración de ese repertorio
+                            foreach($repertorio_colabs as $colabs_repertorio){
+                                $puntaje_colab_repertorio = 0;
+                                if($colaborador_especifico->cliente_email == $colabs_repertorio->cliente_email){
+                                    $puntaje_colab_repertorio += 1;
+                                } //********Crear puntajes para saber si pertenece a las colaboraciones del repertorio */
+                            }
+                            if($puntaje_colab_repertorio < 1){
+                                ColaboracionRepertorio::create([
+                                    'repertorio_id'           => $request->repertorio_id,
+                                    'cliente_email'           => $colaborador_especifico->cliente_email,
+                                    'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                                    'spotify_colaboracion'    => $cliente_colaborador->link_spoty,
+                                ]);
+                                $puntaje_colab_repertorio = 0;
+                            }
+                            $puntaje_colab_especifico += 1;
+                        }
+                    }
+                    if($puntaje_colab_especifico < 1){
+                        $usuario = User::create([
+                            'email'    => $colaborador_especifico->cliente_email,
+                            'name'     => $colaborador_especifico->cliente_email,
+                            'password' => Hash::make('password'),
+                            'role_id'  => 2,
+                            'confirmation_code' => Str::random(40),
+                        ]);
+                        // Send confirmation code---------------------------------------------------------------
+                        $sesion = Auth::user();
+                        $persona = Persona::where('user_id', $sesion->id)->first();
+                        $cliente = Cliente::where('persona_id', $persona->id)->first();
 
-                    Colaboracion::create([
-                        'nombre_colaboracion'     => $request->nombre_colaboracion,
-                        'cancion_id'              => $cancion->id,
-                        'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                        'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
-                        'cliente_email'           => $colaborador_especifico->cliente_email,
-                    ]);
-                    ColaboracionRepertorio::create([
-                        'repertorio_id'           => $request->repertorio_id,
-                        'cliente_email'           => $colaborador_especifico->cliente_email,
-                        'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
-                        'spotify_colaboracion'    => $cliente_colaborador->link_spoty,
-                    ]);
-                }
-            }
-            foreach ($colaboraciones as $colaborador_invitado) {
-                if ($colaborador_invitado->email != NULL) {
-                    $usuario = User::create([
-                        'email'    => $colaborador_invitado->email,
-                        'name'     => $colaborador_invitado->email,
-                        'password' => Hash::make('password'),
-                        'role_id'  => 2,
-                        'confirmation_code' => Str::random(40),
-                    ]);
-                    // Send confirmation code---------------------------------------------------------------
-                    $sesion = Auth::user();
-                    $persona = Persona::where('user_id', $sesion->id)->first();
-                    $cliente = Cliente::where('persona_id', $persona->id)->first();
+                        $details = [
+                            'title' => 'Asunto: ¡Te invito a Prismad Music!',
+                            'subtitle' => $cliente->nombre_artistico . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
+                            'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
+                            'descripcion' => '',
+                            'button' => 'Ingresa al portal',
+                            'enlace' => url('register/verify/' . $usuario->confirmation_code),
+                        ];
+                        Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
 
-                    $details = [
-                        'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                        'subtitle' => $cliente->nombre_artistico . ' te invita a formar parte de su nuevo éxito "' . $cancion->titulo . '"',
-                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
-                        'descripcion' => '',
-                        'button' => 'Ingresa al portal',
-                        'enlace' => url('register/verify/' . $usuario->confirmation_code),
-                    ];
-                    Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
-
-                    $persona = Persona::create([
-                        'user_id'               => $usuario->id,
-                    ]);
-                    $cliente = Cliente::create([
-                        'nombre_artistico'        => $colaborador_invitado->email, //Poner PATCH
-                        'persona_id'              => $persona->id,
-                        'link_spoty'              => $colaborador_invitado->spotify_colaboracion,
-                    ]);
-                    Colaboracion::create([
-                        'nombre_colaboracion'     => $request->nombre_colaboracion,
-                        'cancion_id'              => $cancion->id,
-                        'tipo_colaboracion'       => $colaborador_invitado->tipo_colaboracion,
-                        'porcentaje_intelectual'  => $colaborador_invitado->porcentaje_intelectual,
-                        'cliente_email'           => $usuario->email,
-                    ]);
-                    ColaboracionRepertorio::create([
-                        'repertorio_id'           => $request->repertorio_id,
-                        'cliente_email'           => $usuario->email,
-                        'tipo_colaboracion'       => $colaborador_invitado->tipo_colaboracion,
-                        'spotify_colaboracion'    => $colaborador_invitado->spotify_colaboracion,
-                    ]);
+                        $persona = Persona::create([
+                            'user_id'               => $usuario->id,
+                        ]);
+                        $cliente = Cliente::create([
+                            'nombre_artistico'        => $colaborador_especifico->cliente_email, //Poner PATCH
+                            'persona_id'              => $persona->id,
+                            'link_spoty'              => $colaborador_especifico->spotify_colaboracion,
+                        ]);
+                        Colaboracion::create([
+                            'nombre_colaboracion'     => $request->nombre_colaboracion,
+                            'cancion_id'              => $cancion->id,
+                            'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                            'porcentaje_intelectual'  => $colaborador_especifico->porcentaje_intelectual,
+                            'cliente_email'           => $usuario->email,
+                        ]);
+                        ColaboracionRepertorio::create([
+                            'repertorio_id'           => $request->repertorio_id,
+                            'cliente_email'           => $usuario->email,
+                            'tipo_colaboracion'       => $colaborador_especifico->tipo_colaboracion,
+                            'spotify_colaboracion'    => $colaborador_especifico->spotify_colaboracion,
+                        ]);
+                        $puntaje_colab_especifico = 0;
+                    }
+                    //---------------------------------------------------------------
                 }
             }
         }

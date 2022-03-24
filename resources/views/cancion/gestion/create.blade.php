@@ -350,7 +350,6 @@
                             <div class="col-sm-6">
                                 <label for="subgenero">Sub-género</label>
                                 <br>
-                                
                                 <select class="subgenero col-md-12" name="subgenero" id="subgenero">
                                     <option value="none" selected disabled hidden>Seleccione una opción</option>
                                         <option value="Acid" {{ old('subgenero') == "Acid" ? 'selected' : '' }}>Acid</option>
@@ -690,7 +689,7 @@
                                 <label for="genero_secundario">Género secundario</label>
                                 <br>
                                 <select class="genero_secundario col-md-12" name="genero_secundario" id="genero_secundario"
-                                    value="{{ old('genero') }}">
+                                    value="{{ old('genero_secundario') }}">
                                     <option value="Afoxé">Afoxé</option>
                                     <option value="Alternative">Alternative</option>
                                     <option value="Alternative & Rock in Spanish">Alternative & Rock in Spanish</option>
@@ -826,7 +825,7 @@
                                 <label for="subgenero_secundario">Sub-género secundario</label>
                                 <br>
                                 <select class="subgenero_secundario col-md-12" name="subgenero_secundario"
-                                    id="subgenero_secundario" value="{{ old('genero') }}">
+                                    id="subgenero_secundario" value="{{ old('subgenero_secundario') }}">
                                     <option value="Acid">Acid</option>
                                     <option value="Acid house">Acid house</option>
                                     <option value="Acid Jazz">Acid Jazz</option>
@@ -1277,10 +1276,13 @@
                                     '<div class="row inputElement">\n' +
                                     '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="email">\n' +
+                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador ej: Alex@gmail.com" type="email">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual numérico, ejemplo: 70" type="number">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
@@ -1299,49 +1301,9 @@
 
                         <div class="form-group row">
                             <div class="alert alert-success" role="alert">
-                                <p>¿No pertenecen a Prismad? ¡INVÍTALOS!</p>
+                                <p>¿No pertenece a Prismad? <a class="alert-link">¡INVÍTALO!</a>, añade el email en el campo correspondiente y le enviaremos un mensaje :)</p>
                             </div>
                         </div>
-
-                        <textarea class="form-control multi" name="colaboradores" data-name="colaboradores">
-                            @if (old('colaboradores'))
-                            {{ old('colaboradores') }}
-                            @else
-                            []
-                            @endif
-                            </textarea>
-                        <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
-                        <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
-
-                        <script>
-                            $('.multi').multiInput({
-                                json: true,
-                                input: $(
-                                    '<div class="row inputElement">\n' +
-                                    '<div class="multiinput-title col-xs-12">Invitar Colaborador <span class="number">1</span></div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="email">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="number">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
-                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n' +
-                                    '</div>\n' +
-                                    '</div>\n'),
-                                limit: 4,
-                                onElementAdd: function(el, plugin) {
-                                    console.log(plugin.elementCount);
-                                },
-                                onElementRemove: function(el, plugin) {
-                                    console.log(plugin.elementCount);
-                                }
-                            });
-                        </script>
 
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -1400,8 +1362,8 @@
                 <!-- MENSAJE LARGO -->
                 <form action="">
                     <div class="modal-body parrafo">
-                        <h4>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
-                        puedes hacer cambios.</h4>
+                        <h4>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho <a class="alert-link">NO
+                        PODRÁS hacer cambios.</a></h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
