@@ -566,9 +566,9 @@
                                 <br>
                                 <select class="formato col-md-12" name="formato" id="formato">
                                 <option value="none" selected disabled hidden>Seleccione una opción</option>
-                                    <option value="f1" {{ old('formato') == "f1" ? 'selected' : '' }}>SINGLE</option>
-                                    <option value="f2"{{ old('formato') == "f2" ? 'selected' : '' }}>EP</option>
-                                    <option value="f3"{{ old('formato') == "f3" ? 'selected' : '' }}>ALBUM</option>
+                                    <option value="SINGLE" {{ old('formato') == "SINGLE" ? 'selected' : '' }}>SINGLE</option>
+                                    <option value="EP"{{ old('formato') == "EP" ? 'selected' : '' }}>EP</option>
+                                    <option value="ALBUM"{{ old('formato') == "ALBUM" ? 'selected' : '' }}>ALBUM</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">

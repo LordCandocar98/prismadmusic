@@ -43,7 +43,7 @@ class SolicitarW extends AbstractWidget
     public function shouldBeDisplayed()
     {
         $session = Auth::user();
-        if ($session->role_id == 1 ||  $session->role_id == 2) {
+        if ($session->role_id == 2) {
             return true;
         } else {
             return false;

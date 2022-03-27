@@ -352,7 +352,6 @@
                             <div class="col-sm-6">
                                 <label for="subgenero">Sub-género</label>
                                 <br>
-                                
                                 <select class="subgenero col-md-12" name="subgenero" id="subgenero">
                                     <option value="none" selected disabled hidden>Seleccione una opción</option>
                                         <option value="Acid" {{ old('subgenero') == "Acid" ? 'selected' : '' }}>Acid</option>
@@ -692,7 +691,7 @@
                                 <label for="genero_secundario">Género secundario</label>
                                 <br>
                                 <select class="genero_secundario col-md-12" name="genero_secundario" id="genero_secundario"
-                                    value="{{ old('genero') }}">
+                                    value="{{ old('genero_secundario') }}">
                                     <option value="Afoxé">Afoxé</option>
                                     <option value="Alternative">Alternative</option>
                                     <option value="Alternative & Rock in Spanish">Alternative & Rock in Spanish</option>
@@ -828,7 +827,7 @@
                                 <label for="subgenero_secundario">Sub-género secundario</label>
                                 <br>
                                 <select class="subgenero_secundario col-md-12" name="subgenero_secundario"
-                                    id="subgenero_secundario" value="{{ old('genero') }}">
+                                    id="subgenero_secundario" value="{{ old('subgenero_secundario') }}">
                                     <option value="Acid">Acid</option>
                                     <option value="Acid house">Acid house</option>
                                     <option value="Acid Jazz">Acid Jazz</option>
@@ -1202,37 +1201,36 @@
                                 <label for="idioma_titulo">Idioma del título</label>
                                 <br>
                                 <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo">
-                                    <option value="Español">Español</option>
-                                    <option value="Inglés">Inglés</option>
-                                    <option value="Portugués">Portugués</option>
-                                    <option value="Italiano">Italiano</option>
-                                    <option value="Francés">Francés</option>
-                                    <option value="Chino">Chino</option>
-                                    <option value="Japonés">Japonés</option>
-                                    <option value="Coreano">Coreano</option>
-                                    <option value="Alemán">Alemán</option>
-                                    <option value="Árabe">Árabe</option>
-                                    <option value="Hindi">Hindi</option>
-                                    <option value="Ruso">Ruso</option>
+                                    <option value="Español" {{ old('idioma_titulo') == "Español" ? 'selected' : '' }}>Español</option>
+                                    <option value="Inglés" {{ old('idioma_titulo') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                                    <option value="Portugués" {{ old('idioma_titulo') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                                    <option value="Italiano" {{ old('idioma_titulo') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                                    <option value="Francés" {{ old('idioma_titulo') == "Francés" ? 'selected' : '' }}>Francés</option>
+                                    <option value="Chino" {{ old('idioma_titulo') == "Chino" ? 'selected' : '' }}>Chino</option>
+                                    <option value="Japonés" {{ old('idioma_titulo') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                                    <option value="Coreano" {{ old('idioma_titulo') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                                    <option value="Alemán" {{ old('idioma_titulo') == "Alemán" ? 'selected' : '' }}>Alemán</option>
+                                    <option value="Árabe" {{ old('idioma_titulo') == "Árabe" ? 'selected' : '' }}>Árabe</option>
+                                    <option value="Hindi" {{ old('idioma_titulo') == "Hindi" ? 'selected' : '' }}>Hindi</option>
+                                    <option value="Ruso" {{ old('idioma_titulo') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="idioma_letra">Idioma de la letra</label>
                                 <br>
-                                <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra"
-                                    value="{{ old('idioma_letra') }}">
-                                    <option value="Español">Español</option>
-                                    <option value="Inglés">Inglés</option>
-                                    <option value="Portugués">Portugués</option>
-                                    <option value="Italiano">Italiano</option>
-                                    <option value="Francés">Francés</option>
-                                    <option value="Chino">Chino</option>
-                                    <option value="Japonés">Japonés</option>
-                                    <option value="Coreano">Coreano</option>
-                                    <option value="Alemán">Alemán</option>
-                                    <option value="Árabe">Árabe</option>
-                                    <option value="Hindi">Hindi</option>
-                                    <option value="Ruso">Ruso</option>
+                                <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra">
+                                    <option value="Español" {{ old('idioma_letra') == "Español" ? 'selected' : '' }}>Español</option>
+                                    <option value="Inglés" {{ old('idioma_letra') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                                    <option value="Portugués" {{ old('idioma_letra') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                                    <option value="Italiano" {{ old('idioma_letra') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                                    <option value="Francés" {{ old('idioma_letra') == "Francés" ? 'selected' : '' }}>Francés</option>
+                                    <option value="Chino" {{ old('idioma_letra') == "Chino" ? 'selected' : '' }}>Chino</option>
+                                    <option value="Japonés" {{ old('idioma_letra') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                                    <option value="Coreano" {{ old('idioma_letra') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                                    <option value="Alemán" {{ old('idioma_letra') == "Alemán" ? 'selected' : '' }}>Alemán</option>
+                                    <option value="Árabe" {{ old('idioma_letra') == "Árabe" ? 'selected' : '' }}>Árabe</option>
+                                    <option value="Hindi" {{ old('idioma_letra') == "Hindi" ? 'selected' : '' }}>Hindi</option>
+                                    <option value="Ruso" {{ old('idioma_letra') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                                 </select>
                             </div>
                         </div>
@@ -1280,10 +1278,13 @@
                                     '<div class="row inputElement">\n' +
                                     '<div class="multiinput-title col-xs-12">Colaborador <span class="number">1</span></div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador" type="email">\n' +
+                                    '<input class="form-control" name="cliente_email" placeholder="EMAIL del artista colaborador ej: Alex@gmail.com" type="email">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual numérico, ejemplo: 70" type="number">\n' +
+                                    '</div>\n' +
+                                    '<div class="form-group col-xs-6">\n' +
+                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
                                     '</div>\n' +
                                     '<div class="form-group col-xs-6">\n' +
                                     '<label for="tipo_colaboracion">Tipo de colaboración</label>\n' +
@@ -1302,49 +1303,9 @@
 
                         <div class="form-group row">
                             <div class="alert alert-success" role="alert">
-                                <p>¿No pertenecen a Prismad? ¡INVÍTALOS!</p>
+                                <p>¿No pertenece a Prismad? <a class="alert-link">¡INVÍTALO!</a>, añade el email en el campo correspondiente y le enviaremos un mensaje :)</p>
                             </div>
                         </div>
-
-                        <textarea class="form-control multi" name="colaboradores" data-name="colaboradores">
-                            @if (old('colaboradores'))
-                            {{ old('colaboradores') }}
-                            @else
-                            []
-                            @endif
-                            </textarea>
-                        <script src="{{ asset('assets_reports/js/jquery.min.js') }}"></script>
-                        <script src="{{ asset('multiinput/js/jq.multiinput.min.js') }}"></script>
-
-                        <script>
-                            $('.multi').multiInput({
-                                json: true,
-                                input: $(
-                                    '<div class="row inputElement">\n' +
-                                    '<div class="multiinput-title col-xs-12">Invitar Colaborador <span class="number">1</span></div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="email" placeholder="Pepito@gmail.com" type="email">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="porcentaje_intelectual" placeholder="Porcentaje intelectual Ejemplo: 40" type="number">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<input class="form-control" name="spotify_colaboracion" placeholder="Link Spotify del artista, ejemplo: open.spotify/artist:xxxx" type="text">\n' +
-                                    '</div>\n' +
-                                    '<div class="form-group col-xs-6">\n' +
-                                    '<label for="tipo_colaboracion">Tipo de Colaboración</label>\n' +
-                                    '<select name="tipo_colaboracion"><option value="Remixer">Remixer</option><option value="Featuring">Featuring</option><option value="Principal">Principal</option></select>\n' +
-                                    '</div>\n' +
-                                    '</div>\n'),
-                                limit: 4,
-                                onElementAdd: function(el, plugin) {
-                                    console.log(plugin.elementCount);
-                                },
-                                onElementRemove: function(el, plugin) {
-                                    console.log(plugin.elementCount);
-                                }
-                            });
-                        </script>
 
                         <div class="form-group row">
                             <div class="col-md-12">
@@ -1396,7 +1357,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h2>
+                    <h3 class="modal-title" id="exampleModalLabel">¿YA TODO ESTÁ BIEN?</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1404,8 +1365,8 @@
                 <!-- MENSAJE LARGO -->
                 <form action="">
                     <div class="modal-body parrafo">
-                        <h3>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho no
-                        puedes hacer cambios.</h3>
+                        <h4>¿Estás seguro de que quieres añadir ésta canción al Repertorio?, recuerda que una vez hecho <a class="alert-link">NO
+                        PODRÁS hacer cambios.</a></h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
