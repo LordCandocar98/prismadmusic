@@ -90,6 +90,8 @@ class CancionController extends Controller
     {
         $colaboraciones = json_decode($request->colaboradores);
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
+        $cancion_archivo = json_decode($request->pista_mp3);
+        dd($cancion_archivo);
         $contar_exist = 0;
         foreach ($colaboraciones_existentes as $colaborador_especifico) {
             if ($colaborador_especifico->cliente_email == "" || $colaborador_especifico->porcentaje_intelectual == "" || $colaborador_especifico->tipo_colaboracion == null) {

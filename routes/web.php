@@ -12,6 +12,7 @@ use App\Http\Controllers\Nominas\Informe\InformeNominaController;
 use App\Http\Controllers\Persona\Gestion\PersonaController;
 use App\Http\Controllers\Producto\ProductoController;
 use App\Http\Controllers\Regalias\Informe\InformeRegaliaController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,6 +53,8 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('informeNomina', InformeNominaController::class);
     Route::resource('informeRegalias', InformeRegaliaController::class);
 });
+
+Route::post('upload', [UploadController::class, 'store']);
 
 Route::get('profile', function () {
     return redirect('/admin');

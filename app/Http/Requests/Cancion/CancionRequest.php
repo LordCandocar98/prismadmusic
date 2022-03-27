@@ -49,7 +49,7 @@ class CancionRequest extends FormRequest
             'acepta_riesgo'            =>'required',
             'nombre_colaboracion'      =>'',
             'repertorio_id'            =>'required',
-            'pista_mp3'                =>'required|mimes:wav,aiff,flac',
+            'pista_mp3'                =>'required',
             'confirmation_code'        =>'',
         ];
     }

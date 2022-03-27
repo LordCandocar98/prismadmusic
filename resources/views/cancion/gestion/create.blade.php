@@ -15,6 +15,9 @@
 @endsection
 
 @section('css')
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet"/>
+<link href="{{ asset('css/filepond-plugin-media-preview.css') }}" rel="stylesheet"/>
     <style>
         .parrafo {
             font-size: 80%;
@@ -26,7 +29,6 @@
         .identado {
             text-indent: 10px;
         }
-
     </style>
 @endsection
 
@@ -1363,8 +1365,9 @@
                             <div class="col-md-12">
                                 <label for="pista_mp3">Carga la canción/pista</label>
                                 <br>
-                                <input type="file" class="form-control" id="pista_mp3" name="pista_mp3"
-                                    value="{{ old('pista_mp3') }}">
+                                {{-- <input type="file" class="form-control" id="pista_mp3" name="pista_mp3"
+                                    value="{{ old('pista_mp3') }}"> --}}
+                                    <input type="file" class="filepond my-pond" allowFileEncode name="pista_mp3" data-allow-reorder="true" data-max-file-size="30MB" data-max-files="1" required>
                             </div>
                         </div>
                     </div>
@@ -1413,6 +1416,57 @@
     </div>
 
 @endsection
-@section('javascript')
+@section('javascript')<!-- include jQuery library -->
+
     <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
+
+<!-- include FilePond library -->
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+<!-- include FilePond plugins -->
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+
+<!-- include FilePond jQuery adapter -->
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<!-- add before </body> -->
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+{{-- Validate plugin --}}
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginFileEncode,
+            FilePondPluginFileValidateSize,
+            FilePondPluginImageExifOrientation,
+            FilePondPluginImagePreview,
+            FilePondPluginMediaPreview,
+            FilePondPluginFileValidateType
+);
+const input = document.querySelector('input[name="pista_mp3"]');
+
+// Create a FilePond instance
+FilePond.create(input, {
+    labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
+    storeAsFile: true,
+    maxParallelUploads: 2,
+    allowFileTypeValidation: true,
+    acceptedFileTypes: ['audio/wav','audio/flac','audio/aiff'],
+    fileValidateTypeDetectType: (source, type) =>
+        new Promise((resolve, reject) => {
+            // Do custom type detection here and return with promise
+
+            resolve(type);
+        }),
+});
+FilePond.setOptions({
+    server: {
+        url: '/upload',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' 
+    }
+}}
+);
+    </script>
 @endsection
