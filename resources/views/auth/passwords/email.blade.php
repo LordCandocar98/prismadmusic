@@ -45,7 +45,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a class="btn btn-block" href="http://127.0.0.1:8000/login" role="button"><i class="fa fa-reply" aria-hidden="true"> volver</i></a>
+                                        <a class="btn btn-block" href={{ url("/login") }} role="button"><i class="fa fa-reply" aria-hidden="true"> volver</i></a>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary">
