@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
 use App\Models\Persona;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class RepertorioController extends Controller
 {
@@ -53,10 +55,14 @@ class RepertorioController extends Controller
             ->orderBy('id', 'DESC')
             ->get('');
 
+        $genre = \DB::table('genero')->select('nombre')->get();
+        $subgenre = \DB::table('subgenero')->select('nombre')->get();
+
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('repertorio.gestion.create')->with('clientes', $clientes);
+            return view('repertorio.gestion.create', compact("clientes", "genre", "subgenre"));
         }
-        return view('repertorio.gestion.create')->with('clientes', $clientes);
+
+        return view('repertorio.gestion.create', compact("clientes", "genre", "subgenre"));
     }
 
     /**
@@ -72,16 +78,13 @@ class RepertorioController extends Controller
         $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
         ->select("cliente.*")
         ->first();
-        //dd($cliente_sesion);
 
-        // $persona =  Persona::where('user_id', $sesion->id)->first();
-        // $cliente_sesion = Cliente::where('persona_id', $persona->id)->first();
-        if($image = $request->file('portada')){
-            $destinoPortada = 'portadas/' . date('FY') . '/';
-            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
-            $filename = $destinoPortada . $profileImage ;
-            $image->move('storage/' . $destinoPortada, $profileImage);
-        };
+        $cover =json_decode($request->cover);
+
+        //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
+        $mv = copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas'.$cover->filename);
+        dd($mv);
+
         $repertorio = Repertorio::create([
             'titulo'               => $request->titulo,
             'version'              => $request->version,
@@ -94,7 +97,7 @@ class RepertorioController extends Controller
             'annio_produccion'     => $request->annio_produccion,
             'upc_ean'              => $request->upc_ean,
             'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $filename,
+            'portada'              => $cover->filename,
             'fecha_lanzamiento'    => $request->fecha_lanzamiento,
         ]);
         ColaboracionRepertorio::create([
@@ -162,5 +165,42 @@ class RepertorioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * upload cover in the product view
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadcover(Request $request)
+    {
+        $rules = [
+            'cover' => 'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000'
+        ];
+        $messages = [
+            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas.',
+            'cover.mimes' => 'La imagen tiene formato incorrecto.',
+            'cover.max' => 'La imagen supera el tamaño maximo.'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return Response::json([
+                'status' => 'error',
+                'message' => $validator->messages()
+            ], 400, [], JSON_PRETTY_PRINT);
+        }
+
+        if($image = $request->file('cover')){
+            $destinoPortada = 'portadas/tmp/';
+            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
+            $filename = $destinoPortada . $profileImage ;
+            $image->move('storage/' . $destinoPortada, $profileImage);
+        };
+
+        return [
+            'folder' => $destinoPortada,
+            'filename' => $profileImage
+        ];
     }
 }

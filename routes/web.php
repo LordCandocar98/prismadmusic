@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('producto', ProductoController::class);
     Route::resource('informeNomina', InformeNominaController::class);
     Route::resource('informeRegalias', InformeRegaliaController::class);
+
+    Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
 });
 
 Route::post('upload', [UploadController::class, 'store']);
