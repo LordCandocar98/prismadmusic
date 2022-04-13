@@ -45,40 +45,7 @@ class CancionController extends Controller
      */
     public function create()
     {
-        $clientes = DB::table('cliente')
-            ->select('cliente.nombre_artistico', 'cliente.id')
-            ->orderBy('id', 'DESC')
-            ->get('');
-        $clientes2 = DB::table('cliente')
-            ->select('cliente.nombre_artistico', 'cliente.id')
-            ->orderBy('id', 'DESC')
-            ->get('');
-        $clientes3 = DB::table('cliente')
-            ->select('cliente.nombre_artistico', 'cliente.id')
-            ->orderBy('id', 'DESC')
-            ->get('');
-
-        $sesion = Auth::user();
-        $repertorios = DB::table('users')
-            ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
-            ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
-            ->where('users.role_id', 2)
-            ->where('users.id', $sesion->id)
-            ->get();
-
-        if (Auth::user()->registro_confirmed == 0) { // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('cancion.gestion.create')
-                ->with('clientes', $clientes)
-                ->with('clientes2', $clientes2)
-                ->with('clientes3', $clientes3)
-                ->with('repertorios', $repertorios);
-        }
-
-        return view('cancion.gestion.create')
-            ->with('clientes', $clientes)
-            ->with('clientes2', $clientes2)
-            ->with('clientes3', $clientes3)
-            ->with('repertorios', $repertorios);
+        return view('cancion.gestion.create');
     }
 
     /**
@@ -92,7 +59,6 @@ class CancionController extends Controller
         $repertorio_colabs = ColaboracionRepertorio::where('repertorio_id',$request->repertorio_id)->get();
         $colaboraciones_existentes = json_decode($request->colaboradores_existentes);
         $cancion_archivo = json_decode($request->pista_mp3);
-        dd($cancion_archivo);
         $contar_exist = 0;
 
         foreach ($colaboraciones_existentes as $colaborador_especifico) {

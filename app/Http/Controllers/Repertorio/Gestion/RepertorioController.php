@@ -11,6 +11,7 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
+use App\Models\Cancion;
 use App\Models\Persona;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -82,8 +83,7 @@ class RepertorioController extends Controller
         $cover =json_decode($request->cover);
 
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
-        $mv = copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas'.$cover->filename);
-        dd($mv);
+        copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas/'.$cover->filename);
 
         $repertorio = Repertorio::create([
             'titulo'               => $request->titulo,
@@ -107,15 +107,7 @@ class RepertorioController extends Controller
             'spotify_colaboracion'    => $cliente_sesion->link_spoty,
         ]);
 
-
-
-//------------------------------------------------------------------------
-        $notification = array(
-            'message' => 'Repertorio creado exitosamente!',
-            'alert-type' => 'success'
-        );
-
-        return redirect('admin')->with($notification);
+        return redirect()->route('cancion.gestion.create');
     }
 
     /**
@@ -127,10 +119,8 @@ class RepertorioController extends Controller
     public function show($id)
     {
         $repertorio = Repertorio::find($id);
-        $colaboraciones = ColaboracionRepertorio::where('repertorio_id',$id)->get();
-        //dd($colaboraciones);
-        //dd($repertorio);
-        return view('repertorio.gestion.show', compact('repertorio',$repertorio,'colaboraciones',$colaboraciones));
+        $canciones = Cancion::where('repertorio_id', '=', $id)->get();
+        return view('repertorio.gestion.show', compact('repertorio', 'canciones'));
     }
 
     /**
