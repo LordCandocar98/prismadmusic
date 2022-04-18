@@ -65,7 +65,7 @@
         <div class="card-body">
             <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
             @if( (count($canciones)<1 and $repertorio->formato == 'SINGLE') or (count($canciones)<6 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM')
-                <a class="btn btn-primary float-right mb-3" href="{{ route('cancion.create') }}">Agregar canción</a>
+                <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
             @endif
             <table class="table">
                 <thead>
@@ -82,7 +82,9 @@
                         <th scope="row">{{ $key }}</th>
                         <td>{{ $cancion->titulo }}</td>
                         <td>{{ $cancion->autor }}</td>
-                        <td>{{ $cancion->pista_mp3 }}</td>
+                        <td style="width: 1px;">
+                            <audio controls src="{{ url('storage/'.$cancion->pista_mp3) }}"></audio>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

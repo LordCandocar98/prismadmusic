@@ -42,26 +42,25 @@
 @section('content')
 <form action="{{ route('cancion.store') }}" method="post" id="formRegistro" name="formRegistro"
     enctype="multipart/form-data">
-
+    <input type="hidden" name="repertorio" value="{{$repertorio->id}}">
+    <input type="hidden" name="session_email" id="session_email" value="{{ $session->email }}">
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
                 <h5 class="card-title">Información general</h5>
                 @csrf
                 <div class="form-group row">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="titulo">Título</label>
                         <br>
                         <input type="text" class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label for="version_subtitulo">Versión/Subtítulo</label>
                         <br>
                         <input type="text" class="form-control" id="version_subtitulo" name="version_subtitulo"
                             value="{{ old('version_subtitulo') }}">
                     </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-md-3">
                         <label for="autor">Autor</label>
                         <br>
@@ -73,6 +72,8 @@
                         <input type="text" class="form-control" id="compositor" name="compositor"
                             placeholder="Ejemplo: Wolfgang Amadeus Mozart " value="{{ old('compositor') }}">
                     </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-3">
                         <label for="copyright">Arreglista</label>
                         <br>
@@ -85,9 +86,6 @@
                         <input type="text" class="form-control" id="productor" name="productor"
                             placeholder="George Martin" value="{{ old('productor') }}">
                     </div>
-                </div>
-                <div class="form-group row">
-
                     <div class="col-md-3">
                         <label for="pline">Pline</label>
                         <br>
@@ -100,6 +98,8 @@
                         <input type="text" class="form-control" id="nombre_colaboracion" name="nombre_colaboracion"
                             value="{{ old('nombre_colaboracion') }}">
                     </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-3">
                         <label for="annio_produccion">Año de producción</label>
                         <br>
@@ -111,58 +111,9 @@
                                 aria-hidden="true" data-toggle="popover" title="*para vídeo horarios CET"></i></label>
                         <br>
                         <input type="date" class="form-control" id="fecha_principal_salida"
-                            name="fecha_principal_salida" value="{{ old('fecha_principal_salida') }}">
+                            name="fecha_principal_salida" min="{{date('Y-m')}}-{{date('d')+6}}"
+                            value="{{ old('fecha_principal_salida') }}">
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-3">
-                        <label for="tipo_secundario">Tipo secundario</label>
-                        <br>
-                        <select class="tipo_secundario" name="tipo_secundario" id="tipo_secundario"
-                            style="width: 100%;">
-                            <option value="none" selected disabled hidden>Seleccione una opción</option>
-                            <option value="original" {{ old('tipo_secundario') == "original" ? 'selected' : '' }}>
-                                Original</option>
-                            <option value="karaoke" {{ old('tipo_secundario') == "karaoke" ? 'selected' : '' }}>Karaoke
-                            </option>
-                            <option value="medley" {{ old('tipo_secundario') == "medley" ? 'selected' : '' }}>Medley
-                            </option>
-                            <option value="cover" {{ old('tipo_secundario') == "cover" ? 'selected' : '' }}>Cover
-                            </option>
-                            <option value="otrogrupo" {{ old('tipo_secundario') == "otrogrupo" ? 'selected' : '' }}>
-                                Versión por otro grupo</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="instrumental">Instrumental</label>
-                        <br>
-                        <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
-                            <option value="none" selected disabled hidden>Seleccione una opción</option>
-                            <option value="si" {{ old('instrumental') == "si" ? 'selected' : '' }}>Si</option>
-                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : '' }}>No</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="letra_chocante_vulgar">Letra vulgar o chocante</label>
-                        <br>
-                        <select class="letra_chocante_vulgar" name="letra_chocante_vulgar" id="letra_chocante_vulgar"
-                            style="width: 100%;">
-                            <option value="none" selected disabled hidden>Seleccione una opción</option>
-                            <option value="si" {{ old('letra_chocante_vulgar') == "si" ? 'selected' : '' }}>Si</option>
-                            <option value="no" {{ old('letra_chocante_vulgar') == "no" ? 'selected' : '' }}>No</option>
-                            <option value="clear" {{ old('letra_chocante_vulgar') == "clear" ? 'selected' : '' }}>
-                                Cleaned Version</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="inicio_previsualizacion">Inicio de la previsualización</label>
-                        <br>
-                        <input type="number" class="form-control" id="inicio_previsualizacion"
-                            name="inicio_previsualizacion" placeholder="En segundos, ejemplo: 3"
-                            value="{{ old('inicio_previsualizacion') }}">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-md-3">
                         <label for="idioma_titulo">Idioma del título</label>
                         <br>
@@ -215,22 +166,53 @@
                             <option value="Ruso" {{ old('idioma_letra') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                         </select>
                     </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-3">
-                        <label for="porcentaje_intelectualCreador">¿De cuánto será TU porcentaje intelectual?</label>
+                        <label for="tipo_secundario">Tipo secundario</label>
                         <br>
-                        <input type="text" class="form-control" id="porcentaje_intelectualCreador"
-                            name="porcentaje_intelectualCreador" placeholder="Numérico, ejemplo: 50 "
-                            value="{{ old('porcentaje_intelectualCreador') }}">
+                        <select class="tipo_secundario" name="tipo_secundario" id="tipo_secundario"
+                            style="width: 100%;">
+                            <option value="none" selected disabled hidden>Seleccione una opción</option>
+                            <option value="original" {{ old('tipo_secundario') == "original" ? 'selected' : '' }}>
+                                Original</option>
+                            <option value="karaoke" {{ old('tipo_secundario') == "karaoke" ? 'selected' : '' }}>Karaoke
+                            </option>
+                            <option value="medley" {{ old('tipo_secundario') == "medley" ? 'selected' : '' }}>Medley
+                            </option>
+                            <option value="cover" {{ old('tipo_secundario') == "cover" ? 'selected' : '' }}>Cover
+                            </option>
+                            <option value="otrogrupo" {{ old('tipo_secundario') == "otrogrupo" ? 'selected' : '' }}>
+                                Versión por otro grupo</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="tipo_colaboracionCreador">¿Cuál será TU tipo de colaboración?</label>
+                        <label for="instrumental">Instrumental</label>
                         <br>
-                        <select class="idioma_titulo col-md-12" name="tipo_colaboracionCreador"
-                            id="tipo_colaboracionCreador" value="{{ old('tipo_colaboracionCreador') }}">
-                            <option value="Principal">Principal</option>
-                            <option value="Featuring">Featuring</option>
-                            <option value="Remixer">Remixer</option>
+                        <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
+                            <option value="none" selected disabled hidden>Seleccione una opción</option>
+                            <option value="si" {{ old('instrumental') == "si" ? 'selected' : '' }}>Si</option>
+                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : '' }}>No</option>
                         </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="letra_chocante_vulgar">Letra vulgar o chocante</label>
+                        <br>
+                        <select class="letra_chocante_vulgar" name="letra_chocante_vulgar" id="letra_chocante_vulgar"
+                            style="width: 100%;">
+                            <option value="none" selected disabled hidden>Seleccione una opción</option>
+                            <option value="si" {{ old('letra_chocante_vulgar') == "si" ? 'selected' : '' }}>Si</option>
+                            <option value="no" {{ old('letra_chocante_vulgar') == "no" ? 'selected' : '' }}>No</option>
+                            <option value="clear" {{ old('letra_chocante_vulgar') == "clear" ? 'selected' : '' }}>
+                                Cleaned Version</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inicio_previsualizacion">Inicio de la previsualización</label>
+                        <br>
+                        <input type="number" class="form-control" id="inicio_previsualizacion"
+                            name="inicio_previsualizacion" placeholder="En segundos, ejemplo: 3"
+                            value="{{ old('inicio_previsualizacion') }}">
                     </div>
                 </div>
             </div>
@@ -241,41 +223,63 @@
         <div class="card-body">
             <h5 class="card-title">Subir audio</h5>
             <div class="form-group row">
-                <div class="col-md-12">
-                    <div class="alert alert-info text-start font-weight-bold" role="alert" style="margin-bottom: 0;">
-                        <p>Puede importar los siguientes formatos: WAV, FLAC, AIFF</p>
-                        <p>No importar canciones con símbolos especiales como '/%#' y demás. Podría afectar la
-                            subida del archivo o directamente no ocurrir la misma.</p>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <label for="pista_mp3">Carga la canción/pista</label>
+                <div class="col-md-12" style="margin: 0;">
+                    <label for="pista_mp3">Carga la canción/pista <i class="fa fa-question-circle" aria-hidden="true"
+                            data-toggle="popover"
+                            title="Puede importar los siguientes formatos: WAV, FLAC, AIFF."></i></label>
                     <br>
                     <input type="file" class="filepond my-pond" allowFileEncode name="pista_mp3"
                         data-allow-reorder="true" data-max-file-size="30MB" data-max-files="1" required>
+                    <small class="form-text text-muted">No importar canciones con símbolos
+                        especiales como '/%#' y demás. Podría afectar la subida del archivo o directamente no ocurrir la
+                        misma.</small>
                 </div>
             </div>
         </div>
     </div>
     <br>
-    <div class="card" style="width: 100%;">
+    <div class="card" style="width: 100%; padding-bottom: 2em;">
         <div class="card-body">
             <h5 class="card-title">Colaboradores</h5>
-            <div class="alert alert-info" role="alert">
-                <p>**Recuerda que sólo debes registrar a los colaboradores <a class="alert-link">APARTE DE
-                        TI</a> para crear correctamente la canción**</p>
-                <p>¡Los colaboradores se registran diligenciando el <a class="alert-link">CORREO
-                        ELECTRÓNICO!</a></p>
+            <div class="row">
+                <div class="col-md-12 pb-5">
+                    <label for="porcentaje_intelectualCreador">¿De cuánto será TU porcentaje del Fonograma?</label>
+                    <br>
+                    <input type="text" class="form-control" id="porcentaje_intelectualCreador"
+                        name="porcentaje_intelectualCreador" placeholder="Numérico, ejemplo: 50 "
+                        value="{{ old('porcentaje_intelectualCreador') }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="cant_col">Invitar Colaborador: </label>
+                    <input type="button" value="Agregar" class="btn btn-success" id="addcol">
+                    <input type="button" value="Eliminar" class="btn btn-danger" id="delcol">
+                </div>
+                <div class="col-md-12" id="zoneaddcol">
+
+                </div>
+                <small class="form-text text-muted">El total de porcentaje debe ser igual a 100%</small>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Añadir canción</button>
+        <div style="text-align: left;background-color: white;padding: 0.7em 0;margin: 10px 0;">
+            <input type="checkbox" name="confirmation" id="confirmation">
+            <label for="confirmation">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer
+                modificaciones a la misma.</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="addsong">Añadir canción</button>
     </div>
 </form>
 
 @endsection
 @section('javascript')
+<!-- CDN ALERT2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- EDN CDN ALERT 2 -->
+
 <!-- include jQuery library -->
 <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
@@ -283,7 +287,8 @@
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+</script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 <script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
 <script>
@@ -303,7 +308,7 @@
         storeAsFile: true,
         maxParallelUploads: 2,
         allowFileTypeValidation: true,
-        acceptedFileTypes: ['audio/wav', 'audio/flac', 'audio/aiff'],
+        acceptedFileTypes: ['audio/wav', 'audio/flac', 'audio/aiff', 'audio/ogg'],
         fileValidateTypeDetectType: (source, type) =>
             new Promise((resolve, reject) => {
                 // Do custom type detection here and return with promise
@@ -313,11 +318,12 @@
     });
     FilePond.setOptions({
         server: {
-            url: '/upload',
+            url: '/uploadsong',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
         }
     });
+
 </script>
 @endsection

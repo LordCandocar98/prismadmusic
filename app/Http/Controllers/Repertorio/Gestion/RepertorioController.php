@@ -21,9 +21,6 @@ class RepertorioController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        //$this->middleware('is_admin'); //Middleware para permitir que sólo admins/mods registen personas
-        //$this->middleware('is_mod');
-        //$this->middleware('not_confirmed');
     }
 
     /**
@@ -97,7 +94,7 @@ class RepertorioController extends Controller
             'annio_produccion'     => $request->annio_produccion,
             'upc_ean'              => $request->upc_ean,
             'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $cover->filename,
+            'portada'              => public_path().'/storage/portadas/'.$cover->filename,
             'fecha_lanzamiento'    => $request->fecha_lanzamiento,
         ]);
         ColaboracionRepertorio::create([
@@ -107,7 +104,7 @@ class RepertorioController extends Controller
             'spotify_colaboracion'    => $cliente_sesion->link_spoty,
         ]);
 
-        return redirect()->route('cancion.gestion.create');
+        return redirect()->route('create_song', $repertorio->id);
     }
 
     /**
