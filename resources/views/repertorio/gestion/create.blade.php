@@ -34,6 +34,11 @@
     .identado {
         text-indent: 10px;
     }
+
+    .form-validation{
+        font-size: 11px;
+        color: #f96868;
+    }
 </style>
 @endsection
 
@@ -46,14 +51,20 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-md-6 {{ $errors->has('titulo') ? 'has-error' : '' }}">
-                                <label for="titulo" class="{{ $errors->has('titulo') ? 'text-danger' : '' }}">Título de salida al mercado</label>
+                                <label for="titulo" class="{{ $errors->has('titulo') ? 'has-error' : '' }}">Título de salida al mercado</label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ejemplo: Lovely"
                                     value="{{ old('titulo') }}">
+                                @if ($errors->has('titulo'))
+                                    <span class="form-validation">{{ $errors->first('titulo') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-6 {{ $errors->has('version') ? 'has-error' : '' }}">
                                 <label for="version">Versión/Subtitulo</label>
                                 <input type="text" class="form-control" id="version" name="version" placeholder="Ejemplo: Muse"
                                     value="{{ old('version') }}">
+                                @if ($errors->has('version'))
+                                    <span class="form-validation">{{ $errors->first('version') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">
@@ -66,6 +77,9 @@
                                         <option value="{{ $ge->nombre }}">{{ $ge->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('genero'))
+                                    <span class="form-validation">{{ $errors->first('genero') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('subgenero') ? 'has-error' : '' }}">
                                 <label for="subgenero" class="{{ $errors->has('subgenero') ? 'text-danger' : '' }}">Sub-género</label>
@@ -76,11 +90,17 @@
                                         <option value="{{ $sge->nombre }}">{{ $sge->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('subgenero'))
+                                    <span class="form-validation">{{ $errors->first('subgenero') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-6 {{ $errors->has('nombre_sello') ? 'has-error' : '' }}">
                                 <label for="nombre_sello" class="{{ $errors->has('nombre_sello') ? 'text-danger' : '' }}">Nombre del Sello discográfico</label>
                                 <input type="text" class="form-control" id="nombre_sello" name="nombre_sello" placeholder="Ejemplo: Rimas Entertainment"
                                 value="{{ old('nombre_sello') }}">
+                                @if ($errors->has('nombre_sello'))
+                                    <span class="form-validation">{{ $errors->first('nombre_sello') }}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -94,16 +114,25 @@
                                     <option value="EP"{{ old('formato') == "EP" ? 'selected' : '' }}>EP</option>
                                     <option value="ALBUM"{{ old('formato') == "ALBUM" ? 'selected' : '' }}>ALBUM</option>
                                 </select>
+                                @if ($errors->has('formato'))
+                                    <span class="form-validation">{{ $errors->first('formato') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
                                 <label for="annio_produccion" class="{{ $errors->has('annio_produccion') ? 'text-danger' : '' }}">Año de producción</label>
                                 <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
                                     value="{{ old('annio_produccion') }}">
+                                @if ($errors->has('annio_produccion'))
+                                    <span class="form-validation">{{ $errors->first('annio_produccion') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-6 {{ $errors->has('productor') ? 'has-error' : '' }}">
                                 <label for="productor" class="{{ $errors->has('productor') ? 'text-danger' : '' }}">Productor</label>
                                 <input type="text" class="form-control" id="productor" name="productor" placeholder="Ejemplo: Bad Bunny"
                                     value="{{ old('productor') }}">
+                                @if ($errors->has('productor'))
+                                    <span class="form-validation">{{ $errors->first('productor') }}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -111,22 +140,34 @@
                             <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
                                 <label for="copyright" class="{{ $errors->has('copyright') ? 'text-danger' : '' }}">Copyright</label>
                                 <input type="text" class="form-control" id="copyright" name="copyright" value="{{ old('copyright') }}">
+                                @if ($errors->has('copyright'))
+                                    <span class="form-validation">{{ $errors->first('copyright') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('numero_catalogo') ? 'has-error' : '' }}">
                                 <label for="numero_catalogo" class="{{ $errors->has('numero_catalogo') ? 'text-danger' : '' }}">Num. de catálogo Productor <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío."></i></label>
-                                <input type="number" class="form-control" id="numero_catalogo" name="numero_catalogo"
+                                <input type="text" class="form-control" id="numero_catalogo" name="numero_catalogo"
                                     value="{{ old('numero_catalogo') }}">
+                                @if ($errors->has('numero_catalogo'))
+                                    <span class="form-validation">{{ $errors->first('numero_catalogo') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('upc_ean') ? 'has-error' : '' }}">
                                 <label for="upc_ean" class="{{ $errors->has('upc_ean') ? 'text-danger' : '' }}">UPC/EAN <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="Si no sabes qué poner en UPC por favor déjarlo vacío."></i></label>
 
                                 <input type="text" class="form-control" id="upc_ean" name="upc_ean"
                                     value="{{ old('upc_ean') }}">
+                                @if ($errors->has('upc_ean'))
+                                    <span class="form-validation">{{ $errors->first('upc_ean') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-3">
                                 <label for="fecha_lanzamiento" class="{{ $errors->has('fecha_lanzamiento') ? 'text-danger' : '' }}">Fecha de Lanzamiento <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="La fecha de lanzamiento debe ser al menos 5 días después de hoy."></i></label>
                                 <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
                                     value="{{ old('fecha_lanzamiento') }}" min="{{date('Y-m')}}-{{date('d')+6}}">
+                                @if ($errors->has('fecha_lanzamiento'))
+                                    <span class="form-validation">{{ $errors->first('fecha_lanzamiento') }}</span>
+                                @endif
                             </div>
                         </div>
 
@@ -147,6 +188,15 @@
                             <div class="col-md-4">
                                 <label for="portada" class="{{ $errors->has('portada') ? 'text-danger' : '' }}">Carga una Imagen de Portada</label>
                                 <input type="file" class="filepond my-pond" allowFileEncode id="cover" name="cover" data-max-file-size="35MB" data-max-files="1" accept="image/png, image/jpeg" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <input type="checkbox" name="confirmation" id="confirmation">
+                                <label for="confirmation">Soy consciente de que una vez creado el Repertorio no podré hacer modificaciones.</label>
+                                @if ($errors->has('confirmation'))
+                                    <span class="form-validation" style="display: block;">{{ $errors->first('confirmation') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>

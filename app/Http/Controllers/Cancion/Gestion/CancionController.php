@@ -92,7 +92,7 @@ class CancionController extends Controller
         $song->idioma_titulo = $request->idioma_titulo;
         $song->idioma_letra = $request->idioma_letra;
         $song->fecha_principal_salida = $request->fecha_principal_salida;
-        $song->pista_mp3 = public_path().'/storage/canciones/'.$request_song->filename;
+        $song->pista_mp3 = $request_song->filename;
         $song->save();
 
         $info = $request->infocol;

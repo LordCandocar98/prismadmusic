@@ -94,7 +94,7 @@ class RepertorioController extends Controller
             'annio_produccion'     => $request->annio_produccion,
             'upc_ean'              => $request->upc_ean,
             'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => public_path().'/storage/portadas/'.$cover->filename,
+            'portada'              => $cover->filename,
             'fecha_lanzamiento'    => $request->fecha_lanzamiento,
         ]);
         ColaboracionRepertorio::create([

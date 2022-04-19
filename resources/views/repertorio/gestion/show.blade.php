@@ -83,7 +83,7 @@
                         <td>{{ $cancion->titulo }}</td>
                         <td>{{ $cancion->autor }}</td>
                         <td style="width: 1px;">
-                            <audio controls src="{{ url('storage/'.$cancion->pista_mp3) }}"></audio>
+                            <audio controls src="{{ url('storage/canciones/'.$cancion->pista_mp3) }}"></audio>
                         </td>
                     </tr>
                     @endforeach
