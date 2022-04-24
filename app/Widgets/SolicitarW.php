@@ -7,6 +7,7 @@ use App\Models\Repertorio;
 use Arrilot\Widgets\AbstractWidget;
 use App\Models\Tienda;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SolicitarW extends AbstractWidget
 {
@@ -27,14 +28,31 @@ class SolicitarW extends AbstractWidget
         $repertorios = ColaboracionRepertorio::where('cliente_email',$user->email)->get();
         $repertorios = $user->role_id == 2 ? $repertorios : Repertorio::all();
         $count = count($repertorios);
+        $url_solicitud = '';
+        $mensaje_w = '';
+        $regalias = DB::table('users')
+        ->join('persona', 'users.id', '=', 'persona.user_id')
+        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+        ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
+        ->where('users.role_id',2)
+        ->where('users.id', $user->id)
+        ->whereNull('nomina_id')
+        ->sum('regalia.valor');
+        
+        if ($regalias >= 200.00) {
+            $url_solicitud = route('nomina.create');
+            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dolares. Haga clic en el botón de abajo para solicitar pagos.";
+        }else{
+            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dolares. Aun no puede hacer clic en el botón de abajo para solicitar pagos, monto minimo a solicitar $200.";
+        }
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-dollar',
             'title'  => "Pagos - Solicitar pagos",
-            'text'   => "Actualmente tu cuenta tiene un saldo de 0 dolares. Haga clic en el botón de abajo para solicitar pagos.",
+            'text'   => $mensaje_w,
             'button' => [
                 'text' => 'Solicitar Pago',
-                'link' => route('nomina.create'),
+                'link' => $url_solicitud,
                 'color' => "#fff",
             ],
             'image' => '/images/dollar.jpg',
