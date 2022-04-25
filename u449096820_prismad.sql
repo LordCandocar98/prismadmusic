@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-04-2022 a las 04:17:20
+-- Tiempo de generación: 25-04-2022 a las 02:25:04
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -134,7 +134,10 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 (23, 40, 'MIGUEL HUERTAS', 'https://open.spotify.com/artist/2gXDNzafAvtZ4dYrDBhYpm?si=PGRSbbQUS7WjXR6gqCGvGw'),
 (24, 41, 'La Shule', 'https://open.spotify.com/artist/4u4FEjo1WEgiwgC2fRsQHB?si=neXxstxiRV-QKldNtzWtuA&utm_source=copy-link'),
 (25, 42, 'Nelson Romero', 'https://open.spotify.com/artist/4QI5KKpGTdNQaYo7mIpIN3?si=zVHju4vHR_SOFIScQhDuBA'),
-(26, 43, 'Mey Manjarres', 'https://open.spotify.com/user/12127905777?si=-LxXOYhcTWWCytSvvDgjPw&utm_source=copy-link&nd=1');
+(26, 43, 'Mey Manjarres', 'https://open.spotify.com/user/12127905777?si=-LxXOYhcTWWCytSvvDgjPw&utm_source=copy-link&nd=1'),
+(27, 44, 'Kassett', 'https://open.spotify.com/track/08DoQ1mGKSjLWn98NnseYX?si=f57cc08980aa4eba'),
+(28, 45, 'Vanna', NULL),
+(29, 46, 'Anica Rod', 'https://open.spotify.com/artist/0BWH2QK6dFzWdZr72LwqaQ?si=mTFR5-4nR2SoHNnUP6BzyQ');
 
 -- --------------------------------------------------------
 
@@ -785,6 +788,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('Jorgevelezpanda@gmail.com', '$2y$10$WRnEkFtRNCRUIArEYhThD.2Jkg89UEdRCkiOZXDnlybr7zQzJS1LK', '2022-04-17 12:16:25');
+
 -- --------------------------------------------------------
 
 --
@@ -1048,7 +1058,10 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 (40, 'MIGUEL', 'HUERTAS', 'Colombia', NULL, 'cc', '1014272451', '3208150897', 57, 'Bogotá', NULL, NULL),
 (41, 'Pablo', 'Cano', 'Spain', 'Gandesa', 'cc', '47817131Q', '+667289427', 60, 'Catalonia', NULL, NULL),
 (42, 'Nelson', 'Romero', 'Colombia', 'Bogotá D.C.', 'cc', '80742991', '3125561118', 62, 'Bogotá D.C.', NULL, NULL),
-(43, 'mey', 'manjarres', 'Colombia', 'Bogotá D.C.', 'cc', '1010165035', '3124835089', 63, 'Bogotá D.C.', NULL, NULL);
+(43, 'mey', 'manjarres', 'Colombia', 'Bogotá D.C.', 'cc', '1010165035', '3124835089', 63, 'Bogotá D.C.', NULL, NULL),
+(44, 'Josue', 'paredes', 'Colombia', 'Bogotá D.C.', 'ce', '21063809', '3112266723', 70, 'Bogotá D.C.', NULL, NULL),
+(45, 'Carlos', 'Sanchez', 'Ecuador', 'Guayaquil', 'tp', '0930095815', '0980127117', 73, 'Guayas', NULL, NULL),
+(46, 'Aneglica', 'Rodriguez', 'Colombia', 'Bogotá D.C.', 'cc', '52235260', '3004438405', 74, 'Bogotá D.C.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1137,21 +1150,22 @@ CREATE TABLE `repertorio` (
   `copyright` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `annio_produccion` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `upc_ean` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_catalogo` bigint(20) DEFAULT NULL,
-  `fecha_lanzamiento` date DEFAULT NULL
+  `numero_catalogo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_lanzamiento` date DEFAULT NULL,
+  `terminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `repertorio`
 --
 
-INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subgenero`, `nombre_sello`, `formato`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
-(7, 'portadas/March2022/1647664288.jpg', 'Las mañanitas', NULL, 'Britpop', 'Acid house', 'Prismad music', 'f1', 'CandidoM', 'copyrigth', '2022', NULL, NULL, '2022-03-24'),
-(8, 'portadas/March2022/1647799197.jpg', 'Bast Lamia', 'Líber Lilith', 'Heavy Metal', 'Dark', 'Coclestis Meretrix', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '1999', 'DM', 2545, '2022-03-31'),
-(9, 'portadas/March2022/1647804894.jpg', 'la gata moon', 'agatha', 'Alternative', 'Acid house', 'los ratones de la casa se van cuando los gatos llegan', 'f3', 'jesucristo', 'maria', '2022', 'jose', 8, '2023-02-08'),
-(10, 'portadas/March2022/1647806349.jpg', 'somo de barrio', 'el barrio nos llama', 'Americana', 'Acid rap', 'las cosas que pasan en el  barrio se quedan en el barrio', 'f3', 'don etor', 'ud sabe que yo le he servido', '2022', 'rosa', 5, '2022-08-25'),
-(11, 'portadas/March2022/1647838896.jpg', 'kelly cardenas', NULL, 'Reggaeton', 'Pop', 'sony music', 'f3', 'alejo cruz', 'prismad music', '2022', NULL, NULL, '2022-03-28'),
-(12, 'portadas/March2022/1647843845.jpg', 'Plasma', 'Electron', 'Afoxé', 'Acid house', 'Popeye', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '2022', 'sdafsdaf', 23413124, '2022-03-31');
+INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subgenero`, `nombre_sello`, `formato`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`, `terminado`) VALUES
+(7, 'portadas/March2022/1647664288.jpg', 'Las mañanitas', NULL, 'Britpop', 'Acid house', 'Prismad music', 'f1', 'CandidoM', 'copyrigth', '2022', NULL, NULL, '2022-03-24', 0),
+(8, 'portadas/March2022/1647799197.jpg', 'Bast Lamia', 'Líber Lilith', 'Heavy Metal', 'Dark', 'Coclestis Meretrix', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '1999', 'DM', '2545', '2022-03-31', 0),
+(9, 'portadas/March2022/1647804894.jpg', 'la gata moon', 'agatha', 'Alternative', 'Acid house', 'los ratones de la casa se van cuando los gatos llegan', 'f3', 'jesucristo', 'maria', '2022', 'jose', '8', '2023-02-08', 0),
+(10, 'portadas/March2022/1647806349.jpg', 'somo de barrio', 'el barrio nos llama', 'Americana', 'Acid rap', 'las cosas que pasan en el  barrio se quedan en el barrio', 'f3', 'don etor', 'ud sabe que yo le he servido', '2022', 'rosa', '5', '2022-08-25', 0),
+(11, 'portadas/March2022/1647838896.jpg', 'kelly cardenas', NULL, 'Reggaeton', 'Pop', 'sony music', 'f3', 'alejo cruz', 'prismad music', '2022', NULL, NULL, '2022-03-28', 0),
+(12, 'portadas/March2022/1647843845.jpg', 'Plasma', 'Electron', 'Afoxé', 'Acid house', 'Popeye', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '2022', 'sdafsdaf', '23413124', '2022-03-31', 0);
 
 -- --------------------------------------------------------
 
@@ -1726,7 +1740,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'mgRemoeVx5iRFwkCVV7runPBAl80CUfphszNqdYtiwQdSNkLcJslfL61NE4H', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'f8XhTPD2kpJ0XmzJtwXRs2Yzlp06zQH42i6e2xSWiD1QUnSjh7TbbaVKgBGT', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
 (26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$hx0M3CbnSnOiV591TTANv.AuOcSfDuE/JpQ6rFPflZJXgmAplAxDO', 'V4jAQKmMdL1KIxqcgEwtd7prK576kFkie9gc0vEx0w0BqfgEisMHWqUu31mk', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-03-17 12:21:48', 1, NULL),
 (28, 2, 'lamacaproducciones', 'lamacaproducciones@gmail.com', 'users/default.png', '2022-03-06 18:37:28', '$2y$10$bnPFS9fs/Ldgq5szw7Psj.VShqCQgNB8IGFf1g61ZHwzo6aSXrKT.', NULL, NULL, '2022-03-06 18:37:10', '2022-03-06 18:40:21', 1, NULL),
 (29, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2022-03-06 20:44:24', '$2y$10$2zw/Tjhwseaj5Qbm8bi6Uu5lN4zS2gdvJHci9blNQaj/eG2WSVo0S', NULL, NULL, '2022-03-06 20:44:06', '2022-03-06 20:44:24', 0, NULL),
@@ -1737,10 +1751,10 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (41, 2, 'dennis corredor', 'contcatodennisfernando@gmail.com', 'users/default.png', NULL, '$2y$10$QybFYmb2lYYk/Ler49aruO1WXNR5ptbIj5HVe/X6wfxdKiRhcxTQ2', NULL, NULL, '2022-03-12 22:34:38', '2022-03-12 22:34:38', 0, NULL),
 (42, 2, 'dennys fernando corredor', 'polappcolombia@gmail.com', 'users/default.png', '2022-03-12 22:38:26', '$2y$10$qbFMSHtfyu6YGf0/e3e.b.elbS5YtS9miB5dvn4hR1eRJWifthELq', NULL, NULL, '2022-03-12 22:37:39', '2022-03-12 22:40:44', 1, NULL),
 (43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$PJgbp3qe5rEhQtxucDZate46IbXExyrqsit2VNGfG69GWbzQomH16', 'iYvnvxcVz8KEhDoqxeqRjIWAGt19suo3VYkIA8D0fDDCa3YcGBpUXaF4ZmUZ', NULL, '2022-03-13 14:46:16', '2022-03-13 14:46:59', 0, NULL),
-(46, 3, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/default.png', '2022-03-18 23:13:50', '$2y$10$abIYyDyEolpmJaAU5r4oR.BjVhYLdrkErb/6CX03HVH4SWW0RL2hO', NULL, '{\"locale\":\"es\"}', '2022-03-18 23:11:01', '2022-03-21 00:59:32', 1, NULL),
+(46, 3, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/default.png', '2022-03-18 23:13:50', '$2y$10$ncBeaOn7Hep8RdzAkRIflOLYHBUuigVVd0nY91PHpRshuyyzjAOk.', 'dGGVPHhh7yNbb0yd8R1ICZk4RGV7Sv3r7TVqssBUXXKBVUOu7wRyFEC1hxnf', '{\"locale\":\"es\"}', '2022-03-18 23:11:01', '2022-04-11 21:36:25', 1, NULL),
 (47, 2, 'Javier Varon', 'javoxdaemon@gmail.com', 'users/default.png', '2022-03-20 12:47:40', '$2y$10$qYELMrbN5oWL3V5mstuswu88GbAeSjsM91McgPwVHlNGnyIS53hz2', NULL, NULL, '2022-03-20 12:45:53', '2022-03-20 12:49:36', 1, NULL),
 (48, 2, 'jeniagaitan@gmail.com', 'jeniagaitan@gmail.com', 'users/default.png', '2022-03-20 14:21:39', '$2y$10$EBgSMk9ugcyFf6MbokONxOrTJf97xUj.j4hHptP6R9MG07adtmY4u', NULL, NULL, '2022-03-20 14:18:52', '2022-03-20 14:25:32', 1, 'M6g2HK6SGW9X8m4VS8i4sLsfUbYLe6lWI3Nm5Zu2'),
-(49, 2, 'Malkan', 'jvaronbueno@gmail.com', 'users/default.png', '2022-03-20 14:45:55', '$2y$10$rcbGZROc3P6m/3sjrZLPGe7g3ZL3uFpFiFM/zG9vDTqBdGRlsEev.', NULL, '{\"locale\":\"es\"}', '2022-03-20 14:43:29', '2022-03-20 15:15:59', 1, 'A1XP7XH2NGhHnpamsNVJ4W5pVa8QgCSohYcU1zwF'),
+(49, 2, 'Malkan', 'jvaronbueno@gmail.com', 'users/default.png', '2022-03-20 14:45:55', '$2y$10$UInyosnITZ8LGp4N4hsUTuhapOqDZe7eWgbT5JpUBTuB2pJcVZ./O', NULL, '{\"locale\":\"es\"}', '2022-03-20 14:43:29', '2022-04-17 21:23:46', 1, 'A1XP7XH2NGhHnpamsNVJ4W5pVa8QgCSohYcU1zwF'),
 (51, 2, 'jonathan', 'jonatangarzon95@gmail.com', 'users/default.png', '2022-03-22 17:05:33', '$2y$10$8Cc7l93aF/7q.tn8oUFLgOx4O2sfZB1PdVtfkniY/.TfqbrmwUkqG', NULL, NULL, '2022-03-22 17:04:55', '2022-03-22 17:07:21', 1, NULL),
 (52, 2, 'ian123456', 'iangigi97@gmail.com', 'users/default.png', '2022-03-24 11:01:28', '$2y$10$bLvZlShay4Flp7MuLQH0reHKze.4AeLPzTPJZUC1YFScyaGbaa2Ia', NULL, NULL, '2022-03-24 11:00:57', '2022-03-24 11:01:28', 0, NULL),
 (53, 2, 'ElTorres', 'eltorres.musicprod@gmail.com', 'users/default.png', '2022-03-24 15:01:03', '$2y$10$M9q5FMRgrL6oDHCIc5DR9.ERJiCrUb8/dyR18ZalmzUdDrcLVdUBe', NULL, NULL, '2022-03-24 15:00:38', '2022-03-24 15:01:03', 0, NULL),
@@ -1756,7 +1770,15 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (63, 2, 'mey manjarres', 'meycontacto@gmail.com', 'users/default.png', '2022-03-30 18:25:20', '$2y$10$j0U7g7dayNhmGexYTj.A4.M.KSS1JkgNTDCkU6w/EYJCS3uIZlo/u', NULL, NULL, '2022-03-30 18:23:49', '2022-03-30 18:30:20', 1, NULL),
 (64, 2, 'Juan A. Castillo', 'tcrecordsmusic@gmail.com', 'users/default.png', '2022-03-30 19:06:20', '$2y$10$63fL3idu82XHKz3Tw/WHLOVyDmTjFxAIor/64ijgaFO8WUdFLfkvi', NULL, NULL, '2022-03-30 19:05:17', '2022-03-30 19:06:20', 0, NULL),
 (65, 2, 'Dokla', 'laverdaderadinastia.official@gmail.com', 'users/default.png', '2022-04-04 19:25:16', '$2y$10$BqqVhYYlRbsup9mF2q8rZuZQmhmN8LpcVqF8UWzCQHl.piMngHb9S', NULL, NULL, '2022-04-04 19:24:29', '2022-04-04 19:25:16', 0, NULL),
-(66, 2, 'Luis Javier Orizaba', 'luisjaviervoz@gmail.com', 'users/default.png', '2022-04-05 12:25:00', '$2y$10$.5jwOxcJSj/V5vtn2bV2ouOwSwdwfrrX3HunVKjLuQAtyjLXBDB/S', NULL, NULL, '2022-04-05 12:24:43', '2022-04-05 12:25:00', 0, NULL);
+(66, 2, 'Luis Javier Orizaba', 'luisjaviervoz@gmail.com', 'users/default.png', '2022-04-05 12:25:00', '$2y$10$.5jwOxcJSj/V5vtn2bV2ouOwSwdwfrrX3HunVKjLuQAtyjLXBDB/S', NULL, NULL, '2022-04-05 12:24:43', '2022-04-05 12:25:00', 0, NULL),
+(67, 2, 'prismadmusic.com ugrfeiohofidsksmvnjdbvsijf94t9u5t0i4r94ijgrjght9y84r49t64rkowf0ereiuguejdkwdiweofuehdskodjjdgofjsoddggfsidj', 'KsenofontMaidanov+3r4v@mail.ru', 'users/default.png', NULL, '$2y$10$Y3n7M4.8d2Jz25Nlpk39Su6OdHYvK9ERE/SoJ6h1hnnL71u4lHGz.', NULL, NULL, '2022-04-13 23:26:12', '2022-04-13 23:26:12', 0, NULL),
+(68, 2, 'Manolo Maya', 'linkmaya@hotmail.com', 'users/default.png', '2022-04-16 11:20:35', '$2y$10$Wr3L.s95Mw.sCgBn9DouBuyxYmXSgCHvRpdEqUCubVDOSsSwzxMnC', NULL, NULL, '2022-04-16 11:17:07', '2022-04-16 11:20:35', 0, NULL),
+(69, 2, 'bacco', 'bacco.lofi@gmail.com', 'users/default.png', '2022-04-18 13:21:28', '$2y$10$7M3MTekXl9Qim9DsSQYbu.jbnTq3BxouB8mENuYoWIlJFJvneiNDS', NULL, NULL, '2022-04-18 13:20:55', '2022-04-18 13:21:28', 0, NULL),
+(70, 2, 'kassett', 'laordensonora2021@gmail.com', 'users/default.png', '2022-04-19 09:04:28', '$2y$10$BY1CVQXEVkBJENZhXd0nluuXZb.YQY6bNeTIZeXfJf5MsyXoqMG.e', NULL, NULL, '2022-04-19 09:03:53', '2022-04-19 09:09:21', 1, NULL),
+(71, 2, '28music', '28musicve@gmail.com', 'users/default.png', '2022-04-19 11:28:28', '$2y$10$PdqvpU8vwrH.clQUSguHze9RH2R/GjDdWHtwfcPkPEW6wzXWdakT.', NULL, NULL, '2022-04-19 11:28:08', '2022-04-19 11:28:28', 0, NULL),
+(72, 2, 'cristofer crdova cornejo', 'crissdeliz.oficial@gmail.com', 'users/default.png', '2022-04-19 13:40:32', '$2y$10$aG/l.kIvFcKPCsv3p.CmWOUD6oUqsSjjZNx8U7x4q/OVLWkEGL0MK', NULL, NULL, '2022-04-19 13:40:02', '2022-04-19 13:40:32', 0, NULL),
+(73, 2, 'Carlos Sanchez', 'goodvibesmusicst@gmail.com', 'users/default.png', '2022-04-22 01:40:02', '$2y$10$3pmVImShYeD/eBbsO1ArEeZYrpHI/OCZ.5LFSVl2uVOatVuCdXlHa', NULL, NULL, '2022-04-22 01:38:53', '2022-04-22 01:41:34', 1, NULL),
+(74, 2, 'anica rod', 'anicarodmusica@gmail.com', 'users/default.png', '2022-04-22 11:13:00', '$2y$10$UVe.19NYutiaAAsQ1pyEw.6mEpNzq.5Zv7gRZRk1ZoSH0vq/edqP.', NULL, NULL, '2022-04-22 11:02:39', '2022-04-22 11:19:43', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -2000,7 +2022,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
@@ -2072,7 +2094,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -2126,7 +2148,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Restricciones para tablas volcadas
