@@ -74,7 +74,7 @@
                                 <select class="genero" name="genero" id="genero" style="width: 100%;">
                                     <option value="none" selected disabled hidden>Seleccione una opción</option>
                                     @foreach ($genre as $ge)
-                                        <option value="{{ $ge->nombre }}">{{ $ge->nombre }}</option>
+                                        <option value="{{ $ge->nombre }}" {{ old('genero') == $ge->nombre ?'selected':'' }}>{{ $ge->nombre }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('genero'))
@@ -87,7 +87,7 @@
                                 <select class="subgenero" name="subgenero" id="subgenero" style="width: 100%;">
                                     <option value="none" selected disabled hidden>Seleccione una opción</option>
                                     @foreach ($subgenre as $sge)
-                                        <option value="{{ $sge->nombre }}">{{ $sge->nombre }}</option>
+                                        <option value="{{ $sge->nombre }}" {{ old('subgenero') == $sge->nombre ?'selected':'' }}>{{ $sge->nombre }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('subgenero'))
