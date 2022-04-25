@@ -95,7 +95,8 @@ class CancionController extends Controller
         $song->pista_mp3 = $request_song->filename;
         $song->save();
 
-        $info = $request->infocol;
+        $info = $request->infocol ?? [];
+
         for($i = 0; $i<count($info); $i+=2){
             if(!(User::where('email', '=', $info[$i])->exists())){
                 $usuario = User::create([

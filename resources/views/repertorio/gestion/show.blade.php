@@ -1,4 +1,22 @@
 @extends('layouts.master')
+
+@section('addBreadcrumbs')
+<div class="active">
+    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Repertorios</a>
+</div>
+@endsection
+
+
+@section('page_header')
+<h1 class="page-title">
+    <i class="fa fa-music" aria-hidden="true"></i>
+    Vista general de repertorio
+</h1>
+<a href="{{ route('repertorio.index') }}" class="btn btn-warning">
+    <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">Volver a la lista</span>
+</a>
+@endsection
+
 @section('css')
 <style>
     .card-title {
@@ -11,21 +29,7 @@
 
 </style>
 @endsection
-@section('addBreadcrumbs')
-<div class="active">
-    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Repertorios</a>
-</div>
-@endsection
 
-@section('page_header')
-<h1 class="page-title">
-    <i class="fa fa-music" aria-hidden="true"></i>
-    Vista general de repertorio
-</h1>
-<a href="{{ route('repertorio.index') }}" class="btn btn-warning">
-    <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">Volver a la lista</span>
-</a>
-@endsection
 @section('content')
 
 <div class="container">
@@ -59,14 +63,23 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and ((count($canciones)>1 and $repertorio->formato == 'SINGLE') or (count($canciones)>1 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM'))
+                    <a class="btn btn-success float-right" style="margin: 2em;" href="{{ route('finishProduct', $repertorio->id) }}">Finalizar Producto</a>
+                @endif
+            </div>
+        </div>
     </div>
     <br>
     <div class="card">
         <div class="card-body">
             <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
-            @if( (count($canciones)<1 and $repertorio->formato == 'SINGLE') or (count($canciones)<6 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM')
+
+            @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and ((count($canciones)<1 and $repertorio->formato == 'SINGLE') or (count($canciones)<6 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM'))
                 <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
             @endif
+
             <table class="table">
                 <thead>
                     <tr>
@@ -79,11 +92,12 @@
                 <tbody>
                     @foreach ($canciones as $key => $cancion)
                     <tr>
-                        <th scope="row">{{ $key }}</th>
+                        <th scope="row">{{ $key+1 }}</th>
                         <td>{{ $cancion->titulo }}</td>
                         <td>{{ $cancion->autor }}</td>
                         <td style="width: 1px;">
                             <audio controls src="{{ url('storage/canciones/'.$cancion->pista_mp3) }}"></audio>
+                            <a href="{{ url('storage/canciones/'.$cancion->pista_mp3) }}" download="{{$cancion->titulo}}">Decargar</a>
                         </td>
                     </tr>
                     @endforeach
@@ -97,4 +111,5 @@
 
 @section('javascript')
 <script src="{{ asset('js/jsRegalias/gestion/scriptIndex.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
 @endsection

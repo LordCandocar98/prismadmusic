@@ -36,6 +36,10 @@
         text-indent: 10px;
     }
 
+    .form-validation{
+        font-size: 11px;
+        color: #f96868;
+    }
 </style>
 @endsection
 
@@ -50,125 +54,145 @@
                 <h5 class="card-title">Información general</h5>
                 @csrf
                 <div class="form-group row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('titulo') ? 'has-error' : '' }}">
                         <label for="titulo">Título</label>
                         <br>
                         <input type="text" class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}">
+                        @if ($errors->has('titulo'))
+                            <span class="form-validation">{{ $errors->first('titulo') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('version_subtitulo') ? 'has-error' : '' }}">
                         <label for="version_subtitulo">Versión/Subtítulo</label>
                         <br>
                         <input type="text" class="form-control" id="version_subtitulo" name="version_subtitulo"
                             value="{{ old('version_subtitulo') }}">
+                        @if ($errors->has('version_subtitulo'))
+                            <span class="form-validation">{{ $errors->first('version_subtitulo') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('autor') ? 'has-error' : '' }}">
                         <label for="autor">Autor</label>
                         <br>
                         <input type="text" class="form-control" id="autor" name="autor" value="{{ old('autor') }}">
+                        @if ($errors->has('autor'))
+                            <span class="form-validation">{{ $errors->first('autor') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
                         <label for="productor">Compositor</label>
                         <br>
                         <input type="text" class="form-control" id="compositor" name="compositor"
                             placeholder="Ejemplo: Wolfgang Amadeus Mozart " value="{{ old('compositor') }}">
+                        @if ($errors->has('productor'))
+                            <span class="form-validation">{{ $errors->first('productor') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
                         <label for="copyright">Arreglista</label>
                         <br>
                         <input type="text" class="form-control" id="arreglista" name="arreglista"
                             placeholder="Ejemplo: Cyro Pereira" value="{{ old('arreglista') }}">
+                        @if ($errors->has('copyright'))
+                            <span class="form-validation">{{ $errors->first('copyright') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
                         <label for="productor">Productor musical</label>
                         <br>
                         <input type="text" class="form-control" id="productor" name="productor"
                             placeholder="George Martin" value="{{ old('productor') }}">
+                        @if ($errors->has('productor'))
+                            <span class="form-validation">{{ $errors->first('productor') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('pline') ? 'has-error' : '' }}">
                         <label for="pline">Pline</label>
                         <br>
                         <input type="text" class="form-control" id="pline" name="pline" placeholder="..."
                             value="{{ old('pline') }}">
+                        @if ($errors->has('pline'))
+                            <span class="form-validation">{{ $errors->first('pline') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('nombre_colaboracion') ? 'has-error' : '' }}">
                         <label for="nombre_colaboracion">Nombre de la Colaboración</label>
                         <br>
                         <input type="text" class="form-control" id="nombre_colaboracion" name="nombre_colaboracion"
                             value="{{ old('nombre_colaboracion') }}">
+                        @if ($errors->has('nombre_colaboracion'))
+                            <span class="form-validation">{{ $errors->first('nombre_colaboracion') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
                         <label for="annio_produccion">Año de producción</label>
                         <br>
                         <input type="number" step="1" value="2022" class="form-control" id="annio_produccion"
                             name="annio_produccion" value="{{ old('annio_produccion') }}">
+                        @if ($errors->has('annio_produccion'))
+                            <span class="form-validation">{{ $errors->first('annio_produccion') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('fecha_principal_salida') ? 'has-error' : '' }}">
                         <label for="fecha_principal_salida">Fecha de salida al mercado <i class="fa fa-question-circle"
                                 aria-hidden="true" data-toggle="popover" title="*para vídeo horarios CET"></i></label>
                         <br>
                         <input type="date" class="form-control" id="fecha_principal_salida"
                             name="fecha_principal_salida" min="{{date('Y-m')}}-{{date('d')+6}}"
                             value="{{ old('fecha_principal_salida') }}">
+                        @if ($errors->has('fecha_principal_salida'))
+                            <span class="form-validation">{{ $errors->first('fecha_principal_salida') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('idioma_titulo') ? 'has-error' : '' }}">
                         <label for="idioma_titulo">Idioma del título</label>
                         <br>
                         <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo">
-                            <option value="Español" {{ old('idioma_titulo') == "Español" ? 'selected' : '' }}>Español
-                            </option>
-                            <option value="Inglés" {{ old('idioma_titulo') == "Inglés" ? 'selected' : '' }}>Inglés
-                            </option>
-                            <option value="Portugués" {{ old('idioma_titulo') == "Portugués" ? 'selected' : '' }}>
-                                Portugués</option>
-                            <option value="Italiano" {{ old('idioma_titulo') == "Italiano" ? 'selected' : '' }}>Italiano
-                            </option>
-                            <option value="Francés" {{ old('idioma_titulo') == "Francés" ? 'selected' : '' }}>Francés
-                            </option>
+                            <option value="Español" {{ old('idioma_titulo') == "Español" ? 'selected' : '' }}>Español</option>
+                            <option value="Inglés" {{ old('idioma_titulo') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                            <option value="Portugués" {{ old('idioma_titulo') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                            <option value="Italiano" {{ old('idioma_titulo') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                            <option value="Francés" {{ old('idioma_titulo') == "Francés" ? 'selected' : '' }}>Francés</option>
                             <option value="Chino" {{ old('idioma_titulo') == "Chino" ? 'selected' : '' }}>Chino</option>
-                            <option value="Japonés" {{ old('idioma_titulo') == "Japonés" ? 'selected' : '' }}>Japonés
-                            </option>
-                            <option value="Coreano" {{ old('idioma_titulo') == "Coreano" ? 'selected' : '' }}>Coreano
-                            </option>
-                            <option value="Alemán" {{ old('idioma_titulo') == "Alemán" ? 'selected' : '' }}>Alemán
-                            </option>
+                            <option value="Japonés" {{ old('idioma_titulo') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                            <option value="Coreano" {{ old('idioma_titulo') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                            <option value="Alemán" {{ old('idioma_titulo') == "Alemán" ? 'selected' : '' }}>Alemán</option>
                             <option value="Árabe" {{ old('idioma_titulo') == "Árabe" ? 'selected' : '' }}>Árabe</option>
                             <option value="Hindi" {{ old('idioma_titulo') == "Hindi" ? 'selected' : '' }}>Hindi</option>
                             <option value="Ruso" {{ old('idioma_titulo') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                         </select>
+                        @if ($errors->has('idioma_titulo'))
+                            <span class="form-validation">{{ $errors->first('idioma_titulo') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('idioma_letra') ? 'has-error' : '' }}">
                         <label for="idioma_letra">Idioma de la letra</label>
                         <br>
                         <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra">
-                            <option value="Español" {{ old('idioma_letra') == "Español" ? 'selected' : '' }}>Español
-                            </option>
-                            <option value="Inglés" {{ old('idioma_letra') == "Inglés" ? 'selected' : '' }}>Inglés
-                            </option>
-                            <option value="Portugués" {{ old('idioma_letra') == "Portugués" ? 'selected' : '' }}>
-                                Portugués</option>
-                            <option value="Italiano" {{ old('idioma_letra') == "Italiano" ? 'selected' : '' }}>Italiano
-                            </option>
-                            <option value="Francés" {{ old('idioma_letra') == "Francés" ? 'selected' : '' }}>Francés
-                            </option>
+                            <option value="Español" {{ old('idioma_letra') == "Español" ? 'selected' : '' }}>Español</option>
+                            <option value="Inglés" {{ old('idioma_letra') == "Inglés" ? 'selected' : '' }}>Inglés</option>
+                            <option value="Portugués" {{ old('idioma_letra') == "Portugués" ? 'selected' : '' }}>Portugués</option>
+                            <option value="Italiano" {{ old('idioma_letra') == "Italiano" ? 'selected' : '' }}>Italiano</option>
+                            <option value="Francés" {{ old('idioma_letra') == "Francés" ? 'selected' : '' }}>Francés</option>
                             <option value="Chino" {{ old('idioma_letra') == "Chino" ? 'selected' : '' }}>Chino</option>
-                            <option value="Japonés" {{ old('idioma_letra') == "Japonés" ? 'selected' : '' }}>Japonés
-                            </option>
-                            <option value="Coreano" {{ old('idioma_letra') == "Coreano" ? 'selected' : '' }}>Coreano
-                            </option>
-                            <option value="Alemán" {{ old('idioma_letra') == "Alemán" ? 'selected' : '' }}>Alemán
-                            </option>
+                            <option value="Japonés" {{ old('idioma_letra') == "Japonés" ? 'selected' : '' }}>Japonés</option>
+                            <option value="Coreano" {{ old('idioma_letra') == "Coreano" ? 'selected' : '' }}>Coreano</option>
+                            <option value="Alemán" {{ old('idioma_letra') == "Alemán" ? 'selected' : '' }}>Alemán</option>
                             <option value="Árabe" {{ old('idioma_letra') == "Árabe" ? 'selected' : '' }}>Árabe</option>
                             <option value="Hindi" {{ old('idioma_letra') == "Hindi" ? 'selected' : '' }}>Hindi</option>
                             <option value="Ruso" {{ old('idioma_letra') == "Ruso" ? 'selected' : '' }}>Ruso</option>
                         </select>
+                        @if ($errors->has('idioma_letra'))
+                            <span class="form-validation">{{ $errors->first('idioma_letra') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('tipo_secundario') ? 'has-error' : '' }}">
                         <label for="tipo_secundario">Tipo secundario</label>
                         <br>
                         <select class="tipo_secundario" name="tipo_secundario" id="tipo_secundario"
@@ -185,8 +209,11 @@
                             <option value="otrogrupo" {{ old('tipo_secundario') == "otrogrupo" ? 'selected' : '' }}>
                                 Versión por otro grupo</option>
                         </select>
+                        @if ($errors->has('tipo_secundario'))
+                            <span class="form-validation">{{ $errors->first('tipo_secundario') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('instrumental') ? 'has-error' : '' }}">
                         <label for="instrumental">Instrumental</label>
                         <br>
                         <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
@@ -194,8 +221,11 @@
                             <option value="si" {{ old('instrumental') == "si" ? 'selected' : '' }}>Si</option>
                             <option value="no" {{ old('instrumental') == "no" ? 'selected' : '' }}>No</option>
                         </select>
+                        @if ($errors->has('instrumental'))
+                            <span class="form-validation">{{ $errors->first('instrumental') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('letra_chocante_vulgar') ? 'has-error' : '' }}">
                         <label for="letra_chocante_vulgar">Letra vulgar o chocante</label>
                         <br>
                         <select class="letra_chocante_vulgar" name="letra_chocante_vulgar" id="letra_chocante_vulgar"
@@ -206,13 +236,19 @@
                             <option value="clear" {{ old('letra_chocante_vulgar') == "clear" ? 'selected' : '' }}>
                                 Cleaned Version</option>
                         </select>
+                        @if ($errors->has('letra_chocante_vulgar'))
+                            <span class="form-validation">{{ $errors->first('letra_chocante_vulgar') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 {{ $errors->has('inicio_previsualizacion') ? 'has-error' : '' }}">
                         <label for="inicio_previsualizacion">Inicio de la previsualización</label>
                         <br>
                         <input type="number" class="form-control" id="inicio_previsualizacion"
                             name="inicio_previsualizacion" placeholder="En segundos, ejemplo: 3"
                             value="{{ old('inicio_previsualizacion') }}">
+                        @if ($errors->has('inicio_previsualizacion'))
+                            <span class="form-validation">{{ $errors->first('inicio_previsualizacion') }}</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -238,7 +274,7 @@
         </div>
     </div>
     <br>
-    <div class="card" style="width: 100%; padding-bottom: 2em;">
+    <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('porcentaje_intelectualCreador') ? 'has-error' : '' }}">
         <div class="card-body">
             <h5 class="card-title">Colaboradores</h5>
             <div class="row">
@@ -248,6 +284,9 @@
                     <input type="text" class="form-control" id="porcentaje_intelectualCreador"
                         name="porcentaje_intelectualCreador" placeholder="Numérico, ejemplo: 50 "
                         value="{{ old('porcentaje_intelectualCreador') }}">
+                        @if ($errors->has('porcentaje_intelectualCreador'))
+                            <span class="form-validation">{{ $errors->first('porcentaje_intelectualCreador') }}</span>
+                        @endif
                 </div>
             </div>
             <div class="row">
@@ -268,6 +307,9 @@
             <input type="checkbox" name="confirmation" id="confirmation">
             <label for="confirmation">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer
                 modificaciones a la misma.</label>
+                @if ($errors->has('confirmation'))
+                    <span class="form-validation">{{ $errors->first('confirmation') }}</span>
+                @endif
         </div>
 
         <button type="submit" class="btn btn-primary" id="addsong">Añadir canción</button>
@@ -308,7 +350,7 @@
         storeAsFile: true,
         maxParallelUploads: 2,
         allowFileTypeValidation: true,
-        acceptedFileTypes: ['audio/wav', 'audio/flac', 'audio/aiff', 'audio/ogg'],
+        acceptedFileTypes: ['audio/wav', 'audio/flac', 'audio/aiff'],
         fileValidateTypeDetectType: (source, type) =>
             new Promise((resolve, reject) => {
                 // Do custom type detection here and return with promise

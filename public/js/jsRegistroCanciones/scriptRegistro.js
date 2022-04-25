@@ -52,7 +52,6 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.tipo_secundario').val('-1').trigger('change');
 
     $('.instrumental').select2({
         allowClear: true,
@@ -60,7 +59,6 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.instrumental').val('-1').trigger('change');
 
     $('.letra_chocante_vulgar').select2({
         allowClear: true,
@@ -68,7 +66,6 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.letra_chocante_vulgar').val('-1').trigger('change');
 
     $('.idioma_titulo').select2({
         allowClear: true,
@@ -77,8 +74,6 @@ $(document).ready(function () {
             text: 'Seleccione una opción'
         },
     });
-    $('.idioma_titulo').val('-1').trigger('change');
-
 
     $('.idioma_letra').select2({
         allowClear: true,
@@ -86,7 +81,6 @@ $(document).ready(function () {
             id: -1,
         },
     });
-    $('.idioma_letra').val('-1').trigger('change');
 
     $("#porcentaje_intelectualCreador").change(function () {
         let suma = parseFloat($("#porcentaje_intelectualCreador").val());

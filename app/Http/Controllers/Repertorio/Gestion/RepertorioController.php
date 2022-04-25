@@ -11,8 +11,10 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
+use App\Mail\CorreoPrismadMusic;
 use App\Models\Cancion;
 use App\Models\Persona;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,6 +41,47 @@ class RepertorioController extends Controller
         ->where('users.id',$sesion->id)
         ->get();
         return view('repertorio.gestion.index', compact('repertorios'));
+    }
+
+    /**
+     * send finished
+
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function finishProduct($id)
+    {
+        $users = DB::table('users')
+        ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+        ->where('cr.repertorio_id', $id)
+        ->select('users.id', 'users.role_id', 'users.name', 'users.email')
+        ->get()[0];
+
+        if($users->id  == auth()->user()->id){
+            $repertorio = Repertorio::find($id);
+            $repertorio->terminado = 1;
+            $repertorio->save();
+
+            $details = [
+                'title' => 'Asunto: Hora de revisar este nuevo exito!',
+                'subtitle' => $users->name . ' Acaba de finalizar la contrucción del repertorio ' .$repertorio->titulo,
+                'body' => 'En Prismad Music nos encanta apoyar el espíritu musical',
+                'descripcion' => '',
+                'button' => 'Ver Repertorio',
+                'enlace' => route('repertorio.show', $repertorio->id)
+            ];
+
+            $moderadores = User::where('role_id', '=',  3)->get();
+
+            foreach($moderadores as $moderador){
+                Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+            }
+
+            return redirect()->route('repertorio.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -115,9 +158,19 @@ class RepertorioController extends Controller
      */
     public function show($id)
     {
-        $repertorio = Repertorio::find($id);
-        $canciones = Cancion::where('repertorio_id', '=', $id)->get();
-        return view('repertorio.gestion.show', compact('repertorio', 'canciones'));
+        $users = DB::table('users')
+        ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+        ->where('cr.repertorio_id', $id)
+        ->select('users.id', 'users.role_id')
+        ->get()[0];
+
+        if(($users->id  == auth()->user()->id) or ($users->role_id == 3) ){
+            $repertorio = Repertorio::find($id);
+            $canciones = Cancion::where('repertorio_id', '=', $id)->get();
+            return view('repertorio.gestion.show', compact('repertorio', 'canciones', 'users'));
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**

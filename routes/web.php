@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('informeRegalias', InformeRegaliaController::class);
 
     Route::get('/create_song/{id}', [CancionController::class, 'create_song'])->name('create_song');
+    Route::get('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
     Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
     Route::post('/uploadsong', [CancionController::class, 'uploadsong'])->name('uploadsong');
 });
