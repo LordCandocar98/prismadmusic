@@ -265,7 +265,7 @@
                             title="Puede importar los siguientes formatos: WAV, FLAC, AIFF."></i></label>
                     <br>
                     <input type="file" class="filepond my-pond" allowFileEncode name="pista_mp3"
-                        data-allow-reorder="true" data-max-file-size="30MB" data-max-files="1" required>
+                        data-allow-reorder="true" data-max-file-size="70MB" data-max-files="1" required>
                     <small class="form-text text-muted">No importar canciones con símbolos
                         especiales como '/%#' y demás. Podría afectar la subida del archivo o directamente no ocurrir la
                         misma.</small>
