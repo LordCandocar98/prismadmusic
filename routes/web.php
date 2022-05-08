@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('repertorio', RepertorioController::class); //Repertorio
     //Gestión de Repertorios para los rol: Cliente.
     Route::resource('cancion', CancionController::class); //Cancion
+    Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
     //Gestión de nomina para los roles: AMIN y Moderadores.
     Route::resource('nomina', NominaController::class);
     //Gestión de clientes para los roles: AMIN y Moderadores.
