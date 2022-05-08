@@ -46,6 +46,18 @@ class CancionController extends Controller
     }
 
     /**
+     * Mostrar todas las canciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCanciones(Request $request)
+    {
+        $term = $request->term ? : '';
+        $canciones = Cancion::where('titulo','like','%'.$term.'%')->select('id','titulo as text')->get();
+        return response()->json($canciones);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -97,8 +109,8 @@ class CancionController extends Controller
 
         $info = $request->infocol ?? [];
 
-        for($i = 0; $i<count($info); $i+=2){
-            if(!(User::where('email', '=', $info[$i])->exists())){
+        for ($i = 0; $i<count($info); $i+=2) {
+            if (!(User::where('email', '=', $info[$i])->exists())) {
                 $usuario = User::create([
                     'email'    => $info[$i],
                     'name'     => $info[$i],
@@ -197,7 +209,7 @@ class CancionController extends Controller
      */
     public function uploadsong(Request $request)
     {
-        if($song = $request->file('pista_mp3')){
+        if ($song = $request->file('pista_mp3')) {
             $destinosong = 'canciones/tmp/';
             $profilesong  = time() . '.' . $song->getClientOriginalExtension();
             $filename = $destinosong . $profilesong ;

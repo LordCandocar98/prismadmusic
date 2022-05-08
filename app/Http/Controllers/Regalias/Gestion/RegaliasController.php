@@ -10,6 +10,7 @@ use App\Models\Colaboracion;
 use App\Models\Persona;
 use App\Models\Regalia;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,31 +53,40 @@ class RegaliasController extends Controller
      */
     public function store(RegaliasRequest $request)
     {
-        $filename = "";
-        if ($xlsArchivo = $request->file('fileInforme')) {
-            $destinoXls = 'Regalias/' . date('FY') . '/';
-            $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
-            $filename = $destinoXls . $profileXls ;
-            $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
-        };
-        $colaboraciones = Colaboracion::where('cancion_id', $request->idcancion)->get();
-        dd($colaboraciones);
-        foreach ($colaboraciones as $colaboracion) {
-            $cliente = User::join('persona', 'persona.user_id', 'users.id')
+        try {
+            $filename = "";
+            if ($xlsArchivo = $request->file('fileInforme')) {
+                $destinoXls = 'Regalias/' . date('FY') . '/';
+                $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
+                $filename = $destinoXls . $profileXls ;
+                $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
+            };
+            DB::beginTransaction();
+            $colaboraciones = Colaboracion::where('cancion_id', $request->idcancion)->get();
+            foreach ($colaboraciones as $colaboracion) {
+                $cliente = User::join('persona', 'persona.user_id', 'users.id')
             ->join('cliente', 'cliente.persona_id', 'persona.id')
             ->where('users.email', $colaboracion->cliente_email)
             ->select('cliente.id', 'cliente.nombre_artistico')
             ->first();
-            dd($cliente);
+                $valor_cliente = ($request->valor *$colaboracion->porcentaje_intelectual)/100;
+                $regalia = new Regalia;
+                $regalia->cliente_id            = $cliente->id;
+                $regalia->informe               = $filename;
+                $regalia->fecha_informe_inicio  = $request->fecha_informe_inicio;
+                $regalia->fecha_informe_final   = $request->fecha_informe_final;
+                $regalia->valor                 = $valor_cliente;
+                $regalia->save();
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $notification = array(
+            'message' => $e->getLine()." ".$e->getMessage(),
+            'alert-type' => 'warning'
+        );
+            return back()->withInput()->with($notification);
         }
-        dd("HOLA");
-        $regalia = new Regalia;
-        $regalia->cliente_id            = $request->idCliente;
-        $regalia->informe               = $filename;
-        $regalia->fecha_informe_inicio  = $request->fecha_informe_inicio;
-        $regalia->fecha_informe_final   = $request->fecha_informe_final;
-        $regalia->valor                 = $request->valor;
-        $regalia->save();
         $notification = array(
             'message' => 'Regalia creada exitosamente!',
             'alert-type' => 'success'
