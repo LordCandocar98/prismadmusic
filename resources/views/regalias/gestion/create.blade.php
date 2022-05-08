@@ -29,32 +29,35 @@
                             </div>
                         @endif
                     </div>
-                    @csrf                        
+                    @csrf
                     <fieldset>
                         <legend>CARGA DE INFORME</legend>
                         <div class="form-group  col-md-12 ">
-                            <label for="forNombres">Cliente</label>
-                            <select class="cliente col-md-12" name="idCliente" id="idCliente" >
-                                @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">{{ $cliente->numero_identificacion." - ".$cliente->nombre." ".$cliente->apellido }}</option>
-                                @endforeach
+                            <label for="idcancion">Cancion</label>
+                            <select class="cancion col-md-12" name="idcancion" id="idcancion">
                             </select>
                         </div>
                         <div class="form-group  col-md-12 ">
                             <label class="control-label" for="forInforme">Informe</label>
-                            <input type="file" class="form-control" name="fileInforme" id="fileInforme" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                            <input type="file" class="form-control" name="fileInforme" id="fileInforme"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
                         </div>
-                        <div class="form-group  col-md-12 ">
+                        <div class="form-group col-md-12 ">
                             <label class="control-label" for="name">Fecha Informe Inicio</label>
-                            <input type="date" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio" placeholder="Fecha Informe Inicio" value="">
+                            <input type="date" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio"
+                                placeholder="Fecha Informe Inicio"
+                                value="{{ old('fecha_informe_inicio', date('d/m/Y')) }}">
                         </div>
-                        <div class="form-group  col-md-12 ">          
+                        <div class="form-group col-md-12 ">
                             <label class="control-label" for="name">Fecha Informe Final</label>
-                            <input type="date" class="form-control" name="fecha_informe_final" placeholder="Fecha Informe Final" value="">
+                            <input type="date" class="form-control" name="fecha_informe_final"
+                                placeholder="Fecha Informe Final" value="{{ old('fecha_informe_final', date('d/m/Y')) }}">
                         </div>
-                        <div class="form-group  col-md-12 ">
+
+                        <div class="form-group col-md-12 {{ $errors->has('valor') ? 'has-error' : '' }}">
                             <label class="control-label" for="name">Valor</label>
-                            <input type="number" class="form-control" name="valor" required="" step="any" placeholder="Valor" value="">
+                            <input type="text" name="valor" id="valor" class="valor form-control" step="any"
+                                value="{{ old('valor') }}" />
                         </div>
                         <div class="form-group  col-md-12 ">
                             <button type="submit" class="btn btn-primary save">Guardar</button>
@@ -66,5 +69,7 @@
     </div>
 @endsection
 @section('javascript')
+    <script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>
+    <script src="{{ asset('js/jsNomina/gestion/scriptCreate.js') }}"></script>
     <script src="{{ asset('js/jsRegalias/gestion/scriptCreate.js') }}"></script>
 @endsection

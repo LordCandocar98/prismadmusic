@@ -26,5 +26,6 @@ class Repertorio extends Model
         'upc_ean',
         'numero_catalogo',
         'portada',
+        'terminado'
     ];
 }

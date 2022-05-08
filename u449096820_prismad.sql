@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-03-2022 a las 05:19:30
+-- Tiempo de generación: 25-04-2022 a las 02:25:04
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -67,6 +67,17 @@ CREATE TABLE `cancion` (
   `pista_mp3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `cancion`
+--
+
+INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`, `titulo`, `version_subtitulo`, `autor`, `compositor`, `arreglista`, `productor`, `pline`, `annio_produccion`, `genero`, `subgenero`, `genero_secundario`, `subgenero_secundario`, `letra_chocante_vulgar`, `inicio_previsualizacion`, `idioma_titulo`, `idioma_letra`, `fecha_principal_salida`, `pista_mp3`) VALUES
+(4, 8, 'original', 'si', 'Intro Perierat Loculus', 'Intro Perierat Loculus - (lyrics)', 'Javier Varon', 'Jennifer Agudelo', 'Nestor Viana', 'Brayan Perdomo', 'ASD-T', 2022, 'Heavy Metal', 'Dark', 'Rock', 'Death Industrial', 'si', '3', 'Italiano', 'Inglés', '2022-03-31', 'canciones/March2022/1647803932.wav'),
+(5, 9, 'original', 'si', 'La gata moon', 'Agatha', 'Jesucristo', 'javier', 'ivan', 'Varon', 'Bueno', 2022, 'Alternative', 'Acid house', 'Afoxé', 'Acid', 'si', '2', 'Español', 'Español', '2023-02-08', 'canciones/March2022/1647805409.wav'),
+(6, 10, 'original', 'si', 'somo de barrio', 'Agatha', 'el barrios nos llama', 'ya tu sabe', 'el que sabe', 'el que no sabe', 'el que lo sabe', 2022, 'Americana', 'Acid Punk', 'Afoxé', 'Acid', 'si', '5', 'Francés', 'Español', '2022-08-25', 'canciones/March2022/1647806503.wav'),
+(7, 11, 'original', 'no', 'bien por ti', NULL, 'kelly cardenas', 'kelly cardenas', 'prismad music', 'alejo cruz', 'prismad music', 2022, 'Reggae', 'Pop', 'Afoxé', 'Acid', 'no', '120', 'Español', 'Español', '2022-03-28', 'canciones/March2022/1647839519.wav'),
+(8, 11, 'original', 'no', 'bien por ti', NULL, 'kelly cardenas', 'kelly cardenas', 'prismad music', 'alejo cruz', 'prismad music', 2022, 'Reggae', 'Pop', 'Afoxé', 'Acid', 'no', '120', 'Español', 'Español', '2022-03-28', 'canciones/March2022/1647839615.wav');
+
 -- --------------------------------------------------------
 
 --
@@ -112,7 +123,21 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 (5, 17, 'PrismadMusic', 'open.'),
 (12, 29, 'santiagoroncancio', 'open.santiagoroncancio.com'),
 (13, 30, 'maluma', NULL),
-(15, 32, 'LordCandocar', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=78a27f635d8c47ef');
+(15, 32, 'LordCandocar', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=78a27f635d8c47ef'),
+(16, 33, 'Javox', 'www.javox.com'),
+(17, 34, 'Jennia', 'www.lajena.com'),
+(18, 35, 'Malkan', 'www.malkan.com'),
+(19, 36, 'lol', NULL),
+(20, 37, 'davinxi', 'https://open.spotify.com/track/5Xn3ouAZ912kJEhYInD70A?si=027b3f2f29d64279'),
+(21, 38, 'Jorgevelezelpanda', NULL),
+(22, 39, 'Jorgevelezelpanda', NULL),
+(23, 40, 'MIGUEL HUERTAS', 'https://open.spotify.com/artist/2gXDNzafAvtZ4dYrDBhYpm?si=PGRSbbQUS7WjXR6gqCGvGw'),
+(24, 41, 'La Shule', 'https://open.spotify.com/artist/4u4FEjo1WEgiwgC2fRsQHB?si=neXxstxiRV-QKldNtzWtuA&utm_source=copy-link'),
+(25, 42, 'Nelson Romero', 'https://open.spotify.com/artist/4QI5KKpGTdNQaYo7mIpIN3?si=zVHju4vHR_SOFIScQhDuBA'),
+(26, 43, 'Mey Manjarres', 'https://open.spotify.com/user/12127905777?si=-LxXOYhcTWWCytSvvDgjPw&utm_source=copy-link&nd=1'),
+(27, 44, 'Kassett', 'https://open.spotify.com/track/08DoQ1mGKSjLWn98NnseYX?si=f57cc08980aa4eba'),
+(28, 45, 'Vanna', NULL),
+(29, 46, 'Anica Rod', 'https://open.spotify.com/artist/0BWH2QK6dFzWdZr72LwqaQ?si=mTFR5-4nR2SoHNnUP6BzyQ');
 
 -- --------------------------------------------------------
 
@@ -125,9 +150,22 @@ CREATE TABLE `colaboracion` (
   `cliente_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `porcentaje_intelectual` double NOT NULL,
   `cancion_id` bigint(20) NOT NULL,
-  `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `nombre_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `colaboracion`
+--
+
+INSERT INTO `colaboracion` (`id`, `cliente_email`, `porcentaje_intelectual`, `cancion_id`, `nombre_colaboracion`, `tipo_colaboracion`) VALUES
+(6, 'javoxdaemon@gmail.com', 50, 4, 'Libert Lilith', 'Principal'),
+(7, 'jeniagaitan@gmail.com', 50, 4, 'Libert Lilith', 'Featuring'),
+(8, 'jeniagaitan@gmail.com', 50, 5, 'Maria y Jose', 'Principal'),
+(9, 'javoxdaemon@gmail.com', 30, 5, 'Maria y Jose', 'Featuring'),
+(10, 'jvaronbueno@gmail.com', 20, 5, 'Maria y Jose', 'Remixer'),
+(11, 'jeniagaitan@gmail.com', 50, 6, 'javier', 'Principal'),
+(12, 'javoxdaemon@gmail.com', 20, 6, 'javier', 'Featuring');
 
 -- --------------------------------------------------------
 
@@ -148,7 +186,16 @@ CREATE TABLE `colaboracion_repertorio` (
 --
 
 INSERT INTO `colaboracion_repertorio` (`id`, `repertorio_id`, `cliente_email`, `tipo_colaboracion`, `spotify_colaboracion`) VALUES
-(1, 7, 'stiivenmoreno@gmail.com', 'Principal', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=df70056207424a55');
+(1, 7, 'stiivenmoreno@gmail.com', 'Principal', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u?si=df70056207424a55'),
+(2, 8, 'javoxdaemon@gmail.com', 'Principal (1st)', 'www.javox.com'),
+(3, 8, 'jeniagaitan@gmail.com', 'Featuring', 'www.jenniagaitan.com'),
+(4, 9, 'jeniagaitan@gmail.com', 'Principal (1st)', 'www.lajena.com'),
+(5, 9, 'javoxdaemon@gmail.com', 'Featuring', 'www.javox.com'),
+(6, 9, 'jvaronbueno@gmail.com', 'Remixer', 'www.jvaronbuneo.com'),
+(7, 10, 'jeniagaitan@gmail.com', 'Principal (1st)', 'www.lajena.com'),
+(8, 10, 'javoxdaemon@gmail.com', 'Featuring', 'www.javox.com'),
+(9, 11, 'polappcolombia@gmail.com', 'Principal (1st)', NULL),
+(10, 12, 'jvaronbueno@gmail.com', 'Principal (1st)', 'www.malkan.com');
 
 -- --------------------------------------------------------
 
@@ -402,6 +449,151 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `genero`
+--
+
+CREATE TABLE `genero` (
+  `id` int(3) DEFAULT NULL,
+  `nombre` varchar(19) DEFAULT NULL,
+  `descripcion` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Afoxé', NULL),
+(2, 'Alternative', NULL),
+(3, 'Ambient', NULL),
+(4, 'Americana', NULL),
+(5, 'Anime', NULL),
+(6, 'Arabesk', NULL),
+(7, 'Avant-garde', NULL),
+(8, 'Axé', NULL),
+(9, 'Baile Funk', NULL),
+(10, 'Bluegrass', NULL),
+(11, 'Blues', NULL),
+(12, 'Bossa nova', NULL),
+(13, 'Breakbeat', NULL),
+(14, 'Britpop', NULL),
+(15, 'Bugio', NULL),
+(16, 'C-Pop', NULL),
+(17, 'Cajun', NULL),
+(18, 'Canção', NULL),
+(19, 'Cantopop/HK-Pop 1', NULL),
+(20, 'Celtic', NULL),
+(21, 'Celtic Folk', NULL),
+(22, 'Chamamé', NULL),
+(23, 'Chamarra', NULL),
+(24, 'Chamber music', NULL),
+(25, 'Children\'s music', NULL),
+(26, 'Chill-Out', NULL),
+(27, 'Chinese', NULL),
+(28, 'Chorinho', NULL),
+(29, 'Choro', NULL),
+(30, 'Christian', NULL),
+(31, 'Classical', NULL),
+(32, 'Classical Crossover', NULL),
+(33, 'Comedy', NULL),
+(34, 'Country', NULL),
+(35, 'Cumbia', NULL),
+(36, 'Dance', NULL),
+(37, 'Dancehall', NULL),
+(38, 'Delta blues', NULL),
+(39, 'Disco', NULL),
+(40, 'Dixieland', NULL),
+(41, 'Downtempo', NULL),
+(42, 'Drum and bass', NULL),
+(43, 'Dub', NULL),
+(44, 'Easy listening', NULL),
+(45, 'Electronic', NULL),
+(46, 'Electronica', NULL),
+(47, 'Emo', NULL),
+(48, 'Enka', NULL),
+(49, 'Folk', NULL),
+(50, 'Forró', NULL),
+(51, 'French Pop', NULL),
+(52, 'Frevo', NULL),
+(53, 'Funk', NULL),
+(54, 'Gangsta rap', NULL),
+(55, 'German Folk', NULL),
+(56, 'German Pop', NULL),
+(57, 'Gospel', NULL),
+(58, 'Grunge', NULL),
+(59, 'Guitarra baiana', NULL),
+(60, 'Hard bop', NULL),
+(61, 'Hardcore', NULL),
+(62, 'Heavy Metal', NULL),
+(63, 'Hip Hop/Rap', NULL),
+(64, 'Holiday Music', NULL),
+(65, 'House', NULL),
+(66, 'Indo Pop', NULL),
+(67, 'Industrial', NULL),
+(68, 'Jazz', NULL),
+(69, 'Karaoke', NULL),
+(70, 'Kayokyuoku', NULL),
+(71, 'Kizomba', NULL),
+(72, 'Latin Jazz', NULL),
+(73, 'Latin Rap', NULL),
+(74, 'Lounge', NULL),
+(75, 'Milonga', NULL),
+(76, 'Motown', NULL),
+(77, 'MPB', NULL),
+(78, 'New Age', NULL),
+(79, 'New Wave', NULL),
+(80, 'Opera', NULL),
+(81, 'Pagode', NULL),
+(82, 'Pop', NULL),
+(83, 'Pop in Spanish', NULL),
+(84, 'Psychedelic', NULL),
+(85, 'Punk', NULL),
+(86, 'Ragtime', NULL),
+(87, 'Rancheira', NULL),
+(88, 'Rap', NULL),
+(89, 'Reggae', NULL),
+(90, 'Reggaeton', NULL),
+(91, 'Regional Mexicano', NULL),
+(92, 'Rhythm & Blues', NULL),
+(93, 'Rock', NULL),
+(94, 'Rap', NULL),
+(95, 'Rockabilly', NULL),
+(96, 'Russian Chanson', NULL),
+(97, 'Salsa', NULL),
+(98, 'Salsa Choke', NULL),
+(99, 'Samba', NULL),
+(100, 'Samba-canção', NULL),
+(101, 'Samba-reggae', NULL),
+(102, 'Sertaneja', NULL),
+(103, 'Singer-songwriter', NULL),
+(104, 'Ska', NULL),
+(105, 'Smooth jazz', NULL),
+(106, 'Soca', NULL),
+(107, 'Soul', NULL),
+(108, 'Soundtrack', NULL),
+(109, 'Spoken Word', NULL),
+(110, 'Surf', NULL),
+(111, 'Techno', NULL),
+(112, 'Teen Pop', NULL),
+(113, 'Thai Pop', NULL),
+(114, 'Trance', NULL),
+(115, 'Trap', NULL),
+(116, 'Trip Rock', NULL),
+(117, 'Turkish', NULL),
+(118, 'Underground', NULL),
+(119, 'Urban Cowboy', NULL),
+(120, 'Vallenato', NULL),
+(121, 'Valsa', NULL),
+(122, 'Vanera', NULL),
+(123, 'Vocal', NULL),
+(124, 'World', NULL),
+(125, 'Worldbeat', NULL),
+(126, 'Xote', NULL),
+(127, 'Zydeco', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `menus`
 --
 
@@ -548,6 +740,14 @@ CREATE TABLE `nomina` (
   `tipo_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `nomina`
+--
+
+INSERT INTO `nomina` (`id`, `cliente_id`, `desprendible`, `fecha_informe`, `valor`, `nombre_banco`, `numero_cuenta`, `tipo_cuenta`) VALUES
+(4, 13, NULL, NULL, '343', 'gdgdg', 'fgdgd', 'Ahorros'),
+(5, 13, NULL, NULL, '34534', 'dsds', 'xdsd', 'Ahorros');
+
 -- --------------------------------------------------------
 
 --
@@ -587,6 +787,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('Jorgevelezpanda@gmail.com', '$2y$10$WRnEkFtRNCRUIArEYhThD.2Jkg89UEdRCkiOZXDnlybr7zQzJS1LK', '2022-04-17 12:16:25');
 
 -- --------------------------------------------------------
 
@@ -840,7 +1047,21 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 (23, 'Jonathan', 'Susana Collado', 'Dominican Republic', 'Concepción de La Vega', 'cc', '40234501308', '8492203449', 31, 'La Vega Province', NULL, NULL),
 (29, 'Santiago', 'Rocnancio', 'Colombia', 'Villavicencio', 'cc', '1121956650', '3188650760', 40, 'Meta', NULL, NULL),
 (30, 'dennis', 'corredor', 'Colombia', 'Restrepo', 'cc', '1019056933', '3045789392', 42, 'Meta', NULL, NULL),
-(32, 'Candido', 'Moreno', 'Argentina', NULL, 'cc', '1121958055', '3138339062', 46, 'Mendoza', NULL, NULL);
+(32, 'Candido', 'Moreno', 'Argentina', NULL, 'cc', '1121958055', '3138339062', 46, 'Mendoza', NULL, NULL),
+(33, 'Javier Ivan', 'Varon Bueno', 'Colombia', 'Medellín', 'cc', '1121494426', '3192205400', 47, 'Antioquia', NULL, NULL),
+(34, 'Jennifer Stefannia', 'Agudelo Gaitan', 'Colombia', 'Medellín', 'cc', '1152452923', '3152981324', 48, 'Antioquia', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/34.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/34.docx'),
+(35, 'Haldan', 'Storm', 'Estonia', 'Tõrva', 'ce', '4444534', '6546445645', 49, 'Valga County', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/35.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/35.docx'),
+(36, 'jonathan', 'garzon', 'Colombia', 'Villavicencio', 'cc', '1121940890', '3213860504', 51, 'Meta', NULL, NULL),
+(37, 'joseph', 'heurtematte', 'El Salvador', NULL, 'cc', '8-856-14', '5062659086', 55, 'Santa Ana Department', NULL, NULL),
+(38, 'Jorge', 'Vélez', 'Colombia', NULL, 'cc', '94534280', '3112482761', 56, 'Bogotá', NULL, NULL),
+(39, 'Jorge', 'Vélez', 'Colombia', NULL, 'cc', '94534280', '3112482761', 56, 'Bogotá', NULL, NULL),
+(40, 'MIGUEL', 'HUERTAS', 'Colombia', NULL, 'cc', '1014272451', '3208150897', 57, 'Bogotá', NULL, NULL),
+(41, 'Pablo', 'Cano', 'Spain', 'Gandesa', 'cc', '47817131Q', '+667289427', 60, 'Catalonia', NULL, NULL),
+(42, 'Nelson', 'Romero', 'Colombia', 'Bogotá D.C.', 'cc', '80742991', '3125561118', 62, 'Bogotá D.C.', NULL, NULL),
+(43, 'mey', 'manjarres', 'Colombia', 'Bogotá D.C.', 'cc', '1010165035', '3124835089', 63, 'Bogotá D.C.', NULL, NULL),
+(44, 'Josue', 'paredes', 'Colombia', 'Bogotá D.C.', 'ce', '21063809', '3112266723', 70, 'Bogotá D.C.', NULL, NULL),
+(45, 'Carlos', 'Sanchez', 'Ecuador', 'Guayaquil', 'tp', '0930095815', '0980127117', 73, 'Guayas', NULL, NULL),
+(46, 'Aneglica', 'Rodriguez', 'Colombia', 'Bogotá D.C.', 'cc', '52235260', '3004438405', 74, 'Bogotá D.C.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -929,16 +1150,22 @@ CREATE TABLE `repertorio` (
   `copyright` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `annio_produccion` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `upc_ean` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_catalogo` bigint(20) DEFAULT NULL,
-  `fecha_lanzamiento` date DEFAULT NULL
+  `numero_catalogo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_lanzamiento` date DEFAULT NULL,
+  `terminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `repertorio`
 --
 
-INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subgenero`, `nombre_sello`, `formato`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`) VALUES
-(7, 'portadas/March2022/1647664288.jpg', 'Las mañanitas', NULL, 'Britpop', 'Acid house', 'Prismad music', 'f1', 'CandidoM', 'copyrigth', '2022', NULL, NULL, '2022-03-24');
+INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subgenero`, `nombre_sello`, `formato`, `productor`, `copyright`, `annio_produccion`, `upc_ean`, `numero_catalogo`, `fecha_lanzamiento`, `terminado`) VALUES
+(7, 'portadas/March2022/1647664288.jpg', 'Las mañanitas', NULL, 'Britpop', 'Acid house', 'Prismad music', 'f1', 'CandidoM', 'copyrigth', '2022', NULL, NULL, '2022-03-24', 0),
+(8, 'portadas/March2022/1647799197.jpg', 'Bast Lamia', 'Líber Lilith', 'Heavy Metal', 'Dark', 'Coclestis Meretrix', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '1999', 'DM', '2545', '2022-03-31', 0),
+(9, 'portadas/March2022/1647804894.jpg', 'la gata moon', 'agatha', 'Alternative', 'Acid house', 'los ratones de la casa se van cuando los gatos llegan', 'f3', 'jesucristo', 'maria', '2022', 'jose', '8', '2023-02-08', 0),
+(10, 'portadas/March2022/1647806349.jpg', 'somo de barrio', 'el barrio nos llama', 'Americana', 'Acid rap', 'las cosas que pasan en el  barrio se quedan en el barrio', 'f3', 'don etor', 'ud sabe que yo le he servido', '2022', 'rosa', '5', '2022-08-25', 0),
+(11, 'portadas/March2022/1647838896.jpg', 'kelly cardenas', NULL, 'Reggaeton', 'Pop', 'sony music', 'f3', 'alejo cruz', 'prismad music', '2022', NULL, NULL, '2022-03-28', 0),
+(12, 'portadas/March2022/1647843845.jpg', 'Plasma', 'Electron', 'Afoxé', 'Acid house', 'Popeye', 'f3', 'Skull Red', 'Copyright Skull Red Productions', '2022', 'sdafsdaf', '23413124', '2022-03-31', 0);
 
 -- --------------------------------------------------------
 
@@ -995,6 +1222,352 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (8, 'admin.loader', 'Admin Loader', '', '', 'image', 3, 'Admin'),
 (9, 'admin.icon_image', 'Admin Icon Image', 'settings/March2022/4Wjdw2ejzVW61vk8jQh5.png', '', 'image', 4, 'Admin'),
 (10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', '376527473637-0c66akrj06fs2q9rqi6ahlpreul7e6sp.apps.googleusercontent.com', '', 'text', 1, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subgenero`
+--
+
+CREATE TABLE `subgenero` (
+  `id` int(3) DEFAULT NULL,
+  `nombre` varchar(29) DEFAULT NULL,
+  `descripcion` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `subgenero`
+--
+
+INSERT INTO `subgenero` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Acid', NULL),
+(2, 'Acid house', NULL),
+(3, 'Acid Jazz', NULL),
+(4, 'Acid Punk', NULL),
+(5, 'Acid rap', NULL),
+(6, 'Acid rock', NULL),
+(7, 'Acid techno', NULL),
+(8, 'Afoxé', NULL),
+(9, 'Afro', NULL),
+(10, 'Afro-Cuban Jazz', NULL),
+(11, 'Afro-Juju', NULL),
+(12, 'Afro-Punk', NULL),
+(13, 'Afrobeat', NULL),
+(14, 'Aggrotech', NULL),
+(15, 'Air', NULL),
+(16, 'Alternative', NULL),
+(17, 'Alternative & Rock in Spanish', NULL),
+(18, 'Ambient', NULL),
+(19, 'Americana', NULL),
+(20, 'Anadolu rock', NULL),
+(21, 'Anarcho-punk', NULL),
+(22, 'Andean New Age', NULL),
+(23, 'Anime', NULL),
+(24, 'Anti-folk', NULL),
+(25, 'Arabesk', NULL),
+(26, 'Art', NULL),
+(27, 'Asian', NULL),
+(28, 'Audio Book', NULL),
+(29, 'Avant-garde', NULL),
+(30, 'Axé', NULL),
+(31, 'Bachata', NULL),
+(32, 'Baião', NULL),
+(33, 'Baile Exótico', NULL),
+(34, 'Baile Funk', NULL),
+(35, 'Banda', NULL),
+(36, 'Bass', NULL),
+(37, 'Bastard Pop', NULL),
+(38, 'Batá', NULL),
+(39, 'Batucada', NULL),
+(40, 'Batuco', NULL),
+(41, 'Beat', NULL),
+(42, 'Beatboxing', NULL),
+(43, 'Bebop', NULL),
+(44, 'Big band music', NULL),
+(45, 'Big Beat', NULL),
+(46, 'Bloco afro', NULL),
+(47, 'Bluegrass', NULL),
+(48, 'Blues', NULL),
+(49, 'Bohemian Dub', NULL),
+(50, 'Boi', NULL),
+(51, 'Bolero', NULL),
+(52, 'Bombay pop', NULL),
+(53, 'Bossa nova', NULL),
+(54, 'Boy band', NULL),
+(55, 'Brass', NULL),
+(56, 'Brazilian', NULL),
+(57, 'Breakbeat', NULL),
+(58, 'Brega', NULL),
+(59, 'Bregafunk', NULL),
+(60, 'Britpop', NULL),
+(61, 'Broken beat', NULL),
+(62, 'Bubblegum pop', NULL),
+(63, 'Bugio', NULL),
+(64, 'Bulerias', NULL),
+(65, 'C-Pop', NULL),
+(66, 'Cabaret', NULL),
+(67, 'Cadence', NULL),
+(68, 'Cajun', NULL),
+(69, 'Calypso', NULL),
+(70, 'Cancão', NULL),
+(71, 'Canto livre', NULL),
+(72, 'Canto nuevo', NULL),
+(73, 'Canto popular', NULL),
+(74, 'Cantopop/HK-Pop', NULL),
+(75, 'Caopeira music', NULL),
+(76, 'Carimbó', NULL),
+(77, 'Catalogue', NULL),
+(78, 'Celtic', NULL),
+(79, 'Celtic Folk', NULL),
+(80, 'Celtic Pop', NULL),
+(81, 'Celtic Rock', NULL),
+(82, 'Chamamé', NULL),
+(83, 'Chamarra', NULL),
+(84, 'Chamber music', NULL),
+(85, 'Champeta', NULL),
+(86, 'Chemical breaks', NULL),
+(87, 'Children\'s Music', NULL),
+(88, 'Chill-Out', NULL),
+(89, 'Chinese', NULL),
+(90, 'Chorinho', NULL),
+(91, 'Choro', NULL),
+(92, 'Christian', NULL),
+(93, 'Chumba', NULL),
+(94, 'Classical', NULL),
+(95, 'Classical Crossover', NULL),
+(96, 'Club', NULL),
+(97, 'Coldwave', NULL),
+(98, 'Comedy', NULL),
+(99, 'Cool Jazz', NULL),
+(100, 'Country', NULL),
+(101, 'Creole', NULL),
+(102, 'Crunk', NULL),
+(103, 'Cumbia', NULL),
+(104, 'Currulao', NULL),
+(105, 'Dance', NULL),
+(106, 'Dancehall', NULL),
+(107, 'Dark', NULL),
+(108, 'Death Industrial', NULL),
+(109, 'Death Metal', NULL),
+(110, 'Deathcore', NULL),
+(111, 'Deathgrind', NULL),
+(112, 'Deboche', NULL),
+(113, 'Deep house', NULL),
+(114, 'Deep soul', NULL),
+(115, 'Delta blues', NULL),
+(116, 'Dembow', NULL),
+(117, 'Dini', NULL),
+(118, 'Disco', NULL),
+(119, 'Dixieland', NULL),
+(120, 'Dopé', NULL),
+(121, 'Downtempo', NULL),
+(122, 'Dream pop', NULL),
+(123, 'Drill and bass', NULL),
+(124, 'Drone', NULL),
+(125, 'Drum and bass', NULL),
+(126, 'Dub', NULL),
+(127, 'Dubstep', NULL),
+(128, 'Easy Listening', NULL),
+(129, 'Electro', NULL),
+(130, 'Electro Backbeat', NULL),
+(131, 'Electro hop', NULL),
+(132, 'Electronic', NULL),
+(133, 'Electronica', NULL),
+(134, 'Electropop', NULL),
+(135, 'Emo', NULL),
+(136, 'Electronic', NULL),
+(137, 'Enka', NULL),
+(138, 'Europop', NULL),
+(139, 'Experimental', NULL),
+(140, 'F-Step', NULL),
+(141, 'Fado', NULL),
+(142, 'Fantezi', NULL),
+(143, 'Filk', NULL),
+(144, 'Flamenco', NULL),
+(145, 'Folk', NULL),
+(146, 'Folktronica', NULL),
+(147, 'Forró', NULL),
+(148, 'Free improvisation', NULL),
+(149, 'Free Jazz', NULL),
+(150, 'Freestyle', NULL),
+(151, 'French pop', NULL),
+(152, 'Frevo', NULL),
+(153, 'Fricote', NULL),
+(154, 'Funk', NULL),
+(155, 'Gangsta rap', NULL),
+(156, 'Garage', NULL),
+(157, 'German Folk', NULL),
+(158, 'German Pop', NULL),
+(159, 'Go go', NULL),
+(160, 'Gospel', NULL),
+(161, 'Gothic', NULL),
+(162, 'Grime', NULL),
+(163, 'Grindcore', NULL),
+(164, 'Groove metal', NULL),
+(165, 'Grunge', NULL),
+(166, 'Grupera', NULL),
+(167, 'Guaracha', NULL),
+(168, 'Guitarra baiana', NULL),
+(169, 'Gypsy', NULL),
+(170, 'Halk', NULL),
+(171, 'Hard bop', NULL),
+(172, 'Hardcore', NULL),
+(173, 'Heavy metal', NULL),
+(174, 'Hip Hop', NULL),
+(175, 'Hip Hop/Rap', NULL),
+(176, 'Holiday Music', NULL),
+(177, 'House', NULL),
+(178, 'Hyphy', NULL),
+(179, 'Indian Classical', NULL),
+(180, 'Indie', NULL),
+(181, 'Indie Pop', NULL),
+(182, 'Indo Pop', NULL),
+(183, 'Industrial', NULL),
+(184, 'Infantil', NULL),
+(185, 'Instrumental', NULL),
+(186, 'Jam', NULL),
+(187, 'Jazz', NULL),
+(188, 'Juju', NULL),
+(189, 'Jungle', NULL),
+(190, 'K-Pop', NULL),
+(191, 'Karaoke', NULL),
+(192, 'Kayokyoku', NULL),
+(193, 'Kizomba', NULL),
+(194, 'Latin', NULL),
+(195, 'Latin Jazz', NULL),
+(196, 'Latin Rap', NULL),
+(197, 'Lo-Pop', NULL),
+(198, 'Lounge', NULL),
+(199, 'Mambo', NULL),
+(200, 'Mangue Beat', NULL),
+(201, 'Maracatu', NULL),
+(202, 'Mariachi', NULL),
+(203, 'Marimba', NULL),
+(204, 'Maxixe', NULL),
+(205, 'Mento', NULL),
+(206, 'Merengue', NULL),
+(207, 'Metal', NULL),
+(208, 'Mexican', NULL),
+(209, 'Miami bass', NULL),
+(210, 'Microhouse', NULL),
+(211, 'Milonga', NULL),
+(212, 'Minimalist', NULL),
+(213, 'Modinha', NULL),
+(214, 'Motown', NULL),
+(215, 'MPB', NULL),
+(216, 'Neo Soul', NULL),
+(217, 'Neofolk', NULL),
+(218, 'New Age', NULL),
+(219, 'New Wave', NULL),
+(220, 'Noise pop', NULL),
+(221, 'Norteño', NULL),
+(222, 'Nova Canção', NULL),
+(223, 'Oi!', NULL),
+(224, 'Old school', NULL),
+(225, 'Old time', NULL),
+(226, 'Oldies', NULL),
+(227, 'Opera', NULL),
+(228, 'Orchesta', NULL),
+(229, 'Outlaw', NULL),
+(230, 'Özgün', NULL),
+(231, 'Pagode', NULL),
+(232, 'Pixiefunk', NULL),
+(233, 'Plena', NULL),
+(234, 'Pop', NULL),
+(235, 'Pop in Spanish', NULL),
+(236, 'Popular Colombiana', NULL),
+(237, 'Porngroove', NULL),
+(238, 'Post-hardcore', NULL),
+(239, 'Progressive', NULL),
+(240, 'Psychedelic', NULL),
+(241, 'Psychobilly', NULL),
+(242, 'Punk', NULL),
+(243, 'Quadrille', NULL),
+(244, 'Ragas', NULL),
+(245, 'Raggamuffin', NULL),
+(246, 'Ragtime', NULL),
+(247, 'Rancheira', NULL),
+(248, 'Rap', NULL),
+(249, 'Rave', NULL),
+(250, 'Reggae', NULL),
+(251, 'Reggaeton', NULL),
+(252, 'Regional Mexicano', NULL),
+(253, 'Retro', NULL),
+(254, 'Rhytm & Blues', NULL),
+(255, 'Rock', NULL),
+(256, 'Rock opera', NULL),
+(257, 'Rockabilly', NULL),
+(258, 'Roots', NULL),
+(259, 'Ruissian Chanson', NULL),
+(260, 'Salsa', NULL),
+(261, 'Salsa Choke', NULL),
+(262, 'Samba', NULL),
+(263, 'Samba-canção', NULL),
+(264, 'Samba-reggae', NULL),
+(265, 'Sanat', NULL),
+(266, 'Sertaneja', NULL),
+(267, 'Singer-songwriter', NULL),
+(268, 'Ska', NULL),
+(269, 'Skate', NULL),
+(270, 'Sludge metal', NULL),
+(271, 'Smooth jazz', NULL),
+(272, 'Soca', NULL),
+(273, 'Soldier', NULL),
+(274, 'Son montuno', NULL),
+(275, 'Sonata', NULL),
+(276, 'Soul', NULL),
+(277, 'Soundtrack', NULL),
+(278, 'Southern', NULL),
+(279, 'Space', NULL),
+(280, 'Speed metal', NULL),
+(281, 'Spiritual', NULL),
+(282, 'Spirituals', NULL),
+(283, 'Spoken Word', NULL),
+(284, 'Story', NULL),
+(285, 'Surf', NULL),
+(286, 'Swing music', NULL),
+(287, 'Swingbeat', NULL),
+(288, 'Symphony', NULL),
+(289, 'Tango', NULL),
+(290, 'Techno', NULL),
+(291, 'Teen pop', NULL),
+(292, 'Thai pop', NULL),
+(293, 'Thrash metal', NULL),
+(294, 'Tradicional colombiana', NULL),
+(295, 'Trance', NULL),
+(296, 'Trap', NULL),
+(297, 'Tribal house', NULL),
+(298, 'Trip rock', NULL),
+(299, 'Trip-hop', NULL),
+(300, 'Tropical', NULL),
+(301, 'Tropical Salsa', NULL),
+(302, 'Tropicalia', NULL),
+(303, 'Turkish', NULL),
+(304, 'Turkish Alternative', NULL),
+(305, 'Turkish Hip-Hop/Rap', NULL),
+(306, 'Turkish Pop', NULL),
+(307, 'Turkish Rock', NULL),
+(308, 'Unnasigned', NULL),
+(309, 'Undergound', NULL),
+(310, 'Unplugged', NULL),
+(311, 'Urban', NULL),
+(312, 'Urban Cowboy', NULL),
+(313, 'Urban Folk', NULL),
+(314, 'Urban Jazz', NULL),
+(315, 'Vallenato', NULL),
+(316, 'Valsa', NULL),
+(317, 'Vanera', NULL),
+(318, 'Video game', NULL),
+(319, 'Vocal', NULL),
+(320, 'Waltz', NULL),
+(321, 'West Coas hip hop', NULL),
+(322, 'World', NULL),
+(323, 'Worldbeat', NULL),
+(324, 'Xote', NULL),
+(325, 'Yo-pop', NULL),
+(326, 'Zouk', NULL),
+(327, 'Zulu', NULL),
+(328, 'Zydeco', NULL);
 
 -- --------------------------------------------------------
 
@@ -1167,18 +1740,45 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'FWhIb5AUfKIedVWrBbfOpix9tQCfgy38j0kQ1MXzdOASohyNS9QnWlTJqmm5', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'f8XhTPD2kpJ0XmzJtwXRs2Yzlp06zQH42i6e2xSWiD1QUnSjh7TbbaVKgBGT', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
 (26, 3, 'Dennys', 'dennys@gmail.com', 'users/default.png', '2022-02-03 23:16:25', '$2y$10$hx0M3CbnSnOiV591TTANv.AuOcSfDuE/JpQ6rFPflZJXgmAplAxDO', 'V4jAQKmMdL1KIxqcgEwtd7prK576kFkie9gc0vEx0w0BqfgEisMHWqUu31mk', '{\"locale\":\"es\"}', '2022-02-03 23:16:08', '2022-03-17 12:21:48', 1, NULL),
 (28, 2, 'lamacaproducciones', 'lamacaproducciones@gmail.com', 'users/default.png', '2022-03-06 18:37:28', '$2y$10$bnPFS9fs/Ldgq5szw7Psj.VShqCQgNB8IGFf1g61ZHwzo6aSXrKT.', NULL, NULL, '2022-03-06 18:37:10', '2022-03-06 18:40:21', 1, NULL),
 (29, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2022-03-06 20:44:24', '$2y$10$2zw/Tjhwseaj5Qbm8bi6Uu5lN4zS2gdvJHci9blNQaj/eG2WSVo0S', NULL, NULL, '2022-03-06 20:44:06', '2022-03-06 20:44:24', 0, NULL),
 (30, 2, 'Rodyam Producer', 'mrodyam@gmail.com', 'users/default.png', '2022-03-07 14:38:40', '$2y$10$BUoyQQa3gC1ujJzx4aPH6urxh70KXERF4bJx2d.pvjtE7OultcUbW', NULL, NULL, '2022-03-07 14:37:03', '2022-03-07 14:38:40', 0, NULL),
 (31, 2, 'Jay es', 'jonathan_susana@hotmail.com', 'users/default.png', '2022-03-07 15:32:05', '$2y$10$dQZ6ZUtKF0m1i8ydTZMrdeEiQBd5n.Iojf1JDRUecUkQnxaBWzlbe', NULL, NULL, '2022-03-07 15:31:04', '2022-03-07 15:36:07', 1, NULL),
-(32, 2, 'alejocruz', 'alejocruzmusic@gmail.com', 'users/default.png', '2022-03-09 18:27:27', '$2y$10$P9AK9bdfreJjyj7tsADT5OkZhuXZ6YZtmpvLDxwyfw/mBRmSXEOHi', 'ksk4vuJUnKBzdpSKfe4bRu5DLGVa2K8Dv7g53Nok2lw0cGGhCYWd2oTHaVfu', NULL, '2022-03-09 18:27:03', '2022-03-09 18:31:19', 1, NULL),
+(32, 2, 'alejocruz', 'alejocruzmusic@gmail.com', 'users/default.png', '2022-03-09 18:27:27', '$2y$10$P9AK9bdfreJjyj7tsADT5OkZhuXZ6YZtmpvLDxwyfw/mBRmSXEOHi', 'P1usys3AcLEq6O3hmSoQ0jc6MGYFtdsIqgS34zFgOK8e9luqQil2nCeA6OmI', NULL, '2022-03-09 18:27:03', '2022-03-09 18:31:19', 1, NULL),
 (40, 2, 'santiagoroncancio', 'santiagoroncancio2108@gmail.com', 'users/default.png', '2022-03-12 12:38:08', '$2y$10$Tc5gUXSegnOfIOolpcy5.eQTwNcIwwrQP3mZOn.sByT/pJNY6ku.G', NULL, NULL, '2022-03-12 12:37:25', '2022-03-12 15:54:39', 1, NULL),
 (41, 2, 'dennis corredor', 'contcatodennisfernando@gmail.com', 'users/default.png', NULL, '$2y$10$QybFYmb2lYYk/Ler49aruO1WXNR5ptbIj5HVe/X6wfxdKiRhcxTQ2', NULL, NULL, '2022-03-12 22:34:38', '2022-03-12 22:34:38', 0, NULL),
 (42, 2, 'dennys fernando corredor', 'polappcolombia@gmail.com', 'users/default.png', '2022-03-12 22:38:26', '$2y$10$qbFMSHtfyu6YGf0/e3e.b.elbS5YtS9miB5dvn4hR1eRJWifthELq', NULL, NULL, '2022-03-12 22:37:39', '2022-03-12 22:40:44', 1, NULL),
 (43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$PJgbp3qe5rEhQtxucDZate46IbXExyrqsit2VNGfG69GWbzQomH16', 'iYvnvxcVz8KEhDoqxeqRjIWAGt19suo3VYkIA8D0fDDCa3YcGBpUXaF4ZmUZ', NULL, '2022-03-13 14:46:16', '2022-03-13 14:46:59', 0, NULL),
-(46, 2, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/default.png', '2022-03-18 23:13:50', '$2y$10$abIYyDyEolpmJaAU5r4oR.BjVhYLdrkErb/6CX03HVH4SWW0RL2hO', NULL, NULL, '2022-03-18 23:11:01', '2022-03-18 23:17:14', 1, NULL);
+(46, 3, 'LordCandocar', 'stiivenmoreno@gmail.com', 'users/default.png', '2022-03-18 23:13:50', '$2y$10$ncBeaOn7Hep8RdzAkRIflOLYHBUuigVVd0nY91PHpRshuyyzjAOk.', 'dGGVPHhh7yNbb0yd8R1ICZk4RGV7Sv3r7TVqssBUXXKBVUOu7wRyFEC1hxnf', '{\"locale\":\"es\"}', '2022-03-18 23:11:01', '2022-04-11 21:36:25', 1, NULL),
+(47, 2, 'Javier Varon', 'javoxdaemon@gmail.com', 'users/default.png', '2022-03-20 12:47:40', '$2y$10$qYELMrbN5oWL3V5mstuswu88GbAeSjsM91McgPwVHlNGnyIS53hz2', NULL, NULL, '2022-03-20 12:45:53', '2022-03-20 12:49:36', 1, NULL),
+(48, 2, 'jeniagaitan@gmail.com', 'jeniagaitan@gmail.com', 'users/default.png', '2022-03-20 14:21:39', '$2y$10$EBgSMk9ugcyFf6MbokONxOrTJf97xUj.j4hHptP6R9MG07adtmY4u', NULL, NULL, '2022-03-20 14:18:52', '2022-03-20 14:25:32', 1, 'M6g2HK6SGW9X8m4VS8i4sLsfUbYLe6lWI3Nm5Zu2'),
+(49, 2, 'Malkan', 'jvaronbueno@gmail.com', 'users/default.png', '2022-03-20 14:45:55', '$2y$10$UInyosnITZ8LGp4N4hsUTuhapOqDZe7eWgbT5JpUBTuB2pJcVZ./O', NULL, '{\"locale\":\"es\"}', '2022-03-20 14:43:29', '2022-04-17 21:23:46', 1, 'A1XP7XH2NGhHnpamsNVJ4W5pVa8QgCSohYcU1zwF'),
+(51, 2, 'jonathan', 'jonatangarzon95@gmail.com', 'users/default.png', '2022-03-22 17:05:33', '$2y$10$8Cc7l93aF/7q.tn8oUFLgOx4O2sfZB1PdVtfkniY/.TfqbrmwUkqG', NULL, NULL, '2022-03-22 17:04:55', '2022-03-22 17:07:21', 1, NULL),
+(52, 2, 'ian123456', 'iangigi97@gmail.com', 'users/default.png', '2022-03-24 11:01:28', '$2y$10$bLvZlShay4Flp7MuLQH0reHKze.4AeLPzTPJZUC1YFScyaGbaa2Ia', NULL, NULL, '2022-03-24 11:00:57', '2022-03-24 11:01:28', 0, NULL),
+(53, 2, 'ElTorres', 'eltorres.musicprod@gmail.com', 'users/default.png', '2022-03-24 15:01:03', '$2y$10$M9q5FMRgrL6oDHCIc5DR9.ERJiCrUb8/dyR18ZalmzUdDrcLVdUBe', NULL, NULL, '2022-03-24 15:00:38', '2022-03-24 15:01:03', 0, NULL),
+(54, 2, 'Michaelyremy', 'lapesadamusica@gmail.com', 'users/default.png', '2022-03-25 02:11:36', '$2y$10$PVizdDXc9kELGoQOLuN4yuA87tWQdpkB84d/DOHqc6Rwb.3e6UxP2', 'yoLD6Uya02AAtooa5uR56b4BthNd9iRz2TrtlyUikM2KDkNlQ1qG1rE9yM3x', NULL, '2022-03-25 02:10:45', '2022-03-25 02:11:36', 0, NULL),
+(55, 2, 'davinxi', 'heurtemattejoseph1@gmail.com', 'users/default.png', '2022-03-25 11:51:19', '$2y$10$dFXb/CIjEhk7TxgI1W00teSY0TStF0O0LRVqpaRkUjqJi9Q1Q5xES', NULL, NULL, '2022-03-25 11:50:11', '2022-03-25 12:00:20', 1, NULL),
+(56, 2, 'Elpanda', 'Jorgevelezpanda@gmail.com', 'users/default.png', '2022-03-25 22:01:36', '$2y$10$4fviP4pBddqcBZGwavrDJORE3KfFHzFZUbgv2dCqFcc0Xfx9I.h9i', 'ar6nKgvdluSe9lBSOtJ9h5NdFBqdOhZ9waTNMbtSKcXdUWLqAlQ41gCIAtrc', NULL, '2022-03-25 21:59:52', '2022-03-25 22:06:04', 1, NULL),
+(57, 2, 'Miguel Huertas', 'miguelhuertas091@gmail.com', 'users/default.png', '2022-03-26 12:51:46', '$2y$10$UlfgzsStubUFAb1vN4c9RefxoZTS3TS0hd6EbvJHIMs7J7T3EzasG', NULL, NULL, '2022-03-26 12:50:46', '2022-03-26 12:54:37', 1, NULL),
+(58, 2, 'Lotino Music', 'lotinomusic.14032@gmail.com', 'users/default.png', '2022-03-26 16:51:14', '$2y$10$qWFtN2YY3IBumcOQev17l.9PgHPEN2dB0DYTRZDg87XQUzbKPFErm', NULL, NULL, '2022-03-26 16:50:35', '2022-03-26 16:51:14', 0, NULL),
+(59, 2, 'Luis Vázquez', 'nikola.gasol@gmail.com', 'users/default.png', '2022-03-28 00:14:35', '$2y$10$85RFPjv2HzDIXh43dMLL6OW2wipNBEMP9Wmp3InpbvQvUpUcOHF9q', NULL, NULL, '2022-03-28 00:13:12', '2022-03-28 00:14:35', 0, NULL),
+(60, 2, 'Pablo Cano', 'pabloeveretscanovalencia@gmail.com', 'users/default.png', '2022-03-28 09:14:15', '$2y$10$O2DwF3JaoEZHC3mj7w0V1O/QoLXDRZflsoi6fhgzrQVofsi.T7.w6', '8rlRdsKRJrVy4dUFfLqElckHpqGIFC8eJcjsDondVn8TdBheA3SbEo8H4NAM', NULL, '2022-03-28 09:09:05', '2022-03-28 09:20:30', 1, NULL),
+(61, 2, 'vicente rojas', 'vicente.rojas.rock@gmail.com', 'users/default.png', '2022-03-28 15:59:55', '$2y$10$2LfPiO5W.k5iopEbqPys8uyJmJ.GopZ2QZbIs2LDkkN.Yl9LerWKa', NULL, NULL, '2022-03-28 15:58:42', '2022-03-28 15:59:55', 0, NULL),
+(62, 2, 'Nelson Romero', 'nelsonromeromusic@gmail.com', 'users/default.png', '2022-03-28 18:12:27', '$2y$10$T9SzXruxPphR8Pk7KleygOFUoCaITrjY51XH6Tf.uvoXT2cgE8GX2', NULL, NULL, '2022-03-28 18:09:29', '2022-03-28 18:15:12', 1, NULL),
+(63, 2, 'mey manjarres', 'meycontacto@gmail.com', 'users/default.png', '2022-03-30 18:25:20', '$2y$10$j0U7g7dayNhmGexYTj.A4.M.KSS1JkgNTDCkU6w/EYJCS3uIZlo/u', NULL, NULL, '2022-03-30 18:23:49', '2022-03-30 18:30:20', 1, NULL),
+(64, 2, 'Juan A. Castillo', 'tcrecordsmusic@gmail.com', 'users/default.png', '2022-03-30 19:06:20', '$2y$10$63fL3idu82XHKz3Tw/WHLOVyDmTjFxAIor/64ijgaFO8WUdFLfkvi', NULL, NULL, '2022-03-30 19:05:17', '2022-03-30 19:06:20', 0, NULL),
+(65, 2, 'Dokla', 'laverdaderadinastia.official@gmail.com', 'users/default.png', '2022-04-04 19:25:16', '$2y$10$BqqVhYYlRbsup9mF2q8rZuZQmhmN8LpcVqF8UWzCQHl.piMngHb9S', NULL, NULL, '2022-04-04 19:24:29', '2022-04-04 19:25:16', 0, NULL),
+(66, 2, 'Luis Javier Orizaba', 'luisjaviervoz@gmail.com', 'users/default.png', '2022-04-05 12:25:00', '$2y$10$.5jwOxcJSj/V5vtn2bV2ouOwSwdwfrrX3HunVKjLuQAtyjLXBDB/S', NULL, NULL, '2022-04-05 12:24:43', '2022-04-05 12:25:00', 0, NULL),
+(67, 2, 'prismadmusic.com ugrfeiohofidsksmvnjdbvsijf94t9u5t0i4r94ijgrjght9y84r49t64rkowf0ereiuguejdkwdiweofuehdskodjjdgofjsoddggfsidj', 'KsenofontMaidanov+3r4v@mail.ru', 'users/default.png', NULL, '$2y$10$Y3n7M4.8d2Jz25Nlpk39Su6OdHYvK9ERE/SoJ6h1hnnL71u4lHGz.', NULL, NULL, '2022-04-13 23:26:12', '2022-04-13 23:26:12', 0, NULL),
+(68, 2, 'Manolo Maya', 'linkmaya@hotmail.com', 'users/default.png', '2022-04-16 11:20:35', '$2y$10$Wr3L.s95Mw.sCgBn9DouBuyxYmXSgCHvRpdEqUCubVDOSsSwzxMnC', NULL, NULL, '2022-04-16 11:17:07', '2022-04-16 11:20:35', 0, NULL),
+(69, 2, 'bacco', 'bacco.lofi@gmail.com', 'users/default.png', '2022-04-18 13:21:28', '$2y$10$7M3MTekXl9Qim9DsSQYbu.jbnTq3BxouB8mENuYoWIlJFJvneiNDS', NULL, NULL, '2022-04-18 13:20:55', '2022-04-18 13:21:28', 0, NULL),
+(70, 2, 'kassett', 'laordensonora2021@gmail.com', 'users/default.png', '2022-04-19 09:04:28', '$2y$10$BY1CVQXEVkBJENZhXd0nluuXZb.YQY6bNeTIZeXfJf5MsyXoqMG.e', NULL, NULL, '2022-04-19 09:03:53', '2022-04-19 09:09:21', 1, NULL),
+(71, 2, '28music', '28musicve@gmail.com', 'users/default.png', '2022-04-19 11:28:28', '$2y$10$PdqvpU8vwrH.clQUSguHze9RH2R/GjDdWHtwfcPkPEW6wzXWdakT.', NULL, NULL, '2022-04-19 11:28:08', '2022-04-19 11:28:28', 0, NULL),
+(72, 2, 'cristofer crdova cornejo', 'crissdeliz.oficial@gmail.com', 'users/default.png', '2022-04-19 13:40:32', '$2y$10$aG/l.kIvFcKPCsv3p.CmWOUD6oUqsSjjZNx8U7x4q/OVLWkEGL0MK', NULL, NULL, '2022-04-19 13:40:02', '2022-04-19 13:40:32', 0, NULL),
+(73, 2, 'Carlos Sanchez', 'goodvibesmusicst@gmail.com', 'users/default.png', '2022-04-22 01:40:02', '$2y$10$3pmVImShYeD/eBbsO1ArEeZYrpHI/OCZ.5LFSVl2uVOatVuCdXlHa', NULL, NULL, '2022-04-22 01:38:53', '2022-04-22 01:41:34', 1, NULL),
+(74, 2, 'anica rod', 'anicarodmusica@gmail.com', 'users/default.png', '2022-04-22 11:13:00', '$2y$10$UVe.19NYutiaAAsQ1pyEw.6mEpNzq.5Zv7gRZRk1ZoSH0vq/edqP.', NULL, NULL, '2022-04-22 11:02:39', '2022-04-22 11:19:43', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1410,7 +2010,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `cancion`
 --
 ALTER TABLE `cancion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -1422,19 +2022,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
 --
 ALTER TABLE `colaboracion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion_repertorio`
 --
 ALTER TABLE `colaboracion_repertorio`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `data_rows`
@@ -1476,7 +2076,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `nomina`
 --
 ALTER TABLE `nomina`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pages`
@@ -1494,7 +2094,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -1518,7 +2118,7 @@ ALTER TABLE `regalia`
 -- AUTO_INCREMENT de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -1548,7 +2148,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Restricciones para tablas volcadas

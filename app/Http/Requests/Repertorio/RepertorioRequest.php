@@ -35,8 +35,9 @@ class RepertorioRequest extends FormRequest
             'copyright'             =>'required|min:1|max:255',
             'annio_produccion'      =>'required|digits:4|integer|min:1900|before: 01-01-2023',
             'upc_ean'               =>'',
-            'numero_catalogo'       =>'nullable|numeric',
+            'numero_catalogo'       =>'',
             'portada'               =>'image|mimes:jpg,png,tif|max:35000|dimensions:min_width=3000,min_height=3000',
+            'confirmation'          =>'required'
         ];
     }
 

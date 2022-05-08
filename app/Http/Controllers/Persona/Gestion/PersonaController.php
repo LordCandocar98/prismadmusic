@@ -94,7 +94,6 @@ class PersonaController extends Controller
             'firma'                 => $file,
             'contrato'              => $rutaDocumento,
             'user_id'               => auth()->id(), //AGARRA EL ID DE LA SESIÓN ACTUAL
-            'role_id'               => 2,
         ]);
 
         Cliente::create([

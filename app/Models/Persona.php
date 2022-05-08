@@ -22,6 +22,8 @@ class Persona extends Model
         'numero_identificacion',
         'telefono',
         'user_id',
+        'firma',
+        'contrato'
     ];
 
 }

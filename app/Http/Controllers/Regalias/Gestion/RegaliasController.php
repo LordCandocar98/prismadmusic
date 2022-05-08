@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Regalias\Gestion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Regalias\Gestion\RegaliasRequest;
+use App\Models\Cancion;
 use App\Models\Cliente;
+use App\Models\Colaboracion;
 use App\Models\Persona;
 use App\Models\Regalia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +27,7 @@ class RegaliasController extends Controller
         ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
         ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
         ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
-        ->where('role_id',2)
+        ->where('role_id', 2)
         // ->whereNull('nomina_id')
         ->get();
         return view('regalias.gestion.index', compact('regalias'));
@@ -37,15 +40,8 @@ class RegaliasController extends Controller
      */
     public function create()
     {
-
-        $clientes = DB::table('users')
-        ->join('persona', 'users.id', '=', 'persona.user_id')
-        ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-        ->select('users.*', 'persona.*', 'cliente.*')
-        ->where('role_id',2)
-        ->where('registro_confirmed', 1)
-        ->get();
-        return view('regalias.gestion.create', compact('clientes'));
+        $canciones = Cancion::select('id', 'titulo')->get();
+        return view('regalias.gestion.create');
     }
 
     /**
@@ -57,12 +53,23 @@ class RegaliasController extends Controller
     public function store(RegaliasRequest $request)
     {
         $filename = "";
-        if($xlsArchivo = $request->file('fileInforme')){
+        if ($xlsArchivo = $request->file('fileInforme')) {
             $destinoXls = 'Regalias/' . date('FY') . '/';
             $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
             $filename = $destinoXls . $profileXls ;
             $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
         };
+        $colaboraciones = Colaboracion::where('cancion_id', $request->idcancion)->get();
+        dd($colaboraciones);
+        foreach ($colaboraciones as $colaboracion) {
+            $cliente = User::join('persona', 'persona.user_id', 'users.id')
+            ->join('cliente', 'cliente.persona_id', 'persona.id')
+            ->where('users.email', $colaboracion->cliente_email)
+            ->select('cliente.id', 'cliente.nombre_artistico')
+            ->first();
+            dd($cliente);
+        }
+        dd("HOLA");
         $regalia = new Regalia;
         $regalia->cliente_id            = $request->idCliente;
         $regalia->informe               = $filename;
@@ -93,10 +100,10 @@ class RegaliasController extends Controller
         ->join('persona', 'users.id', '=', 'persona.user_id')
         ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
         ->select('users.*', 'persona.*', 'cliente.*')
-        ->where('role_id',2)
+        ->where('role_id', 2)
         ->where('registro_confirmed', 1)
         ->get();
-        return view('regalias.gestion.edit', compact('regalia','persona', 'clientes','client'));
+        return view('regalias.gestion.edit', compact('regalia', 'persona', 'clientes', 'client'));
     }
 
     /**
@@ -123,7 +130,7 @@ class RegaliasController extends Controller
         if ($regalia->nomina_id == null) {
             //Guardado y path del archivo
             $filename = "";
-            if($xlsArchivo = $request->file('fileInforme')){
+            if ($xlsArchivo = $request->file('fileInforme')) {
                 $destinoXls = 'Regalias/' . date('FY') . '/';
                 $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
                 $filename = $destinoXls . $profileXls ;
@@ -134,7 +141,7 @@ class RegaliasController extends Controller
             $regalia->cliente_id = $request->idCliente;
             if ($filename !="") {
                 $regalia->informe = $filename;
-            }else {
+            } else {
                 $regalia->informe = $regalia->informe;
             }
 
@@ -148,7 +155,7 @@ class RegaliasController extends Controller
             );
             
             return redirect('regalias')->with($notification);
-        }else{
+        } else {
             $notification = array(
                 'message' => 'La regalia ha sido pagada, ya no se puden hacer cambios!',
                 'alert-type' => 'error'

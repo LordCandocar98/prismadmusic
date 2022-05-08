@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('repertorio', RepertorioController::class); //Repertorio
     //Gestión de Repertorios para los rol: Cliente.
     Route::resource('cancion', CancionController::class); //Cancion
+    Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
     //Gestión de nomina para los roles: AMIN y Moderadores.
     Route::resource('nomina', NominaController::class);
     //Gestión de clientes para los roles: AMIN y Moderadores.
@@ -52,6 +53,11 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::resource('producto', ProductoController::class);
     Route::resource('informeNomina', InformeNominaController::class);
     Route::resource('informeRegalias', InformeRegaliaController::class);
+
+    Route::get('/create_song/{id}', [CancionController::class, 'create_song'])->name('create_song');
+    Route::get('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
+    Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
+    Route::post('/uploadsong', [CancionController::class, 'uploadsong'])->name('uploadsong');
 });
 
 Route::post('upload', [UploadController::class, 'store']);

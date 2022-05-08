@@ -11,16 +11,18 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
+use App\Mail\CorreoPrismadMusic;
+use App\Models\Cancion;
 use App\Models\Persona;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class RepertorioController extends Controller
 {
     public function __construct()
     {
         $this->middleware('verified');
-        //$this->middleware('is_admin'); //Middleware para permitir que sólo admins/mods registen personas
-        //$this->middleware('is_mod');
-        //$this->middleware('not_confirmed');
     }
 
     /**
@@ -42,6 +44,47 @@ class RepertorioController extends Controller
     }
 
     /**
+     * send finished
+
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function finishProduct($id)
+    {
+        $users = DB::table('users')
+        ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+        ->where('cr.repertorio_id', $id)
+        ->select('users.id', 'users.role_id', 'users.name', 'users.email')
+        ->get()[0];
+
+        if($users->id  == auth()->user()->id){
+            $repertorio = Repertorio::find($id);
+            $repertorio->terminado = 1;
+            $repertorio->save();
+
+            $details = [
+                'title' => 'Asunto: Hora de revisar este nuevo exito!',
+                'subtitle' => $users->name . ' Acaba de finalizar la contrucción del repertorio ' .$repertorio->titulo,
+                'body' => 'En Prismad Music nos encanta apoyar el espíritu musical',
+                'descripcion' => '',
+                'button' => 'Ver Repertorio',
+                'enlace' => route('repertorio.show', $repertorio->id)
+            ];
+
+            $moderadores = User::where('role_id', '=',  3)->get();
+
+            foreach($moderadores as $moderador){
+                Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+            }
+
+            return redirect()->route('repertorio.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -53,10 +96,14 @@ class RepertorioController extends Controller
             ->orderBy('id', 'DESC')
             ->get('');
 
+        $genre = \DB::table('genero')->select('nombre')->get();
+        $subgenre = \DB::table('subgenero')->select('nombre')->get();
+
         if (Auth::user()->registro_confirmed == 0){ // *********CORREGIR ÉSTO PARA CUADRAR LOS PERMISOS**********
-            return view('repertorio.gestion.create')->with('clientes', $clientes);
+            return view('repertorio.gestion.create', compact("clientes", "genre", "subgenre"));
         }
-        return view('repertorio.gestion.create')->with('clientes', $clientes);
+
+        return view('repertorio.gestion.create', compact("clientes", "genre", "subgenre"));
     }
 
     /**
@@ -72,16 +119,12 @@ class RepertorioController extends Controller
         $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
         ->select("cliente.*")
         ->first();
-        //dd($cliente_sesion);
 
-        // $persona =  Persona::where('user_id', $sesion->id)->first();
-        // $cliente_sesion = Cliente::where('persona_id', $persona->id)->first();
-        if($image = $request->file('portada')){
-            $destinoPortada = 'portadas/' . date('FY') . '/';
-            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
-            $filename = $destinoPortada . $profileImage ;
-            $image->move('storage/' . $destinoPortada, $profileImage);
-        };
+        $cover =json_decode($request->cover);
+
+        //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
+        copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas/'.$cover->filename);
+
         $repertorio = Repertorio::create([
             'titulo'               => $request->titulo,
             'version'              => $request->version,
@@ -94,7 +137,7 @@ class RepertorioController extends Controller
             'annio_produccion'     => $request->annio_produccion,
             'upc_ean'              => $request->upc_ean,
             'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $filename,
+            'portada'              => $cover->filename,
             'fecha_lanzamiento'    => $request->fecha_lanzamiento,
         ]);
         ColaboracionRepertorio::create([
@@ -104,15 +147,7 @@ class RepertorioController extends Controller
             'spotify_colaboracion'    => $cliente_sesion->link_spoty,
         ]);
 
-
-
-//------------------------------------------------------------------------
-        $notification = array(
-            'message' => 'Repertorio creado exitosamente!',
-            'alert-type' => 'success'
-        );
-
-        return redirect('admin')->with($notification);
+        return redirect()->route('create_song', $repertorio->id);
     }
 
     /**
@@ -123,11 +158,19 @@ class RepertorioController extends Controller
      */
     public function show($id)
     {
-        $repertorio = Repertorio::find($id);
-        $colaboraciones = ColaboracionRepertorio::where('repertorio_id',$id)->get();
-        //dd($colaboraciones);
-        //dd($repertorio);
-        return view('repertorio.gestion.show', compact('repertorio',$repertorio,'colaboraciones',$colaboraciones));
+        $users = DB::table('users')
+        ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+        ->where('cr.repertorio_id', $id)
+        ->select('users.id', 'users.role_id')
+        ->get()[0];
+
+        if(($users->id  == auth()->user()->id) or ($users->role_id == 3) ){
+            $repertorio = Repertorio::find($id);
+            $canciones = Cancion::where('repertorio_id', '=', $id)->get();
+            return view('repertorio.gestion.show', compact('repertorio', 'canciones', 'users'));
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -162,5 +205,42 @@ class RepertorioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * upload cover in the product view
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadcover(Request $request)
+    {
+        $rules = [
+            'cover' => 'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000'
+        ];
+        $messages = [
+            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas.',
+            'cover.mimes' => 'La imagen tiene formato incorrecto.',
+            'cover.max' => 'La imagen supera el tamaño maximo.'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return Response::json([
+                'status' => 'error',
+                'message' => $validator->messages()
+            ], 400, [], JSON_PRETTY_PRINT);
+        }
+
+        if($image = $request->file('cover')){
+            $destinoPortada = 'portadas/tmp/';
+            $profileImage  = time() . '.' . $image->getClientOriginalExtension();
+            $filename = $destinoPortada . $profileImage ;
+            $image->move('storage/' . $destinoPortada, $profileImage);
+        };
+
+        return [
+            'folder' => $destinoPortada,
+            'filename' => $profileImage
+        ];
     }
 }
