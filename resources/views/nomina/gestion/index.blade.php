@@ -23,7 +23,9 @@
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Numero Telefonico</th>
                                 <th class="text-center">Nombre Artistico</th>
-
+                                <th class="text-center">Nombre Banco</th>
+                                <th class="text-center">Tipo Cuenta</th>
+                                <th class="text-center">Valor</th>
                                 <th class="text-center">Acciones</th> 
                             </tr>
                         </thead>
@@ -35,16 +37,19 @@
                                 <td class="text-center">{{ $nomina->email }}</td>
                                 <td class="text-center">{{ $nomina->telefono }}</td>
                                 <td class="text-center">{{ $nomina->nombre_artistico }}</td>
+                                <td class="text-center">{{ $nomina->nombre_banco }}</td>
+                                <td class="text-center">{{ $nomina->tipo_cuenta }}</td>
+                                <td class="text-center">{{ $nomina->valor }}</td>
                                 <td class="text-center">
-                                    <a href="javascript:;" title="Borrar" class="btn btn-sm btn-danger pull-right delete" data-id="18" id="delete-18">
-                                        <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
-                                    </a>
+                                    @if ($nomina->desprendible == "")
                                     <a href="{{ url('nomina/'.$nomina->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
                                         <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Cargar</span>
                                     </a>
+                                    @else
                                     <a href="{{ url('storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -54,7 +59,6 @@
             </div>
         </section>
     </div>
-
 @endsection
 
 @section('javascript')

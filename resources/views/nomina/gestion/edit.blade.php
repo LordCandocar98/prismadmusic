@@ -11,14 +11,14 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-edit" aria-hidden="true"></i>
-        Editar Nomina
+        Cargar Nomina
     </h1>
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                <form enctype="multipart/form-data" action="{{ url('nomina/' . $regalia->id) }}" method="post">
+                <form enctype="multipart/form-data" action="{{ url('nomina/' . $nomina->id) }}" method="post">
                     {!! method_field('PUT') !!}
                     <div>
                         @if ($errors->any())
@@ -40,11 +40,6 @@
                                 <option value="{{ $client->id }}" selected>
                                     {{ $persona->numero_identificacion . ' - ' . $persona->nombre . ' ' . $persona->apellido }}
                                 </option>
-                                @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">
-                                        {{ $cliente->numero_identificacion . ' - ' . $cliente->nombre . ' ' . $cliente->apellido }}
-                                    </option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="form-group  col-md-12 ">
@@ -58,9 +53,9 @@
                                 placeholder="Fecha Desprendible" value="">
                         </div>
                         <div class="form-group  col-md-12 ">
-                            <label class="control-label" for="name">Valor</label>
-                            <input type="number" class="form-control" name="valor" required="" step="any"
-                                placeholder="Valor" value="">
+                            <label class="control-label" for="valor">Valor</label>
+                            <input type="number" class="form-control" name="valor" id="valor" required="" step="any" readonly
+                                placeholder="Valor" value="{{ $nomina->valor }}">
                         </div>
                         <div class="form-group  col-md-12 ">
                             <button type="submit" class="btn btn-primary save">Guardar</button>

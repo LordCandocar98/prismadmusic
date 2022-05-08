@@ -21,7 +21,7 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                <form enctype="multipart/form-data" action="{{ route('nomina.store') }}" method="POST">
+                <form action="{{ route('nomina.store') }}" method="POST">
                     <div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
