@@ -32,7 +32,7 @@
                                 <td class="text-center"></td>
                                 <td class="text-center">{{ $nomina->fecha_informe }}</td>
                                 <td class="text-center">{{ $nomina->nombre_banco}}</td>
-                                <td class="text-center">{{ $nomina->numero_cuenta_bancaria }}</td>
+                                <td class="text-center">{{ $nomina->numero_cuenta }}</td>
                                 <td class="text-center">{{ $nomina->valor }}</td>
                                 <td class="text-center">
                                     <a href="{{ url('storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
