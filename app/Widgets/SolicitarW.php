@@ -41,15 +41,15 @@ class SolicitarW extends AbstractWidget
         
         if ($regalias >= 200.00) {
             $url_solicitud = route('nomina.create');
-            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dolares. Haga clic en el botón de abajo para solicitar pagos.";
+            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dólares. Haga clic en el botón de abajo para solicitar pagos.";
         }else{
-            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dolares. Aun no puede hacer clic en el botón de abajo para solicitar pagos, monto minimo a solicitar $200.";
+            $mensaje_w = "Actualmente tu cuenta tiene un saldo de ".$regalias." dólares. Todavía no puede hacer clic en el botón de abajo para solicitar pagos, monto mínimo a solicitar $200.";
         }
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-dollar',
-            'title'  => "Pagos - Solicitar pagos",
-            'text'   => $mensaje_w,
+            'title'  => '<div class="widget-css">'."Pagos - Solicitar pagos".'</div>',
+            'text'   => '<div class="widget-css">'.$mensaje_w.'</div>',
             'button' => [
                 'text' => 'Solicitar Pago',
                 'link' => $url_solicitud,
