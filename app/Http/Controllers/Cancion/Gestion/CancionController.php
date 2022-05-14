@@ -77,6 +77,21 @@ class CancionController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function shareSong()
+    {
+        $session = Auth::user();
+        $colas = Colaboracion::where('cliente_email', '=', $session->email)
+                ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+                ->get();
+
+        return view('cancion.gestion.share', compact("colas"));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
