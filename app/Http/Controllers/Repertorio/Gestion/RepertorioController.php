@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
 use App\Mail\CorreoPrismadMusic;
 use App\Models\Cancion;
-use App\Models\Persona;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+
+use Intervention\Image\ImageManagerStatic as Image;
 
 class RepertorioController extends Controller
 {
@@ -78,7 +79,7 @@ class RepertorioController extends Controller
                 Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
             }
 
-            return redirect()->route('repertorio.index');
+            return redirect()->route('repertorio.show', $repertorio->id);
         }else{
             return redirect()->route('repertorio.index');
         }
@@ -124,6 +125,10 @@ class RepertorioController extends Controller
 
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
         copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas/'.$cover->filename);
+
+        $image = Image::make(public_path().'/storage/portadas/'.$cover->filename);
+        $image->resize($image->width() * 0.2,$image->height() * 0.2);
+        $image->save(public_path().'/storage/portadas/min'.$cover->filename);
 
         $repertorio = Repertorio::create([
             'titulo'               => $request->titulo,

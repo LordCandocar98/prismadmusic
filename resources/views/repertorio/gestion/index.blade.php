@@ -13,6 +13,20 @@
     <i class="voyager-plus"></i> <span>Crear</span>
 </a>
 @endsection
+@section('css')
+<style>
+    .card-title {
+        font-size: 2em;
+    }
+
+    .card-text {
+        font-size: 1.2rem;
+    }
+    body, html, .form-control, th, td{
+        color: #1e1f20!important;
+    }
+</style>
+@endsection
 @section('content')
 <div class="col-md-12">
     <div class="panel panel-bordered">
@@ -29,7 +43,7 @@
                             <th class="text-center">Género</th>
                             <th class="text-center">Tipo de colaboración</th>
                             <th class="text-center">Año de producción</th>
-
+                            <th class="text-center">Completado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -44,7 +58,13 @@
                             <td class="text-center">{{ $repertorio->genero}}</td>
                             <td class="text-center">{{ $repertorio->tipo_colaboracion }}</td>
                             <td class="text-center">{{ $repertorio->annio_produccion }}</td>
-
+                            <td class="text-center">
+                                @if($repertorio->terminado == 1)
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <div> <a href="{{ url('repertorio/'.$repertorio->id) }}" title="Ver"
                                         class="btn btn-sm btn-info view">

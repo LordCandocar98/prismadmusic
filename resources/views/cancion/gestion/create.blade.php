@@ -1,12 +1,17 @@
 @extends('layouts.master')
+
 @section('addBreadcrumbs')
-<li class="active">
-    <a href="{{ route('cancion.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Canciones</a>
+<li class="">
+    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Repertorios</a>
 </li>
 <li class="active">
-    <a href="{{ route('cancion.create') }}"><i class="voyager-plus" aria-hidden="true"></i> Crear</a>
+    <a href="{{ url('repertorio/'.$repertorio->id) }}"><i class="fa fa-file-audio-o" aria-hidden="true"></i> Ver Repertorio</a>
+</li>
+<li class="active">
+    <a href="{{ route('cancion.create') }}"><i class="voyager-plus" aria-hidden="true"></i> Crear Canción</a>
 </li>
 @endsection
+
 @section('page_header')
 <h1 class="page-title">
     <i class="voyager-plus" aria-hidden="true"></i>
@@ -54,7 +59,7 @@
                 <h5 class="card-title">Información general</h5>
                 @csrf
                 <div class="form-group row">
-                    <div class="col-md-3 {{ $errors->has('titulo') ? 'has-error' : '' }}">
+                    <div class="col-md-6 {{ $errors->has('titulo') ? 'has-error' : '' }}">
                         <label for="titulo">Título</label>
                         <br>
                         <input type="text" class="form-control" id="titulo" name="titulo" value="{{ old('titulo') }}">
@@ -79,6 +84,8 @@
                             <span class="form-validation">{{ $errors->first('autor') }}</span>
                         @endif
                     </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
                         <label for="productor">Compositor</label>
                         <br>
@@ -88,8 +95,6 @@
                             <span class="form-validation">{{ $errors->first('productor') }}</span>
                         @endif
                     </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
                         <label for="copyright">Arreglista</label>
                         <br>
@@ -115,15 +120,6 @@
                             value="{{ old('pline') }}">
                         @if ($errors->has('pline'))
                             <span class="form-validation">{{ $errors->first('pline') }}</span>
-                        @endif
-                    </div>
-                    <div class="col-md-3 {{ $errors->has('nombre_colaboracion') ? 'has-error' : '' }}">
-                        <label for="nombre_colaboracion">Nombre de la Colaboración</label>
-                        <br>
-                        <input type="text" class="form-control" id="nombre_colaboracion" name="nombre_colaboracion"
-                            value="{{ old('nombre_colaboracion') }}">
-                        @if ($errors->has('nombre_colaboracion'))
-                            <span class="form-validation">{{ $errors->first('nombre_colaboracion') }}</span>
                         @endif
                     </div>
                 </div>
@@ -274,6 +270,48 @@
         </div>
     </div>
     <br>
+    <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('artistaPrincipal') ? 'has-error' : '' }}">
+        <div class="card-body">
+            <h5 class="card-title">Artista Principales</h5>
+            <div class="row">
+                <div class="col-md-12 pb-5">
+                    <label for="artistaPrincipal">Nombre del artista principal</label>
+                    <br>
+                    <input type="text" class="form-control" id="artistaPrincipal"
+                        name="artistaPrincipal" placeholder="Digitar nombre del artista principal"
+                        value="{{ old('artistaPrincipal') }}">
+                        @if ($errors->has('artistaPrincipal'))
+                            <span class="form-validation">{{ $errors->first('artistaPrincipal') }}</span>
+                        @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="zoneaddcol-artista">Agregar otro artista principal </label>
+                    <input type="button" value="Agregar" class="btn btn-success" id="addcol-artista">
+                    <input type="button" value="Eliminar" class="btn btn-danger" id="delcol-artista">
+                </div>
+                <div class="col-md-12" id="zoneaddcol-artista">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('featuring') ? 'has-error' : '' }}">
+        <div class="card-body">
+            <h5 class="card-title">Featuring</h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="zoneaddcol-featuring">Agregar featuring </label>
+                    <input type="button" value="Agregar" class="btn btn-success" id="addcol-featuring">
+                    <input type="button" value="Eliminar" class="btn btn-danger" id="delcol-featuring">
+                </div>
+                <div class="col-md-12" id="zoneaddcol-featuring">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
     <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('porcentaje_intelectualCreador') ? 'has-error' : '' }}">
         <div class="card-body">
             <h5 class="card-title">Colaboradores</h5>
@@ -283,7 +321,7 @@
                     <br>
                     <input type="text" class="form-control" id="porcentaje_intelectualCreador"
                         name="porcentaje_intelectualCreador" placeholder="Numérico, ejemplo: 50 "
-                        value="{{ old('porcentaje_intelectualCreador') }}">
+                        value="{{ old('porcentaje_intelectualCreador') }}" required>
                         @if ($errors->has('porcentaje_intelectualCreador'))
                             <span class="form-validation">{{ $errors->first('porcentaje_intelectualCreador') }}</span>
                         @endif
@@ -303,15 +341,6 @@
         </div>
     </div>
     <div class="modal-footer">
-        <div style="text-align: left;background-color: white;padding: 0.7em 0;margin: 10px 0;">
-            <input type="checkbox" name="confirmation" id="confirmation">
-            <label for="confirmation">Soy consciente de que una vez añadida la canción al Repertorio no podré hacer
-                modificaciones a la misma.</label>
-                @if ($errors->has('confirmation'))
-                    <span class="form-validation">{{ $errors->first('confirmation') }}</span>
-                @endif
-        </div>
-
         <button type="submit" class="btn btn-primary" id="addsong">Añadir canción</button>
     </div>
 </form>

@@ -190,18 +190,9 @@
                                 <input type="file" class="filepond my-pond" allowFileEncode id="cover" name="cover" data-max-file-size="35MB" data-max-files="1" accept="image/png, image/jpeg" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <input type="checkbox" name="confirmation" id="confirmation">
-                                <label for="confirmation">Soy consciente de que una vez creado el Repertorio no podré hacer modificaciones.</label>
-                                @if ($errors->has('confirmation'))
-                                    <span class="form-validation" style="display: block;">{{ $errors->first('confirmation') }}</span>
-                                @endif
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Guardar Repertorio</button>
+                        <input type="submit" class="btn btn-primary" id="addRepertorio" value="Guardar Repertorio">
                     </div>
                 </form>
             </div>
@@ -213,6 +204,27 @@
 
     <!-- CDN ALERT2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $("#addRepertorio").click(function(event){
+            event.preventDefault();
+
+            let form = $('#formRegistro');
+
+            Swal.fire({
+                title: '¿Quieres guardar los cambios?',
+                text: "Soy consciente de que una vez creado el Repertorio no podré hacer modificaciones.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar',
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Guardado!', '', 'success');
+                    form.submit();
+                }
+            });
+        });
+    </script>
     <!-- EDN CDN ALERT 2 -->
 
     <!-- CDN FILEPOND -->
@@ -266,5 +278,6 @@
               }
           });
     });
+
     </script>
 @endsection

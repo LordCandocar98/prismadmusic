@@ -25,7 +25,7 @@ class CancionRequest extends FormRequest
     {
         return [
             'tipo_secundario'          =>'required',
-            'instrumental'             =>'',
+            'instrumental'             =>'required',
             'titulo'                   =>'required|min:1|max:255',
             'version_subtitulo'        =>'max:255',
             'autor'                    =>'required|min:1|max:255',
@@ -39,10 +39,8 @@ class CancionRequest extends FormRequest
             'idioma_titulo'            =>'required',
             'idioma_letra'             =>'required',
             'fecha_principal_salida'   =>'required',
-            'nombre_colaboracion'      =>'',
             'pista_mp3'                =>'required',
             'porcentaje_intelectualCreador' => 'required|numeric',
-            'confirmation'              => 'required'
         ];
     }
 

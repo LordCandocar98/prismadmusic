@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('addBreadcrumbs')
-<div class="active">
-    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Repertorios</a>
-</div>
+<li class="">
+    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Repertorios</a>
+</li>
+<li class="active">
+    <a href="{{ url('repertorio/'.$repertorio->id) }}"><i class="fa fa-file-audio-o" aria-hidden="true"></i> Ver Repertorio</a>
+</li>
 @endsection
-
-
 @section('page_header')
 <h1 class="page-title">
     <i class="fa fa-music" aria-hidden="true"></i>
@@ -26,7 +27,9 @@
     .card-text {
         font-size: 1.2rem;
     }
-
+    body, html, .form-control, th, td{
+        color: #1e1f20!important;
+    }
 </style>
 @endsection
 
@@ -36,15 +39,23 @@
     <div class="card mb-3">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="{{ url('storage/portadas/'.$repertorio->portada) }}" alt="Portada"
+                <img src="{{ url('storage/portadas/min'.$repertorio->portada) }}" alt="Portada"
                     style="width: 100%;height: auto;">
+                    @if(auth()->user()->role_id == 3)
+                    <a style="margin-top: 10px;" href="{{ url('storage/portadas/'.$repertorio->portada) }}" download="{{$repertorio->portada}}">
+                        Descargar Caratula <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+                    @endif
             </div>
             <div class="col-md-8">
                 <div class="card-body">
+                    @if($repertorio->terminado == 1)
+                        <span class="badge badge-secondary badge-success" style="float: right;font-size: 1.5rem;">Terminado</span>
+                    @endif
                     <h5 class="card-title">{{ $repertorio->titulo }}</h5>
                     <p class="card-text">{{ $repertorio->version }}</p>
                     <div class="row">
-                        <div class="col-md-4" style="margin-bottom: 0;">
+                        <div class="col-md-6" style="margin-bottom: 0;">
                             <div><b>Versión:</b> {{ $repertorio->version }}</div>
                             <div><b>Genero:</b> {{ $repertorio->genero }}</div>
                             <div><b>Subgenero:</b> {{ $repertorio->subgenero }}</div>
@@ -52,12 +63,12 @@
                             <div><b>Formato:</b> {{ $repertorio->formato }}</div>
                             <div><b>Productor:</b> {{ $repertorio->productor }}</div>
                         </div>
-                        <div class="col-md-4" style="margin-bottom: 0;">
+                        <div class="col-md-6" style="margin-bottom: 0;">
                             <div><b>Copyright:</b> {{ $repertorio->copyright }}</div>
                             <div><b>Año de producción:</b> {{ $repertorio->annio_produccion }}</div>
                             <div><b>UPC/EAN:</b> {{ $repertorio->upc_ean }}</div>
-                            <div><b>Fecha de lanzamiento:</b> {{ $repertorio->numero_catalogo }}</div>
-                            <div><b>Numero de catalogo</b> {{ $repertorio->fecha_lanzamiento }}</div>
+                            <div><b>Fecha de lanzamiento:</b> {{ $repertorio->fecha_lanzamiento }}</div>
+                            <div><b>Numero de catalogo</b> {{ $repertorio->numero_catalogo }}</div>
                         </div>
                     </div>
                 </div>
@@ -65,8 +76,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and ((count($canciones)>1 and $repertorio->formato == 'SINGLE') or (count($canciones)>1 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM'))
-                    <a class="btn btn-success float-right" style="margin: 2em;" href="{{ route('finishProduct', $repertorio->id) }}">Finalizar Producto</a>
+                @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and (count($canciones)>1))
+
+                <form action="{{ route('finishProduct', $repertorio->id) }}" method="get" id="form-fproduct">
+                    <input class="btn btn-success float-right" style="margin: 2em;" id="btnFinishProduct" type="submit" value="Finalizar Producto">
+                </form>
+
                 @endif
             </div>
         </div>
@@ -76,7 +91,7 @@
         <div class="card-body">
             <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
 
-            @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and ((count($canciones)<1 and $repertorio->formato == 'SINGLE') or (count($canciones)<6 and $repertorio->formato == 'EP') or $repertorio->formato == 'ALBUM'))
+            @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id))
                 <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
             @endif
 
@@ -86,7 +101,10 @@
                         <th scope="col">#</th>
                         <th scope="col">Título</th>
                         <th scope="col">Autor</th>
-                        <th scope="col">Acción</th>
+                        <th scope="col">Canción</th>
+                        @if(auth()->user()->role_id == 3)
+                        <th scope="col">Descargar</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -97,8 +115,14 @@
                         <td>{{ $cancion->autor }}</td>
                         <td style="width: 1px;">
                             <audio controls src="{{ url('storage/canciones/'.$cancion->pista_mp3) }}"></audio>
-                            <a href="{{ url('storage/canciones/'.$cancion->pista_mp3) }}" download="{{$cancion->titulo}}">Decargar</a>
                         </td>
+                        @if(auth()->user()->role_id == 3)
+                        <td style="text-align: center;font-size: 1.5rem;">
+                            <a href="{{ url('storage/canciones/'.$cancion->pista_mp3) }}" download="{{$cancion->titulo}}">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
@@ -112,4 +136,25 @@
 @section('javascript')
 <script src="{{ asset('js/jsRegalias/gestion/scriptIndex.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        $("#btnFinishProduct").click(function(event){
+            // event.preventDefault();
+            let form = $('#form-fproduct');
+            Swal.fire({
+                title: '¿Quieres guardar los cambios?',
+                text: "Soy consciente de que una vez finalizado no podré hacer modificaciones.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar',
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Guardado!', '', 'success');
+                    form.submit();
+                }
+            });
+        });
+</script>
+
 @endsection

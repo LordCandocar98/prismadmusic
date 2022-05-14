@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Cancion\Gestion;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Requests\Cancion\CancionRequest;
 use App\Mail\CorreoPrismadMusic;
 use App\Models\Cancion;
 use App\Models\Colaboracion;
+use App\Models\ColaboracionArtFea;
 use App\Models\Repertorio;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,14 +27,15 @@ class CancionController extends Controller
      */
     public function index()
     {
-        $sesion = Auth::user();
-        $canciones = DB::table('users')
-            ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
-            ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-            ->where('users.role_id', 2)
-            ->where('users.id', $sesion->id)
-            ->get();
-        return view('cancion.gestion.index', compact('canciones'));
+        // $sesion = Auth::user();
+        // $canciones = DB::table('users')
+        //     ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
+        //     ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+        //     ->where('users.role_id', 2)
+        //     ->where('users.id', $sesion->id)
+        //     ->get();
+        // return view('cancion.gestion.index', compact('canciones'));
+        return redirect()->route('repertorio.index');
     }
 
     /**
@@ -66,7 +69,11 @@ class CancionController extends Controller
     {
         $repertorio = Repertorio::find($id);
         $session = Auth::user();
-        return view('cancion.gestion.create', compact('repertorio', 'session'));
+        if($repertorio->terminado == 0){
+            return view('cancion.gestion.create', compact('repertorio', 'session'));
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -80,6 +87,7 @@ class CancionController extends Controller
         $session = Auth::user();
         $request_song =json_decode($request->pista_mp3);
         $repertorio = Repertorio::find($request->repertorio);
+
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
         copy(public_path().'/storage/'.$request_song->folder.''.$request_song->filename, public_path().'/storage/canciones/'.$request_song->filename);
 
@@ -134,9 +142,31 @@ class CancionController extends Controller
             $cola->cliente_email = $info[$i];
             $cola->porcentaje_intelectual = $info[$i+1];
             $cola->cancion_id = $song->id;
-            $cola->nombre_colaboracion = $request->nombre_colaboracion;
-            $cola->tipo_colaboracion = '';
             $cola->save();
+        }
+
+        $infoArtista = $request->nombreartista ?? [];
+
+        for ($i = 0; $i<count($infoArtista); $i++) {
+            $cola = new ColaboracionArtFea();
+            $cola->nombre = $infoArtista[$i];
+            $cola->tipo_colaboracion = "Artista Principal";
+            $cola->cancion_id = $song->id;
+            $cola->save();
+        }
+
+        $infoFeaturing = $request->nombrefeaturing ?? [];
+
+        for ($i = 0; $i<count($infoFeaturing); $i++) {
+            $cola = new ColaboracionArtFea();
+            $cola->nombre = $infoFeaturing[$i];
+            $cola->tipo_colaboracion = "Featuring";
+            $cola->cancion_id = $song->id;
+            $cola->save();
+        }
+
+        if(($repertorio->formato == 'SINGLE') or (($repertorio->formato == 'EP') and ($repertorio->count_song()>=5))){
+            app(RepertorioController::class)->finishProduct($repertorio->id);
         }
 
         return redirect()->route('repertorio.show', $request->repertorio);
