@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-05-2022 a las 06:08:35
+-- Tiempo de generación: 15-05-2022 a las 22:26:52
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -139,7 +139,8 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 (31, 48, 'LordCandocar', 'https://open.spotify.com/user/08wfyckbjxeptjjbe3m2c912u'),
 (33, 50, 'mosik', NULL),
 (34, 51, 'Shinobido', 'open.spotify/artist:shinobido'),
-(35, 52, 'YohanInstitucional', 'open.spotify/artistUnillanos');
+(35, 52, 'YohanInstitucional', 'open.spotify/artistUnillanos'),
+(36, 53, 'llano music', 'https://open.spotify.com/artist/6p98zCBQU192bKp0TgzSdX');
 
 -- --------------------------------------------------------
 
@@ -172,14 +173,16 @@ INSERT INTO `colaboracion` (`id`, `cliente_email`, `porcentaje_intelectual`, `ca
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `colaboracion_artfea`
+-- Estructura de tabla para la tabla `colaboracion_art_feas`
 --
 
-CREATE TABLE `colaboracion_artfea` (
+CREATE TABLE `colaboracion_art_feas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cancion_id` bigint(20) NOT NULL
+  `cancion_id` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1069,7 +1072,8 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 (48, 'Candido', 'Moreno', 'Colombia', 'Villavicencio', 'cc', '1121958055', '3138339062', 79, 'Meta', NULL, NULL),
 (50, 'mosik', 'mosik', 'Colombia', 'Bogotá D.C.', 'cc', '1019056933', '3212342334', 81, 'Cundinamarca', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/81.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/81.docx'),
 (51, 'Johan Dayan', 'Vacca Vaca', 'Colombia', 'Villavicencio', 'cc', '1121962356', '3123254608', 84, 'Meta', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/84.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/84.docx'),
-(52, 'Yohan', 'Unillanos', 'Albania', NULL, 'cc', '1121962355', '3123254607', 85, 'Kavajë District', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/85.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/85.docx');
+(52, 'Yohan', 'Unillanos', 'Albania', NULL, 'cc', '1121962355', '3123254607', 85, 'Kavajë District', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/85.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/85.docx'),
+(53, 'llano', 'music', 'Colombia', 'Bogotá D.C.', 'cc', '1019056933', '3045789392', 88, 'Bogotá D.C.', '/home/u449096820/domains/prismadmusic.com/public_html/storage/firma/88.png', '/home/u449096820/domains/prismadmusic.com/public_html/storage/contratos/88.docx');
 
 -- --------------------------------------------------------
 
@@ -1794,7 +1798,8 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (84, 2, 'JohanVacca12', 'johan.vacca12@gmail.com', 'users/May2022/3cGckaYRnWe9zSBujSfd.jpg', '2022-05-08 06:47:47', '$2y$10$mguLTKl/FgR5dcfm541AnOfov.DNHbkC/TBAEBLzSXtGu6zyIMcCS', NULL, '{\"locale\":\"es\"}', '2022-05-08 06:47:27', '2022-05-08 08:04:34', 1, NULL),
 (85, 2, 'yohan.vacca@unillanos.edu.co', 'yohan.vacca@unillanos.edu.co', 'users/default.png', '2022-05-08 08:12:25', '$2y$10$4xatJjGAdAgYgBkaS.qiK.YokGehRiJa8XM8.rvv0F30DPT7ZT1AW', 'xc9Rz0miEvFREmAcrtX6qQTS4pFhEEII1Ukmh9FQfqRorgomdkm5GQKLZShl', NULL, '2022-05-08 07:40:22', '2022-05-08 08:19:06', 1, 'V13iRDwAPNyMIX2al40TkWNYak24J34pmDmHQNXp'),
 (86, 2, 'Felwil', 'felwilleo@gmail.com', 'users/default.png', '2022-05-08 11:59:48', '$2y$10$RKlwxzQDhhXXtjMfPs3Rx.Nwh7uFzivZiOqaN1d7sK3XxB3oAmo/O', NULL, NULL, '2022-05-08 11:59:31', '2022-05-08 11:59:48', 0, NULL),
-(87, 2, 'Festo', 'boxjr91@gmail.com', 'users/default.png', '2022-05-11 18:34:37', '$2y$10$wptLgnq.jRzRnqBYPLSyBunKwdrOjDYrnRMefFNkrTF0XbAe2z3rW', 's1UFBcHyNZyt8D5rvR43weHy6pwhFvMwmbyxRvfy8Zzo2vlaie2amfMHvlSN', NULL, '2022-05-11 18:33:36', '2022-05-11 18:34:37', 0, NULL);
+(87, 2, 'Festo', 'boxjr91@gmail.com', 'users/default.png', '2022-05-11 18:34:37', '$2y$10$wptLgnq.jRzRnqBYPLSyBunKwdrOjDYrnRMefFNkrTF0XbAe2z3rW', 's1UFBcHyNZyt8D5rvR43weHy6pwhFvMwmbyxRvfy8Zzo2vlaie2amfMHvlSN', NULL, '2022-05-11 18:33:36', '2022-05-11 18:34:37', 0, NULL),
+(88, 3, 'Llano Music', 'llanomusicoficial@gmail.com', 'users/default.png', '2022-05-13 20:49:41', '$2y$10$WU4/yBo3t8JqfLHCe1/9kuQRRxyEMAKcmBk33ieK75wu/PuuFO9fS', NULL, '{\"locale\":\"es\"}', '2022-05-13 20:47:18', '2022-05-13 20:53:00', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1849,9 +1854,9 @@ ALTER TABLE `colaboracion`
   ADD KEY `colaboracion_cancion_id_index` (`cancion_id`);
 
 --
--- Indices de la tabla `colaboracion_artfea`
+-- Indices de la tabla `colaboracion_art_feas`
 --
-ALTER TABLE `colaboracion_artfea`
+ALTER TABLE `colaboracion_art_feas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2044,7 +2049,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
@@ -2053,10 +2058,10 @@ ALTER TABLE `colaboracion`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `colaboracion_artfea`
+-- AUTO_INCREMENT de la tabla `colaboracion_art_feas`
 --
-ALTER TABLE `colaboracion_artfea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `colaboracion_art_feas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion_repertorio`
@@ -2122,7 +2127,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -2176,7 +2181,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Restricciones para tablas volcadas

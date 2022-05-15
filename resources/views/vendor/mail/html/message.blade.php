@@ -6,7 +6,7 @@
 @endcomponent
 @endslot
 
-![Prismad Music][logo].
+![Prismad Music][logo]
 
 {{-- Body --}}
 {{ $slot }}
