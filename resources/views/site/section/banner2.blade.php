@@ -4,7 +4,7 @@
         <div class="col-md-6 padding0 center">
             <img src="{{ asset('slider2.png') }}" alt="Imagen del slider 2">
             <div class="texto-flotante-hijo2 text abajo">
-                <a href="{{ route('register') }}" class="button button-lg button-primary">DISTRIBUYE AHORA</a>
+                <a href="{{ route('register') }}" class="button button-lg button-primary" style="margin: 1em;">DISTRIBUYE AHORA</a>
             </div>
         </div>
         <div class="col-md-6 bg-white centrar">
