@@ -34,10 +34,7 @@ Y gracias por formar parte de nuestro equipo, por favor confirma tu dirección d
 @endisset
 
 {{-- Outro Lines --}}
-@foreach ($outroLines as $line)
 Si no creaste una cuenta, no es necesario hacer ninguna acción.
-
-@endforeach
 
 {{-- Salutation --}}
 @if (! empty($salutation))
