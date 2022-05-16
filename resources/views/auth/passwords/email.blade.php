@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-6 col-center">
                             <button type="button" class="btn btn-block btn-info" onclick="window.location.href='{{ url('/login') }}';" role="button"><i class="fa fa-reply"
-                                    aria-hidden="true"> volver</i></button>
+                                    aria-hidden="true"> Volver</i></button>
                         </div>
                         <div class="col-md-6 col-center">
                             <button type="submit" class="btn btn-block btn-primary">
