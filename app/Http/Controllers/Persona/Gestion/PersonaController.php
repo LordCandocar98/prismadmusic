@@ -32,6 +32,13 @@ class PersonaController extends Controller
         $user = Auth::user();
         $persona = Persona::where('user_id', $user->id)->first();
 
+        if(! $persona && $user->role_id == 3){
+            $user->email_verified_at = now();
+            $user->registro_confirmed = 1;
+            $user->save();
+            return redirect('/home');
+        }
+
         if(! $persona){
             $condicional_metodo = 0;
             $accion="registro";
