@@ -29,7 +29,7 @@ class RegaliasRequest extends FormRequest
         $fecha_arriba=$fecha_informe_inicio->addMonths(3)->format('Y-m-d');
         return [
             'idcancion'             =>'required',
-            'fileInforme'           =>'required|mimes:doc,csv,xlsx,xls,docx,ppt,odt,ods,odp|max:3000"',
+            'fileInforme'           =>'required|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000"',
             'fecha_informe_inicio'  =>'required|date|date_format:Y-m-d|before_or_equal:' . $fecha_abajo,
             'fecha_informe_final'   =>'required|date|date_format:Y-m-d|after_or_equal:'.$fecha_arriba,
             'valor'                 =>'required|numeric'
