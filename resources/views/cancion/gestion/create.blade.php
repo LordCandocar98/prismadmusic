@@ -45,6 +45,12 @@
         font-size: 11px;
         color: #f96868;
     }
+    body, html, .form-control, th, td{
+        color: #1e1f20!important;
+    }
+    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+        font-weight: normal;
+    }
 </style>
 @endsection
 
@@ -135,7 +141,7 @@
                     </div>
                     <div class="col-md-3 {{ $errors->has('fecha_principal_salida') ? 'has-error' : '' }}">
                         <label for="fecha_principal_salida">Fecha de salida al mercado <i class="fa fa-question-circle"
-                                aria-hidden="true" data-toggle="popover" title="*para vídeo horarios CET"></i></label>
+                                aria-hidden="true" id="helpFlanz" style="cursor: pointer;"></i></label>
                         <br>
                         <input type="date" class="form-control" id="fecha_principal_salida"
                             name="fecha_principal_salida" min="{{date('Y-m')}}-{{date('d')+6}}"
@@ -147,7 +153,7 @@
                     <div class="col-md-3 {{ $errors->has('idioma_titulo') ? 'has-error' : '' }}">
                         <label for="idioma_titulo">Idioma del título</label>
                         <br>
-                        <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo">
+                        <select class="idioma_titulo col-md-12" name="idioma_titulo" id="idioma_titulo" style="width: 100%;">
                             <option value="Español" {{ old('idioma_titulo') == "Español" ? 'selected' : '' }}>Español</option>
                             <option value="Inglés" {{ old('idioma_titulo') == "Inglés" ? 'selected' : '' }}>Inglés</option>
                             <option value="Portugués" {{ old('idioma_titulo') == "Portugués" ? 'selected' : '' }}>Portugués</option>
@@ -168,7 +174,7 @@
                     <div class="col-md-3 {{ $errors->has('idioma_letra') ? 'has-error' : '' }}">
                         <label for="idioma_letra">Idioma de la letra</label>
                         <br>
-                        <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra">
+                        <select class="idioma_letra col-md-12" name="idioma_letra" id="idioma_letra" style="width: 100%;">
                             <option value="Español" {{ old('idioma_letra') == "Español" ? 'selected' : '' }}>Español</option>
                             <option value="Inglés" {{ old('idioma_letra') == "Inglés" ? 'selected' : '' }}>Inglés</option>
                             <option value="Portugués" {{ old('idioma_letra') == "Portugués" ? 'selected' : '' }}>Portugués</option>
@@ -262,9 +268,8 @@
                     <br>
                     <input type="file" class="filepond my-pond" allowFileEncode name="pista_mp3"
                         data-allow-reorder="true" data-max-file-size="70MB" data-max-files="1" required>
-                    <small class="form-text text-muted">No importar canciones con símbolos
-                        especiales como '/%#' y demás. Podría afectar la subida del archivo o directamente no ocurrir la
-                        misma.</small>
+                    <small class="form-text text-muted" style="color: black;">No importar canciones con símbolos
+                        especiales como '/%#' y demás. Podría afectar la subida del archivo.</small>
                 </div>
             </div>
         </div>
@@ -336,7 +341,7 @@
                 <div class="col-md-12" id="zoneaddcol">
 
                 </div>
-                <small class="form-text text-muted">El total de porcentaje debe ser igual a 100%</small>
+                <small class="form-text text-muted" style="color: black;">El porcentaje total debe ser igual al 100%</small>
             </div>
         </div>
     </div>
@@ -349,6 +354,15 @@
 @section('javascript')
 <!-- CDN ALERT2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#helpFlanz').click(function(){
+    Swal.fire(
+        'Fecha de salida al mercado',
+        '<ul style="text-align:left"><li>Para videos horarios CET</li><li>La fecha de salida al mercado debe ser al menos 5 días después de hoy.</li></ul>',
+        'question'
+        )
+    });
+</script>
 <!-- EDN CDN ALERT 2 -->
 
 <!-- include jQuery library -->
@@ -363,6 +377,46 @@
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 <script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
 <script>
+const labels_es_ES = {
+        labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
+        labelInvalidField: "El campo contiene archivos inválidos",
+        labelFileWaitingForSize: "Esperando tamaño",
+        labelFileSizeNotAvailable: "Tamaño no disponible",
+        labelFileLoading: "Cargando",
+        labelFileLoadError: "Error durante la carga",
+        labelFileProcessing: "Cargando",
+        labelFileProcessingComplete: "Carga completa",
+        labelFileProcessingAborted: "Carga cancelada",
+        labelFileProcessingError: "Error durante la carga",
+        labelFileProcessingRevertError: "Error durante la reversión",
+        labelFileRemoveError: "Error durante la eliminación",
+        labelTapToCancel: "toca para cancelar",
+        labelTapToRetry: "tocar para volver a intentar",
+        labelTapToUndo: "tocar para deshacer",
+        labelButtonRemoveItem: "Eliminar",
+        labelButtonAbortItemLoad: "Abortar",
+        labelButtonRetryItemLoad: "Reintentar",
+        labelButtonAbortItemProcessing: "Cancelar",
+        labelButtonUndoItemProcessing: "Deshacer",
+        labelButtonRetryItemProcessing: "Reintentar",
+        labelButtonProcessItem: "Cargar",
+        labelMaxFileSizeExceeded: "El archivo es demasiado grande",
+        labelMaxFileSize: "El tamaño máximo del archivo es {filesize}",
+        labelMaxTotalFileSizeExceeded: "Tamaño total máximo excedido",
+        labelMaxTotalFileSize: "El tamaño total máximo del archivo es {filesize}",
+        labelFileTypeNotAllowed: "Archivo de tipo no válido",
+        fileValidateTypeLabelExpectedTypes: "Espera {allButLastType} o {lastType}",
+        imageValidateSizeLabelFormatError: "Tipo de imagen no compatible",
+        imageValidateSizeLabelImageSizeTooSmall: "La imagen es demasiado pequeña",
+        imageValidateSizeLabelImageSizeTooBig: "La imagen es demasiado grande",
+        imageValidateSizeLabelExpectedMinSize: "El tamaño mínimo es {minWidth} × {minHeight}",
+        imageValidateSizeLabelExpectedMaxSize: "El tamaño máximo es {maxWidth} × {maxHeight}",
+        imageValidateSizeLabelImageResolutionTooLow: "La resolución es demasiado baja",
+        imageValidateSizeLabelImageResolutionTooHigh: "La resolución es demasiado alta",
+        imageValidateSizeLabelExpectedMinResolution: "La resolución mínima es {minResolution}",
+        imageValidateSizeLabelExpectedMaxResolution: "La resolución máxima es {maxResolution}",
+    };
+
     FilePond.registerPlugin(
         FilePondPluginFileEncode,
         FilePondPluginFileValidateSize,
@@ -371,6 +425,7 @@
         FilePondPluginMediaPreview,
         FilePondPluginFileValidateType
     );
+
     const input = document.querySelector('input[name="pista_mp3"]');
 
     // Create a FilePond instance
@@ -387,6 +442,9 @@
                 resolve(type);
             }),
     });
+
+    FilePond.setOptions(labels_es_ES);
+
     FilePond.setOptions({
         server: {
             url: '/uploadsong',

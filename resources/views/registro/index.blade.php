@@ -8,6 +8,7 @@
 @endsection
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
 <style>
     .parrafo {
         font-size: 80%;
@@ -43,7 +44,9 @@
     body, html, .form-control{
         color: #1e1f20!important;
     }
-
+    .iti{
+        width: 100%;
+    }
 </style>
 @endsection
 
@@ -142,9 +145,9 @@
                                 value="{{ old('numero_identificacion') }}">
                         </div>
                         <div class="col-sm-6">
-                            <label for="numCelular">Número de Celular</label>
+                            <label for="telefono">Número de Celular</label>
                             <br>
-                            <input type="text" class="form-control" id="telefono" name="telefono"
+                            <input type="tel" class="form-control" id="telefono" name="telefono" style="width: 100%;"
                                 placeholder="Ejemplo: 3123254607" value="{{ old('telefono') }}">
                         </div>
                     </div>
@@ -208,4 +211,14 @@
 <script src="{{ asset('js/signature_pad/signature_pad.js') }}"></script>
 <script src="{{ asset('js/jsRegistroPersonas/scriptRegistro.js') }}"></script>
 <script src="{{ asset('js/jsRegistroPersonas/scriptCanvas.js') }}"></script>
+
+<script src="{{ asset('js/intlTelInput.js') }}"></script>
+<script>
+  var input = document.querySelector("#telefono");
+  window.intlTelInput(input, {
+    // any initialisation options go here
+    initialCountry:"Co",
+  });
+</script>
+
 @endsection

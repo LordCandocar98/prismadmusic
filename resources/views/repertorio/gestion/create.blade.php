@@ -24,6 +24,10 @@
         color: #1e1f20!important;
     }
 
+    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+        font-weight: normal;
+    }
+
     .parrafo{
     font-size: 80%;
     text-align: justify;
@@ -145,7 +149,7 @@
                                 @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('numero_catalogo') ? 'has-error' : '' }}">
-                                <label for="numero_catalogo" class="{{ $errors->has('numero_catalogo') ? 'text-danger' : '' }}">Num. de catálogo Productor <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío."></i></label>
+                                <label for="numero_catalogo" class="{{ $errors->has('numero_catalogo') ? 'text-danger' : '' }}">Num. de catálogo Productor <i id="helpNumCatalogo" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
                                 <input type="text" class="form-control" id="numero_catalogo" name="numero_catalogo"
                                     value="{{ old('numero_catalogo') }}">
                                 @if ($errors->has('numero_catalogo'))
@@ -153,8 +157,7 @@
                                 @endif
                             </div>
                             <div class="col-md-3 {{ $errors->has('upc_ean') ? 'has-error' : '' }}">
-                                <label for="upc_ean" class="{{ $errors->has('upc_ean') ? 'text-danger' : '' }}">UPC/EAN <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="Si no sabes qué poner en UPC por favor déjarlo vacío."></i></label>
-
+                                <label for="upc_ean" class="{{ $errors->has('upc_ean') ? 'text-danger' : '' }}">UPC/EAN <i id="helpUPC" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
                                 <input type="text" class="form-control" id="upc_ean" name="upc_ean"
                                     value="{{ old('upc_ean') }}">
                                 @if ($errors->has('upc_ean'))
@@ -162,7 +165,7 @@
                                 @endif
                             </div>
                             <div class="col-md-3">
-                                <label for="fecha_lanzamiento" class="{{ $errors->has('fecha_lanzamiento') ? 'text-danger' : '' }}">Fecha de Lanzamiento <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" title="La fecha de lanzamiento debe ser al menos 5 días después de hoy."></i></label>
+                                <label for="fecha_lanzamiento" class="{{ $errors->has('fecha_lanzamiento') ? 'text-danger' : '' }}">Fecha de Lanzamiento <i id="helpFlanz" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
                                 <input type="date" class="form-control" id="fecha_lanzamiento" name="fecha_lanzamiento"
                                     value="{{ old('fecha_lanzamiento') }}" min="{{date('Y-m')}}-{{date('d')+6}}">
                                 @if ($errors->has('fecha_lanzamiento'))
@@ -224,6 +227,27 @@
                 }
             });
         });
+        $('#helpNumCatalogo').click(function(){
+        Swal.fire(
+            'Número de Catalogo',
+            'Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío.',
+            'question'
+          )
+        });
+        $('#helpFlanz').click(function(){
+        Swal.fire(
+            'Fecha de lanzamiento',
+            'La fecha de lanzamiento debe ser al menos 5 días después de hoy.',
+            'question'
+          )
+        });
+        $('#helpUPC').click(function(){
+        Swal.fire(
+            'UPC/EAN',
+            'Si no sabes qué poner en UPC por favor déjarlo vacío.',
+            'question'
+          )
+        });
     </script>
     <!-- EDN CDN ALERT 2 -->
 
@@ -238,6 +262,45 @@
 
     <script>
     $(function(){
+        const labels_es_ES = {
+            labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
+            labelInvalidField: "El campo contiene archivos inválidos",
+            labelFileWaitingForSize: "Esperando tamaño",
+            labelFileSizeNotAvailable: "Tamaño no disponible",
+            labelFileLoading: "Cargando",
+            labelFileLoadError: "Error durante la carga",
+            labelFileProcessing: "Cargando",
+            labelFileProcessingComplete: "Carga completa",
+            labelFileProcessingAborted: "Carga cancelada",
+            labelFileProcessingError: "Error durante la carga",
+            labelFileProcessingRevertError: "Error durante la reversión",
+            labelFileRemoveError: "Error durante la eliminación",
+            labelTapToCancel: "toca para cancelar",
+            labelTapToRetry: "tocar para volver a intentar",
+            labelTapToUndo: "tocar para deshacer",
+            labelButtonRemoveItem: "Eliminar",
+            labelButtonAbortItemLoad: "Abortar",
+            labelButtonRetryItemLoad: "Reintentar",
+            labelButtonAbortItemProcessing: "Cancelar",
+            labelButtonUndoItemProcessing: "Deshacer",
+            labelButtonRetryItemProcessing: "Reintentar",
+            labelButtonProcessItem: "Cargar",
+            labelMaxFileSizeExceeded: "El archivo es demasiado grande",
+            labelMaxFileSize: "El tamaño máximo del archivo es {filesize}",
+            labelMaxTotalFileSizeExceeded: "Tamaño total máximo excedido",
+            labelMaxTotalFileSize: "El tamaño total máximo del archivo es {filesize}",
+            labelFileTypeNotAllowed: "Archivo de tipo no válido",
+            fileValidateTypeLabelExpectedTypes: "Espera {allButLastType} o {lastType}",
+            imageValidateSizeLabelFormatError: "Tipo de imagen no compatible",
+            imageValidateSizeLabelImageSizeTooSmall: "La imagen es demasiado pequeña",
+            imageValidateSizeLabelImageSizeTooBig: "La imagen es demasiado grande",
+            imageValidateSizeLabelExpectedMinSize: "El tamaño mínimo es {minWidth} × {minHeight}",
+            imageValidateSizeLabelExpectedMaxSize: "El tamaño máximo es {maxWidth} × {maxHeight}",
+            imageValidateSizeLabelImageResolutionTooLow: "La resolución es demasiado baja",
+            imageValidateSizeLabelImageResolutionTooHigh: "La resolución es demasiado alta",
+            imageValidateSizeLabelExpectedMinResolution: "La resolución mínima es {minResolution}",
+            imageValidateSizeLabelExpectedMaxResolution: "La resolución máxima es {maxResolution}",
+        };
 
         FilePond.registerPlugin(
             FilePondPluginFileValidateType,
@@ -259,6 +322,8 @@
                     resolve(type);
                 }),
         });
+
+        FilePond.setOptions(labels_es_ES);
 
         FilePond.setOptions({
             server: {

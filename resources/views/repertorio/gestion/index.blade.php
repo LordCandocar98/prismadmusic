@@ -25,6 +25,9 @@
     body, html, .form-control, th, td{
         color: #1e1f20!important;
     }
+    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+        font-weight: normal;
+    }
 </style>
 @endsection
 @section('content')
@@ -36,9 +39,6 @@
                     class="dataTables_wrapper form-inline dt-bootstrap no-footer" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th class="dt-not-orderable">
-                                <input type="checkbox" class="select_all">
-                            </th>
                             <th class="text-center">Título</th>
                             <th class="text-center">Género</th>
                             <th class="text-center">Tipo de colaboración</th>
@@ -50,10 +50,6 @@
                     <tbody>
                         @foreach ($repertorios as $repertorio)
                         <tr role="row">
-                            <td>
-                                <input type="checkbox" name="row_id[]" class="checkRegalia"
-                                    id="checkbox_{{ $repertorio->id }}" value="{{ $repertorio->id }}">
-                            </td>
                             <td class="text-center">{{ $repertorio->titulo}}</td>
                             <td class="text-center">{{ $repertorio->genero}}</td>
                             <td class="text-center">{{ $repertorio->tipo_colaboracion }}</td>

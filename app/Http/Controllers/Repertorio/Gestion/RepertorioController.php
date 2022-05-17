@@ -126,6 +126,7 @@ class RepertorioController extends Controller
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
         copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas/'.$cover->filename);
 
+        // Imagen reducida
         $image = Image::make(public_path().'/storage/portadas/'.$cover->filename);
         $image->resize($image->width() * 0.2,$image->height() * 0.2);
         $image->save(public_path().'/storage/portadas/min'.$cover->filename);
@@ -220,13 +221,14 @@ class RepertorioController extends Controller
      */
     public function uploadcover(Request $request)
     {
+        $image = Image::make($request->cover);
         $rules = [
             'cover' => 'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000'
         ];
         $messages = [
-            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas.',
-            'cover.mimes' => 'La imagen tiene formato incorrecto.',
-            'cover.max' => 'La imagen supera el tamaño maximo.'
+            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas '.$image->width(). ' x '. $image->height(),
+            'cover.mimes' => 'La imagen tiene formato incorrecto '.$image->mime(),
+            'cover.max' => 'La imagen supera el tamaño maximo '. $image->filesize()
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {

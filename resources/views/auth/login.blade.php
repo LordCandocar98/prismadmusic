@@ -69,7 +69,7 @@
                             class="remember-me-text">{{ __('voyager::generic.remember_me') }}</label>
                     </div>
                     <div class="col-md-6 col-center">
-                        <a href="{{ url('password/reset') }}">Olvide mi contraseña.</a>
+                        <a href="{{ url('password/reset') }}">Olvidé mi contraseña.</a>
                     </div>
                 </div>
             </div>
