@@ -448,10 +448,19 @@ const labels_es_ES = {
 <script>
         $("#addsong").click(function(event){
         event.preventDefault();
-
+        let cantcol = $("#cantcol").val();
         let suma = parseFloat($("#porcentaje_intelectualCreador").val());
         for (let i = 1; i <= cantcol; i++) {
             suma += parseFloat($("#po-" + i).val());
+
+            if ($("#email-" + cantcol).val() == $("#session_email").val()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "No se puede agregar el correo como colaborador"
+                });
+                $("#email-" + cantcol).val('');
+            }
         }
 
         if(pond.status){

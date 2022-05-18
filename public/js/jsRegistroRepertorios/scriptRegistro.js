@@ -57,4 +57,8 @@ $(document).ready(function () {
     if($('#nombre_sello').val() == null){
         $('#nombre_sello').val('-1').trigger('change');
     }
+
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
+    });
 });

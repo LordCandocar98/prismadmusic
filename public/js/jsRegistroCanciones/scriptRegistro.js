@@ -105,48 +105,6 @@ $(document).ready(function () {
 
         $("#zoneaddcol").append(cola);
 
-        $("#po-" + cantcol).change(function () {
-            let suma = parseFloat($("#porcentaje_intelectualCreador").val());
-            for (let i = 1; i <= cantcol; i++) {
-                suma += parseFloat($("#po-" + i).val());
-            }
-
-            if(suma == 100){
-
-                let form = $('#formRegistro');
-
-                Swal.fire({
-                    title: '¿Quieres guardar los cambios?',
-                    text: "Soy consciente de que una vez creado la canción no podré hacer modificaciones.",
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Aceptar',
-                    }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        Swal.fire('Guardado!', '', 'success');
-                        form.submit();
-                    }
-                });
-            }else{
-                Swal.fire({
-                    title: 'Error en los colaboradores',
-                    text: 'El porcentaje de colaboración debe ser igual a 100',
-                    icon: 'warning'
-                });
-            }
-        });
-
-        $("#email-" + cantcol).change(function () {
-            if ($("#email-" + cantcol).val() == $("#session_email").val()) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: "No se puede agregar el correo como colaborador"
-                });
-                $("#email-" + cantcol).val('');
-            }
-        });
         $("#cantcol").val(cantcol);
     });
 
@@ -231,6 +189,10 @@ $(document).ready(function () {
                 text: "Primero debes añadir un Featuring"
             });
         }
+    });
+
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
     });
 
 });
