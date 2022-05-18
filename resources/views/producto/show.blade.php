@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
 <li class="active">
-    <a href="{{ route('producto.index') }}"><i class="voyager-lab" aria-hidden="true"></i> Gestion de productos</a>
+    <a href="{{ route('producto.index') }}"><i class="voyager-lab" aria-hidden="true"></i> Gestion de Repertorio</a>
 </li>
 @endsection
 @section('page_header')
@@ -11,94 +11,99 @@
 </h1>
 @endsection
 @section('content')
-<div class="col-md-12">
-    <div class="panel panel-bordered">
-        <div class="panel-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="{{ Storage::url('$repertorio->portada') }}" class="card-img-top" alt="Imagen de portada del repertorio">
-                            <div class="card-body">
-                                <h3>{{$repertorio->titulo}}</h3>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><b>Versión: </b>{{$repertorio->version}}</li>
-                                    <li class="list-group-item"><b>Genero: </b>{{$repertorio->genero}}</li>
-                                    <li class="list-group-item"><b>Subgenero: </b>{{$repertorio->subgenero}}</li>
-                                    <li class="list-group-item"><b>Fecha salida: </b>{{$repertorio->fecha_lanzamiento}}</li>
-                                    <li class="list-group-item"><b>Fecha producción: </b>{{$repertorio->annio_produccion}}</li>
-                                    <li class="list-group-item"><b>Productor: </b>{{$repertorio->productor}}</li>
-                                    <li class="list-group-item"><b>Copyright: </b>{{$repertorio->copyright}}</li>
-                                </ul>
-                            </div>
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ url('storage/portadas/min'.$repertorio->portada) }}" alt="Portada"
+                    style="width: 100%;height: auto;">
+                    @if(auth()->user()->role_id == 3)
+                    <a style="margin-top: 10px;" href="{{ url('storage/portadas/'.$repertorio->portada) }}" download="{{$repertorio->portada}}">
+                        Descargar Caratula <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+                    @endif
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    @if($repertorio->terminado == 1)
+                        <span class="badge badge-secondary badge-success" style="float: right;font-size: 1.5rem;">Terminado</span>
+                    @endif
+                    <h5 class="card-title">{{ $repertorio->titulo }}</h5>
+                    <p class="card-text">{{ $repertorio->version }}</p>
+                    <div class="row">
+                        <div class="col-md-6" style="margin-bottom: 0;">
+                            <div><b>Versión:</b> {{ $repertorio->version }}</div>
+                            <div><b>Género:</b> {{ $repertorio->genero }}</div>
+                            <div><b>Subgénero:</b> {{ $repertorio->subgenero }}</div>
+                            <div><b>Nombre del sello:</b> {{ $repertorio->nombre_sello }}</div>
+                            <div><b>Formato:</b> {{ $repertorio->formato }}</div>
+                            <div><b>Productor:</b> {{ $repertorio->productor }}</div>
                         </div>
-                    </div>
-                    <div class="col-md-9">
-                        @if(count($canciones)>0)
-                        <h4>Lista de canciones</h4>
-                        <ul class="list-group list-group-flush">
-                            <div class="table-responsive">
-                                <table id="dataTableCancion" name="dataTableProducto" class="display" cellspacing="0"
-                                    width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">N°</th>
-                                            <th class="text-center">titulo</th>
-                                            <th class="text-center">Versión subtitulada</th>
-                                            <th class="text-center">Autor</th>
-                                            <th class="text-center">Compositor</th>
-                                            <th class="text-center">Arreglista</th>
-                                            <th class="text-center">Productor</th>
-                                            <th class="text-center">Pline</th>
-                                            <th class="text-center">Año de producción</th>
-                                            <th class="text-center">Genero</th>
-                                            <th class="text-center">Subgenero</th>
-                                            <th class="text-center">Genero secundario</th>
-                                            <th class="text-center">Subgenero secundario</th>
-                                            <th class="text-center">Letra chocante o vulgar</th>
-                                            <th class="text-center">Inicio de previsualización</th>
-                                            <th class="text-center">Idioma del titulo</th>
-                                            <th class="text-center">Idioma de la letra</th>
-                                            <th class="text-center">Fecha principal</th>
-                                            <th class="text-center">Pista</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($canciones as $key => $cancion)
-                                        <tr role="row">
-                                            <td class="text-center">{{$key+1}}</td>
-                                            <td class="text-center">{{ $cancion->titulo }}</td>
-                                            <td class="text-center">{{ $cancion->version_subtitulo }}</td>
-                                            <td class="text-center">{{ $cancion->autor }}</td>
-                                            <td class="text-center">{{ $cancion->compositor }}</td>
-                                            <td class="text-center">{{ $cancion->arreglista }}</td>
-                                            <td class="text-center">{{ $cancion->productor }}</td>
-                                            <td class="text-center">{{ $cancion->pline }}</td>
-                                            <td class="text-center">{{ $cancion->annio_produccion }}</td>
-                                            <td class="text-center">{{ $cancion->genero }}</td>
-                                            <td class="text-center">{{ $cancion->subgenero }}</td>
-                                            <td class="text-center">{{ $cancion->genero_secundario }}</td>
-                                            <td class="text-center">{{ $cancion->subgenero_secundario }}</td>
-                                            <td class="text-center">{{ $cancion->letra_chocante_vulgar }}</td>
-                                            <td class="text-center">{{ $cancion->inicio_previsualizacion }}</td>
-                                            <td class="text-center">{{ $cancion->idioma_titulo }}</td>
-                                            <td class="text-center">{{ $cancion->idioma_letra }}</td>
-                                            <td class="text-center">{{ $cancion->fecha_principal_salida }}</td>
-                                            <td class="text-center center">
-                                                Boton de la cancion {{$cancion->pista_mp3}}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </ul>
-                        @else
-                        <h4>Repertorio sin canciones</h4>
-                        @endif
+                        <div class="col-md-6" style="margin-bottom: 0;">
+                            <div><b>Copyright:</b> {{ $repertorio->copyright }}</div>
+                            <div><b>Año de producción:</b> {{ $repertorio->annio_produccion }}</div>
+                            <div><b>UPC/EAN:</b> {{ $repertorio->upc_ean }}</div>
+                            <div><b>Fecha de lanzamiento:</b> {{ $repertorio->fecha_lanzamiento }}</div>
+                            <div><b>Número de catálogo</b> {{ $repertorio->numero_catalogo }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and (count($canciones)>1))
+
+                <form action="{{ route('finishProduct', $repertorio->id) }}" method="get" id="form-fproduct">
+                    <input class="btn btn-success float-right" style="margin: 2em;" id="btnFinishProduct" type="submit" value="Finalizar Producto">
+                </form>
+
+                @endif
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
+
+            @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id))
+                <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
+            @endif
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Canción</th>
+                        @if(auth()->user()->role_id == 3)
+                        <th scope="col">Descargar</th>
+                        @endif
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($canciones as $key => $cancion)
+                    <tr>
+                        <th scope="row">{{ $key+1 }}</th>
+                        <td>{{ $cancion->titulo }}</td>
+                        <td>{{ $cancion->autor }}</td>
+                        <td style="width: 1px;">
+                            <audio controls src="{{ url('storage/canciones/'.$cancion->pista_mp3) }}"></audio>
+                        </td>
+                        @if(auth()->user()->role_id == 3)
+                        <td style="text-align: center;font-size: 1.5rem;">
+                            <a href="{{ url('storage/canciones/'.$cancion->pista_mp3) }}" download="{{$cancion->titulo}}">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        @endif
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('producto.index') }}"><i class="voyager-lab" aria-hidden="true"></i> Gestion de productos</a>
+        <a href="{{ route('producto.index') }}"><i class="voyager-lab" aria-hidden="true"></i> Gestion de Repertorios</a>
     </li>
 @endsection
 @section('page_header')
@@ -22,8 +22,8 @@
                         <thead>
                             <tr>
                                 <th class="text-center">N°</th>
-                                <th class="text-center">titulo</th>
-                                <th class="text-center">Artista Principal</th>
+                                <th class="text-center">Titulo</th>
+                                <th class="text-center">Formato</th>
                                 <th class="text-center">Genero</th>
                                 <th class="text-center">Subgenero</th>
                                 <th class="text-center">Producción</th>
@@ -35,7 +35,7 @@
                         <tr role="row">
                                 <td class="text-center">{{$key+1}}</td>
                                 <td class="text-center">{{ $rep->titulo }}</td>
-                                <td class="text-center">{{ $rep->artista_principal }}</td>
+                                <td class="text-center">{{ $rep->formato }}</td>
                                 <td class="text-center">{{ $rep->genero }}</td>
                                 <td class="text-center">{{ $rep->subgenero }}</td>
                                 <td class="text-center">{{ $rep->annio_produccion }}</td>

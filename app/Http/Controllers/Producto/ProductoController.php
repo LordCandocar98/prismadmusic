@@ -7,6 +7,7 @@ use App\Models\Cancion;
 use App\Models\Persona;
 use App\Models\Repertorio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
@@ -17,8 +18,12 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $repertorio = Repertorio::all();
-        return view('producto.index', ['repertorio' => $repertorio]);
+        if(Auth::user()->role_id == 3){
+            $repertorio = Repertorio::where('terminado', '=', 1)->get();
+            return view('producto.index', ['repertorio' => $repertorio]);
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -28,7 +33,11 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return redirect()->route('producto.index');
+        if(Auth::user()->role_id == 3){
+            return redirect()->route('producto.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -39,7 +48,11 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('producto.index');
+        if(Auth::user()->role_id == 3){
+            return redirect()->route('producto.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -50,10 +63,14 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $repertorio = Repertorio::find($id);
-        $canciones = Cancion::where('repertorio_id', '=', $id)->get();
-        $principal = Persona::where('id', '=', $repertorio->artista_principal)->get();
-        return view('producto.show', compact('repertorio', 'canciones', 'principal'));
+        if(Auth::user()->role_id == 3){
+            $repertorio = Repertorio::find($id);
+            $canciones = Cancion::where('repertorio_id', '=', $id)->get();
+            $principal = Persona::where('id', '=', $repertorio->artista_principal)->get();
+            return view('producto.show', compact('repertorio', 'canciones', 'principal'));
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -64,7 +81,11 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        return redirect()->route('producto.index');
+        if(Auth::user()->role_id == 3){
+            return redirect()->route('producto.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
@@ -76,7 +97,11 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect()->route('producto.index');
+        if(Auth::user()->role_id == 3){
+            return redirect()->route('producto.index');
+        }else{
+            return redirect()->route('repertorio.index');
+        }
     }
 
     /**
