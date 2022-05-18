@@ -59,6 +59,7 @@
     enctype="multipart/form-data">
     <input type="hidden" name="repertorio" value="{{$repertorio->id}}">
     <input type="hidden" name="session_email" id="session_email" value="{{ $session->email }}">
+    <input type="hidden" id="cantcol" name="cantcol" value="0">
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
@@ -263,8 +264,7 @@
             <div class="form-group row">
                 <div class="col-md-12" style="margin: 0;">
                     <label for="pista_mp3">Carga la canción/pista <i class="fa fa-question-circle" aria-hidden="true"
-                            data-toggle="popover"
-                            title="Puede importar los siguientes formatos: WAV, FLAC, AIFF."></i></label>
+                            id="upSong" style="cursor: pointer;"></i></label>
                     <br>
                     <input type="file" class="filepond my-pond" allowFileEncode name="pista_mp3"
                         data-allow-reorder="true" data-max-file-size="70MB" data-max-files="1" required>
@@ -352,19 +352,6 @@
 
 @endsection
 @section('javascript')
-<!-- CDN ALERT2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    $('#helpFlanz').click(function(){
-    Swal.fire(
-        'Fecha de salida al mercado',
-        '<ul style="text-align:left"><li>Para videos horarios CET</li><li>La fecha de salida al mercado debe ser al menos 5 días después de hoy.</li></ul>',
-        'question'
-        )
-    });
-</script>
-<!-- EDN CDN ALERT 2 -->
-
 <!-- include jQuery library -->
 <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
@@ -429,7 +416,7 @@ const labels_es_ES = {
     const input = document.querySelector('input[name="pista_mp3"]');
 
     // Create a FilePond instance
-    FilePond.create(input, {
+    let pond = FilePond.create(input, {
         labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
         storeAsFile: true,
         maxParallelUploads: 2,
@@ -455,4 +442,66 @@ const labels_es_ES = {
     });
 
 </script>
+
+<!-- CDN ALERT2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        $("#addsong").click(function(event){
+        event.preventDefault();
+
+        let suma = parseFloat($("#porcentaje_intelectualCreador").val());
+        for (let i = 1; i <= cantcol; i++) {
+            suma += parseFloat($("#po-" + i).val());
+        }
+
+        if(pond.status){
+            if(suma == 100){
+
+            let form = $('#formRegistro');
+
+            Swal.fire({
+                title: '¿Quieres guardar los cambios?',
+                text: "Soy consciente de que una vez creado la canción no podré hacer modificaciones.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar',
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Guardado!', '', 'success');
+                    form.submit();
+                }
+            });
+            }else{
+                Swal.fire({
+                    title: 'Error en los colaboradores',
+                    text: 'El porcentaje de colaboración debe ser igual a 100',
+                    icon: 'warning'
+                });
+            }
+        }else{
+            Swal.fire({
+                title: 'Subir audio',
+                text: 'Falto cargar el fonograma',
+                icon: 'warning'
+            });
+        }
+
+    });
+    $('#helpFlanz').click(function(){
+    Swal.fire(
+        'Fecha de salida al mercado',
+        '<ul style="text-align:left"><li>Para videos horarios CET</li><li>La fecha de salida al mercado debe ser al menos 5 días después de hoy.</li></ul>',
+        'question'
+        )
+    });
+    $('#upSong').click(function(){
+    Swal.fire(
+        'Subir audio',
+        'Puede importar los siguientes formatos: WAV, FLAC, AIFF.',
+        'question'
+        )
+    });
+</script>
+<!-- EDN CDN ALERT 2 -->
 @endsection

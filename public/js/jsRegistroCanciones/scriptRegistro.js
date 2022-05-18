@@ -110,10 +110,30 @@ $(document).ready(function () {
             for (let i = 1; i <= cantcol; i++) {
                 suma += parseFloat($("#po-" + i).val());
             }
-            if (suma == 100) {
-                $("#addsong").prop('disabled', false);
-            } else {
-                $("#addsong").prop('disabled', true);
+
+            if(suma == 100){
+
+                let form = $('#formRegistro');
+
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    text: "Soy consciente de que una vez creado la canción no podré hacer modificaciones.",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Guardado!', '', 'success');
+                        form.submit();
+                    }
+                });
+            }else{
+                Swal.fire({
+                    title: 'Error en los colaboradores',
+                    text: 'El porcentaje de colaboración debe ser igual a 100',
+                    icon: 'warning'
+                });
             }
         });
 
@@ -127,6 +147,7 @@ $(document).ready(function () {
                 $("#email-" + cantcol).val('');
             }
         });
+        $("#cantcol").val(cantcol);
     });
 
     $("#addcol-artista").on('click', function () {
@@ -169,6 +190,7 @@ $(document).ready(function () {
             $("#cola-" + cantcol).remove();
 
             cantcol -= 1;
+            $("#cantcol").val(cantcol);
 
         } else {
             Swal.fire({
@@ -207,40 +229,6 @@ $(document).ready(function () {
                 icon: 'error',
                 title: 'Error',
                 text: "Primero debes añadir un Featuring"
-            });
-        }
-    });
-
-    $("#addsong").click(function(event){
-        event.preventDefault();
-
-        let suma = parseFloat($("#porcentaje_intelectualCreador").val());
-        for (let i = 1; i <= cantcol; i++) {
-            suma += parseFloat($("#po-" + i).val());
-        }
-
-        if(suma == 100){
-
-            let form = $('#formRegistro');
-
-            Swal.fire({
-                title: '¿Quieres guardar los cambios?',
-                text: "Soy consciente de que una vez creado la canción no podré hacer modificaciones.",
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Aceptar',
-                }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Guardado!', '', 'success');
-                    form.submit();
-                }
-            });
-        }else{
-            Swal.fire({
-                title: 'Error en los colaboradores',
-                text: 'El porcentaje de colaboración debe ser igual a 100',
-                icon: 'warning'
             });
         }
     });
