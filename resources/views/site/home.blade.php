@@ -65,7 +65,7 @@
                 <article class="post-boxed">
                     <div class="post-meta">
                         <div class="post-meta-item">
-                            <div class="post-author"><span>by</span> <a href="#">Dennis Fernando</a>
+                            <div class="post-author"><span>by</span> <a href="#">Prismad Music</a>
                             </div>
                         </div>
                         {{-- <div class="post-meta-item">
@@ -88,7 +88,7 @@
                 <article class="post-boxed">
                     <div class="post-meta">
                         <div class="post-meta-item">
-                            <div class="post-author"><span>by</span> <a href="#">Dennis Fernando</a>
+                            <div class="post-author"><span>by</span> <a href="#">Prismad Music</a>
                             </div>
                         </div>
                         {{-- <div class="post-meta-item">
@@ -111,7 +111,7 @@
                 <article class="post-boxed">
                     <div class="post-meta">
                         <div class="post-meta-item">
-                            <div class="post-author"><span>by</span> <a href="#">Dennis Fernando</a>
+                            <div class="post-author"><span>by</span> <a href="#">Prismad Music</a>
                             </div>
                         </div>
                         {{-- <div class="post-meta-item">

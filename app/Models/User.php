@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
@@ -18,9 +20,11 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
+        'role_id',
         'registro_confirmed',
         'confirmation_code',
     ];
@@ -43,4 +47,17 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        if (Auth::check()){
+            if (Auth::user()->role_id == 3) {
+                static::addGlobalScope('users', function (Builder $builder) {
+                    $builder->where('users.role_id', '=', 2)
+                    ->orWhere('users.id','=', Auth::user()->id);
+                });
+            }
+        }
+    }
 }
