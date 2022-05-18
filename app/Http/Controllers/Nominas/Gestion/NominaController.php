@@ -24,6 +24,9 @@ class NominaController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id == 2) {
+            return redirect('admin');
+        }
         $nominas = DB::table('users')
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
@@ -141,11 +144,11 @@ class NominaController extends Controller
         }
 
         $notification = array(
-            'message' => 'Nomina creada exitosamente!',
+            'message' => 'Solicitud creada exitosamente!',
             'alert-type' => 'success'
         );
 
-        return redirect('nomina')->with($notification);
+        return redirect('admin')->with($notification);
     }
 
     /**
