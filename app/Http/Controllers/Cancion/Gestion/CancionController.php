@@ -132,6 +132,12 @@ class CancionController extends Controller
 
         $info = $request->infocol ?? [];
 
+        $cola = new Colaboracion();
+        $cola->cliente_email = Auth::user()->email;
+        $cola->porcentaje_intelectual = $request->porcentaje_intelectualCreador;
+        $cola->cancion_id = $song->id;
+        $cola->save();
+
         for ($i = 0; $i<count($info); $i+=2) {
             if (!(User::where('email', '=', $info[$i])->exists())) {
                 $usuario = User::create([

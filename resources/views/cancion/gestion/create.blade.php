@@ -221,7 +221,7 @@
                         <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
                             <option value="none" selected disabled hidden>Seleccione una opción</option>
                             <option value="si" {{ old('instrumental') == "si" ? 'selected' : '' }}>Si</option>
-                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : '' }}>No</option>
+                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : old('instrumental')=='' ? 'selected' : '' }}>No</option>
                         </select>
                         @if ($errors->has('instrumental'))
                             <span class="form-validation">{{ $errors->first('instrumental') }}</span>

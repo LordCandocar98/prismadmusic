@@ -189,7 +189,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="portada" class="{{ $errors->has('portada') ? 'text-danger' : '' }}">Carga una Imagen de Portada</label>
+                                <label for="cover" class="{{ $errors->has('cover') ? 'text-danger' : '' }}">Carga una Imagen de Portada</label>
                                 <input type="file" class="filepond my-pond" allowFileEncode id="cover" name="cover" data-max-file-size="35MB" data-max-files="1" accept="image/png, image/jpeg" required>
                             </div>
                         </div>
@@ -204,52 +204,6 @@
 @endsection
 @section('javascript')
     <script src="{{ asset('js/jsRegistroRepertorios/scriptRegistro.js') }}"></script>
-
-    <!-- CDN ALERT2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $("#addRepertorio").click(function(event){
-            event.preventDefault();
-
-            let form = $('#formRegistro');
-
-            Swal.fire({
-                title: '¿Quieres guardar los cambios?',
-                text: "Soy consciente de que una vez creado el Repertorio no podré hacer modificaciones.",
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Aceptar',
-                }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Guardado!', '', 'success');
-                    form.submit();
-                }
-            });
-        });
-        $('#helpNumCatalogo').click(function(){
-        Swal.fire(
-            'Número de Catalogo',
-            'Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío.',
-            'question'
-          )
-        });
-        $('#helpFlanz').click(function(){
-        Swal.fire(
-            'Fecha de lanzamiento',
-            'La fecha de lanzamiento debe ser al menos 5 días después de hoy.',
-            'question'
-          )
-        });
-        $('#helpUPC').click(function(){
-        Swal.fire(
-            'UPC/EAN',
-            'Si no sabes qué poner en UPC por favor déjarlo vacío.',
-            'question'
-          )
-        });
-    </script>
-    <!-- EDN CDN ALERT 2 -->
 
     <!-- CDN FILEPOND -->
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
@@ -309,7 +263,7 @@
             FilePondPluginFileValidateSize
         );
 
-        FilePond.create(document.querySelector('.filepond'), {
+        pond = FilePond.create(document.querySelector('.filepond'), {
             labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
             storeAsFile: true,
             allowFileTypeValidation: true,
@@ -345,4 +299,58 @@
     });
 
     </script>
+
+    <!-- CDN ALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $("#addRepertorio").click(function(event){
+            event.preventDefault();
+
+            let form = $('#formRegistro');
+            if(pond.status){
+                Swal.fire({
+                    title: '¿Quieres guardar los cambios?',
+                    text: "Soy consciente de que una vez creado el Repertorio no podré hacer modificaciones.",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire('Guardado!', '', 'success');
+                        form.submit();
+                    }
+                });
+            }else{
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Falto cargar la portada',
+                });
+            }
+        });
+        $('#helpNumCatalogo').click(function(){
+        Swal.fire(
+            'Número de Catalogo',
+            'Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío.',
+            'question'
+          )
+        });
+        $('#helpFlanz').click(function(){
+        Swal.fire(
+            'Fecha de lanzamiento',
+            'La fecha de lanzamiento debe ser al menos 5 días después de hoy.',
+            'question'
+          )
+        });
+        $('#helpUPC').click(function(){
+        Swal.fire(
+            'UPC/EAN',
+            'Si no sabes qué poner en UPC por favor déjarlo vacío.',
+            'question'
+          )
+        });
+    </script>
+    <!-- EDN CDN ALERT 2 -->
+
 @endsection
