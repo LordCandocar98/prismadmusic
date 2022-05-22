@@ -7,11 +7,8 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-lab" aria-hidden="true"></i>
-        Gestion de Repertorios
+        Gestion de productos
     </h1>
-    <a href="{{ route('producto.create') }}" class="btn btn-success btn-add-new">
-        <i class="voyager-plus"></i> <span>Crear</span>
-    </a>
 @endsection
 @section('content')
     <div class="col-md-12">

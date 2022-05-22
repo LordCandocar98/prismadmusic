@@ -148,6 +148,8 @@ return [
             '\\App\Widgets\SolicitarW',
             '\\App\Widgets\RegaliaW',
             '\\App\Widgets\ClienteW',
+            '\\App\Widgets\ProductoW',
+            '\\App\Widgets\ColaboracionW',
             'TCG\\Voyager\\Widgets\\UserDimmer',
             //'TCG\\Voyager\\Widgets\\PostDimmer',
             //'TCG\\Voyager\\Widgets\\PageDimmer',
