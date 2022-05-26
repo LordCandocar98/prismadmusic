@@ -86,6 +86,7 @@ class PersonaController extends Controller
         $imageName = $id.'.'.'png';
         $file = public_path(). '/storage'. '/firma' . '/'. $imageName;
         file_put_contents($file, base64_decode($image));
+
         // Generar documento
         $rutaDocumento = $this->generarDocumento($request, $id);
 
@@ -98,7 +99,7 @@ class PersonaController extends Controller
             'tipo_documento'        => $request->tipo_documento,
             'numero_identificacion' => $request->numero_identificacion,
             'telefono'              => $request->telefono,
-            'firma'                 => $file,
+            'firma'                 => "firma/".$imageName,
             'contrato'              => $rutaDocumento,
             'user_id'               => auth()->id(), //AGARRA EL ID DE LA SESIÓN ACTUAL
         ]);
@@ -186,6 +187,6 @@ class PersonaController extends Controller
         $phpWord = IOFactory::load($pathToSave, 'Word2007');
         $phpWord->save(public_path(). '/storage'. '/contratos'.'/'.$id.'.pdf', 'PDF');
 
-        return $pathToSave;
+        return '/contratos'.'/'.$id.'.pdf';
     }
 }
