@@ -1,3 +1,4 @@
+Dropzone.autoDiscover = false;
 $(document).ready(function () {
 
     let cantcol = 0;
