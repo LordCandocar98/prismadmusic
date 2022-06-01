@@ -20,7 +20,9 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+<link href="{{ asset('css/filepond-plugin-media-preview.css') }}" rel="stylesheet" />
 <style>
     body,
     html,
@@ -264,9 +266,7 @@
                     <label for="pista_mp3">Carga la canción/pista <i class="fa fa-question-circle" aria-hidden="true"
                             id="upSong" style="cursor: pointer;"></i></label>
                     <br>
-                    <!-- <input type="file" class="dropzone" name="pista_mp3" required> -->
-                    <div class="dropzone">
-                    </div>
+                    <input type="file" class="filepond" name="pista_mp3" required>
                     <small class="form-text text-muted" style="color: black;">No importar canciones con símbolos
                         especiales como '/%#' y demás. Podría afectar la subida del archivo.</small>
                 </div>
@@ -353,33 +353,7 @@
 @section('javascript')
 <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
 
-<!-- DropZone -->
-<!-- <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script> -->
-<script>
-    let myDropZone = new Dropzone('.dropzone',{
-        paramName: "pista_mp3",
-        url: '/uploadsong',
-        method: "POST",
-        maxFilesize: 70,
-        acceptedFiles: 'audio/wav, audio/flac, audio/aiff',
-        uploadMultiple: false,
-        maxFiles: 1,
-        dictDefaultMessage: 'Arrastra el fonograma aquí o haz clic en cargar',
-        dictMaxFilesExceeded: "¡Solo puede cargar 1 archivo como máximo!",
-        dictResponseError: '¡Error al cargar el archivo!',
-        dictInvalidFileType: "El tipo de archivo solo puede ser wav, flac, aiff",
-        dictFallbackMessage: "El navegador no es compatible",
-        dictFileTooBig: "El tamaño máximo de archivo admitido para cargar archivos es demasiado grande",
-        dictRemoveFile: "Eliminar",
-        addRemoveLinks: true,
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    });
-
-</script>
-
-<!-- <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
@@ -466,7 +440,7 @@ const labels_es_ES = {
         }
     });
 
-</script> -->
+</script>
 
 <!-- CDN ALERT2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -488,7 +462,7 @@ const labels_es_ES = {
             }
         }
 
-        if(myDropZone.files.length > 0){
+        if(pond.status){
             if(suma == 100){
 
             let form = $('#formRegistro');

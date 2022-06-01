@@ -32,11 +32,11 @@ class NominaController extends Controller
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->join('nomina', 'cliente.id', '=', 'nomina.cliente_id')
             ->select(
-                'users.email', 
+                'users.email',
                 'persona.nombre',
                 'persona.apellido',
                 'persona.telefono',
-                'cliente.nombre_artistico', 
+                'cliente.nombre_artistico',
                 'nomina.id',
                 'nomina.desprendible',
                 'nomina.valor',
@@ -108,7 +108,7 @@ class NominaController extends Controller
                     $update_regalia = Regalia::find($regalia->id);
                     $update_regalia->nomina_id = $nomina->id;
                     $update_regalia->save();
-                    
+
                     break;
                 }else{
                     $update_regalia = Regalia::find($regalia->id);
@@ -125,7 +125,7 @@ class NominaController extends Controller
                 $regalia_sobrante->valor                 = $restante;
                 $regalia_sobrante->save();
             }
-            
+
             if($aprobadoRegalias == false){
                 $notification = array(
                     'message' => '¡Error en la Solicitud de Pago, fondos insusficientes!',
