@@ -76,15 +76,15 @@
                             <input type="file" class="filepond" name="fileInforme" id="fileInforme" />
                         </div>
                         <div class="form-group col-md-3 ">
-                            <label class="control-label" for="fecha_informe_inicio">Fecha Informe Inicio</label>
-                            <input type="date" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio"
+                            <label class="control-label" for="fecha_informe_inicio">Mes Informe Inicio</label>
+                            <input type="month" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio"
                                 placeholder="Fecha Informe Inicio"
-                                value="{{ old('fecha_informe_inicio', date('d/m/Y')) }}">
+                                value="{{ old('fecha_informe_inicio', date('Y-m')) }}">
                         </div>
                         <div class="form-group col-md-3 ">
-                            <label class="control-label" for="fecha_informe_final">Fecha Informe Final</label>
-                            <input type="date" class="form-control" name="fecha_informe_final"
-                                placeholder="Fecha Informe Final" value="{{ old('fecha_informe_final', date('d/m/Y')) }}">
+                            <label class="control-label" for="fecha_informe_final">Mes Informe Final</label>
+                            <input type="month" class="form-control" name="fecha_informe_final"
+                                placeholder="Fecha Informe Final" value="{{ old('fecha_informe_final', date('Y-m')) ?: '' }}">
                         </div>
 
                         <div class="form-group col-md-6 {{ $errors->has('valor') ? 'has-error' : '' }}">
