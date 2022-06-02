@@ -12,7 +12,6 @@
     <a href="{{ route('regalias.create') }}" class="btn btn-success btn-add-new">
         <i class="voyager-plus"></i> <span>Crear</span>
     </a>
-    <a class="btn btn-danger" id="borradoMasivo" name="borradoMasivo"><i class="voyager-trash"></i> <span>Borrado masivo</span></a>
 @endsection
 @section('content')
     <div class="col-md-12">  
@@ -63,9 +62,6 @@
                                     !!}
                                 </td>
                                 <td class="text-center">
-                                    <a href="javascript:;" title="Borrar" class="btn btn-sm btn-danger pull-right delete" data-id="18" id="delete-18">
-                                        <i class="voyager-trash"></i> <span class="hidden-xs hidden-sm">Borrar</span>
-                                    </a>
                                     <a href="{{ url('regalias/'.$regalia->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
                                         <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
                                     </a>

@@ -26,7 +26,7 @@ class RegaliasRequest extends FormRequest
     {
         return [
             'idcancion'             =>'required',
-            'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
+            // 'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
             'fecha_informe_inicio'  =>'required',
             'fecha_informe_final'   =>'required',
             'valor'                 =>'required|numeric'
@@ -48,7 +48,7 @@ class RegaliasRequest extends FormRequest
     {
         return [
             'idcancion'             =>'Cancion',
-            'fileInforme'           =>'Informe',
+            // 'fileInforme'           =>'Informe',
             'fecha_informe_inicio'  =>'Fecha Informe Inicio',
             'fecha_informe_final'   =>'Fecha Informe Final',
             'valor'                 =>'Valor'

@@ -26,7 +26,7 @@ class CargaNominaRequest extends FormRequest
         return [
             'idCliente'             => 'required',
             'valor'                 => 'required|numeric|min:200',
-            'fileDesprendible'      => 'required|mimes:pdf'
+            // 'fileDesprendible'      => 'required|mimes:pdf'
         ];
     }
 
@@ -44,7 +44,7 @@ class CargaNominaRequest extends FormRequest
     {
         return [
             'idCliente'             => 'Cliente',
-            'fileDesprendible'      => 'Desprendible',
+            // 'fileDesprendible'      => 'Desprendible',
             'fecha_Desprendible'    => 'Fecha Desprendible',
             'valor'                 => 'Valor'
         ];
