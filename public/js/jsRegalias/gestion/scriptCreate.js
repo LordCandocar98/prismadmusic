@@ -13,7 +13,7 @@ $(document).ready(function () {
                 };
             },
             processResults: function (response) {
-                console.log(response);
+                //console.log(response);
                 return {
                     results: response
                 };
@@ -21,7 +21,11 @@ $(document).ready(function () {
             cache: true
         }
     });
-
+    //$('.cancion').val('-1').trigger('change');
+    $('.cancion').on('change', function (e) {
+        var title = $(this).select2('data')[0].text;
+        $('#item_title').val(title);
+    });
     $('.valor').inputmask('decimal', {
         'alias': 'numeric',
         'groupSeparator': ',',
