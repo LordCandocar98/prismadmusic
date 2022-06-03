@@ -25,11 +25,11 @@ class RegaliasRequest extends FormRequest
     public function rules()
     {
         return [
-            'idcancion'             =>'required',
+            'idcancion'             => 'required',
             // 'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
-            'fecha_informe_inicio'  =>'required',
-            'fecha_informe_final'   =>'required',
-            'valor'                 =>'required|numeric'
+            'fecha_informe_inicio'  => 'required',
+            'fecha_informe_final'   => 'required|after_or_equal:fecha_informe_inicio',
+            'valor'                 => 'required|numeric'
         ];
     }
 
@@ -40,18 +40,18 @@ class RegaliasRequest extends FormRequest
             'numeric'   => 'El campo :attribute debe ser numérico',
             'mimes'     => 'Debe cargar en el campo :attribute un archivo excel',
             'before_or_equal' => 'El campo :attribute debe ser una fecha anterior o igual a ',
-            'after_or_equal'  => 'El campo :attribute debe ser una fecha posterior o igual a ',
+            'after_or_equal'  => 'El campo :attribute debe ser una fecha posterior o igual a :date',
         ];
     }
 
     public function attributes()
     {
         return [
-            'idcancion'             =>'Cancion',
+            'idcancion'             => 'Cancion',
             // 'fileInforme'           =>'Informe',
-            'fecha_informe_inicio'  =>'Fecha Informe Inicio',
-            'fecha_informe_final'   =>'Fecha Informe Final',
-            'valor'                 =>'Valor'
+            'fecha_informe_inicio'  => 'Fecha Informe Inicio',
+            'fecha_informe_final'   => 'Fecha Informe Final',
+            'valor'                 => 'Valor'
         ];
     }
 }

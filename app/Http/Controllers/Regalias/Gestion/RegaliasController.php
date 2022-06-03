@@ -10,6 +10,7 @@ use App\Models\Colaboracion;
 use App\Models\Persona;
 use App\Models\Regalia;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +54,13 @@ class RegaliasController extends Controller
      */
     public function store(RegaliasRequest $request)
     {
+        $f_inicio = Carbon::parse($request->fecha_informe_inicio);
+        $f_final = Carbon::parse($request->fecha_informe_final);
+        //dd($_REQUEST['fecha_informe_inicio'] - $_REQUEST['fecha_informe_final']);
+        $length = $f_inicio->diffInMonths($f_final);
+        if ($length != 2) {
+            return redirect()->back()->withInput($request->all())->with('message', 'La fecha debe ser un trimestre. Ejemplo: Enero - Marzo, Abril - Junio.');
+        }
         try {
             $filename = "";
             if ($xlsArchivo = $request->file('fileInforme')) {
@@ -69,7 +77,7 @@ class RegaliasController extends Controller
                     ->where('users.email', $colaboracion->cliente_email)
                     ->select('cliente.id', 'cliente.nombre_artistico')
                     ->first();
-                $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual/100), 2);
+                $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100), 2);
                 $regalia = new Regalia;
                 $regalia->cliente_id            = $cliente->id;
                 $regalia->informe               = $filename;

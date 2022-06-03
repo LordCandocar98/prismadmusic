@@ -14,6 +14,7 @@
     </h1>
 @endsection
 @section('css')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
 <link href="{{ asset('css/filepond-plugin-media-preview.css') }}" rel="stylesheet" />
@@ -52,6 +53,7 @@
         <div class="panel panel-bordered">
             <div class="panel-body">
                 <form enctype="multipart/form-data" action="{{ route('regalias.store') }}" method="POST">
+                    @csrf
                     <div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -63,15 +65,15 @@
                             </div>
                         @endif
                     </div>
-                    @csrf
                     <fieldset>
                         <legend>CARGA DE INFORME</legend>
                         <div class="form-group  col-md-12 ">
+                            <input type="hidden" id="oldcancion" value="{{ old('idcancion') }}">
                             <label for="idcancion">Cancion</label>
                             <select class="cancion col-md-12" name="idcancion" id="idcancion">
                             </select>
                         </div>
-                        <div class="form-group  col-md-12 ">
+                        <div class="form-group col-md-12 ">
                             <label class="control-label" for="fileInforme">Informe</label>
                             <input type="file" class="filepond" name="fileInforme" id="fileInforme" />
                         </div>
@@ -115,6 +117,20 @@
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
     <script>
+        
+    // Set default FilePond options
+    FilePond.setOptions({
+        server: {
+            url: "{{ config('filepond.server.url') }}",
+            headers: {
+                'X-CSRF-TOKEN': "{{ @csrf_token() }}",
+            }
+        }
+    });
+
+    // Create the FilePond instance
+    FilePond.create(document.querySelector('input[name="filePrueba"]'));
+    
          const labels_es_ES = {
             labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
             labelInvalidField: "El campo contiene archivos inválidos",
@@ -169,7 +185,7 @@
         // Create a FilePond instance
         let pond = FilePond.create(input, {
             labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
-            maxParallelUploads: 2,
+            maxParallelUploads: 1,
             allowFileTypeValidation: true
         });
 

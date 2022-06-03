@@ -21,7 +21,6 @@ $(document).ready(function () {
             cache: true
         }
     });
-    $('.cancion').val('-1').trigger('change');
 
     $('.valor').inputmask('decimal', {
         'alias': 'numeric',
