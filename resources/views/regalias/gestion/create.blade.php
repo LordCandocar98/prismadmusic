@@ -68,10 +68,15 @@
                     <fieldset>
                         <legend>CARGA DE INFORME</legend>
                         <div class="form-group  col-md-12 ">
-                            <input type="hidden" id="oldcancion" value="{{ old('idcancion') }}">
                             <label for="idcancion">Cancion</label>
                             <select class="cancion col-md-12" name="idcancion" id="idcancion">
+                                @if(old('idcancion')  != null)
+                                <option value="{{ old('idcancion') }}" selected="selected">
+                                    {{ old('item_title') }}
+                                </option>
+                                @endif
                             </select>
+                            <input type="hidden" id="item_title" name ="item_title" value="{{ old('item_title') }}" />
                         </div>
                         <div class="form-group col-md-12 ">
                             <label class="control-label" for="fileInforme">Informe</label>
@@ -117,20 +122,7 @@
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
     <script>
-        
-    // Set default FilePond options
-    FilePond.setOptions({
-        server: {
-            url: "{{ config('filepond.server.url') }}",
-            headers: {
-                'X-CSRF-TOKEN': "{{ @csrf_token() }}",
-            }
-        }
-    });
 
-    // Create the FilePond instance
-    FilePond.create(document.querySelector('input[name="filePrueba"]'));
-    
          const labels_es_ES = {
             labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
             labelInvalidField: "El campo contiene archivos inválidos",
