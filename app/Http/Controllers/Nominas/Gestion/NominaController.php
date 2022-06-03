@@ -230,4 +230,14 @@ class NominaController extends Controller
     {
         //
     }
+
+    public function solicitudPagoDenegado()
+    {
+        $notification = array(
+            'message' => '¡Saldo insuficiente para realizar su solicitud!',
+            'alert-type' => 'warning'
+        );
+
+        return redirect('admin')->with($notification);
+    }
 }

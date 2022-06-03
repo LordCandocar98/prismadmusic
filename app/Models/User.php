@@ -47,17 +47,4 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-        if (Auth::check()){
-            if (Auth::user()->role_id == 3) {
-                static::addGlobalScope('users', function (Builder $builder) {
-                    $builder->where('users.role_id', '=', 2)
-                    ->orWhere('users.id','=', Auth::user()->id);
-                });
-            }
-        }
-    }
 }
