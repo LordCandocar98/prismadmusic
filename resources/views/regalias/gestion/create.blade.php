@@ -176,6 +176,7 @@
 
         // Create a FilePond instance
         let pond = FilePond.create(input, {
+            storeAsFile: true,
             labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
             maxParallelUploads: 1,
             allowFileTypeValidation: true

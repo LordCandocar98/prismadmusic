@@ -26,7 +26,7 @@ class RegaliasRequest extends FormRequest
     {
         return [
             'idcancion'             => 'required',
-            // 'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
+            'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
             'fecha_informe_inicio'  => 'required',
             'fecha_informe_final'   => 'required|after_or_equal:fecha_informe_inicio',
             'valor'                 => 'required|numeric'
@@ -38,7 +38,7 @@ class RegaliasRequest extends FormRequest
         return [
             'required'  => 'El campo :attribute es requerido',
             'numeric'   => 'El campo :attribute debe ser numérico',
-            'mimes'     => 'Debe cargar en el campo :attribute un archivo excel',
+            'mimes'     => 'Debe cargar en el campo :attribute debe ser de tipo [doc, csv, xlsx, xls, docx, odt, ods, odp]',
             'before_or_equal' => 'El campo :attribute debe ser una fecha anterior o igual a ',
             'after_or_equal'  => 'El campo :attribute debe ser una fecha posterior o igual a :date',
         ];
