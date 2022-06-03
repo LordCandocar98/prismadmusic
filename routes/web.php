@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
     //Gestión de nomina para los roles: AMIN y Moderadores.
     Route::resource('nomina', NominaController::class);
+    //Notificacion para solicitud de pago menor a 200 dolares
+    Route::get('/sinSaldo',[NominaController::class, 'solicitudPagoDenegado'])->name('sinSaldo');
     //Gestión de clientes para los roles: AMIN y Moderadores.
     Route::resource('clientes', ClientesController::class);
     //Gestión de regalias para los roles: AMIN y Moderadores.
