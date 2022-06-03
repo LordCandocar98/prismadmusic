@@ -82,17 +82,17 @@
     <script>
         $('.valor').inputmask('decimal', {
             'alias': 'numeric',
-            'groupSeparator': '.',
+            'groupSeparator': ',',
             'autoGroup': true,
-            'digits': 0,
-            'radixPoint': ",",
+            'digits': 2,
+            'radixPoint': ".",
             'digitsOptional': false,
             'allowMinus': false,
             'prefix': 'USD ',
             'placeholder': '0',
             'numericInput': true,
             'removeMaskOnSubmit': true,
-            'rightAlign' : false
+            'rightAlign': false
         });
     </script>
 @endsection

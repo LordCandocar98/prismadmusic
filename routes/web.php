@@ -90,6 +90,6 @@ Route::get('/clear-cache', function () {
 });
 
 Route::get('/config-cache', function () {
-    Artisan::call('cache:config');
+    Artisan::call('config:cache');
     return "Cache is cleared";
 });
