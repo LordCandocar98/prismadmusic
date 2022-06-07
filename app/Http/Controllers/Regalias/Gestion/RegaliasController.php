@@ -42,7 +42,6 @@ class RegaliasController extends Controller
      */
     public function create()
     {
-        $canciones = Cancion::select('id', 'titulo')->get();
         return view('regalias.gestion.create');
     }
 
