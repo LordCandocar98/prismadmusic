@@ -57,17 +57,16 @@
                                 <td class="text-center">
                                     {!! 
                                         $regalia->nomina_id != null?
-                                            '<button type="button" class="btn btn-success">Pagado</button>':
+                                            '<button type="button" class="btn btn-success">Solicitado</button>':
                                             '<button type="button" class="btn btn-dark">Pendiente</button>' 
                                     !!}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ url('regalias/'.$regalia->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
-                                        <i class="voyager-edit"></i> <span class="hidden-xs hidden-sm">Editar</span>
-                                    </a>
+                                    @if($regalia->informe != '[]')
                                     <a href="{{ url('storage/'.$regalia->informe) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
