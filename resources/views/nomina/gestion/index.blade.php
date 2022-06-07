@@ -22,7 +22,7 @@
                                 <th class="text-center">Nombres y Apellidos</th>
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Numero Telefonico</th>
-                                <th class="text-center">Nombre Artistico</th>
+                                <th class="text-center">Numero de cuenta</th>
                                 <th class="text-center">Nombre Banco</th>
                                 <th class="text-center">Tipo Cuenta</th>
                                 <th class="text-center">Valor</th>
@@ -36,7 +36,7 @@
                                 <td class="text-center">{{ $nomina->nombre.' '.$nomina->apellido }}</td>
                                 <td class="text-center">{{ $nomina->email }}</td>
                                 <td class="text-center">{{ $nomina->telefono }}</td>
-                                <td class="text-center">{{ $nomina->nombre_artistico }}</td>
+                                <td class="text-center">{{ $nomina->numero_cuenta }}</td>
                                 <td class="text-center">{{ $nomina->nombre_banco }}</td>
                                 <td class="text-center">{{ $nomina->tipo_cuenta }}</td>
                                 <td class="text-center">{{ $nomina->valor }}</td>

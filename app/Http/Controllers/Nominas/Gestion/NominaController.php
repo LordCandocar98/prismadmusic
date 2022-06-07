@@ -40,6 +40,7 @@ class NominaController extends Controller
                 'nomina.id',
                 'nomina.desprendible',
                 'nomina.valor',
+                'nomina.numero_cuenta',
                 'nomina.nombre_banco',
                 'nomina.tipo_cuenta',
                 'nomina.valor'
