@@ -37,9 +37,13 @@
                                 <td class="text-center">{{ $rep->subgenero }}</td>
                                 <td class="text-center">{{ $rep->annio_produccion }}</td>
                                 <td class="text-center center">
-                                    <a href="{{ url('producto/'.$rep->id) }}" title="Ver" class="btn btn-sm btn-warning pull-right view">
-                                        <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
+                                    @if($rep->procesado == 0)
+                                    <a href="{{ url('producto/'.$rep->id) }}" title="Procesar" class="btn btn-sm btn-warning pull-right view">
+                                        <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Procesar</span>
                                     </a>
+                                    @else
+                                    <span class="label label-success">Procesado</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -98,6 +98,9 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         if(Auth::user()->role_id == 3){
+            $repertorio = Repertorio::find($id);
+            $repertorio->procesado = 1;
+            $repertorio->save();
             return redirect()->route('producto.index');
         }else{
             return redirect()->route('repertorio.index');

@@ -104,6 +104,16 @@
                     @endforeach
                 </tbody>
             </table>
+            <form enctype="multipart/form-data" action="{{ url('producto/' . $repertorio->id) }}" method="post">
+                {!! method_field('PUT') !!}
+                @csrf
+                <div class="form-group  col-md-12">
+                    <button type="submit" class="btn btn-primary save">Procesar</button>
+                    <a href="{{ route("producto.index") }}" title="cancelar" class="btn btn-danger pull-right">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
