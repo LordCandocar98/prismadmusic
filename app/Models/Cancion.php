@@ -9,7 +9,7 @@ class Cancion extends Model
 {
     use HasFactory;
     protected $table = "cancion";
-    public $timestamps=false;
+    public $timestamps = false;
     protected $primaryKey = 'id'; // or null
 
     protected $fillable = [

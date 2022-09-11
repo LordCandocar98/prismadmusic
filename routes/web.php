@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     //Gestión de Repertorios para los rol: Cliente.
     Route::resource('cancion', CancionController::class); //Cancion
     Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
+    Route::get('/datatable/canciones', [CancionController::class, 'getSongsDatatable']);
     //Gestión de nomina para los roles: AMIN y Moderadores.
     Route::resource('nomina', NominaController::class);
     //Notificacion para solicitud de pago menor a 200 dolares

@@ -12,84 +12,86 @@
     <div class="page-content">
         @include('voyager::alerts')
         @include('voyager::dimmers')
-        <div class="analytics-container">
-            <?php $google_analytics_client_id = Voyager::setting('admin.google_analytics_client_id'); ?>
-            @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
-                {{-- Google Analytics Embed --}}
-                <div id="embed-api-auth-container"></div>
-            @else
-                <p style="border-radius:4px; padding:20px; background:#fff; margin:0; color:#999; text-align:center;">
-                    {!! __('voyager::analytics.no_client_id') !!}
-                    <a href="https://console.developers.google.com"
-                        target="_blank">https://console.developers.google.com</a>
-                </p>
-            @endif
-
-            <div class="Dashboard Dashboard--full" id="analytics-dashboard">
-                <header class="Dashboard-header">
-                    <ul class="FlexGrid">
-                        <li class="FlexGrid-item">
-                            <div class="Titles">
-                                <h1 class="Titles-main" id="view-name">{{ __('voyager::analytics.select_view') }}</h1>
-                                <div class="Titles-sub">{{ __('voyager::analytics.various_visualizations') }}</div>
-                            </div>
-                        </li>
-                        <li class="FlexGrid-item FlexGrid-item--fixed">
-                            <div id="active-users-container"></div>
-                        </li>
-                    </ul>
-                    <div id="view-selector-container"></div>
-                </header>
-
-                <ul class="FlexGrid FlexGrid--halves">
-                    <li class="FlexGrid-item">
-                        <div class="Chartjs">
-                            <header class="Titles">
-                                <h1 class="Titles-main">{{ __('voyager::analytics.this_vs_last_week') }}</h1>
-                                <div class="Titles-sub">{{ __('voyager::analytics.by_users') }}</div>
-                            </header>
-                            <figure class="Chartjs-figure" id="chart-1-container"></figure>
-                            <ol class="Chartjs-legend" id="legend-1-container"></ol>
-                        </div>
-                    </li>
-                    <li class="FlexGrid-item">
-                        <div class="Chartjs">
-                            <header class="Titles">
-                                <h1 class="Titles-main">{{ __('voyager::analytics.this_vs_last_year') }}</h1>
-                                <div class="Titles-sub">{{ __('voyager::analytics.by_users') }}</div>
-                            </header>
-                            <figure class="Chartjs-figure" id="chart-2-container"></figure>
-                            <ol class="Chartjs-legend" id="legend-2-container"></ol>
-                        </div>
-                    </li>
-                    <li class="FlexGrid-item">
-                        <div class="Chartjs">
-                            <header class="Titles">
-                                <h1 class="Titles-main">{{ __('voyager::analytics.top_browsers') }}</h1>
-                                <div class="Titles-sub">{{ __('voyager::analytics.by_pageview') }}</div>
-                            </header>
-                            <figure class="Chartjs-figure" id="chart-3-container"></figure>
-                            <ol class="Chartjs-legend" id="legend-3-container"></ol>
-                        </div>
-                    </li>
-                    <li class="FlexGrid-item">
-                        <div class="Chartjs">
-                            <header class="Titles">
-                                <h1 class="Titles-main">{{ __('voyager::analytics.top_countries') }}</h1>
-                                <div class="Titles-sub">{{ __('voyager::analytics.by_sessions') }}</div>
-                            </header>
-                            <figure class="Chartjs-figure" id="chart-4-container"></figure>
-                            <ol class="Chartjs-legend" id="legend-4-container"></ol>
-                        </div>
-                    </li>
-                </ul>
+        @if (auth()->user()->role_id == 2)
+        <div class="col-md-12">
+            <div class="panel panel-bordered">
+                <h1 class="page-title">
+                    <i class="fa fa-music" aria-hidden="true"></i>
+                    Información general de tus participaciones
+                </h1>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="tablaCanciones" name="tablaCanciones" class="dataTables_wrapper form-inline dt-bootstrap no-footer" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Título</th>
+                                    <th class="text-center">Año</th>
+                                    <th class="text-center">Fecha de salida</th>
+                                    <th class="text-center">Enlace</th>
+                                    <th class="text-center">Participación</th>
+                                    <th class="text-center">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+        @endif
     </div>
 @stop
 
 @section('javascript')
-
+<script>
+    $('#tablaCanciones').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
+            paging: true,
+            serverSide: true,
+            processing: true,
+            pageLength: 10,
+            lengthChange: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            cache: false,
+            ajax: {
+                url: '/datatable/canciones',
+                type: 'GET',
+                data: function(data) {},
+                async: true,
+            },
+            columns: [
+                {data: 'titulo',orderable: true, searchable: true, className: 'text-center'},
+                {data: 'annio_produccion', orderable: true, searchable: true, className: 'text-center'},
+                {data: 'fecha_principal_salida', orderable: true, searchable: true, className: 'text-center'},
+                {data: 'link_preguardado', orderable: true, searchable: true, className: 'text-center'},
+                {data: 'participacion', orderable: true, searchable: true, className: 'text-center'},
+                {data: 'accion', orderable: false, searchable: false, className: 'text-center'},
+            ],
+            autoWidth: false
+        });
+</script>
     @if (isset($google_analytics_client_id) && !empty($google_analytics_client_id))
         <script>
             (function(w, d, s, g, js, fs) {

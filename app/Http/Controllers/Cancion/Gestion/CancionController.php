@@ -2,22 +2,36 @@
 
 namespace App\Http\Controllers\Cancion\Gestion;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
-use App\Http\Requests\Cancion\CancionRequest;
-use App\Mail\CorreoPrismadMusic;
-use App\Models\Cancion;
-use App\Models\Colaboracion;
-use App\Models\ColaboracionArtFea;
-use App\Models\Repertorio;
+use Exception;
 use App\Models\User;
+use App\Models\Cancion;
+use App\Models\Repertorio;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Colaboracion;
+use App\Mail\CorreoPrismadMusic;
+use App\Models\ColaboracionArtFea;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\Cancion\CancionRequest;
+use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 
+/**
+ * Controlador Maneja Lógica de Canciones.
+ *
+ * Controlador que maneja la lógica de las canciones para listar, guardar datos.
+ *
+ * @package    Controllers
+ * @subpackage \Cancion\Gestion
+ * @copyright  2022 Geem Seeders
+ * @author     Santiago Roncancio <Sntgrncnc@gmail.com>
+ * @author     Candido Moreno <stiivenmoreno@gmail.com>
+ * @version    v1.0.1
+ */
 class CancionController extends Controller
 {
     /**
@@ -55,8 +69,8 @@ class CancionController extends Controller
      */
     public function getCanciones(Request $request)
     {
-        $term = $request->term ? : '';
-        $canciones = Cancion::where('titulo','like','%'.$term.'%')->select('id','titulo as text')->get();
+        $term = $request->term ?: '';
+        $canciones = Cancion::where('titulo', 'like', '%' . $term . '%')->select('id', 'titulo as text')->get();
         return response()->json($canciones);
     }
 
@@ -69,9 +83,9 @@ class CancionController extends Controller
     {
         $repertorio = Repertorio::find($id);
         $session = Auth::user();
-        if($repertorio->terminado == 0){
+        if ($repertorio->terminado == 0) {
             return view('cancion.gestion.create', compact('repertorio', 'session'));
-        }else{
+        } else {
             return redirect()->route('repertorio.index');
         }
     }
@@ -85,8 +99,8 @@ class CancionController extends Controller
     {
         $session = Auth::user();
         $colas = Colaboracion::where('cliente_email', '=', $session->email)
-                ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-                ->get();
+            ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+            ->get();
 
         return view('cancion.gestion.share', compact("colas"));
     }
@@ -100,11 +114,11 @@ class CancionController extends Controller
     public function store(CancionRequest $request)
     {
         $session = Auth::user();
-        $request_song =json_decode($request->pista_mp3);
+        $request_song = json_decode($request->pista_mp3);
         $repertorio = Repertorio::find($request->repertorio);
 
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
-        copy(public_path().'/storage/'.$request_song->folder.''.$request_song->filename, public_path().'/storage/canciones/'.$request_song->filename);
+        copy(public_path() . '/storage/' . $request_song->folder . '' . $request_song->filename, public_path() . '/storage/canciones/' . $request_song->filename);
 
         $song = new Cancion();
         $song->repertorio_id = $request->repertorio;
@@ -138,7 +152,7 @@ class CancionController extends Controller
         $cola->cancion_id = $song->id;
         $cola->save();
 
-        for ($i = 0; $i<count($info); $i+=2) {
+        for ($i = 0; $i < count($info); $i += 2) {
             if (!(User::where('email', '=', $info[$i])->exists())) {
                 $usuario = User::create([
                     'email'    => $info[$i],
@@ -161,14 +175,14 @@ class CancionController extends Controller
 
             $cola = new Colaboracion();
             $cola->cliente_email = $info[$i];
-            $cola->porcentaje_intelectual = $info[$i+1];
+            $cola->porcentaje_intelectual = $info[$i + 1];
             $cola->cancion_id = $song->id;
             $cola->save();
         }
 
         $infoArtista = $request->nombreartista ?? [];
 
-        for ($i = 0; $i<count($infoArtista); $i++) {
+        for ($i = 0; $i < count($infoArtista); $i++) {
             $cola = new ColaboracionArtFea();
             $cola->nombre = $infoArtista[$i];
             $cola->tipo_colaboracion = "Artista Principal";
@@ -178,7 +192,7 @@ class CancionController extends Controller
 
         $infoFeaturing = $request->nombrefeaturing ?? [];
 
-        for ($i = 0; $i<count($infoFeaturing); $i++) {
+        for ($i = 0; $i < count($infoFeaturing); $i++) {
             $cola = new ColaboracionArtFea();
             $cola->nombre = $infoFeaturing[$i];
             $cola->tipo_colaboracion = "Featuring";
@@ -186,7 +200,7 @@ class CancionController extends Controller
             $cola->save();
         }
 
-        if(($repertorio->formato == 'SINGLE') or (($repertorio->formato == 'EP') and ($repertorio->count_song()>=5))){
+        if (($repertorio->formato == 'SINGLE') or (($repertorio->formato == 'EP') and ($repertorio->count_song() >= 5))) {
             app(RepertorioController::class)->finishProduct($repertorio->id);
         }
 
@@ -263,7 +277,7 @@ class CancionController extends Controller
         if ($song = $request->file('pista_mp3')) {
             $destinosong = 'canciones/tmp/';
             $profilesong  = time() . '.' . $song->getClientOriginalExtension();
-            $filename = $destinosong . $profilesong ;
+            $filename = $destinosong . $profilesong;
             $song->move('storage/' . $destinosong, $profilesong);
         };
 
@@ -271,5 +285,44 @@ class CancionController extends Controller
             'folder' => $destinosong,
             'filename' => $profilesong
         ];
+    }
+
+    /**
+     * Datatable con listado de canciones subidas por el usuario actual
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
+     */
+    public function getSongsDatatable(Request $request)
+    {
+        try {
+            $session = Auth::user();
+            //return $session->email;
+            $canciones = Cancion::Join('colaboracion as cl', 'cl.cancion_id', 'cancion.id')
+                ->where('cl.cliente_email', $session->email)
+                ->select(
+                    'cancion.id',
+                    'cancion.titulo',
+                    'cancion.annio_produccion',
+                    'cancion.fecha_principal_salida',
+                    'cancion.link_preguardado',
+                    'cl.porcentaje_intelectual')
+                ->get();
+            return DataTables::of($canciones)
+                ->addColumn('participacion', function ($cancion) {
+                    return $cancion->porcentaje_intelectual . '%';
+                })
+                ->addColumn('accion', function ($cancion) {
+                    return '<button data-id="' . $cancion->id . '" type="button" class="btn btn-info ctm-border-radius cancion"><i class="fa fa-eye"><span class="hidden-xs hidden-sm"> Ver detalle</span></i></button>';
+                })
+                ->rawColumns(['participacion', 'accion'])
+                ->make(true);
+        } catch (Exception $exception) {
+            return response()->json([
+                'code'    => 500,
+                'status'  => 'error',
+                'message' => $exception->getMessage()
+            ], 500, [], JSON_PRETTY_PRINT);
+        }
     }
 }
