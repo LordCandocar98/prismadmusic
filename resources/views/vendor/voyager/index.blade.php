@@ -21,7 +21,7 @@
                 </h1>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table id="tablaCanciones" name="tablaCanciones" class="dataTables_wrapper form-inline dt-bootstrap no-footer" cellspacing="0" width="100%">
+                        <table id="tablaCanciones" name="tablaCanciones" class="dataTables_wrapper form-inline dt-bootstrap no-footer table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th class="text-center">Título</th>

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Cancion\CancionRequest;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
+use App\Models\HistoricoCancion;
 
 /**
  * Controlador Maneja Lógica de Canciones.
@@ -306,16 +307,63 @@ class CancionController extends Controller
                     'cancion.annio_produccion',
                     'cancion.fecha_principal_salida',
                     'cancion.link_preguardado',
-                    'cl.porcentaje_intelectual')
+                    'cl.porcentaje_intelectual'
+                )
                 ->get();
             return DataTables::of($canciones)
                 ->addColumn('participacion', function ($cancion) {
                     return $cancion->porcentaje_intelectual . '%';
                 })
                 ->addColumn('accion', function ($cancion) {
-                    return '<button data-id="' . $cancion->id . '" type="button" class="btn btn-info ctm-border-radius cancion"><i class="fa fa-eye"><span class="hidden-xs hidden-sm"> Ver detalle</span></i></button>';
+                    return '<a href="/cancion/historico/' . $cancion->id . '" data-id="' . $cancion->id . '" class="btn btn-info ctm-border-radius cancion"><i class="fa fa-eye"><span class="hidden-xs hidden-sm"> Ver detalle</span></i></button>';
                 })
                 ->rawColumns(['participacion', 'accion'])
+                ->make(true);
+        } catch (Exception $exception) {
+            return response()->json([
+                'code'    => 500,
+                'status'  => 'error',
+                'message' => $exception->getMessage()
+            ], 500, [], JSON_PRETTY_PRINT);
+        }
+    }
+
+    /**
+     * Obtener el detalle de una canción para su historico
+     *
+     * @param  int  $id de la canción solicitada
+     * @return \Illuminate\Http\View
+     */
+    public function getDetailSong($id)
+    {
+        $cancion = Cancion::findOrFail($id);
+        $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
+        return view('cancion.gestion.detalle', compact('cancion', $cancion));
+    }
+
+    /**
+     * Datatable del historico de una canción
+     *
+     * @param  int $id de la canción
+     * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
+     */
+    public function getSongDatatable(int $id)
+    {
+        try {
+            //return $session->email;
+            $canciones = HistoricoCancion::where('cancion_id', $id)
+                ->get();
+            return DataTables::of($canciones)
+                ->addColumn('valores', function ($cancion) {
+                    return '<div class="valor">' . $cancion->valor . '</div>';
+                })
+                ->addColumn('mes_reporte', function ($cancion) {
+                    setlocale(LC_TIME, 'es_ES');
+                    $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+
+                    return $meses[$cancion->mes - 1];
+                })
+                ->rawColumns(['valores', 'mes_reporte'])
                 ->make(true);
         } catch (Exception $exception) {
             return response()->json([
