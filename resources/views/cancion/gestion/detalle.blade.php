@@ -111,6 +111,11 @@
                     </div>
                 </div>
                 <legend>Historico de la canción</legend>
+                @if (Auth::user()->role_id === 3)
+                <a href="{{ url('/hitorico-cancion/show/' . $cancion->id) }}" class="btn btn-success btn-add-new">
+                    <i class="voyager-plus"></i> <span>Crear Historico de Canción</span>
+                </a>
+                @endif
                 <div class="table-responsive">
                     <table id="tablaCanciones" name="tablaCanciones" class="dataTables_wrapper form-inline dt-bootstrap no-footer table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
@@ -169,7 +174,7 @@
                 async: true,
             },
             columns: [
-                {data: 'annio',orderable: true, searchable: true, className: 'text-center'},
+                {data: 'descripcion',orderable: true, searchable: true, className: 'text-center'},
                 {data: 'mes_reporte', orderable: true, searchable: true, className: 'text-center'},
                 {data: 'valores', orderable: true, searchable: true, className: 'text-center'},
             ],

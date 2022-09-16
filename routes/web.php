@@ -4,6 +4,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\Cancion\Gestion\CancionController;
+use App\Http\Controllers\Cancion\Gestion\HistoricoCancionController;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
@@ -64,6 +65,16 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::get('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
     Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
     Route::post('/uploadsong', [CancionController::class, 'uploadsong'])->name('uploadsong');
+
+    //Gestion para moderador de historico canciones de clientes
+    Route::resource('hitorico-cancion', HistoricoCancionController::class);
+    Route::post('/hitorico-cancion/store', [HistoricoCancionController::class, 'store']);
+    Route::get('/hitorico-cancion/show/{id}', [HistoricoCancionController::class, 'show']);
+    Route::get('/hitorico/show/{id}', [HistoricoCancionController::class, 'showHistorico']);
+    Route::put('/hitorico-cancion/update/{id}', [HistoricoCancionController::class, 'update']);
+    Route::get('/hitorico-cliente/canciones/{id}', [HistoricoCancionController::class, 'indexCanciones']);
+    Route::get('/index/datable-clientes', [CancionController::class, 'getClientesDatatable']);
+    Route::get('/datatable/canciones-cliente', [CancionController::class, 'getSongsDatatableCliente']);
 });
 
 Route::post('upload', [UploadController::class, 'store']);

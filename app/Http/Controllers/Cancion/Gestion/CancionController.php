@@ -351,7 +351,8 @@ class CancionController extends Controller
     {
         try {
             //return $session->email;
-            $canciones = HistoricoCancion::where('cancion_id', $id)
+            $canciones = HistoricoCancion::join('years', 'years.id', '=', 'historico_canciones.annio')
+                ->where('cancion_id', $id)
                 ->get();
             return DataTables::of($canciones)
                 ->addColumn('valores', function ($cancion) {
@@ -373,4 +374,75 @@ class CancionController extends Controller
             ], 500, [], JSON_PRETTY_PRINT);
         }
     }
+    /**
+     * Datatable del Clientes par ver historicos de canciones por cliente
+     *
+     * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
+     */
+    public function getClientesDatatable()
+    {
+        $users = DB::table('users')
+            ->join('persona', 'users.id', '=', 'persona.user_id')
+            ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+            ->select('users.id', 'users.registro_confirmed', 'users.email', 'users.avatar', DB::raw('CONCAT(persona.nombre," ",persona.apellido) AS nombre_completo'))
+            ->where('role_id', 2)
+            ->get();
+        $url = env('APP_URL'); 
+        return Datatables::of($users)
+            ->addColumn('ver_colaboraciones', function ($user) use ($url) {
+                return "<abbr title='Ver Colaboraciones'><a href='" . $url . "/hitorico-cliente/canciones/" . $user->id . "' class='btn btn-sm btn-primary pull-right edit'><i class='fa fa-external-link' aria-hidden='true'></i> Ver Colaboraciones</a></abbr>";
+            })
+            ->addColumn('avatar', function ($user) use ($url) {
+                return '<img src="{{ asset("storage/"' . $user->avatar . '") }}" style="width:100px">';
+            })
+            ->addColumn('registro_confirmed', function ($user) use ($url) {
+                return '<span class="label label-primary">' . $user->registro_confirmed === 0 ? "Incompleto" : "Completado" . '</span>';
+            })
+            ->rawColumns(['ver_colaboraciones', 'avatar', 'registro_confirmed'])
+            ->make(true);    
+    }
+
+     /**
+     * Datatable con listado de canciones subidas por cliente.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
+     */
+    public function getSongsDatatableCliente(Request $request)
+    {
+        try {
+            $canciones = Cancion::Join('colaboracion as cl', 'cl.cancion_id', 'cancion.id')
+                ->where('cl.cliente_email', $request->email)
+                ->select(
+                    'cancion.id',
+                    'cancion.titulo',
+                    'cancion.annio_produccion',
+                    'cancion.fecha_principal_salida',
+                    'cancion.link_preguardado',
+                    'cl.porcentaje_intelectual'
+                )
+                ->get();
+            $user = User::where('email', $request->email)->first();
+            return DataTables::of($canciones)
+                ->addColumn('participacion', function ($cancion) {
+                    return $cancion->porcentaje_intelectual . '%';
+                })
+                ->addColumn('accion', function ($cancion) use($user) {
+                    return '
+                        <abbr title="Cargar Link Preguardado"><a href="/hitorico/show/' .  $cancion->id . '?user=' . $user->id . '" class="btn btn-sm btn-success pull-right edit"><i class="fa fa-external-link" aria-hidden="true"></i> Cargar Link Preguardado</a></abbr>
+                        <abbr title="Ver Detalle"><a href="/cancion/historico/' . $cancion->id . '" data-id="' . $cancion->id . '" class="btn btn-sm btn-info pull-right edit"><i class="fa fa-eye" aria-hidden="true"></i> Ver detalle</a></abbr>
+                    ';
+                })
+                ->rawColumns(['participacion', 'accion'])
+                ->make(true);
+        } catch (Exception $exception) {
+            return response()->json([
+                'code'    => 500,
+                'status'  => 'error',
+                'message' => $exception->getMessage()
+            ], 500, [], JSON_PRETTY_PRINT);
+        }
+    }
+
+        
 }
