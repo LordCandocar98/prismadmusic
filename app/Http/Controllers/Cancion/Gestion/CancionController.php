@@ -412,6 +412,7 @@ class CancionController extends Controller
     {
         try {
             $canciones = Cancion::Join('colaboracion as cl', 'cl.cancion_id', 'cancion.id')
+                ->join('historico_canciones as h_c', 'h_c.cancion_id', 'cancion.id')
                 ->where('cl.cliente_email', $request->email)
                 ->select(
                     'cancion.id',
@@ -419,7 +420,16 @@ class CancionController extends Controller
                     'cancion.annio_produccion',
                     'cancion.fecha_principal_salida',
                     'cancion.link_preguardado',
-                    'cl.porcentaje_intelectual'
+                    'cl.porcentaje_intelectual',
+                    DB::raw('SUM(h_c.valor) AS total')
+                )
+                ->groupBy(
+                    'cancion.id', 
+                    'cancion.titulo', 
+                    'cancion.annio_produccion',
+                    'cancion.fecha_principal_salida',
+                    'cancion.link_preguardado',
+                    'cl.porcentaje_intelectual',
                 )
                 ->get();
             $user = User::where('email', $request->email)->first();
@@ -427,13 +437,22 @@ class CancionController extends Controller
                 ->addColumn('participacion', function ($cancion) {
                     return $cancion->porcentaje_intelectual . '%';
                 })
+                ->addColumn('total', function ($cancion) {
+                    return '<span class="valor">' . number_format($cancion->total, 2) . '</span>';
+                })
+                ->addColumn('link_preguardado', function ($cancion) {
+                    if($cancion->link_preguardado != null){
+                        return '<abbr title="Link Preguardado"><a href="' . $cancion->link_preguardado . '" target="_blank" class="btn btn-sm btn-warning pull-right edit"><i class="fa fa-external-link" aria-hidden="true"></i> Link Preguardado</a></abbr>';
+                    }
+                    return '-';
+                })
                 ->addColumn('accion', function ($cancion) use($user) {
                     return '
                         <abbr title="Cargar Link Preguardado"><a href="/hitorico/show/' .  $cancion->id . '?user=' . $user->id . '" class="btn btn-sm btn-success pull-right edit"><i class="fa fa-external-link" aria-hidden="true"></i> Cargar Link Preguardado</a></abbr>
                         <abbr title="Ver Detalle"><a href="/cancion/historico/' . $cancion->id . '" data-id="' . $cancion->id . '" class="btn btn-sm btn-info pull-right edit"><i class="fa fa-eye" aria-hidden="true"></i> Ver detalle</a></abbr>
                     ';
                 })
-                ->rawColumns(['participacion', 'accion'])
+                ->rawColumns(['accion', 'link_preguardado', 'total'])
                 ->make(true);
         } catch (Exception $exception) {
             return response()->json([

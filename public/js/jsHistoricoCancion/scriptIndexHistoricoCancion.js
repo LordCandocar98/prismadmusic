@@ -42,11 +42,27 @@ $(document).ready( function () {
         columns: [
             {data: 'titulo',orderable: true, searchable: true, className: 'text-center'},
             {data: 'annio_produccion', orderable: true, searchable: true, className: 'text-center'},
-            {data: 'fecha_principal_salida', orderable: true, searchable: true, className: 'text-center'},
+            {data: 'total', orderable: true, searchable: true, className: 'text-center'},
             {data: 'link_preguardado', orderable: true, searchable: true, className: 'text-center'},
             {data: 'participacion', orderable: true, searchable: true, className: 'text-center'},
             {data: 'accion', orderable: false, searchable: false, className: 'text-center'},
         ],
-        autoWidth: false
+        autoWidth: false,
+        drawCallback: function(settings) {
+            $('.valor').inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': ',',
+                'autoGroup': true,
+                'digits': 2,
+                'radixPoint': ".",
+                'digitsOptional': false,
+                'allowMinus': false,
+                'prefix': 'USD ',
+                'placeholder': '0',
+                'numericInput': true,
+                'removeMaskOnSubmit': true,
+                'rightAlign': false
+            });
+        }
     });
 });

@@ -42,7 +42,7 @@
                             <tr>
                                 <th class="text-center">Título</th>
                                 <th class="text-center">Año</th>
-                                <th class="text-center">Fecha de salida</th>
+                                <th class="text-center">Consolidado Total</th>
                                 <th class="text-center">Enlace</th>
                                 <th class="text-center">Participación</th>
                                 <th class="text-center">Accion</th>
@@ -57,5 +57,6 @@
 @endsection
 
 @section('javascript')
+    <script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.js"></script>
     <script src="{{ asset('js\jsHistoricoCancion\scriptIndexHistoricoCancion.js') }}"></script>
 @endsection

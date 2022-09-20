@@ -110,8 +110,6 @@
         });
         $('#annio, #mes').val('-1').trigger('change');
         
-        
-        
         $('.valor').inputmask('decimal', {
             'alias': 'numeric',
             'groupSeparator': ',',
