@@ -412,7 +412,7 @@ class CancionController extends Controller
     {
         try {
             $canciones = Cancion::Join('colaboracion as cl', 'cl.cancion_id', 'cancion.id')
-                ->join('historico_canciones as h_c', 'h_c.cancion_id', 'cancion.id')
+                ->leftJoin('historico_canciones as h_c', 'h_c.cancion_id', 'cancion.id')
                 ->where('cl.cliente_email', $request->email)
                 ->select(
                     'cancion.id',
