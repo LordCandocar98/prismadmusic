@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group  col-md-6 ">
                         <label class="control-label" for="correo">Correo</label>
-                        <input type="text" name="correo" id="correo" class="valor form-control" step="any" value="{{ $user->email }}" readonly/>
+                        <input type="text" name="correo" id="correo" class="form-control" step="any" value="{{ $user->email }}" readonly/>
                     </div>
                 </fieldset>
             </div>
