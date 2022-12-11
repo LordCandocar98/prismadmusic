@@ -26,7 +26,8 @@ class RegaliasRequest extends FormRequest
     {
         return [
             'idcancion'             => 'required',
-            'fileInforme'           =>'required|file|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
+            'fileInforme'           =>'required',
+            // 'fileInforme'           =>'required|mimes:doc,csv,xlsx,xls,docx,odt,ods,odp|max:3000',
             'fecha_informe_inicio'  => 'required',
             'fecha_informe_final'   => 'required|after_or_equal:fecha_informe_inicio',
             'valor'                 => 'required|numeric'
