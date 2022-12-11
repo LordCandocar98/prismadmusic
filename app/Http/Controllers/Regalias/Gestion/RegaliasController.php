@@ -56,10 +56,10 @@ class RegaliasController extends Controller
         $f_inicio = Carbon::parse($request->fecha_informe_inicio);
         $f_final = Carbon::parse($request->fecha_informe_final);
         //dd($_REQUEST['fecha_informe_inicio'] - $_REQUEST['fecha_informe_final']);
-        $length = $f_inicio->diffInMonths($f_final);
-        if ($length != 2) {
-            return redirect()->back()->withInput($request->all())->with('message', 'La fecha debe ser un trimestre. Ejemplo: Enero - Marzo, Abril - Junio.');
-        }
+        // $length = $f_inicio->diffInMonths($f_final);
+        // if ($length != 2) {
+        //     return redirect()->back()->withInput($request->all())->with('message', 'La fecha debe ser un trimestre. Ejemplo: Enero - Marzo, Abril - Junio.');
+        // }
         try {
             $filename = "";
             if ($xlsArchivo = $request->file('fileInforme')) {
