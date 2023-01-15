@@ -7,7 +7,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-lab" aria-hidden="true"></i>
-        Gestion de productos
+        Gestión de productos
     </h1>
 @endsection
 @section('content')

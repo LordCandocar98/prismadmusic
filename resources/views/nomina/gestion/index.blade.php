@@ -7,7 +7,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="fa fa-university" aria-hidden="true"></i>
-        Gestion de Nomina
+        Gestión de Nomina
     </h1>
 @endsection
 @section('content')

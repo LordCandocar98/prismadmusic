@@ -7,7 +7,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-wallet" aria-hidden="true"></i>
-        Gestion de Regalias
+        Gestión de Regalias
     </h1>
     <a href="{{ route('regalias.create') }}" class="btn btn-success btn-add-new">
         <i class="voyager-plus"></i> <span>Crear</span>

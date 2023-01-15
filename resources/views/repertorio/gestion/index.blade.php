@@ -7,7 +7,7 @@
 @section('page_header')
 <h1 class="page-title">
     <i class="fa fa-music" aria-hidden="true"></i>
-    Gestion de Repertorios
+    Gestión de Repertorios
 </h1>
 <a href="{{ route('repertorio.create') }}" class="btn btn-success btn-add-new">
     <i class="voyager-plus"></i> <span>Crear</span>
