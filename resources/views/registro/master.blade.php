@@ -8,7 +8,12 @@
     <title>@yield('page_title', setting('admin.title') . " - " . setting('admin.description'))</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Favicon -->
-    <?php $admin_favicon = Voyager::setting('admin.icon_image', ''); ?>
+    <?php
+
+use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Facades\Voyager;
+
+ $admin_favicon = Voyager::setting('admin.icon_image', ''); ?>
     @if ($admin_favicon == '')
         <link rel="shortcut icon" href="{{ asset('assets/images/logo-icon.png') }}" type="image/png">
     @else
