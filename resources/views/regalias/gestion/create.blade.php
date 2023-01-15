@@ -52,7 +52,7 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                <form enctype="multipart/form-data" action="{{ route('regalias.store') }}" method="POST">
+                <form enctype="multipart/form-data" action="{{ route('regalias.store') }}" method="POST" id="formRegalias">
                     @csrf
                     <div>
                         @if ($errors->any())
@@ -80,27 +80,23 @@
                         </div>
                         <div class="form-group col-md-12 ">
                             <label class="control-label" for="fileInforme">Informe</label>
-                            <input type="file" class="filepond" name="fileInforme" id="fileInforme" />
+                            <input type="file" class="filepond" name="fileInforme" id="fileInforme" data-max-file-size="100MB" data-max-files="1"/>
                         </div>
                         <div class="form-group col-md-3 ">
                             <label class="control-label" for="fecha_informe_inicio">Mes Informe Inicio</label>
-                            <input type="month" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio"
-                                placeholder="Fecha Informe Inicio"
-                                value="{{ old('fecha_informe_inicio', date('Y-m')) }}">
+                            <input type="month" class="form-control" name="fecha_informe_inicio" id="fecha_informe_inicio" placeholder="Fecha Informe Inicio" max="{{ date('Y-m'); }}" value="{{ old('fecha_informe_inicio', date('Y-m')) }}">
                         </div>
                         <div class="form-group col-md-3 ">
                             <label class="control-label" for="fecha_informe_final">Mes Informe Final</label>
-                            <input type="month" class="form-control" name="fecha_informe_final"
-                                placeholder="Fecha Informe Final" value="{{ old('fecha_informe_final', date('Y-m')) ?: '' }}">
+                            <input type="month" class="form-control" name="fecha_informe_final" id="fecha_informe_final" placeholder="Fecha Informe Final" max="{{ date('Y-m'); }}" value="{{ old('fecha_informe_final', date('Y-m')) ?: '' }}">
                         </div>
 
                         <div class="form-group col-md-6 {{ $errors->has('valor') ? 'has-error' : '' }}">
                             <label class="control-label" for="valor">Valor</label>
-                            <input type="text" name="valor" id="valor" class="valor form-control" step="any"
-                                value="{{ old('valor') }}" />
+                            <input type="text" name="valor" id="valor" class="valor form-control" step="any" value="{{ old('valor') }}" />
                         </div>
                         <div class="form-group  col-md-12 ">
-                            <button type="submit" class="btn btn-primary save">Guardar</button>
+                            <button type="submit" class="btn btn-primary save" id="btnSave">Guardar</button>
                         </div>
                     </fieldset>
                 </form>
@@ -116,13 +112,11 @@
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="{{ asset('js/filepond-plugin-media-preview.js') }}"></script>
     <script>
-
          const labels_es_ES = {
             labelIdle: 'Arrastra y suelta tus archivos o <span class = "filepond--label-action"> Examinar <span>',
             labelInvalidField: "El campo contiene archivos inválidos",
@@ -164,7 +158,6 @@
         };
 
         FilePond.registerPlugin(
-            FilePondPluginFileEncode,
             FilePondPluginFileValidateSize,
             FilePondPluginImageExifOrientation,
             FilePondPluginImagePreview,
@@ -172,17 +165,84 @@
             FilePondPluginFileValidateType
         );
 
-        const input = document.querySelector('input[name="fileInforme"]');
-
-        // Create a FilePond instance
-        let pond = FilePond.create(input, {
+        pond = FilePond.create(document.querySelector('.filepond'), {
             storeAsFile: true,
             labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
             maxParallelUploads: 1,
-            allowFileTypeValidation: true
+            allowFileTypeValidation: true,
+            labelMaxFileSizeExceeded: 'Archivo demasiado pesado',
+            labelMaxFileSize: 'El tamaño maximo es de 100MB',
+            labelFileTypeNotAllowed: 'Tipo de Archivo no permitido',
+            acceptedFileTypes: ['text/csv','application/csv', 'application/vnd.oasis.opendocument.spreadsheet', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'],
+            fileValidateTypeDetectType: (source, type) =>
+                new Promise((resolve, reject) => {
+                    // Do custom type detection here and return with promise
+                    resolve(type);
+            })
         });
 
         FilePond.setOptions(labels_es_ES);
-
     </script>
+
+    <!-- CDN ALERT2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $("#btnSave").click(function(event){
+            event.preventDefault();
+
+            let form = $('#formRegalias');
+            let pivote = true;
+            Swal.fire({
+                title: '¿Quieres guardar los cambios?',
+                text: "Soy consciente de que una vez creado no podré hacer modificaciones.",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if ($('#idcancion').val() == null) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Falto seleccionar la canción'
+                        });
+                        pivote = false;
+                    }
+
+                    if (!pond.status) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Falto subir el informe'
+                        });
+                        pivote = false;
+                    }
+
+                    if ($('#valor').val() == '') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Falto ingresar el valor'
+                        });
+                        pivote = false;
+                    }
+
+                    if ($('#fecha_informe_inicio').val() > $('#fecha_informe_final').val()) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'La fecha inicial no puede ser mayor a la fecha final'
+                        });
+                        pivote = false;
+                    }
+
+                    if (pivote == true) {
+                        Swal.fire('Guardado!', '', 'success');
+                        form.submit();
+                    }
+                }
+        });
+    });
+    </script>
+    <!-- EDN CDN ALERT 2 -->
 @endsection
