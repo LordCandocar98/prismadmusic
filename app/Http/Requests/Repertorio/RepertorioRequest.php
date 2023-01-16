@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Repertorio;
-use Carbon\Carbon;
+
 use Illuminate\Foundation\Http\FormRequest;
 class RepertorioRequest extends FormRequest
 {
@@ -33,7 +33,7 @@ class RepertorioRequest extends FormRequest
             'fecha_lanzamiento'     =>'required|date|after:5 days',
             'productor'             =>'required|min:1|max:255',
             'copyright'             =>'required|min:1|max:255',
-            'annio_produccion'      =>'required|digits:4|integer|min:1900|before: 01-01-2023',
+            'annio_produccion'      =>'required|digits:4|integer|between:1900,' . date("Y"),
             'upc_ean'               =>'',
             'numero_catalogo'       =>'',
             'cover'                 =>'required'

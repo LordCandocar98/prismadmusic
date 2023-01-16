@@ -35,4 +35,9 @@ class Cancion extends Model
         'fecha_principal_salida',
         'pista_mp3',
     ];
+
+    public function repertorio()
+    {
+        return $this->belongsTo(Repertorio::class, 'repertorio_id');
+    }
 }

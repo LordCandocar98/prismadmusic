@@ -134,8 +134,7 @@
                     <div class="col-md-3 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
                         <label for="annio_produccion">Año de producción</label>
                         <br>
-                        <input type="number" step="1" value="2022" class="form-control" id="annio_produccion"
-                            name="annio_produccion" value="{{ old('annio_produccion') }}">
+                        <input type="number" step="1" class="form-control" id="annio_produccion" name="annio_produccion"  value="{{ old('annio_produccion', date('Y')) }}" min="{{ date('Y') - 100 }}" max="{{ date('Y') }}">
                         @if ($errors->has('annio_produccion'))
                             <span class="form-validation">{{ $errors->first('annio_produccion') }}</span>
                         @endif
@@ -222,7 +221,7 @@
                         <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
                             <option value="none" selected disabled hidden>Seleccione una opción</option>
                             <option value="si" {{ old('instrumental') == "si" ? 'selected' : '' }}>Si</option>
-                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : old('instrumental')=='' ? 'selected' : '' }}>No</option>
+                            <option value="no" {{ old('instrumental') == "no" ? 'selected' : '' }} {{ old('instrumental') == "" ? 'selected' : '' }}>No</option>
                         </select>
                         @if ($errors->has('instrumental'))
                             <span class="form-validation">{{ $errors->first('instrumental') }}</span>

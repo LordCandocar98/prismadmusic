@@ -71,7 +71,12 @@ class CancionController extends Controller
     public function getCanciones(Request $request)
     {
         $term = $request->term ?: '';
-        $canciones = Cancion::where('titulo', 'like', '%' . $term . '%')->select('id', 'titulo as text')->get();
+        $canciones = DB::table('cancion as ca')
+        ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
+        ->where('ca.titulo', 'like', '%' . $term . '%')
+        ->orWhere('re.titulo', 'like', '%' . $term . '%')
+        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo) AS text'))
+        ->get();
         return response()->json($canciones);
     }
 

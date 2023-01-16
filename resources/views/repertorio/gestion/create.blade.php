@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-md-3 {{ $errors->has('annio_produccion') ? 'has-error' : '' }}">
                                 <label for="annio_produccion" class="{{ $errors->has('annio_produccion') ? 'text-danger' : '' }}">Año de producción</label>
-                                <input type="number" step="1" value="2022" class="form-control" id="annio_produccion" name="annio_produccion"
+                                <input type="number" step="1" value="{{ date('Y'); }}" min="{{ date('Y') - 100; }}"  max="{{ date('Y'); }}" class="form-control" id="annio_produccion" name="annio_produccion"
                                     value="{{ old('annio_produccion') }}">
                                 @if ($errors->has('annio_produccion'))
                                     <span class="form-validation">{{ $errors->first('annio_produccion') }}</span>

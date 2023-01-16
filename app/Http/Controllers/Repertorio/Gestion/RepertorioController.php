@@ -113,7 +113,7 @@ class RepertorioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RepertorioRequest $request) //ACÁ REDIRIGE AL VALIDATOR*******************************
+    public function store(RepertorioRequest $request)
     {
         $sesion = Auth::user();
 
@@ -124,27 +124,27 @@ class RepertorioController extends Controller
         $cover =json_decode($request->cover);
 
         //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
-        copy(public_path().'/storage/'.$cover->folder.''.$cover->filename, public_path().'/storage/portadas/'.$cover->filename);
+        copy(public_path() . '/storage/' . $cover->folder . '' . $cover->filename, public_path() . '/storage/portadas/' . $cover->filename);
 
         // Imagen reducida
-        $image = Image::make(public_path().'/storage/portadas/'.$cover->filename);
+        $image = Image::make(public_path() . '/storage/portadas/' . $cover->filename);
         $image->resize($image->width() * 0.2,$image->height() * 0.2);
         $image->save(public_path().'/storage/portadas/min'.$cover->filename);
 
         $repertorio = Repertorio::create([
-            'titulo'               => $request->titulo,
-            'version'              => $request->version,
-            'genero'               => $request->genero,
-            'subgenero'            => $request->subgenero,
-            'nombre_sello'         => $request->nombre_sello,
-            'formato'              => $request->formato,
-            'productor'            => $request->productor,
-            'copyright'            => $request->copyright,
-            'annio_produccion'     => $request->annio_produccion,
-            'upc_ean'              => $request->upc_ean,
-            'numero_catalogo'      => $request->numero_catalogo,
-            'portada'              => $cover->filename,
-            'fecha_lanzamiento'    => $request->fecha_lanzamiento,
+            'titulo' => $request->titulo,
+            'version' => $request->version,
+            'genero' => $request->genero,
+            'subgenero' => $request->subgenero,
+            'nombre_sello' => $request->nombre_sello,
+            'formato' => $request->formato,
+            'productor' => $request->productor,
+            'copyright' => $request->copyright,
+            'annio_produccion' => $request->annio_produccion,
+            'upc_ean' => $request->upc_ean,
+            'numero_catalogo' => $request->numero_catalogo,
+            'portada' => $cover->filename,
+            'fecha_lanzamiento' => $request->fecha_lanzamiento,
         ]);
         ColaboracionRepertorio::create([
             'repertorio_id'           => $repertorio->id,
@@ -226,9 +226,9 @@ class RepertorioController extends Controller
             'cover' => 'image|mimes:jpg,png|max:35000|dimensions:min_width=3000,min_height=3000'
         ];
         $messages = [
-            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas '.$image->width(). ' x '. $image->height(),
-            'cover.mimes' => 'La imagen tiene formato incorrecto '.$image->mime(),
-            'cover.max' => 'La imagen supera el tamaño maximo '. $image->filesize()
+            'cover.dimensions' => 'La imagen tiene dimensiones incorrectas '.$image->width() . ' x ' . $image->height(),
+            'cover.mimes' => 'La imagen tiene formato incorrecto ' . $image->mime(),
+            'cover.max' => 'La imagen supera el tamaño maximo ' . $image->filesize()
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {

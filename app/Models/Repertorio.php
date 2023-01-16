@@ -30,6 +30,8 @@ class Repertorio extends Model
     ];
 
     public function count_song(){
-        return Cancion::where('repertorio_id', '=', $this->id)->get()->count();
+        return Cancion::where('repertorio_id', '=', $this->id)
+        ->get()
+        ->count();
     }
 }
