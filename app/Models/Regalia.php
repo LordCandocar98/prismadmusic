@@ -18,8 +18,6 @@ class Regalia extends Model
         'fecha_informe_inicio',
         'fecha_informe_final',
         'nomina_id',
-        'valor',
-
-
+        'valor'
     ];
 }
