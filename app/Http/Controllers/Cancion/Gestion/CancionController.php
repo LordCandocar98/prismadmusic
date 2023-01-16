@@ -115,8 +115,7 @@ class CancionController extends Controller
         $request_song = json_decode($request->pista_mp3);
         $repertorio = Repertorio::find($request->repertorio);
 
-        //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
-        copy(public_path() . '/storage/' . $request_song->folder . '' . $request_song->filename, public_path() . '/storage/canciones/' . $request_song->filename);
+        copy(storage_path() . '/app/public/' . $request_song->folder . $request_song->filename, storage_path() . '/app/public/canciones/' . $request_song->filename);
 
         $song = new Cancion();
         $song->repertorio_id = $request->repertorio;
@@ -206,7 +205,7 @@ class CancionController extends Controller
     }
 
     public function verify($code)
-    { //VACCA
+    {
         $user = User::where('confirmation_code', $code)->first();
         if (!$user) {
             return redirect('/');
@@ -275,8 +274,7 @@ class CancionController extends Controller
         if ($song = $request->file('pista_mp3')) {
             $destinosong = 'canciones/tmp/';
             $profilesong  = time() . '.' . $song->getClientOriginalExtension();
-            $filename = $destinosong . $profilesong;
-            $song->move('storage/' . $destinosong, $profilesong);
+            $song->move(storage_path() . '/app/public/' . $destinosong, $profilesong);
         };
 
         return [

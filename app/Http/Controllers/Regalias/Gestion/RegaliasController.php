@@ -53,20 +53,13 @@ class RegaliasController extends Controller
      */
     public function store(RegaliasRequest $request)
     {
-        $f_inicio = Carbon::parse($request->fecha_informe_inicio);
-        $f_final = Carbon::parse($request->fecha_informe_final);
-        //dd($_REQUEST['fecha_informe_inicio'] - $_REQUEST['fecha_informe_final']);
-        // $length = $f_inicio->diffInMonths($f_final);
-        // if ($length != 2) {
-        //     return redirect()->back()->withInput($request->all())->with('message', 'La fecha debe ser un trimestre. Ejemplo: Enero - Marzo, Abril - Junio.');
-        // }
         try {
             $filename = "";
             if ($xlsArchivo = $request->file('fileInforme')) {
                 $destinoXls = 'Regalias/' . date('FY') . '/';
                 $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
                 $filename = $destinoXls . $profileXls;
-                $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
+                $xlsArchivo->move(storage_path() . '/app/public/' . $destinoXls, $profileXls);
             };
             DB::beginTransaction();
             $colaboraciones = Colaboracion::where('cancion_id', $request->idcancion)->get();
@@ -78,11 +71,11 @@ class RegaliasController extends Controller
                     ->first();
                 $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100), 2);
                 $regalia = new Regalia;
-                $regalia->cliente_id            = $cliente->id;
-                $regalia->informe               = $filename;
-                $regalia->fecha_informe_inicio  =  date('Y-m-d', strtotime($request->fecha_informe_inicio));
-                $regalia->fecha_informe_final   = date('Y-m-d', strtotime($request->fecha_informe_final));
-                $regalia->valor                 = $valor_cliente;
+                $regalia->cliente_id = $cliente->id;
+                $regalia->informe = $filename;
+                $regalia->fecha_informe_inicio =  date('Y-m-d', strtotime($request->fecha_informe_inicio));
+                $regalia->fecha_informe_final = date('Y-m-d', strtotime($request->fecha_informe_final));
+                $regalia->valor = $valor_cliente;
                 $regalia->save();
             }
             DB::commit();
@@ -110,10 +103,10 @@ class RegaliasController extends Controller
      */
     public function show($id)
     {
-        $regalia    = Regalia::find($id);
-        $client     = Cliente::find($regalia->cliente_id);
-        $persona    = Persona::find($client->persona_id);
-        $clientes   = DB::table('users')
+        $regalia = Regalia::find($id);
+        $client = Cliente::find($regalia->cliente_id);
+        $persona = Persona::find($client->persona_id);
+        $clientes = DB::table('users')
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->select('users.*', 'persona.*', 'cliente.*')
@@ -151,7 +144,7 @@ class RegaliasController extends Controller
                 $destinoXls = 'Regalias/' . date('FY') . '/';
                 $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
                 $filename = $destinoXls . $profileXls;
-                $xlsArchivo->move('storage/' . $destinoXls, $profileXls);
+                $xlsArchivo->move(storage_path() . '/app/public/' . $destinoXls, $profileXls);
             };
 
             //Control de archivos vacios

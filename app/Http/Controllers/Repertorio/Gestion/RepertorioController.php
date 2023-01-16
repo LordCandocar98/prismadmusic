@@ -122,14 +122,12 @@ class RepertorioController extends Controller
         ->first();
 
         $cover =json_decode($request->cover);
-
-        //Ejecuto el comando para copiar los archivos de la carpeta from a to  /portadas/
-        copy(public_path() . '/storage/' . $cover->folder . '' . $cover->filename, public_path() . '/storage/portadas/' . $cover->filename);
+        copy(storage_path() . '/app/public/portadas/tmp/' . $cover->filename, storage_path() . '/app/public/portadas/' . $cover->filename);
 
         // Imagen reducida
-        $image = Image::make(public_path() . '/storage/portadas/' . $cover->filename);
-        $image->resize($image->width() * 0.2,$image->height() * 0.2);
-        $image->save(public_path().'/storage/portadas/min'.$cover->filename);
+        $image = Image::make(storage_path() . '/app/public/portadas/' . $cover->filename);
+        $image->resize($image->width() * 0.2, $image->height() * 0.2);
+        $image->save(storage_path() . '/app/public/portadas/min' . $cover->filename);
 
         $repertorio = Repertorio::create([
             'titulo' => $request->titulo,
@@ -241,8 +239,7 @@ class RepertorioController extends Controller
         if($image = $request->file('cover')){
             $destinoPortada = 'portadas/tmp/';
             $profileImage  = time() . '.' . $image->getClientOriginalExtension();
-            $filename = $destinoPortada . $profileImage ;
-            $image->move('storage/' . $destinoPortada, $profileImage);
+            $image->move(storage_path() . '/app/public/' . $destinoPortada, $profileImage);
         };
 
         return [
