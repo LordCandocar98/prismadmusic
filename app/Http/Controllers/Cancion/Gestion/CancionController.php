@@ -42,14 +42,6 @@ class CancionController extends Controller
      */
     public function index()
     {
-        // $sesion = Auth::user();
-        // $canciones = DB::table('users')
-        //     ->join('colaboracion', 'users.email', '=', 'colaboracion.cliente_email')
-        //     ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-        //     ->where('users.role_id', 2)
-        //     ->where('users.id', $sesion->id)
-        //     ->get();
-        // return view('cancion.gestion.index', compact('canciones'));
         return redirect()->route('repertorio.index');
     }
 
@@ -342,8 +334,8 @@ class CancionController extends Controller
     public function getDetailSong($id)
     {
         $cancion = Cancion::findOrFail($id);
-        $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
-        return view('cancion.gestion.detalle', compact('cancion', $cancion));
+        // $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
+        return view('cancion.gestion.detalle', compact('cancion'));
     }
 
     /**
