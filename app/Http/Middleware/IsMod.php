@@ -12,30 +12,20 @@ use Closure;
 
 class IsMod
 {
-    // protected $auth;
-
-    // public function __construct(Guard $auth)
-    // {
-    //     $this->auth = $auth;
-    // }
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        /** @var \App\Models\User $user **/
-        //$user = Auth::user();
-        if (Auth::user()->role_id != 3 && Auth::user()->role_id != 1) {
-            return redirect('admin/roles');
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->to('admin/login');
-            }
+        /** 
+         * @var \App\Models\User $user 
+        **/
+        if (Auth::user()->role_id == 2) { //1 admin, 2 user y 3 mod
+            return redirect()->to('admin');
         }
 
         return $next($request);

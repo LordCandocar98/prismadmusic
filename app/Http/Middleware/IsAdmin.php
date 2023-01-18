@@ -8,16 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
- //dd(Auth::user()->role_id);
-
 class IsAdmin
 {
-    // protected $auth;
-
-    // public function __construct(Guard $auth)
-    // {
-    //     $this->auth = $auth;
-    // }
     /**
      * Handle an incoming request.
      *
@@ -27,14 +19,11 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        /** @var \App\Models\User $user **/
-        if (Auth::user()->role_id != 1) {
-            return redirect('admin');
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->to('/login');
-            }
+        /** 
+         * @var \App\Models\User $user 
+        **/
+        if (Auth::user()->role_id != 1) { 
+            abort(401);
         }
 
         return $next($request);
