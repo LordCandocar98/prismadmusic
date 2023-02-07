@@ -111,97 +111,106 @@ class CancionController extends Controller
      */
     public function store(CancionRequest $request)
     {
-        $session = Auth::user();
-        $request_song = json_decode($request->pista_mp3);
-        $repertorio = Repertorio::find($request->repertorio);
+        try {
+            DB::beginTransaction();
 
-        copy(storage_path() . '/app/public/' . $request_song->folder . $request_song->filename, storage_path() . '/app/public/canciones/' . $request_song->filename);
+            $session = Auth::user();
+            $request_song = json_decode($request->pista_mp3);
+            $repertorio = Repertorio::find($request->repertorio);
 
-        $song = new Cancion();
-        $song->repertorio_id = $request->repertorio;
-        $song->tipo_secundario = $request->tipo_secundario;
-        $song->instrumental = $request->instrumental;
-        $song->titulo = $request->titulo;
-        $song->version_subtitulo = $request->version_subtitulo;
-        $song->autor = $request->autor;
-        $song->compositor = $request->compositor;
-        $song->arreglista = $request->arreglista;
-        $song->productor = $request->productor;
-        $song->pline = $request->pline;
-        $song->annio_produccion = $request->annio_produccion;
-        $song->genero = $repertorio->genero;
-        $song->subgenero = $repertorio->subgenero;
-        $song->genero_secundario = $repertorio->genero;
-        $song->subgenero_secundario = $repertorio->subgenero;
-        $song->letra_chocante_vulgar = $request->letra_chocante_vulgar;
-        $song->inicio_previsualizacion = $request->inicio_previsualizacion;
-        $song->idioma_titulo = $request->idioma_titulo;
-        $song->idioma_letra = $request->idioma_letra;
-        $song->fecha_principal_salida = $request->fecha_principal_salida;
-        $song->pista_mp3 = $request_song->filename;
-        $song->save();
+            copy(storage_path() . '/app/public/' . $request_song->folder . $request_song->filename, storage_path() . '/app/public/canciones/' . $request_song->filename);
 
-        $info = $request->infocol ?? [];
+            $song = new Cancion();
+            $song->repertorio_id = $request->repertorio;
+            $song->tipo_secundario = $request->tipo_secundario;
+            $song->instrumental = $request->instrumental;
+            $song->titulo = $request->titulo;
+            $song->version_subtitulo = $request->version_subtitulo;
+            $song->autor = $request->autor;
+            $song->compositor = $request->compositor;
+            $song->arreglista = $request->arreglista;
+            $song->productor = $request->productor;
+            $song->pline = $request->pline;
+            $song->annio_produccion = $request->annio_produccion;
+            $song->genero = $repertorio->genero;
+            $song->subgenero = $repertorio->subgenero;
+            $song->genero_secundario = $repertorio->genero;
+            $song->subgenero_secundario = $repertorio->subgenero;
+            $song->letra_chocante_vulgar = $request->letra_chocante_vulgar;
+            $song->inicio_previsualizacion = $request->inicio_previsualizacion;
+            $song->idioma_titulo = $request->idioma_titulo;
+            $song->idioma_letra = $request->idioma_letra;
+            $song->fecha_principal_salida = $request->fecha_principal_salida;
+            $song->pista_mp3 = $request_song->filename;
+            $song->save();
 
-        $cola = new Colaboracion();
-        $cola->cliente_email = Auth::user()->email;
-        $cola->porcentaje_intelectual = $request->porcentaje_intelectualCreador;
-        $cola->cancion_id = $song->id;
-        $cola->save();
-
-        for ($i = 0; $i < count($info); $i += 2) {
-            if (!(User::where('email', '=', $info[$i])->exists())) {
-                $usuario = User::create([
-                    'email'    => $info[$i],
-                    'name'     => $info[$i],
-                    'password' => Hash::make('password'),
-                    'role_id'  => 2,
-                    'confirmation_code' => Str::random(40),
-                ]);
-
-                $details = [
-                    'title' => 'Asunto: ¡Te invito a Prismad Music!',
-                    'subtitle' => $session->email . ' te invita a formar parte de su nuevo éxito "' . $song->titulo . '"',
-                    'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
-                    'descripcion' => '',
-                    'button' => 'Ingresa al portal',
-                    'enlace' => url('register/verify/' . $usuario->confirmation_code),
-                ];
-                Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
-            }
+            $info = $request->infocol ?? [];
 
             $cola = new Colaboracion();
-            $cola->cliente_email = $info[$i];
-            $cola->porcentaje_intelectual = $info[$i + 1];
+            $cola->cliente_email = Auth::user()->email;
+            $cola->porcentaje_intelectual = $request->porcentaje_intelectualCreador;
             $cola->cancion_id = $song->id;
             $cola->save();
+
+            for ($i = 0; $i < count($info); $i += 2) {
+                if (!(User::where('email', '=', $info[$i])->exists())) {
+                    $usuario = User::create([
+                        'email'    => $info[$i],
+                        'name'     => $info[$i],
+                        'password' => Hash::make('password'),
+                        'role_id'  => 2,
+                        'confirmation_code' => Str::random(40),
+                    ]);
+
+                    $details = [
+                        'title' => 'Asunto: ¡Te invito a Prismad Music!',
+                        'subtitle' => $session->email . ' te invita a formar parte de su nuevo éxito "' . $song->titulo . '"',
+                        'body' => 'En Prismad Music nos encanta apoyar el espíritu musical, ¿qué esperas para unirte?, tu contraseña es: " password ", ¡recuerda cambiarla!, Acepta a continuación.',
+                        'descripcion' => '',
+                        'button' => 'Ingresa al portal',
+                        'enlace' => url('register/verify/' . $usuario->confirmation_code),
+                    ];
+                    Mail::to($usuario->email)->send(new CorreoPrismadMusic($details));
+                }
+
+                $cola = new Colaboracion();
+                $cola->cliente_email = $info[$i];
+                $cola->porcentaje_intelectual = $info[$i + 1];
+                $cola->cancion_id = $song->id;
+                $cola->save();
+            }
+
+            $infoArtista = $request->nombreartista ?? [];
+
+            for ($i = 0; $i < count($infoArtista); $i++) {
+                $cola = new ColaboracionArtFea();
+                $cola->nombre = $infoArtista[$i];
+                $cola->tipo_colaboracion = "Artista Principal";
+                $cola->cancion_id = $song->id;
+                $cola->save();
+            }
+
+            $infoFeaturing = $request->nombrefeaturing ?? [];
+
+            for ($i = 0; $i < count($infoFeaturing); $i++) {
+                $cola = new ColaboracionArtFea();
+                $cola->nombre = $infoFeaturing[$i];
+                $cola->tipo_colaboracion = "Featuring";
+                $cola->cancion_id = $song->id;
+                $cola->save();
+            }
+
+            if (($repertorio->formato == 'SINGLE') or (($repertorio->formato == 'EP') and ($repertorio->count_song() >= 5))) {
+                app(RepertorioController::class)->finishProduct($repertorio->id);
+            }
+
+            DB::commit();
+
+            return redirect()->route('repertorio.show', $request->repertorio);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()->route('repertorio.show', $request->repertorio);
         }
-
-        $infoArtista = $request->nombreartista ?? [];
-
-        for ($i = 0; $i < count($infoArtista); $i++) {
-            $cola = new ColaboracionArtFea();
-            $cola->nombre = $infoArtista[$i];
-            $cola->tipo_colaboracion = "Artista Principal";
-            $cola->cancion_id = $song->id;
-            $cola->save();
-        }
-
-        $infoFeaturing = $request->nombrefeaturing ?? [];
-
-        for ($i = 0; $i < count($infoFeaturing); $i++) {
-            $cola = new ColaboracionArtFea();
-            $cola->nombre = $infoFeaturing[$i];
-            $cola->tipo_colaboracion = "Featuring";
-            $cola->cancion_id = $song->id;
-            $cola->save();
-        }
-
-        if (($repertorio->formato == 'SINGLE') or (($repertorio->formato == 'EP') and ($repertorio->count_song() >= 5))) {
-            app(RepertorioController::class)->finishProduct($repertorio->id);
-        }
-
-        return redirect()->route('repertorio.show', $request->repertorio);
     }
 
     public function verify($code)
@@ -271,6 +280,9 @@ class CancionController extends Controller
      */
     public function uploadsong(Request $request)
     {
+
+        \Log::Debug($request);
+
         if ($song = $request->file('pista_mp3')) {
             $destinosong = 'canciones/tmp/';
             $profilesong  = time() . '.' . $song->getClientOriginalExtension();

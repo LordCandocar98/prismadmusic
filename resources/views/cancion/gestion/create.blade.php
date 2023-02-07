@@ -93,22 +93,22 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
-                        <label for="productor">Compositor</label>
+                    <div class="col-md-3 {{ $errors->has('compositor') ? 'has-error' : '' }}">
+                        <label for="compositor">Compositor</label>
                         <br>
                         <input type="text" class="form-control" id="compositor" name="compositor"
                             placeholder="Ejemplo: Wolfgang Amadeus Mozart " value="{{ old('compositor') }}">
-                        @if ($errors->has('productor'))
-                            <span class="form-validation">{{ $errors->first('productor') }}</span>
+                        @if ($errors->has('compositor'))
+                            <span class="form-validation">{{ $errors->first('compositor') }}</span>
                         @endif
                     </div>
                     <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
-                        <label for="copyright">Arreglista</label>
+                        <label for="arreglista">Arreglista</label>
                         <br>
                         <input type="text" class="form-control" id="arreglista" name="arreglista"
                             placeholder="Ejemplo: Cyro Pereira" value="{{ old('arreglista') }}">
-                        @if ($errors->has('copyright'))
-                            <span class="form-validation">{{ $errors->first('copyright') }}</span>
+                        @if ($errors->has('arreglista'))
+                            <span class="form-validation">{{ $errors->first('arreglista') }}</span>
                         @endif
                     </div>
                     <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
@@ -200,16 +200,11 @@
                         <select class="tipo_secundario" name="tipo_secundario" id="tipo_secundario"
                             style="width: 100%;">
                             <option value="none" selected disabled hidden>Seleccione una opción</option>
-                            <option value="original" {{ old('tipo_secundario') == "original" ? 'selected' : '' }}>
-                                Original</option>
-                            <option value="karaoke" {{ old('tipo_secundario') == "karaoke" ? 'selected' : '' }}>Karaoke
-                            </option>
-                            <option value="medley" {{ old('tipo_secundario') == "medley" ? 'selected' : '' }}>Medley
-                            </option>
-                            <option value="cover" {{ old('tipo_secundario') == "cover" ? 'selected' : '' }}>Cover
-                            </option>
-                            <option value="otrogrupo" {{ old('tipo_secundario') == "otrogrupo" ? 'selected' : '' }}>
-                                Versión por otro grupo</option>
+                            <option value="original" {{ old('tipo_secundario') == "original" ? 'selected' : '' }}>Original</option>
+                            <option value="karaoke" {{ old('tipo_secundario') == "karaoke" ? 'selected' : '' }}>Karaoke</option>
+                            <option value="medley" {{ old('tipo_secundario') == "medley" ? 'selected' : '' }}>Medley</option>
+                            <option value="cover" {{ old('tipo_secundario') == "cover" ? 'selected' : '' }}>Cover</option>
+                            <option value="otrogrupo" {{ old('tipo_secundario') == "otrogrupo" ? 'selected' : '' }}>Versión por otro grupo</option>
                         </select>
                         @if ($errors->has('tipo_secundario'))
                             <span class="form-validation">{{ $errors->first('tipo_secundario') }}</span>
@@ -475,7 +470,6 @@ const labels_es_ES = {
                 }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    Swal.fire('Guardado!', '', 'success');
                     form.submit();
                 }
             });

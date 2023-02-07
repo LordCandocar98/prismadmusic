@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Repertorio\RepertorioRequest;
 use App\Mail\CorreoPrismadMusic;
 use App\Models\Cancion;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -115,43 +116,52 @@ class RepertorioController extends Controller
      */
     public function store(RepertorioRequest $request)
     {
-        $sesion = Auth::user();
+        try {
+            DB::beginTransaction();
 
-        $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
-        ->select("cliente.*")
-        ->first();
+            $sesion = Auth::user();
 
-        $cover =json_decode($request->cover);
-        copy(storage_path() . '/app/public/portadas/tmp/' . $cover->filename, storage_path() . '/app/public/portadas/' . $cover->filename);
+            $cliente_sesion = Cliente::join("persona","cliente.persona_id", "=", "persona.id")->where("persona.user_id", "=", $sesion->id)
+            ->select("cliente.*")
+            ->first();
+    
+            $cover =json_decode($request->cover);
+            copy(storage_path() . '/app/public/portadas/tmp/' . $cover->filename, storage_path() . '/app/public/portadas/' . $cover->filename);
+    
+            // Imagen reducida
+            $image = Image::make(storage_path() . '/app/public/portadas/' . $cover->filename);
+            $image->resize($image->width() * 0.2, $image->height() * 0.2);
+            $image->save(storage_path() . '/app/public/portadas/min' . $cover->filename);
+    
+            $repertorio = Repertorio::create([
+                'titulo' => $request->titulo,
+                'version' => $request->version,
+                'genero' => $request->genero,
+                'subgenero' => $request->subgenero,
+                'nombre_sello' => $request->nombre_sello,
+                'formato' => $request->formato,
+                'productor' => $request->productor,
+                'copyright' => $request->copyright,
+                'annio_produccion' => $request->annio_produccion,
+                'upc_ean' => $request->upc_ean,
+                'numero_catalogo' => $request->numero_catalogo,
+                'portada' => $cover->filename,
+                'fecha_lanzamiento' => $request->fecha_lanzamiento,
+            ]);
+            ColaboracionRepertorio::create([
+                'repertorio_id'           => $repertorio->id,
+                'cliente_email'           => $sesion->email,
+                'tipo_colaboracion'       => "Principal (1st)",
+                'spotify_colaboracion'    => $cliente_sesion->link_spoty,
+            ]);
+    
+            DB::commit();
 
-        // Imagen reducida
-        $image = Image::make(storage_path() . '/app/public/portadas/' . $cover->filename);
-        $image->resize($image->width() * 0.2, $image->height() * 0.2);
-        $image->save(storage_path() . '/app/public/portadas/min' . $cover->filename);
-
-        $repertorio = Repertorio::create([
-            'titulo' => $request->titulo,
-            'version' => $request->version,
-            'genero' => $request->genero,
-            'subgenero' => $request->subgenero,
-            'nombre_sello' => $request->nombre_sello,
-            'formato' => $request->formato,
-            'productor' => $request->productor,
-            'copyright' => $request->copyright,
-            'annio_produccion' => $request->annio_produccion,
-            'upc_ean' => $request->upc_ean,
-            'numero_catalogo' => $request->numero_catalogo,
-            'portada' => $cover->filename,
-            'fecha_lanzamiento' => $request->fecha_lanzamiento,
-        ]);
-        ColaboracionRepertorio::create([
-            'repertorio_id'           => $repertorio->id,
-            'cliente_email'           => $sesion->email,
-            'tipo_colaboracion'       => "Principal (1st)",
-            'spotify_colaboracion'    => $cliente_sesion->link_spoty,
-        ]);
-
-        return redirect()->route('create_song', $repertorio->id);
+            return redirect()->route('create_song', $repertorio->id);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()->to('admin');
+        }
     }
 
     /**
