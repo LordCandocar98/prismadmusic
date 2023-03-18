@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'autenticado'], function () {
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('register/verify/{code}', 'App\Http\Controllers\Cancion\Gestion\CancionController@verify');
+Route::get('/register/verify/{code}', 'App\Http\Controllers\Cancion\Gestion\CancionController@verify');
 
 Route::get('/register', function () {
     auth()->logout();
@@ -42,7 +42,10 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     //Routes rol: Cliente.
     Route::resource('repertorio', RepertorioController::class);
     Route::resource('cancion', CancionController::class); //Cancion
-    Route::get('cancion/historico/{id}', [CancionController::class, 'getDetailSong']);
+    Route::resource('informeNomina', InformeNominaController::class);
+    Route::resource('informeRegalias', InformeRegaliaController::class);
+    
+    Route::get('/cancion/historico/{id}', [CancionController::class, 'getDetailSong']);
     Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
     Route::get('/datatable/canciones', [CancionController::class, 'getSongsDatatable']);
     Route::get('/datatable/cancion/{id}', [CancionController::class, 'getSongDatatable']);
@@ -61,8 +64,6 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
         Route::resource('clientes', ClientesController::class);
         Route::resource('regalias', RegaliasController::class);
         Route::resource('producto', ProductoController::class);
-        Route::resource('informeNomina', InformeNominaController::class);
-        Route::resource('informeRegalias', InformeRegaliaController::class);
         Route::resource('nomina', NominaController::class);
 
         //Gestion para moderador de historico canciones de clientes
