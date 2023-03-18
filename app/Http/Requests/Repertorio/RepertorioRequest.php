@@ -32,10 +32,7 @@ class RepertorioRequest extends FormRequest
             'formato'               =>'required',
             'fecha_lanzamiento'     =>'required|date|after:5 days',
             'productor'             =>'required|min:1|max:255',
-            'copyright'             =>'required|min:1|max:255',
             'annio_produccion'      =>'required|digits:4|integer|between:1900,' . date("Y"),
-            'upc_ean'               =>'',
-            'numero_catalogo'       =>'',
             'cover'                 =>'required'
         ];
     }

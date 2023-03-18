@@ -55,7 +55,7 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-md-6 {{ $errors->has('titulo') ? 'has-error' : '' }}">
-                                <label for="titulo" class="{{ $errors->has('titulo') ? 'has-error' : '' }}">Título de salida al mercado</label>
+                                <label for="titulo" class="{{ $errors->has('titulo') ? 'has-error' : '' }}">Título de salida al mercado <i id="helpTsm" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
                                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ejemplo: Lovely"
                                     value="{{ old('titulo') }}">
                                 @if ($errors->has('titulo'))
@@ -63,7 +63,7 @@
                                 @endif
                             </div>
                             <div class="col-md-6 {{ $errors->has('version') ? 'has-error' : '' }}">
-                                <label for="version">Versión/Subtitulo</label>
+                                <label for="version">Versión/Subtitulo <i id="helpVersion" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
                                 <input type="text" class="form-control" id="version" name="version" placeholder="Ejemplo: Muse"
                                     value="{{ old('version') }}">
                                 @if ($errors->has('version'))
@@ -130,38 +130,12 @@
                                     <span class="form-validation">{{ $errors->first('annio_produccion') }}</span>
                                 @endif
                             </div>
-                            <div class="col-md-6 {{ $errors->has('productor') ? 'has-error' : '' }}">
+                            <div class="col-md-3 {{ $errors->has('productor') ? 'has-error' : '' }}">
                                 <label for="productor" class="{{ $errors->has('productor') ? 'text-danger' : '' }}">Productor</label>
                                 <input type="text" class="form-control" id="productor" name="productor" placeholder="Ejemplo: Bad Bunny"
                                     value="{{ old('productor') }}">
                                 @if ($errors->has('productor'))
                                     <span class="form-validation">{{ $errors->first('productor') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
-                                <label for="copyright" class="{{ $errors->has('copyright') ? 'text-danger' : '' }}">Copyright</label>
-                                <input type="text" class="form-control" id="copyright" name="copyright" value="{{ old('copyright') }}">
-                                @if ($errors->has('copyright'))
-                                    <span class="form-validation">{{ $errors->first('copyright') }}</span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 {{ $errors->has('numero_catalogo') ? 'has-error' : '' }}">
-                                <label for="numero_catalogo" class="{{ $errors->has('numero_catalogo') ? 'text-danger' : '' }}">Num. de catálogo Productor <i id="helpNumCatalogo" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
-                                <input type="text" class="form-control" id="numero_catalogo" name="numero_catalogo"
-                                    value="{{ old('numero_catalogo') }}">
-                                @if ($errors->has('numero_catalogo'))
-                                    <span class="form-validation">{{ $errors->first('numero_catalogo') }}</span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 {{ $errors->has('upc_ean') ? 'has-error' : '' }}">
-                                <label for="upc_ean" class="{{ $errors->has('upc_ean') ? 'text-danger' : '' }}">UPC/EAN <i id="helpUPC" style="cursor: pointer;" class="fa fa-question-circle" aria-hidden="true"></i></label>
-                                <input type="text" class="form-control" id="upc_ean" name="upc_ean"
-                                    value="{{ old('upc_ean') }}">
-                                @if ($errors->has('upc_ean'))
-                                    <span class="form-validation">{{ $errors->first('upc_ean') }}</span>
                                 @endif
                             </div>
                             <div class="col-md-3">
@@ -182,7 +156,7 @@
                                         <li>Formato de archivo: JPG, PNG</li>
                                         <li>Tamaño de al menos: 3000x3000 píxeles</li>
                                         <li>Tamaño del archivo: No puede superar los 35 MB</li>
-                                        <li>Color: RGB (incluyendo imagenes en blanco y negro</li>
+                                        <li>Color: RGB (incluyendo imagenes en blanco y negro)</li>
                                         <li>Resolución: 72 dpi</li>
                                     </ul>
                                     <p>La carátula no puede tener ningún tipo de logos, información de páginas web, fechas de lanzamiento ni publicidad de algún tipo.</p>
@@ -328,12 +302,19 @@
                 });
             }
         });
-        $('#helpNumCatalogo').click(function(){
-        Swal.fire(
-            'Número de Catalogo',
-            'Si no sabes qué poner en el Número de Catálogo por favor déjarlo vacío.',
-            'question'
-          )
+        $('#helpTsm').click(function(){
+            Swal.fire(
+                'Título de salida al mercado',
+                'Nombre del lanzamiento, tal cual cómo quieres que aparezca en las plataformas digitales.',
+                'question'
+            )
+        });
+        $('#helpVersion').click(function(){
+            Swal.fire(
+                '¿Cuál es la versión del lanzamiento?',
+                'Ejemplo: Versión en vivo, versión acústica, versión salsa, etc.',
+                'question'
+            )
         });
         $('#helpFlanz').click(function(){
         Swal.fire(
@@ -342,13 +323,7 @@
             'question'
           )
         });
-        $('#helpUPC').click(function(){
-        Swal.fire(
-            'UPC/EAN',
-            'Si no sabes qué poner en UPC por favor déjarlo vacío.',
-            'question'
-          )
-        });
+
     </script>
     <!-- EDN CDN ALERT 2 -->
 

@@ -14,6 +14,7 @@ use App\Http\Requests\Repertorio\RepertorioRequest;
 use App\Mail\CorreoPrismadMusic;
 use App\Models\Cancion;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -141,10 +142,8 @@ class RepertorioController extends Controller
                 'nombre_sello' => $request->nombre_sello,
                 'formato' => $request->formato,
                 'productor' => $request->productor,
-                'copyright' => $request->copyright,
+                'copyright' => 'Prismad Music',
                 'annio_produccion' => $request->annio_produccion,
-                'upc_ean' => $request->upc_ean,
-                'numero_catalogo' => $request->numero_catalogo,
                 'portada' => $cover->filename,
                 'fecha_lanzamiento' => $request->fecha_lanzamiento,
             ]);
@@ -159,6 +158,7 @@ class RepertorioController extends Controller
 
             return redirect()->route('create_song', $repertorio->id);
         } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());   
             DB::rollBack();
             return redirect()->to('admin');
         }

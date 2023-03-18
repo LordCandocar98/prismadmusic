@@ -75,7 +75,8 @@
                         @endif
                     </div>
                     <div class="col-md-3 {{ $errors->has('version_subtitulo') ? 'has-error' : '' }}">
-                        <label for="version_subtitulo">Versión/Subtítulo</label>
+                        <label for="version_subtitulo">Versión/Subtítulo <i class="fa fa-question-circle"
+                                aria-hidden="true" id="helpVersion" style="cursor: pointer;"></i></label>
                         <br>
                         <input type="text" class="form-control" id="version_subtitulo" name="version_subtitulo"
                             value="{{ old('version_subtitulo') }}">
@@ -102,7 +103,7 @@
                             <span class="form-validation">{{ $errors->first('compositor') }}</span>
                         @endif
                     </div>
-                    <div class="col-md-3 {{ $errors->has('copyright') ? 'has-error' : '' }}">
+                    <div class="col-md-3 {{ $errors->has('arreglista') ? 'has-error' : '' }}">
                         <label for="arreglista">Arreglista</label>
                         <br>
                         <input type="text" class="form-control" id="arreglista" name="arreglista"
@@ -121,7 +122,8 @@
                         @endif
                     </div>
                     <div class="col-md-3 {{ $errors->has('pline') ? 'has-error' : '' }}">
-                        <label for="pline">Pline</label>
+                        <label for="pline">Pline <i class="fa fa-question-circle"
+                                aria-hidden="true" id="helpPline" style="cursor: pointer;"></i></label>
                         <br>
                         <input type="text" class="form-control" id="pline" name="pline" placeholder="..."
                             value="{{ old('pline') }}">
@@ -211,7 +213,8 @@
                         @endif
                     </div>
                     <div class="col-md-3 {{ $errors->has('instrumental') ? 'has-error' : '' }}">
-                        <label for="instrumental">Instrumental</label>
+                        <label for="instrumental">Instrumental <i class="fa fa-question-circle"
+                                aria-hidden="true" id="helpInstrumental" style="cursor: pointer;"></i></label>
                         <br>
                         <select class="instrumental" name="instrumental" id="instrumental" style="width: 100%;">
                             <option value="none" selected disabled hidden>Seleccione una opción</option>
@@ -344,6 +347,7 @@
 </form>
 
 @endsection
+
 @section('javascript')
 <script src="{{ asset('js/jsRegistroCanciones/scriptRegistro.js') }}"></script>
 
@@ -490,17 +494,38 @@ const labels_es_ES = {
 
     });
     $('#helpFlanz').click(function(){
-    Swal.fire(
-        'Fecha de salida al mercado',
-        '<ul style="text-align:left"><li>Para videos horarios CET</li><li>La fecha de salida al mercado debe ser al menos 5 días después de hoy.</li></ul>',
-        'question'
+        Swal.fire(
+            'Fecha de salida al mercado',
+            '<ul style="text-align:left"><li>Para videos horarios CET</li><li>La fecha de salida al mercado debe ser al menos 5 días después de hoy.</li></ul>',
+            'question'
         )
     });
     $('#upSong').click(function(){
-    Swal.fire(
-        'Subir audio',
-        'Puede importar los siguientes formatos: WAV, FLAC, AIFF.',
-        'question'
+        Swal.fire(
+            'Subir audio',
+            'Puede importar los siguientes formatos: WAV, FLAC, AIFF.',
+            'question'
+        )
+    });
+    $('#helpVersion').click(function(){
+        Swal.fire(
+            '¿Cuál es la versión del lanzamiento?',
+            'Ejemplo: Versión en vivo, versión acústica, versión salsa, etc.',
+            'question'
+        )
+    });
+    $('#helpPline').click(function(){
+        Swal.fire(
+            'Pline',
+            'Persona que paga la producción. ejemplo: puede ser el mismo artista.',
+            'question'
+        )
+    });
+    $('#helpInstrumental').click(function(){
+        Swal.fire(
+            '¿Es Instrumental?',
+            'Si tu pista no tiene voz seleccionas “Si” pero si tu pista tiene voz seleccionas “No”',
+            'question'
         )
     });
 </script>

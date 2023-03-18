@@ -20,6 +20,7 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Cancion\CancionRequest;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Models\HistoricoCancion;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Controlador Maneja Lógica de Canciones.
@@ -206,10 +207,11 @@ class CancionController extends Controller
 
             DB::commit();
 
-            return redirect()->route('repertorio.show', $request->repertorio);
+            return redirect()->route('repertorio.show', $request->repertorio)->with('message', 'Canción creada Correctamente');
         } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());   
             DB::rollBack();
-            return redirect()->route('repertorio.show', $request->repertorio);
+            return redirect()->route('repertorio.show', $request->repertorio)->with('error', 'Error al crear la Canción, por favor comunicarse con el administrador');
         }
     }
 
@@ -280,9 +282,6 @@ class CancionController extends Controller
      */
     public function uploadsong(Request $request)
     {
-
-        \Log::Debug($request);
-
         if ($song = $request->file('pista_mp3')) {
             $destinosong = 'canciones/tmp/';
             $profilesong  = time() . '.' . $song->getClientOriginalExtension();
@@ -327,6 +326,7 @@ class CancionController extends Controller
                 ->rawColumns(['participacion', 'accion'])
                 ->make(true);
         } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());   
             return response()->json([
                 'code'    => 500,
                 'status'  => 'error',
