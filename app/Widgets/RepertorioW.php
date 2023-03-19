@@ -29,8 +29,8 @@ class RepertorioW extends AbstractWidget
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-documentation',
-            'title'  => '<div class="widget-css">'."Repertorio - Ver repertorios".'</div>',
-            'text'   => '<div class="widget-css">'."Actualmente tu cuenta tiene un total de $count repertorios registradas. Haga clic en el botón de abajo para ver todos los repertorios.".'</div>',
+            'title'  => '<div class="widget-css">' . "Repertorio" . '</div>',
+            'text'   => '<div class="widget-css">' . "Actualmente tu cuenta tiene un total de $count repertorios registrados. Haga clic en el botón de abajo para ver todos los repertorios." . '</div>',
             'button' => [
                 'text' => 'Repertorio',
                 'link' => $user->role_id == 2 ?  url("/repertorio") : route('voyager.repertorio.index'),

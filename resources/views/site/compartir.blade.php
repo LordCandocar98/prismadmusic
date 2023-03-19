@@ -4,6 +4,13 @@
         font-size: 11px;
     }
 
+    .alert-success, .alert-success h4 {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        padding: .75rem 1.25rem;
+    }
+
 </style>
 @section('contenido')
 
@@ -12,6 +19,8 @@
     <!-- Join Our Team-->
     <section class="section section-lg custom-image-section">
         <div class="container relative-container">
+            @include('partials.message')
+            @include('partials.error')
             <div class="row row-30 row-md-60 justify-content-between">
                 <div class="col-md-6">
                     <h2>Envíanos tu canción</h2>
