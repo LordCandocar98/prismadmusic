@@ -14,6 +14,16 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
+                <div class="row">
+                <div class="col-md-6">
+                    <label for="fecha_inicial">Fecha Inicial:</label>
+                    <input type="date" name="fecha_inicial" id="fecha_inicial" style="width: 100%;">
+                </div>
+                <div class="col-md-6">
+                    <label for="fecha_final">Fecha Final:</label>
+                    <input type="date" name="fecha_final" id="fecha_final" style="width: 100%;">
+                </div>
+                </div>
                 <div class="table-responsive">
                 <table id="dataTableProducto" name="dataTableProducto" class="display" cellspacing="0" width="100%">
                         <thead>
@@ -24,6 +34,7 @@
                                 <th class="text-center">Genero</th>
                                 <th class="text-center">Subgenero</th>
                                 <th class="text-center">Producción</th>
+                                <th class="text-center">Fecha de Lanzamiento</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -36,6 +47,7 @@
                                 <td class="text-center">{{ $rep->genero }}</td>
                                 <td class="text-center">{{ $rep->subgenero }}</td>
                                 <td class="text-center">{{ $rep->annio_produccion }}</td>
+                                <td class="text-center">{{ $rep->fecha_lanzamiento }}</td>
                                 <td class="text-center center">
                                     @if($rep->procesado == 0)
                                     <a href="{{ url('producto/'.$rep->id) }}" title="Procesar" class="btn btn-sm btn-warning pull-right view">

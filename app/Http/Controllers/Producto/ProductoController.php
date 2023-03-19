@@ -18,7 +18,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_id == 3){
+        if(Auth::user()->role_id == 3){ //Moderador
             $repertorio = Repertorio::where('terminado', '=', 1)->get();
             return view('producto.index', ['repertorio' => $repertorio]);
         }else{
