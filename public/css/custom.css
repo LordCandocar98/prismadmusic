@@ -1,0 +1,24 @@
+.btn-link, .checkbox label, .checkbox-inline, .radio label, .radio-inline, label {
+    font-weight: bold;
+}
+
+.form-control, .table {
+    color: #1d1d1d;
+}
+
+.btn-link, .checkbox label, .checkbox-inline, .radio label, .radio-inline, label {
+    font-weight: 500;
+}
+
+.form-control, .table {
+    color: #1d1d1d;
+}
+
+label {
+    color: #1d1d1d !important;
+    font-weight: 500 !important;
+}
+
+input, table, td {
+    color: #1d1d1d !important;
+}
