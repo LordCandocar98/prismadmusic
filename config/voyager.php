@@ -150,6 +150,7 @@ return [
             '\\App\Widgets\ClienteW',
             '\\App\Widgets\ProductoW',
             '\\App\Widgets\ColaboracionW',
+            '\\App\Widgets\UpCancionW',
             'TCG\\Voyager\\Widgets\\UserDimmer',
             //'TCG\\Voyager\\Widgets\\PostDimmer',
             //'TCG\\Voyager\\Widgets\\PageDimmer',
