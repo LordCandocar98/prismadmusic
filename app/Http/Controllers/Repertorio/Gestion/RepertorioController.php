@@ -97,7 +97,7 @@ class RepertorioController extends Controller
         $clientes = \DB::table('cliente')
             ->select('cliente.nombre_artistico','cliente.id')
             ->orderBy('id', 'DESC')
-            ->get('');
+            ->get();
 
         $genre = \DB::table('genero')->select('nombre')->get();
         $subgenre = \DB::table('subgenero')->select('nombre')->get();
@@ -176,9 +176,9 @@ class RepertorioController extends Controller
         ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
         ->where('cr.repertorio_id', $id)
         ->select('users.id', 'users.role_id')
-        ->get()[0];
+        ->first();
 
-        if(($users->id  == auth()->user()->id) or ($users->role_id == 3) ){
+        if(($users->id  == auth()->user()->id) or ($users->role_id == 3)){
             $repertorio = Repertorio::find($id);
             $canciones = Cancion::where('repertorio_id', '=', $id)->get();
             return view('repertorio.gestion.show', compact('repertorio', 'canciones', 'users'));
@@ -256,5 +256,32 @@ class RepertorioController extends Controller
             'folder' => $destinoPortada,
             'filename' => $profileImage
         ];
+    }
+
+    public function upSong()
+    {
+        $sesion = Auth::user();
+        $repertorios = DB::table('users')
+        ->join('colaboracion_repertorio', 'users.email', '=', 'colaboracion_repertorio.cliente_email')
+        ->join('repertorio', 'colaboracion_repertorio.repertorio_id', '=', 'repertorio.id')
+        ->where([
+            ['users.role_id', '=', 2],
+            ['users.id', '=', $sesion->id],
+            ['repertorio.terminado', '=', 0] //Repertorios No terminados
+        ])
+        ->get();
+
+        if (count($repertorios) <= 0) {
+            $clientes = DB::table('cliente')
+            ->select('cliente.nombre_artistico','cliente.id')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+            $genre = DB::table('genero')->select('nombre')->get();
+            $subgenre = DB::table('subgenero')->select('nombre')->get();
+            return redirect()->route('repertorio.create')->with('message', 'Primero vamos a crear un Repertorio');
+        } else {
+            return view('repertorio.gestion.indexHelp', compact('repertorios'))->with('message', '');
+        }
     }
 }

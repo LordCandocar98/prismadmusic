@@ -50,6 +50,8 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
+                @include('partials.message')
+                @include('partials.error')
                 <form action="{{ route('repertorio.store') }}" method="post" id="formRegistro" name="formRegistro" enctype="multipart/form-data">
                 @csrf
                     <div class="modal-body">

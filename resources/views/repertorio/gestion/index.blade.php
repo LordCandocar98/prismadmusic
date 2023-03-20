@@ -1,35 +1,38 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
-<li class="active">
-    <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Repertorios</a>
-</li>
+    <li class="active">
+        <a href="{{ route('repertorio.index') }}"><i class="fa fa-music" aria-hidden="true"></i> Gestion de Repertorios</a>
+    </li>
 @endsection
-@section('page_header')
-<h1 class="page-title">
-    <i class="fa fa-music" aria-hidden="true"></i>
-    Gestión de Repertorios
-</h1>
-<a href="{{ route('repertorio.create') }}" class="btn btn-success btn-add-new">
-    <i class="voyager-plus"></i> <span>Crear</span>
-</a>
-@endsection
-@section('css')
-<style>
-    .card-title {
-        font-size: 2em;
-    }
 
-    .card-text {
-        font-size: 1.2rem;
-    }
-    body, html, .form-control, th, td{
-        color: #1e1f20!important;
-    }
-    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
-        font-weight: normal;
-    }
-</style>
+@section('page_header')
+    <h1 class="page-title">
+        <i class="fa fa-music" aria-hidden="true"></i>
+        Gestión de Repertorios
+    </h1>
+    <a href="{{ route('repertorio.create') }}" class="btn btn-success btn-add-new">
+        <i class="voyager-plus"></i> <span>Crear</span>
+    </a>
 @endsection
+
+@section('css')
+    <style>
+        .card-title {
+            font-size: 2em;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+        }
+        body, html, .form-control, th, td{
+            color: #1e1f20!important;
+        }
+        .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+            font-weight: normal;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="col-md-12">
     <div class="panel panel-bordered">
