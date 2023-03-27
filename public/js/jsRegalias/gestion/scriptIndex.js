@@ -20,6 +20,6 @@ $(document).ready( function () {
                 "previous": "Anterior"
             }
         },
-        order: [[ 1, 'asc' ]]
+        order: [[ 0, 'desc' ]]
     });
 });

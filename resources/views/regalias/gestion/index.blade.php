@@ -21,18 +21,7 @@
                     <table id="dataTableRegalias" name="dataTableRegalias" class="dataTables_wrapper form-inline dt-bootstrap no-footer" cellspacing="0" width="100%">
                         <thead>
                             <tr role="row">
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th class="text-center" COLSPAN=2>Trimestre</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <th class="dt-not-orderable">
-                                    <input type="checkbox" class="select_all">
-                                </th>
+                                <th class="text-center">Nº</th>
                                 <th class="text-center">Nombres y Apellidos</th>
                                 <th class="text-center">N° Identificacion</th>
                                 <th class="text-center">Valor</th>
@@ -45,10 +34,7 @@
                         <tbody>
                         @foreach ($regalias as $regalia)
                             <tr role="row">
-                                <td>
-                                    <input type="checkbox" name="row_id[]" class="checkRegalia"
-                                        id="checkbox_{{ $regalia->id }}" value="{{ $regalia->id }}">
-                                </td>
+                                <td class="text-center">{{ $regalia->id }}</td>
                                 <td class="text-center">{{ $regalia->nombre.' '.$regalia->apellido }}</td>
                                 <td class="text-center">{{ $regalia->numero_identificacion }}</td>
                                 <td class="text-center">USD {{ $regalia->valor }}</td>

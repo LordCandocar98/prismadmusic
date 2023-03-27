@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RegaliasController extends Controller
 {
@@ -81,6 +82,7 @@ class RegaliasController extends Controller
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
+            Log($e->getMessage() . ' - ' . $e->getLine() . ' ' . $e->getFile());
             $notification = array(
                 'message' => $e->getLine() . " " . $e->getMessage(),
                 'alert-type' => 'warning'
