@@ -2,8 +2,6 @@
 
 namespace App\Widgets;
 
-use App\Models\ColaboracionRepertorio;
-use App\Models\Repertorio;
 use Arrilot\Widgets\AbstractWidget;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,23 +20,18 @@ class UpCancionW extends AbstractWidget
      */
     public function run()
     {
-        $user = Auth::user();
-        $repertorios = ColaboracionRepertorio::where('cliente_email',$user->email)->get();
-        $repertorios = $user->role_id == 2 ? $repertorios : Repertorio::all();
-        $count = count($repertorios);
-
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-double-up',
-            'title'  => '<div class="widget-css">' . "Subir Canción" . '</div>',
-            'text'   => '<div class="widget-css">' . " Haga clic en el botón de abajo para agregar una nueva Canción" . '</div>',
             'button' => [
                 'text' => 'Subir Canción',
                 'link' => url("/subir-cancion"),
                 'color' => "#34a4eb",
+                'id' => "btnUpSong",
+                'class' => "btn-big"
             ],
-            'image' => '/images/repertorio.jpg',
+            'image' => '/images/pexels-yaroslava.jpg',
         ]));
     }
+
     public function shouldBeDisplayed()
     {
         $session = Auth::user();
