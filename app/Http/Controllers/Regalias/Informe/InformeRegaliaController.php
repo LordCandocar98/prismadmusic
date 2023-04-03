@@ -22,7 +22,7 @@ class InformeRegaliaController extends Controller
         ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
         ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
         ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
-        ->where('users.role_id',2)
+        ->where('users.role_id', 2)
         ->where('users.id', $sesion->id)
         ->where('users.registro_confirmed', 1)
         ->get();
