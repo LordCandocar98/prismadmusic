@@ -29,8 +29,8 @@ class RegaliaW extends AbstractWidget
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-wallet',
-            'title'  => '<div class="widget-css">'."Gestión de regalías".'</div>',
-            'text'   => '<div class="widget-css">'."Actualmente hay un total de $count regalías registrados en plataforma. Haga clic en el botón de abajo para ver todas las regalías.".'</div>',
+            'title'  => "Gestión de regalías",
+            'text'   => "Actualmente hay un total de $count regalías registrados en plataforma. Haga clic en el botón de abajo para ver todas las regalías.",
             'button' => [
                 'text' => 'Ver todas las regalías',
                 'link' => $user->role_id == 3 ?  url("/regalias") : route('voyager.regalia.index'),

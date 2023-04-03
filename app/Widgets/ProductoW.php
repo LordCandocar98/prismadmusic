@@ -28,8 +28,8 @@ class ProductoW extends AbstractWidget
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-lab',
-            'title'  => '<div class="widget-css">'."Gestión de productos".'</div>',
-            'text'   => '<div class="widget-css">'."Actualmente hay un total de $count productos registradas en plataforma. Haga clic en el botón de abajo para ver todos los productos.".'</div>',
+            'title'  => "Gestión de productos",
+            'text'   => "Actualmente hay un total de $count productos registradas en plataforma. Haga clic en el botón de abajo para ver todos los productos.",
             'button' => [
                 'text' => 'Ver todos los productos',
                 'link' => $user->role_id == 3 ?  url("/producto") : route('voyager.repertorio.index'),

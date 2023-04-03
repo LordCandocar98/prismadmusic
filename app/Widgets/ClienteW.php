@@ -27,8 +27,8 @@ class ClienteW extends AbstractWidget
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'voyager-smile',
-            'title'  => '<div class="widget-css">'."Gestión de clientes".'</div>',
-            'text'   => '<div class="widget-css">'."Actualmente hay un total de $count clientes registradas en plataforma. Haga clic en el botón de abajo para ver todos los clientes.".'</div>',
+            'title'  => "Gestión de clientes",
+            'text'   => "Actualmente hay un total de $count clientes registradas en plataforma. Haga clic en el botón de abajo para ver todos los clientes.",
             'button' => [
                 'text' => 'Ver todos los clientes',
                 'link' => $user->role_id == 3 ?  url("/admin/clientes") : route('voyager.cliente.index'),

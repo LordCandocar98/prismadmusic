@@ -29,13 +29,13 @@ class ColaboracionW extends AbstractWidget
         $repertorios = $user->role_id == 2 ? $repertorios : Repertorio::all();
         $count = count($repertorios);
         $url_solicitud = url('/cancion-colaboracion');
-        $mensaje_w = "Actualmente tu cuenta tiene un total de ".$count." colaboraciones. Haga clic en el botón de abajo para ver sus colaboraciones.";
+        $mensaje_w = "Actualmente tu cuenta tiene un total de " . $count . " colaboraciones. Haga clic en el botón de abajo para ver sus colaboraciones.";
 
 
         return view('voyager::dimmer', array_merge($this->config, [
             'icon'   => 'fa fa-music',
-            'title'  => '<div class="widget-css">'."Colaboracion de canciones".'</div>',
-            'text'   => '<div class="widget-css">'.$mensaje_w.'</div>',
+            'title'  => "Colaboracion de cancionesº",
+            'text'   => $mensaje_w,
             'button' => [
                 'text' => 'Ver colaboraciones',
                 'link' => $url_solicitud,

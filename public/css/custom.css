@@ -22,3 +22,14 @@ label {
 input, table, td {
     color: #1d1d1d !important;
 }
+
+.btn-big {
+    padding: 1.5rem 2rem !important;
+    font-size: 1.25rem !important;
+    line-height: 1.5 !important;
+    border-radius: .3rem !important;
+}
+
+.panel.widget p {
+    max-height: max-content !important;
+}
