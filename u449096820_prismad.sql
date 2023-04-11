@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 18-03-2023 a las 13:17:59
+-- Tiempo de generación: 11-04-2023 a las 19:55:45
 -- Versión del servidor: 10.5.12-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
@@ -195,7 +195,17 @@ INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`,
 (137, 138, 'otrogrupo', 'no', 'Prueba 6', 'Prueba 6', 'Prueba 6', 'Prueba 6', 'Prueba 6', NULL, 'Prueba 6', 2023, 'Bossa nova', 'Acid Punk', 'Bossa nova', 'Acid Punk', 'no', NULL, 'Español', 'Español', '2023-02-23', '1675828068.wav', NULL),
 (138, 140, 'original', 'no', 'Estacion Lunar', 'Estudio', 'Anica Rod', 'Anica Rod', 'Aleja Olarte', 'Anica Rod, Alejandra Olarte', 'Anica Rod', 2022, 'balada pop', 'Alternative', 'balada pop', 'Alternative', 'no', '5', 'Español', 'Español', '2023-03-03', '1676649953.wav', 'https://bfan.link/estacion-lunar'),
 (140, 143, 'cover', 'no', 'COMO LO HIZO', 'en vivo', 'Alberto Mercado \"tico\", Pedro Avila \"predinchi\"', 'Alberto Mercado \"tico\", Pedro Avila \"predinchi\"', 'Miguel Huertas', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', 2023, 'Regional Mexicano', 'Norteño', 'Regional Mexicano', 'Norteño', 'no', NULL, 'Español', 'Español', '2023-03-31', '1678303896.wav', NULL),
-(141, 144, 'cover', 'no', 'UNA CASITA BELLA PARA TI', 'en vivo', 'L. German Fleytas', 'L. German Fleytas', 'Miguel Huertas', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', 2023, 'corridos tumbados', 'Regional Mexicano', 'corridos tumbados', 'Regional Mexicano', 'no', NULL, 'Español', 'Español', '2023-03-24', '1678307510.wav', NULL);
+(141, 144, 'cover', 'no', 'UNA CASITA BELLA PARA TI', 'en vivo', 'L. German Fleytas', 'L. German Fleytas', 'Miguel Huertas', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', 2023, 'corridos tumbados', 'Regional Mexicano', 'corridos tumbados', 'Regional Mexicano', 'no', NULL, 'Español', 'Español', '2023-03-24', '1678307510.wav', NULL),
+(142, 145, 'cover', 'no', 'Primera Cancion', 'Primera Cancion', 'Primera Cancion', 'Primera Cancion', 'Primera Cancion', 'Primera Cancion', 'Primera Cancion', 2023, 'Bossa nova', 'Acid Jazz', 'Bossa nova', 'Acid Jazz', 'clear', '0', 'Español', 'Español', '2023-03-28', '1679280286.wav', NULL),
+(143, 145, 'karaoke', 'no', 'Segunda Cancion', 'Segunda Cancion', 'Segunda Cancion', 'Segunda Cancion', 'Segunda Cancion', 'Segunda Cancion', 'Segunda Cancion', 2023, 'Bossa nova', 'Acid Jazz', 'Bossa nova', 'Acid Jazz', 'no', '0', 'Español', 'Español', '2023-03-27', '1679280346.wav', NULL),
+(144, 146, 'original', 'si', 'Exitium et Principium', 'Version latín Sanctus blasphemia', 'Onn Eurion', 'Onn Eurion', 'Nestor Viana', 'Skull Red', 'ASD-T', 2023, 'Folk', 'Canto popular', 'Folk', 'Canto popular', 'no', '3', 'Inglés', 'Portugués', '2023-03-31', '1679347118.wav', 'https://www.youtube.com/watch?v=sbFbvcKhUDE'),
+(145, 147, 'cover', 'no', 'Que bonito es el Llano', 'En vivo', 'Onn Eurion', 'Onn Eurion', 'Dartagnan', 'Skull Red', 'ASD-T', 2023, 'Musica Llanera', 'Canto popular', 'Musica Llanera', 'Canto popular', 'no', '4', 'Español', 'Español', '2023-03-30', '1679350018.wav', NULL),
+(146, 147, 'original', 'no', 'Loley', 'En vivo', 'Dartagnan', 'Dartagnan', 'Onn Eurion', 'Skull Red', 'ASD-T', 2023, 'Musica Llanera', 'Canto popular', 'Musica Llanera', 'Canto popular', 'clear', '120', 'Español', 'Español', '2023-03-30', '1679350126.wav', NULL),
+(147, 148, 'original', 'no', 'ILUSO', 'Estudio', 'Angie Garcia', 'Angie Garcia', 'Ricardo Torres', 'Ricardo Torres', 'Angie Garcia', 2023, 'Regional Mexicano', 'Popular Colombiana', 'Regional Mexicano', 'Popular Colombiana', 'no', '5', 'Español', 'Español', '2023-04-14', '1680119115.wav', 'https://bfan.link/iluso-1'),
+(148, 149, 'Original', 'no', 'TIERRA SECA', NULL, 'ANICA RODRIGUEZ', 'ANICA RODRIGUEZ', NULL, 'SANALEJO', NULL, NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(149, 150, 'Original', 'no', 'colombia abre tus alas', NULL, 'ANICA RODRIGUEZ', 'ANICA RODRIGUEZ', NULL, 'SANALEJO', NULL, NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(150, 151, 'original', 'no', 'INSTINTO', 'Estudio', 'Alejo Cruz', 'Alejo Cruz', 'Juan Pablo Mojica', 'Alejo Cruz', 'Alejo Cruz', 2023, 'Alternative', 'Psychedelic', 'Alternative', 'Psychedelic', 'no', NULL, 'Español', 'Español', '2023-04-21', '1680544519.wav', 'https://bfan.link/instinto'),
+(151, 152, 'original', 'no', 'DIME', 'Estudio', 'Jorge Velez Panda', 'Luis Albino Herrera / Hermanos Herrera', 'Jorge Velez Panda', 'Alejo Cruz', 'Jorge Velez Panda', 2023, 'Regional Mexicano', 'Popular Colombiana', 'Regional Mexicano', 'Popular Colombiana', 'no', NULL, 'Español', 'Español', '2023-04-21', '1680552198.wav', 'https://bfan.link/dime-3');
 
 -- --------------------------------------------------------
 
@@ -323,7 +333,17 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 (110, 128, 'Javibass', NULL),
 (111, 129, 'Alejo Manrique', 'https://open.spotify.com/artist/5bDF5TJilMRhFmzfF9QmJI?si=mEf-3a3DTLGHGFn-wA_qaw'),
 (112, 130, 'Viviana Posada', 'https://open.spotify.com/artist/5kb7EcGL2XrFld6Hsz7pbW?si=Hbc59pR9S8607WEfLE8cnA'),
-(113, 131, 'Dempuls', 'dempuls https://open.spotify.com/artist/7MjHHzip4We5CPJdkz82Z9');
+(113, 131, 'Dempuls', 'dempuls https://open.spotify.com/artist/7MjHHzip4We5CPJdkz82Z9'),
+(114, 132, 'Rizalez', 'https://open.spotify.com/artist/3TtCIUWOCCKawcRWcIoixX'),
+(115, 133, 'Rizalez', 'https://open.spotify.com/artist/3TtCIUWOCCKawcRWcIoixX'),
+(116, 134, 'Angie Garcia', 'https://open.spotify.com/artist/4xACS1Pb2HZMnjjruxvx6y?si=meA_fpPZSLWAPJdv9s7Jrg'),
+(117, 135, 'J&J on the Beats', 'https://open.spotify.com/artist/05c1t1UxqYicpkWWMUnjZD'),
+(118, 136, 'EiBin', 'open.spotify.com/artist/4g7K43NUGZUDwXROzFm3c7'),
+(119, 137, 'Nicolas Lapeña', 'https://open.spotify.com/artist/53oXu8IwshfQ1OL83267P9?si=fYlLv_hxQJCbLIyhtF5yIA'),
+(120, 138, 'Juan Mojica', NULL),
+(121, 139, 'gaboja', NULL),
+(122, 140, 'gaboja', NULL),
+(123, 141, 'Dambel', 'https://open.spotify.com/track/0me9PxDi6ySXAhJ2trGsYw');
 
 -- --------------------------------------------------------
 
@@ -467,7 +487,20 @@ INSERT INTO `colaboracion` (`id`, `cliente_email`, `porcentaje_intelectual`, `ca
 (144, 'sntgrncnc@gmail.com', 100, 137),
 (145, 'anicarodmusica@gmail.com', 100, 138),
 (147, 'amproyectos20@gmail.com', 100, 140),
-(148, 'amproyectos20@gmail.com', 100, 141);
+(148, 'amproyectos20@gmail.com', 100, 141),
+(149, 'jvaronbueno@gmail.com', 100, 142),
+(150, 'jvaronbueno@gmail.com', 100, 143),
+(151, 'javoxdaemon@gmail.com', 50, 144),
+(152, 'jensfergaitan@gmail.com', 50, 144),
+(153, 'javoxdaemon@gmail.com', 100, 145),
+(154, 'javoxdaemon@gmail.com', 100, 146),
+(155, 'angiegarciaoficial@gmail.com', 100, 147),
+(156, 'anicarodmusica@gmail.com', 100, 148),
+(157, 'anicarodmusica@gmail.com', 100, 149),
+(158, 'alejocruzmusic@gmail.com', 80, 150),
+(159, 'juanpmojicar0@gmail.com', 15, 150),
+(160, 'ingesonja@gmail.com', 5, 150),
+(161, 'Jorgevelezpanda@gmail.com', 100, 151);
 
 -- --------------------------------------------------------
 
@@ -502,7 +535,13 @@ INSERT INTO `colaboracion_art_feas` (`id`, `nombre`, `tipo_colaboracion`, `canci
 (19, 'JOSÉ LUIS MEDINA', 'Artista Principal', 55, '2022-10-03 22:01:21', '2022-10-03 22:01:21'),
 (20, 'JOSÉ LUIS MEDINA', 'Artista Principal', 56, '2022-10-03 22:03:17', '2022-10-03 22:03:17'),
 (21, 'JOSÉ LUIS MEDINA', 'Artista Principal', 57, '2022-10-03 22:05:41', '2022-10-03 22:05:41'),
-(22, 'Hemisferios Paralelos', 'Featuring', 126, '2023-01-30 00:58:20', '2023-01-30 00:58:20');
+(22, 'Hemisferios Paralelos', 'Featuring', 126, '2023-01-30 00:58:20', '2023-01-30 00:58:20'),
+(23, 'porca', 'Artista Principal', 144, '2023-03-20 16:21:26', '2023-03-20 16:21:26'),
+(24, 'Arkan', 'Artista Principal', 144, '2023-03-20 16:21:26', '2023-03-20 16:21:26'),
+(25, 'Dj gould', 'Featuring', 144, '2023-03-20 16:21:26', '2023-03-20 16:21:26'),
+(26, 'Dj freth', 'Featuring', 144, '2023-03-20 16:21:26', '2023-03-20 16:21:26'),
+(27, 'Dj gould', 'Featuring', 145, '2023-03-20 17:07:04', '2023-03-20 17:07:04'),
+(28, 'Dj gould', 'Featuring', 146, '2023-03-20 17:08:52', '2023-03-20 17:08:52');
 
 -- --------------------------------------------------------
 
@@ -579,7 +618,13 @@ INSERT INTO `colaboracion_repertorio` (`id`, `repertorio_id`, `cliente_email`, `
 (75, 141, 'ao3870389@gmail.com', 'Principal (1st)', NULL),
 (76, 142, 'amproyectos20@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/5bDF5TJilMRhFmzfF9QmJI?si=mEf-3a3DTLGHGFn-wA_qaw'),
 (77, 143, 'amproyectos20@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/5bDF5TJilMRhFmzfF9QmJI?si=mEf-3a3DTLGHGFn-wA_qaw'),
-(78, 144, 'amproyectos20@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/5bDF5TJilMRhFmzfF9QmJI?si=mEf-3a3DTLGHGFn-wA_qaw');
+(78, 144, 'amproyectos20@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/5bDF5TJilMRhFmzfF9QmJI?si=mEf-3a3DTLGHGFn-wA_qaw'),
+(79, 145, 'jvaronbueno@gmail.com', 'Principal (1st)', 'https://open.spotify.com/user/31sx2egnm4lreenwnjbeghlbwmqy?si=4286bae3e7c3447f'),
+(80, 146, 'javoxdaemon@gmail.com', 'Principal (1st)', 'www.developer.com'),
+(81, 147, 'javoxdaemon@gmail.com', 'Principal (1st)', 'www.developer.com'),
+(82, 148, 'angiegarciaoficial@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/4xACS1Pb2HZMnjjruxvx6y?si=meA_fpPZSLWAPJdv9s7Jrg'),
+(83, 151, 'alejocruzmusic@gmail.com', 'Principal (1st)', 'https://open.spotify.com/artist/6ZyhBCSLEWD31C6AdgXiRt?si=LnfKQ8fESAKoGQFU3eYTAg'),
+(84, 152, 'Jorgevelezpanda@gmail.com', 'Principal (1st)', NULL);
 
 -- --------------------------------------------------------
 
@@ -706,7 +751,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (104, 11, 'cancion_id', 'text', 'Cancion', 1, 1, 1, 1, 1, 1, '{\"validation\":{\"rule\":\"required\",\"messages\":{\"required\":\"El campo canci\\u00f3n es obligatorio\"}}}', 4),
 (106, 13, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
 (107, 13, 'cliente_id', 'text', 'Cliente Id', 1, 1, 1, 1, 1, 1, '{}', 2),
-(108, 13, 'informe', 'file', 'Informe', 1, 1, 1, 1, 1, 1, '{}', 3),
+(108, 13, 'informe', 'text', 'Informe', 0, 1, 1, 1, 1, 1, '{}', 3),
 (110, 13, 'regalium_belongsto_cliente_relationship', 'relationship', 'cliente', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Cliente\",\"table\":\"cliente\",\"type\":\"belongsTo\",\"column\":\"cliente_id\",\"key\":\"id\",\"label\":\"nombre_artistico\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6),
 (111, 9, 'cancion_belongsto_repertorio_relationship_1', 'relationship', 'repertorio', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Models\\\\Repertorio\",\"table\":\"repertorio\",\"type\":\"belongsTo\",\"column\":\"repertorio_id\",\"key\":\"id\",\"label\":\"titulo\",\"pivot_table\":\"articulo\",\"pivot\":\"0\",\"taggable\":\"0\"}', 2),
 (114, 14, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
@@ -822,7 +867,7 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (9, 'cancion', 'cancion', 'Cancion', 'Canciones', 'voyager-music', 'App\\Models\\Cancion', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:18:22', '2022-11-02 14:17:11'),
 (10, 'cliente', 'cliente', 'Cliente', 'Clientes', 'voyager-smile', 'App\\Models\\Cliente', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:22:19', '2022-06-06 23:29:45'),
 (11, 'colaboracion', 'colaboracion', 'Colaboracion', 'Colaboraciones', 'voyager-people', 'App\\Models\\Colaboracion', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:26:02', '2022-06-15 22:28:16'),
-(13, 'regalia', 'regalia', 'Regalia', 'Regalias', 'voyager-wallet', 'App\\Models\\Regalia', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:42:20', '2022-01-25 23:21:00'),
+(13, 'regalia', 'regalia', 'Regalia', 'Regalias', 'voyager-wallet', 'App\\Models\\Regalia', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:42:20', '2023-04-11 14:42:07'),
 (14, 'repertorio', 'repertorio', 'Repertorio', 'Repertorios', 'voyager-documentation', 'App\\Models\\Repertorio', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-02 17:49:10', '2022-06-15 21:51:04'),
 (15, 'persona', 'persona', 'Persona', 'Personas', NULL, 'App\\Models\\Persona', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-01-05 21:30:03', '2022-06-06 23:30:47'),
 (18, 'colaboracion_repertorio', 'colaboracion-repertorio', 'Colaboracion Repertorio', 'Colaboracion Repertorios', 'voyager-logbook', 'App\\Models\\ColaboracionRepertorio', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2022-03-18 23:07:56', '2022-06-06 23:25:38'),
@@ -1039,20 +1084,20 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (22, 1, 'Parametros', '', '_self', 'voyager-params', '#000000', NULL, 4, '2022-01-10 23:15:48', '2022-09-16 00:33:55', NULL, ''),
 (26, 1, 'Despliegue', '', '_blank', 'voyager-dot-3', '#000000', 25, 1, '2022-01-10 23:30:25', '2022-01-10 23:32:50', NULL, 'null'),
 (27, 1, 'Desarrollo', '', '_self', 'voyager-whale', '#000000', NULL, 2, '2022-01-10 23:38:07', '2022-01-10 23:41:13', NULL, ''),
-(30, 3, 'Gestión de Repertorios', '/repertorio', '_self', 'voyager-music', '#000000', NULL, 2, '2022-02-03 21:55:21', '2022-05-08 01:10:06', NULL, ''),
+(30, 3, 'Subir Canción', '/repertorio', '_self', 'voyager-music', '#000000', NULL, 3, '2022-02-03 21:55:21', '2023-04-03 10:08:17', NULL, ''),
 (31, 3, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:56:24', '2022-02-03 21:56:37', NULL, ''),
 (32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:57:47', '2022-02-28 04:00:31', NULL, ''),
 (33, 2, 'Gestión de Nómina', '/nomina', '_self', 'fa fa-university', '#000000', NULL, 2, '2022-02-03 22:00:00', '2022-02-28 04:00:50', NULL, ''),
 (34, 2, 'Gestión de Regalías', '/regalias', '_self', 'voyager-wallet', '#000000', NULL, 3, '2022-02-03 22:01:50', '2022-09-16 00:32:48', NULL, ''),
 (36, 3, 'Informe de Pagos', '/informeNomina', '_self', 'fa fa-university', '#000000', 37, 1, '2022-02-12 15:51:40', '2022-05-08 01:11:39', NULL, ''),
-(37, 3, 'Informes', '', '_self', 'fa fa-info-circle', '#000000', NULL, 3, '2022-02-12 23:41:14', '2022-05-22 17:30:48', NULL, ''),
+(37, 3, 'Informes', '', '_self', 'fa fa-info-circle', '#000000', NULL, 4, '2022-02-12 23:41:14', '2023-03-19 21:27:24', NULL, ''),
 (39, 3, 'Cargar Musica', '/cancion', '_self', 'fa fa-file-audio-o', '#000000', 38, 1, '2022-02-12 23:42:59', '2022-05-08 01:10:06', NULL, ''),
 (40, 3, 'Informe de Regalías', '/informeRegalias', '_self', 'voyager-wallet', '#000000', 37, 2, '2022-02-12 23:43:58', '2022-02-12 23:44:21', NULL, ''),
 (43, 2, 'Gestión de Usuarios', '', '_self', 'voyager-folder', '#000000', NULL, 4, '2022-05-16 22:37:05', '2022-05-16 22:46:29', NULL, ''),
 (44, 2, 'Usuarios', '/admin/users', '_self', 'voyager-person', '#000000', 43, 1, '2022-05-16 22:37:46', '2022-05-16 22:38:31', NULL, ''),
 (45, 2, 'Cliente', '/admin/cliente', '_self', 'voyager-smile', '#000000', 43, 3, '2022-05-16 22:38:08', '2022-05-16 22:46:29', NULL, ''),
 (46, 2, 'Persona', '/admin/persona', '_self', 'voyager-people', '#000000', 43, 2, '2022-05-16 22:38:26', '2022-05-16 22:46:29', NULL, ''),
-(47, 3, 'Colaboraciones', '/cancion-colaboracion', '_self', 'fa fa-percent', '#000000', NULL, 4, '2022-05-17 23:02:02', '2022-05-22 17:30:48', NULL, ''),
+(47, 3, 'Colaboraciones', '/cancion-colaboracion', '_self', 'fa fa-percent', '#000000', NULL, 5, '2022-05-17 23:02:02', '2023-03-19 21:27:24', NULL, ''),
 (48, 2, 'Gestión de Repertorio', '/producto', '_self', 'fa fa-gavel', '#000000', NULL, 5, '2022-05-18 03:03:20', '2022-09-18 18:48:23', NULL, ''),
 (49, 1, 'Generos', '', '_self', 'fa fa-caret-square-o-right', NULL, 22, 2, '2022-06-06 21:55:02', '2022-06-06 23:51:53', 'voyager.genero.index', NULL),
 (50, 1, 'Subgeneros', '', '_self', 'fa fa-bell-o', '#000000', 22, 3, '2022-06-06 21:55:56', '2022-06-08 21:43:43', 'voyager.subgenero.index', 'null'),
@@ -1555,7 +1600,17 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 (128, 'Javier', 'Ramos', 'Colombia', 'Mosquera', 'cc', '1031141552', '3104826875', 267, 'Cundinamarca', 'firma/267.png', '/contratos/267.pdf'),
 (129, 'Alejandro', 'Manrique', 'Colombia', 'Chía', 'cc', '1011081350', '3224791455', 268, 'Cundinamarca', 'firma/268.png', '/contratos/268.pdf'),
 (130, 'Viviana', 'Posada', 'Colombia', 'Cajicá', 'cc', '1122647183', '3124435174', 269, 'Cundinamarca', 'firma/269.png', '/contratos/269.pdf'),
-(131, 'freddi', 'prieto maza', 'Brazil', 'Ciudad Guayana', 'cc', '30184245', '9291521648', 270, 'Bolívar', 'firma/270.png', '/contratos/270.pdf');
+(131, 'freddi', 'prieto maza', 'Brazil', 'Ciudad Guayana', 'cc', '30184245', '9291521648', 270, 'Bolívar', 'firma/270.png', '/contratos/270.pdf'),
+(132, 'Jesus', 'Rizalez', 'Colombia', 'Pereira', 'ce', '646049', '3023664633', 275, 'Risaralda', 'firma/275.png', '/contratos/275.pdf'),
+(133, 'Jesus', 'Rizalez', 'Colombia', 'Pereira', 'ce', '646049', '3023664633', 275, 'Risaralda', 'firma/275.png', '/contratos/275.pdf'),
+(134, 'Angie', 'Garcia', 'Colombia', 'Bogotá D.C.', 'cc', '1019033466', '3107973491', 279, 'Cundinamarca', 'firma/279.png', '/contratos/279.pdf'),
+(135, 'Joel', 'Rodriguez', 'Dominican Republic', 'Santo Domingo Oeste', 'cc', '40233242722', '8494571783', 281, 'Santo Domingo Province', 'firma/281.png', '/contratos/281.pdf'),
+(136, 'Ricardo', 'Montero', 'Chile', 'Puente Alto', 'cc', '153511098', '0998489838', 282, 'Región Metropolitana de Santiago', 'firma/282.png', '/contratos/282.pdf'),
+(137, 'Nicolas', 'Lapeña', 'Argentina', 'Buenos Aires', 'cc', '222222222222222', '1134545354', 284, 'Buenos Aires', 'firma/284.png', '/contratos/284.pdf'),
+(138, 'Juan Pablo', 'Mojica', 'Colombia', 'Bogotá D.C.', 'cc', '1018434667', '3152486857', 286, 'Bogotá D.C.', 'firma/286.png', '/contratos/286.pdf'),
+(139, 'LUIS GABRIEL', 'JARRO MORA', 'Colombia', 'Bogotá D.C.', 'cc', '80053118', '3103388367', 287, 'Cundinamarca', 'firma/287.png', '/contratos/287.pdf'),
+(140, 'LUIS GABRIEL', 'JARRO MORA', 'Colombia', 'Bogotá D.C.', 'cc', '80053118', '3103388367', 287, 'Cundinamarca', 'firma/287.png', '/contratos/287.pdf'),
+(141, 'julio', 'da silva', 'Peru', 'Ica', 'ce', '26818455', '5988162450', 291, 'Ica', 'firma/291.png', '/contratos/291.pdf');
 
 -- --------------------------------------------------------
 
@@ -1630,52 +1685,51 @@ CREATE TABLE `regalia` (
 --
 
 INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `fecha_informe_final`, `nomina_id`, `valor`) VALUES
-(17, 64, '[{\"download_link\":\"regalia\\/August2022\\/LyjssdTtuOeQHxUArIfr.xlsx\",\"original_name\":\"Newfest_62f694.xlsx\"}]', '2019-09-01', '2019-11-30', NULL, 0.819),
-(18, 64, '[{\"download_link\":\"regalia\\/August2022\\/IzGrf3jfFQTldbCKh6Ni.xlsx\",\"original_name\":\"Newfest_62f6b4.xlsx\"}]', '2019-12-01', '2020-02-29', NULL, 0.812),
-(19, 64, '[{\"download_link\":\"regalia\\/August2022\\/pnfEx5wLQOFC407Fh0mb.xlsx\",\"original_name\":\"Newfest_62f6b5.xlsx\"}]', '2020-03-01', '2020-05-31', NULL, 0.133),
-(20, 64, '[{\"download_link\":\"regalia\\/August2022\\/QZQsKvWUT0O5G6z2fJdW.xlsx\",\"original_name\":\"Newfest_62f6b7.xlsx\"}]', '2020-06-01', '2020-08-31', NULL, 5.243),
-(21, 64, '[{\"download_link\":\"regalia\\/August2022\\/3dYXBBASw2pcGyIIaCMw.xlsx\",\"original_name\":\"Newfest_62f6b7.xlsx\"}]', '2020-09-01', '2020-11-30', NULL, 7.189),
-(22, 64, '[{\"download_link\":\"regalia\\/August2022\\/fLSUDbXbhCKm0Q05JLIv.xlsx\",\"original_name\":\"Newfest_62f6b8.xlsx\"}]', '2020-12-01', '2021-02-28', NULL, 6.356),
-(23, 64, '[{\"download_link\":\"regalia\\/August2022\\/RMMBOAsoFv9NAgNohEPq.xlsx\",\"original_name\":\"Newfest_62f6b8.xlsx\"}]', '2021-03-01', '2021-05-31', NULL, 9.373),
-(24, 64, '[{\"download_link\":\"regalia\\/August2022\\/fWycyK6LsZW8Kv2I1o07.xlsx\",\"original_name\":\"Newfest_62f6b9.xlsx\"}]', '2021-06-01', '2021-08-31', NULL, 6.048),
-(25, 64, '[{\"download_link\":\"regalia\\/August2022\\/Ql1jgMia1k3iCwIthKkX.xlsx\",\"original_name\":\"Newfest_62f768.xlsx\"}]', '2021-09-01', '2021-11-30', NULL, 6.433),
-(26, 64, '[{\"download_link\":\"regalia\\/August2022\\/WGC5Us7rd07xBLuuCpYL.xlsx\",\"original_name\":\"Newfest_62f768.xlsx\"}]', '2021-12-01', '2022-02-28', NULL, 6.363),
-(27, 64, '[{\"download_link\":\"regalia\\/August2022\\/SoeUfm7PKGF00I2nVGvn.xlsx\",\"original_name\":\"Newfest_62f6b9.xlsx\"}]', '2022-03-01', '2022-05-31', NULL, 6.447),
-(28, 64, '[{\"download_link\":\"regalia\\/August2022\\/vxTdRXek3PmDMZON0xiP.xlsx\",\"original_name\":\"Newfest_62f6c8.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 2.464),
-(29, 66, '[{\"download_link\":\"regalia\\/August2022\\/lziGJzuzveqqXiqvSplg.xlsx\",\"original_name\":\"Alejo_Cruz_62f692.xlsx\"}]', '2019-09-01', '2019-11-30', NULL, 1.302),
-(30, 66, '[{\"download_link\":\"regalia\\/August2022\\/RF3PkuUVavnlMBcJz7Xe.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b2.xlsx\"}]', '2029-12-01', '2020-02-29', NULL, 0.07),
-(31, 66, '[{\"download_link\":\"regalia\\/August2022\\/SNf4tUyg97CHIbNPOir8.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b3.xlsx\"}]', '2020-03-01', '2020-05-31', NULL, 0.035),
-(32, 66, '[{\"download_link\":\"regalia\\/August2022\\/0lQUIYJcTP7qVhGDgeGQ.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b5.xlsx\"}]', '2020-06-01', '2020-08-31', NULL, 9.779),
-(33, 66, '[{\"download_link\":\"regalia\\/August2022\\/hV8cCsF5uZ5ZHNgbV9c5.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b5.xlsx\"}]', '2020-09-01', '2020-11-30', NULL, 0.567),
-(34, 66, '[{\"download_link\":\"regalia\\/August2022\\/yVU4f3DLDcBBlk20Er71.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b6.xlsx\"}]', '2020-12-01', '2021-02-28', NULL, 0.616),
-(35, 66, '[{\"download_link\":\"regalia\\/August2022\\/VcWhVlv0pg0ZKg8MUaFj.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b6.xlsx\"}]', '2021-03-01', '2021-05-31', NULL, 4.536),
-(36, 66, '[{\"download_link\":\"regalia\\/August2022\\/JpCJNbGciQMFFCie064n.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b7.xlsx\"}]', '2021-06-01', '2021-08-31', NULL, 2.527),
-(37, 66, '[{\"download_link\":\"regalia\\/August2022\\/6Sk1kZTIqTp46JedUSDM.xlsx\",\"original_name\":\"Alejo_Cruz_62f767.xlsx\"}]', '2021-09-01', '2021-11-30', NULL, 4.865),
-(38, 66, '[{\"download_link\":\"regalia\\/August2022\\/FzZ7KTeGshujNaSXnEsV.xlsx\",\"original_name\":\"Alejo_Cruz_62f766.xlsx\"}]', '2021-12-01', '2022-02-28', NULL, 3.857),
-(39, 66, '[{\"download_link\":\"regalia\\/August2022\\/rZ8lpjNK8US4bpz47Rnv.xlsx\",\"original_name\":\"Alejo_Cruz_62f6b7.xlsx\"}]', '2022-03-01', '2022-05-31', NULL, 7.322),
-(40, 66, '[{\"download_link\":\"regalia\\/August2022\\/4SBxEkO2dZzejMRaVXTR.xlsx\",\"original_name\":\"Alejo_Cruz_62f6c6.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 1.946),
-(41, 45, '[{\"download_link\":\"regalia\\/August2022\\/YXMOAqezafwrbK4wBgCI.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b2.xlsx\"}]', '2020-03-01', '2020-05-31', NULL, 4.207),
-(42, 45, '[{\"download_link\":\"regalia\\/August2022\\/ds05SdSq4gK0f9eDDpVv.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b4.xlsx\"}]', '2020-06-01', '2020-08-31', NULL, 4.375),
-(43, 45, '[{\"download_link\":\"regalia\\/August2022\\/fL2oTdNMBAgG6u65umA9.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b4.xlsx\"}]', '2020-09-01', '2020-11-30', NULL, 15.204),
-(44, 45, '[{\"download_link\":\"regalia\\/August2022\\/vyvZxA6wSL24f0JDk1kx.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b5.xlsx\"}]', '2020-12-01', '2021-02-28', NULL, 2.66),
-(45, 45, '[{\"download_link\":\"regalia\\/August2022\\/mkkW9CyL5AVahZaKJfXJ.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b5.xlsx\"}]', '2021-03-01', '2021-05-31', NULL, 4.361),
-(46, 45, '[{\"download_link\":\"regalia\\/August2022\\/naJK28UlLBFBlen49Vs6.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b6.xlsx\"}]', '2021-06-01', '2021-08-31', NULL, 1.813),
-(47, 45, '[{\"download_link\":\"regalia\\/August2022\\/nllNZRq6RhLmdvCLi7gL.xlsx\",\"original_name\":\"Kelly_Cardenas_62f766.xlsx\"}]', '2021-09-01', '2021-11-30', NULL, 9.457),
-(48, 45, '[{\"download_link\":\"regalia\\/August2022\\/pjQO62y0IGwFWoExVdSE.xlsx\",\"original_name\":\"Kelly_Cardenas_62f765.xlsx\"}]', '2021-12-01', '2022-02-28', NULL, 6.615),
-(49, 45, '[{\"download_link\":\"regalia\\/August2022\\/VMVaIXFu61PYa3dPwUD6.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6b6.xlsx\"}]', '2022-03-01', '2020-05-31', NULL, 13.923),
-(50, 45, '[{\"download_link\":\"regalia\\/August2022\\/qkveX7KxSTc7mJJNyA0Y.xlsx\",\"original_name\":\"Kelly_Cardenas_62f6c5.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 37.821),
-(51, 41, '[{\"download_link\":\"regalia\\/August2022\\/PcVbPmuUjnI4QygTJxho.xlsx\",\"original_name\":\"Luna_Reyes_62f6b56.xlsx\"}]', '2020-12-01', '2021-02-28', NULL, 2.141),
-(52, 41, '[{\"download_link\":\"regalia\\/August2022\\/LQ1RT1yW1eFFWzQLo0gu.xlsx\",\"original_name\":\"Luna_Reyes_62f6b60.xlsx\"}]', '2021-03-01', '2021-05-31', NULL, 3.339),
-(53, 41, '[{\"download_link\":\"regalia\\/August2022\\/CEGi64rW4Wy6fChOtIQs.xlsx\",\"original_name\":\"Luna_Reyes_62f6b61.xlsx\"}]', '2021-06-01', '2021-08-31', NULL, 4.333),
-(54, 41, '[{\"download_link\":\"regalia\\/August2022\\/i7iPkP7AJNwT7JBdtypP.xlsx\",\"original_name\":\"Luna_Reyes_62f7657.xlsx\"}]', '2021-09-01', '2022-11-30', NULL, 5.173),
-(55, 41, '[{\"download_link\":\"regalia\\/August2022\\/GiLcPyG30frpQ9be11bR.xlsx\",\"original_name\":\"Luna_Reyes_62f7658.xlsx\"}]', '2021-12-01', '2022-02-28', NULL, 4.354),
-(56, 41, '[{\"download_link\":\"regalia\\/August2022\\/Y8y1TW5G0xPxthOhN1fJ.xlsx\",\"original_name\":\"Luna_Reyes_62f6b55.xlsx\"}]', '2022-03-01', '2022-05-31', NULL, 2.926),
-(57, 41, '[{\"download_link\":\"regalia\\/August2022\\/04NfJpInpDoUuDgCoJvb.xlsx\",\"original_name\":\"Luna_Reyes_62f6c53.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 4.389),
-(58, 49, '[{\"download_link\":\"regalia\\/August2022\\/nxmWLLo7aZdrDcngyPIl.xlsx\",\"original_name\":\"Abdul_Farfan_62f7686.xlsx\"}]', '2021-12-01', '2022-02-28', NULL, 2.527),
-(59, 49, '[{\"download_link\":\"regalia\\/August2022\\/cutzi2WycjYdXNHJApqc.xlsx\",\"original_name\":\"Abdul_Farfan_62f6b83.xlsx\"}]', '2022-03-01', '2022-05-31', NULL, 2.667),
-(60, 49, '[{\"download_link\":\"regalia\\/August2022\\/FOMVJBmP4Ni5YLISJ7c6.xlsx\",\"original_name\":\"Abdul_Farfan_62f6c80.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 1.008),
-(61, 21, '[{\"download_link\":\"regalia\\/August2022\\/aodUlC5aIJydvwWjakLB.xlsx\",\"original_name\":\"Jorge_Velez_Panda_62f6b89.xlsx\"}]', '2022-03-01', '2022-05-31', NULL, 1.309),
-(62, 21, '[{\"download_link\":\"regalia\\/August2022\\/A4LswCXzx5zqPnho6hoV.xlsx\",\"original_name\":\"Jorge_Velez_Panda_62f6c86.xlsx\"}]', '2022-06-01', '2022-06-30', NULL, 0.294),
+(17, 64, 'regalia/August2022/LyjssdTtuOeQHxUArIfr.xlsx', '2019-09-01', '2019-11-30', NULL, 0.819),
+(18, 64, 'regalia/August2022/IzGrf3jfFQTldbCKh6Ni.xlsx', '2019-12-01', '2020-02-29', NULL, 0.812),
+(19, 64, 'regalia/August2022/pnfEx5wLQOFC407Fh0mb.xlsx', '2020-03-01', '2020-05-31', NULL, 0.133),
+(20, 64, 'regalia/August2022/QZQsKvWUT0O5G6z2fJdW.xlsx', '2020-06-01', '2020-08-31', NULL, 5.243),
+(21, 64, 'regalia/August2022/3dYXBBASw2pcGyIIaCMw.xlsx', '2020-09-01', '2020-11-30', NULL, 7.189),
+(22, 64, 'regalia/August2022/fLSUDbXbhCKm0Q05JLIv.xlsx', '2020-12-01', '2021-02-28', NULL, 6.356),
+(23, 64, 'regalia/August2022/RMMBOAsoFv9NAgNohEPq.xlsx', '2021-03-01', '2021-05-31', NULL, 9.373),
+(24, 64, 'regalia/August2022/fWycyK6LsZW8Kv2I1o07.xlsx', '2021-06-01', '2021-08-31', NULL, 6.048),
+(25, 64, 'regalia/August2022/Ql1jgMia1k3iCwIthKkX.xlsx', '2021-09-01', '2021-11-30', NULL, 6.433),
+(26, 64, 'regalia/August2022/WGC5Us7rd07xBLuuCpYL.xlsx', '2021-12-01', '2022-02-28', NULL, 6.363),
+(27, 64, 'regalia/August2022/SoeUfm7PKGF00I2nVGvn.xlsx', '2022-03-01', '2022-05-31', NULL, 6.447),
+(28, 64, 'regalia/August2022/vxTdRXek3PmDMZON0xiP.xlsx', '2022-06-01', '2022-06-30', NULL, 2.464),
+(29, 66, 'regalia/August2022/lziGJzuzveqqXiqvSplg.xlsx', '2019-09-01', '2019-11-30', NULL, 1.302),
+(30, 66, 'regalia/August2022/RF3PkuUVavnlMBcJz7Xe.xlsx', '2029-12-01', '2020-02-29', NULL, 0.07),
+(31, 66, 'regalia/August2022/SNf4tUyg97CHIbNPOir8.xlsx', '2020-03-01', '2020-05-31', NULL, 0.035),
+(32, 66, 'regalia/August2022/0lQUIYJcTP7qVhGDgeGQ.xlsx', '2020-06-01', '2020-08-31', NULL, 9.779),
+(34, 66, 'regalia/August2022/yVU4f3DLDcBBlk20Er71.xlsx', '2020-12-01', '2021-02-28', NULL, 0.616),
+(35, 66, 'regalia/August2022/VcWhVlv0pg0ZKg8MUaFj.xlsx', '2021-03-01', '2021-05-31', NULL, 4.536),
+(36, 66, 'regalia/August2022/JpCJNbGciQMFFCie064n.xlsx', '2021-06-01', '2021-08-31', NULL, 2.527),
+(37, 66, 'regalia/August2022/6Sk1kZTIqTp46JedUSDM.xlsx', '2021-09-01', '2021-11-30', NULL, 4.865),
+(38, 66, 'regalia/August2022/FzZ7KTeGshujNaSXnEsV.xlsx', '2021-12-01', '2022-02-28', NULL, 3.857),
+(39, 66, 'regalia/August2022/rZ8lpjNK8US4bpz47Rnv.xlsx', '2022-03-01', '2022-05-31', NULL, 7.322),
+(40, 66, 'regalia/August2022/4SBxEkO2dZzejMRaVXTR.xlsx', '2022-06-01', '2022-06-30', NULL, 1.946),
+(41, 45, 'regalia/August2022/YXMOAqezafwrbK4wBgCI.xlsx', '2020-03-01', '2020-05-31', NULL, 4.207),
+(42, 45, 'regalia/August2022/ds05SdSq4gK0f9eDDpVv.xlsx', '2020-06-01', '2020-08-31', NULL, 4.375),
+(43, 45, 'regalia/August2022/fL2oTdNMBAgG6u65umA9.xlsx', '2020-09-01', '2020-11-30', NULL, 15.204),
+(44, 45, 'regalia/August2022/vyvZxA6wSL24f0JDk1kx.xlsx', '2020-12-01', '2021-02-28', NULL, 2.66),
+(45, 45, 'regalia/August2022/mkkW9CyL5AVahZaKJfXJ.xlsx', '2021-03-01', '2021-05-31', NULL, 4.361),
+(46, 45, 'regalia/August2022/naJK28UlLBFBlen49Vs6.xlsx', '2021-06-01', '2021-08-31', NULL, 1.813),
+(47, 45, 'regalia/August2022/nllNZRq6RhLmdvCLi7gL.xlsx', '2021-09-01', '2021-11-30', NULL, 9.457),
+(48, 45, 'regalia/August2022/pjQO62y0IGwFWoExVdSE.xlsx', '2021-12-01', '2022-02-28', NULL, 6.615),
+(49, 45, 'regalia/August2022/VMVaIXFu61PYa3dPwUD6.xlsx', '2022-03-01', '2020-05-31', NULL, 13.923),
+(50, 45, 'regalia/August2022/qkveX7KxSTc7mJJNyA0Y.xlsx', '2022-06-01', '2022-06-30', NULL, 37.821),
+(51, 41, 'regalia/August2022/PcVbPmuUjnI4QygTJxho.xlsx', '2020-12-01', '2021-02-28', NULL, 2.141),
+(52, 41, 'regalia/August2022/LQ1RT1yW1eFFWzQLo0gu.xlsx', '2021-03-01', '2021-05-31', NULL, 3.339),
+(53, 41, 'regalia/August2022/CEGi64rW4Wy6fChOtIQs.xlsx', '2021-06-01', '2021-08-31', NULL, 4.333),
+(54, 41, 'regalia/August2022/i7iPkP7AJNwT7JBdtypP.xlsx', '2021-09-01', '2022-11-30', NULL, 5.173),
+(55, 41, 'regalia/August2022/GiLcPyG30frpQ9be11bR.xlsx', '2021-12-01', '2022-02-28', NULL, 4.354),
+(56, 41, 'regalia/August2022/Y8y1TW5G0xPxthOhN1fJ.xlsx', '2022-03-01', '2022-05-31', NULL, 2.926),
+(57, 41, 'regalia/August2022/04NfJpInpDoUuDgCoJvb.xlsx', '2022-06-01', '2022-06-30', NULL, 4.389),
+(58, 49, 'regalia/August2022/nxmWLLo7aZdrDcngyPIl.xlsx', '2021-12-01', '2022-02-28', NULL, 2.527),
+(59, 49, 'regalia/August2022/cutzi2WycjYdXNHJApqc.xlsx', '2022-03-01', '2022-05-31', NULL, 2.667),
+(60, 49, 'regalia/August2022/FOMVJBmP4Ni5YLISJ7c6.xlsx', '2022-06-01', '2022-06-30', NULL, 1.008),
+(61, 21, 'regalia/August2022/aodUlC5aIJydvwWjakLB.xlsx', '2022-03-01', '2022-05-31', NULL, 1.309),
+(62, 21, 'regalia/August2022/A4LswCXzx5zqPnho6hoV.xlsx', '2022-06-01', '2022-06-30', NULL, 0.294),
 (63, 43, 'Regalias/November2022/1668503414.xlsx', '2022-06-01', '2022-08-01', NULL, 5.96),
 (64, 43, 'Regalias/November2022/1668504997.xlsx', '2022-06-01', '2022-08-01', NULL, 14.44),
 (65, 43, '', '2022-06-01', '2022-08-01', NULL, 1.17),
@@ -2008,7 +2062,40 @@ INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `f
 (395, 43, 'Regalias/January2023/1673426965.xlsx', '2022-07-01', '2022-07-01', NULL, 0.08),
 (396, 43, 'Regalias/January2023/1673427005.xlsx', '2022-08-01', '2022-08-01', NULL, 4.17),
 (397, 43, 'Regalias/January2023/1673427052.xlsx', '2022-09-01', '2022-09-01', NULL, 6.5),
-(398, 43, 'Regalias/January2023/1673427090.xlsx', '2022-10-01', '2022-10-01', NULL, 2.58);
+(398, 43, 'Regalias/January2023/1673427090.xlsx', '2022-10-01', '2022-10-01', NULL, 2.58),
+(403, 73, 'Regalias/March2023/1679350263.xlsx', '2023-03-01', '2023-03-01', NULL, 500),
+(404, 49, 'Regalias/March2023/1680298652.xlsx', '2022-11-01', '2022-11-01', NULL, 0.11),
+(405, 49, 'Regalias/March2023/1680298900.xlsx', '2022-12-01', '2022-12-01', NULL, 0.05),
+(406, 49, 'Regalias/March2023/1680299049.xlsx', '2022-11-01', '2022-11-01', NULL, 0.05),
+(407, 49, 'Regalias/March2023/1680299108.xlsx', '2023-03-01', '2023-03-01', NULL, 0.02),
+(408, 49, 'Regalias/March2023/1680299293.xlsx', '2022-11-01', '2022-11-01', NULL, 2.24),
+(409, 49, 'Regalias/March2023/1680299337.xlsx', '2022-12-01', '2022-12-01', NULL, 0.44),
+(410, 49, 'Regalias/March2023/1680299413.xlsx', '2022-11-01', '2022-11-01', NULL, 0.06),
+(411, 49, 'Regalias/March2023/1680299449.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(412, 49, 'Regalias/March2023/1680299559.xlsx', '2022-11-01', '2022-11-01', NULL, 3.63),
+(413, 49, 'Regalias/March2023/1680299598.xlsx', '2022-12-01', '2022-12-01', NULL, 1.34),
+(414, 49, 'Regalias/March2023/1680300251.xlsx', '2022-11-01', '2022-11-01', NULL, 1.15),
+(415, 49, 'Regalias/March2023/1680300328.xlsx', '2022-12-01', '2022-12-01', NULL, 1.04),
+(416, 49, 'Regalias/March2023/1680300387.xlsx', '2022-11-01', '2022-11-01', NULL, 0.17),
+(417, 49, 'Regalias/March2023/1680300425.xlsx', '2022-12-01', '2022-12-01', NULL, 0.25),
+(418, 49, 'Regalias/March2023/1680300543.xlsx', '2022-11-01', '2022-11-01', NULL, 4.02),
+(419, 49, 'Regalias/March2023/1680300581.xlsx', '2022-12-01', '2022-12-01', NULL, 2.73),
+(420, 49, 'Regalias/March2023/1680300822.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(421, 43, 'Regalias/March2023/1680303166.xlsx', '2022-11-01', '2022-11-01', NULL, 3.28),
+(422, 43, 'Regalias/March2023/1680303203.xlsx', '2022-12-01', '2022-12-01', NULL, 3.06),
+(423, 29, 'Regalias/March2023/1680305839.xlsx', '2022-05-01', '2022-05-01', NULL, 0),
+(424, 29, 'Regalias/March2023/1680305876.xlsx', '2022-06-01', '2022-06-01', NULL, 0),
+(425, 29, 'Regalias/March2023/1680305932.xlsx', '2022-07-01', '2022-07-01', NULL, 0),
+(426, 29, 'Regalias/March2023/1680305968.xlsx', '2022-08-01', '2022-08-01', NULL, 0),
+(427, 29, 'Regalias/March2023/1680306016.xlsx', '2022-09-01', '2022-09-01', NULL, 0),
+(428, 29, 'Regalias/March2023/1680306042.xlsx', '2022-10-01', '2022-10-01', NULL, 0),
+(429, 29, 'Regalias/March2023/1680306120.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(430, 29, 'Regalias/March2023/1680307135.xlsx', '2022-05-01', '2022-05-01', NULL, 0),
+(431, 29, 'Regalias/March2023/1680307176.xlsx', '2022-06-01', '2022-06-01', NULL, 0),
+(432, 29, 'Regalias/March2023/1680307207.xlsx', '2022-07-01', '2022-07-01', NULL, 0),
+(433, 29, 'Regalias/March2023/1680307244.xlsx', '2022-08-01', '2022-08-01', NULL, 0),
+(434, 29, 'Regalias/March2023/1680307278.xlsx', '2022-09-01', '2022-09-01', NULL, 0),
+(435, 29, 'Regalias/March2023/1680307324.xlsx', '2022-10-01', '2022-10-01', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2146,7 +2233,15 @@ INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subge
 (141, '1677022014.jpg', '2 AM JHOANY DY ft DHJ3-LETRAS', 'Original', 'Reggaeton', 'Dancehall', 'Jhoany dy', 'SINGLE', 'Jhoan Osorio', 'Original', '2023', NULL, NULL, '2023-02-27', 0, 0),
 (142, '1678303006.jpg', 'UNA CASITA BELLA PARA TI', 'Alejo Manrique', 'corridos tumbados', 'Regional Mexicano', 'SanalejoStudio', 'SINGLE', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', '2023', NULL, NULL, '2023-03-24', 0, 0),
 (143, '1678303675.jpg', 'COMO LO HIZO', 'Alejo Manrique', 'Regional Mexicano', 'Norteño', 'SanalejoStudio', 'SINGLE', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', '2023', NULL, NULL, '2023-03-31', 1, 1),
-(144, '1678307421.jpg', 'UNA CASITA BELLA PARA TI', 'Alejo Manrique', 'corridos tumbados', 'Regional Mexicano', 'SanalejoStudio', 'SINGLE', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', '2023', NULL, NULL, '2023-03-24', 1, 0);
+(144, '1678307421.jpg', 'UNA CASITA BELLA PARA TI', 'Alejo Manrique', 'corridos tumbados', 'Regional Mexicano', 'SanalejoStudio', 'SINGLE', 'Miguel Huertas, Alejo Cruz', 'Alejo Manrique', '2023', NULL, NULL, '2023-03-24', 1, 1),
+(145, '1679280213.jpg', 'Primera Cancion', 'Primera Cancion', 'Bossa nova', 'Acid Jazz', 'Primera Cancion', 'ALBUM', 'Santiago Roncancio', 'Prismad Music', '2023', NULL, NULL, '2023-03-27', 1, 1),
+(146, '1679346736.jpg', 'Intro Perierat Loculus', 'Neque spatium foraminis', 'Folk', 'Canto popular', 'Skull Red', 'SINGLE', 'Skull Red', 'Prismad Music', '2022', NULL, NULL, '2023-03-29', 1, 1),
+(147, '1679349884.jpg', 'Plasma', 'En vivo', 'Musica Llanera', 'Canto popular', 'Skull Red', 'EP', 'Jenfer', 'Prismad Music', '2023', NULL, NULL, '2023-03-31', 1, 1),
+(148, '1680118905.jpg', 'ILUSO', 'Angie Garcia', 'Regional Mexicano', 'Popular Colombiana', 'SanalejoStudio', 'SINGLE', 'Ricardo Torres', 'Prismad Music', '2019', NULL, NULL, '2023-04-14', 1, 1),
+(149, NULL, 'TIERRA SECA', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(150, NULL, 'colombia abre tus alas', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(151, '1680544310.jpg', 'INSTINTO', 'Alejo Cruz', 'Alternative', 'Psychedelic', 'SanalejoStudio', 'SINGLE', 'Alejo Cruz', 'Prismad Music', '2023', NULL, NULL, '2023-04-21', 1, 1),
+(152, '1680552043.jpg', 'DIME', 'Jorge Velez Panda', 'Regional Mexicano', 'Popular Colombiana', 'SanalejoStudio', 'SINGLE', 'Alejo Cruz', 'Prismad Music', '2023', NULL, NULL, '2023-04-21', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2721,34 +2816,33 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'EWdWKsE9mGEN0MazggklhtZ4MB8RJ0V2NqTyVUKuyjEMnfQAc3YjmM5E0N2c', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'w2Rxkwl88StuNs4b7ql9NNk7w1Pbs7rigZkiQVo4PDcfXCjA3AoPOquhy6Qq', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
 (31, 2, 'Jay es', 'jonathan_susana@hotmail.com', 'users/default.png', '2022-03-07 15:32:05', '$2y$10$dQZ6ZUtKF0m1i8ydTZMrdeEiQBd5n.Iojf1JDRUecUkQnxaBWzlbe', NULL, NULL, '2022-03-07 15:31:04', '2022-03-07 15:36:07', 1, NULL),
-(43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$5mcnArnURZyFxLGuLkqaC.X/v1gYwfOUp88J1Bp5BkZJDoIXxI/ka', 'XEmfl60vrIm6QOwCaF9QklSHhlQPV0duX6TM3cuHB70pBy7CYY3M3KGkaBL8', '{\"locale\":\"es\"}', '2022-03-13 14:46:16', '2023-03-08 16:51:53', 1, NULL),
+(43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$5mcnArnURZyFxLGuLkqaC.X/v1gYwfOUp88J1Bp5BkZJDoIXxI/ka', 'Tz4veKSxxfLDb1sObzQalSEVm4j6BIINrENwatz9v97wLEhRtoCgwShgLa6U', '{\"locale\":\"es\"}', '2022-03-13 14:46:16', '2023-03-08 16:51:53', 1, NULL),
 (51, 2, 'jonathan', 'jonatangarzon95@gmail.com', 'users/default.png', '2022-03-22 17:05:33', '$2y$10$8Cc7l93aF/7q.tn8oUFLgOx4O2sfZB1PdVtfkniY/.TfqbrmwUkqG', NULL, NULL, '2022-03-22 17:04:55', '2022-03-22 17:07:21', 1, NULL),
 (55, 2, 'davinxi', 'heurtemattejoseph1@gmail.com', 'users/default.png', '2022-03-25 11:51:19', '$2y$10$dFXb/CIjEhk7TxgI1W00teSY0TStF0O0LRVqpaRkUjqJi9Q1Q5xES', NULL, NULL, '2022-03-25 11:50:11', '2022-03-25 12:00:20', 1, NULL),
-(56, 2, 'Elpanda', 'Jorgevelezpanda@gmail.com', 'users/default.png', '2022-03-25 22:01:36', '$2y$10$SEVAE3W8r4PSV.Mx.UtGguFFZDQNPqmUn47ZUii/2uRi3cOSMQkxa', 'p0YxlgXiW9r834NkOF7RjUvLyyr8CwZR4EbkG45hWE5Mfu0kqgRy37yM8VjN', NULL, '2022-03-25 21:59:52', '2022-10-11 19:53:15', 1, NULL),
+(56, 2, 'Elpanda', 'Jorgevelezpanda@gmail.com', 'users/default.png', '2022-03-25 22:01:36', '$2y$10$xCIWCzW2xzru2od1bxq8vuv97Kx4eeVj4N7xt.uFo4GYYMnNcqYUq', 'hjEMTNElbQoZaoVUQW9yZbaFNpmolSAe3fOD1VBBB7onWpB8H4TZdREnYxgm', NULL, '2022-03-25 21:59:52', '2023-04-03 14:58:40', 1, NULL),
 (57, 2, 'Miguel Huertas', 'miguelhuertas091@gmail.com', 'users/default.png', '2022-03-26 12:51:46', '$2y$10$UlfgzsStubUFAb1vN4c9RefxoZTS3TS0hd6EbvJHIMs7J7T3EzasG', NULL, NULL, '2022-03-26 12:50:46', '2022-03-26 12:54:37', 1, NULL),
 (60, 2, 'Pablo Cano', 'pabloeveretscanovalencia@gmail.com', 'users/default.png', '2022-03-28 09:14:15', '$2y$10$O2DwF3JaoEZHC3mj7w0V1O/QoLXDRZflsoi6fhgzrQVofsi.T7.w6', '8rlRdsKRJrVy4dUFfLqElckHpqGIFC8eJcjsDondVn8TdBheA3SbEo8H4NAM', NULL, '2022-03-28 09:09:05', '2022-03-28 09:20:30', 1, NULL),
-(61, 2, 'vicente rojas', 'vicente.rojas.rock@gmail.com', 'users/default.png', '2022-03-28 15:59:55', '$2y$10$2LfPiO5W.k5iopEbqPys8uyJmJ.GopZ2QZbIs2LDkkN.Yl9LerWKa', NULL, NULL, '2022-03-28 15:58:42', '2022-03-28 15:59:55', 0, NULL),
 (62, 2, 'Nelson Romero', 'nelsonromeromusic@gmail.com', 'users/August2022/yFQHPAQXhrcDB4u33Fby.jpg', '2022-03-28 18:12:27', '$2y$10$XE8KmihtzSA0wnlEYX1I.et8PpEZiIvvuFVicHnZmth2cQMgvHUP6', '7IYyEfmi9xsWroaZmV9tFK5g8xgVawgqTjLYAgRutaVisXE8hqbQjTwDiXQl', '{\"locale\":\"es\"}', '2022-03-28 18:09:29', '2022-08-19 15:34:05', 1, NULL),
 (63, 2, 'mey manjarres', 'meycontacto@gmail.com', 'users/default.png', '2022-03-30 18:25:20', '$2y$10$j0U7g7dayNhmGexYTj.A4.M.KSS1JkgNTDCkU6w/EYJCS3uIZlo/u', NULL, NULL, '2022-03-30 18:23:49', '2022-03-30 18:30:20', 1, NULL),
 (70, 2, 'kassett', 'laordensonora2021@gmail.com', 'users/default.png', '2022-04-19 09:04:28', '$2y$10$BY1CVQXEVkBJENZhXd0nluuXZb.YQY6bNeTIZeXfJf5MsyXoqMG.e', NULL, NULL, '2022-04-19 09:03:53', '2022-04-19 09:09:21', 1, NULL),
 (73, 2, 'Carlos Sanchez', 'goodvibesmusicst@gmail.com', 'users/default.png', '2022-04-22 01:40:02', '$2y$10$3pmVImShYeD/eBbsO1ArEeZYrpHI/OCZ.5LFSVl2uVOatVuCdXlHa', NULL, NULL, '2022-04-22 01:38:53', '2022-04-22 01:41:34', 1, NULL),
 (74, 2, 'anica rod', 'anicarodmusica@gmail.com', 'users/default.png', '2022-04-22 11:13:00', '$2y$10$1/47R.AdumRji9rnyKPjDufTKr5gG5ynZSIbnlbpuQXMjaQwrxSW.', 'zrOSqbHsG89LUgeL82hAmWxkSGPWtCPNw6Qc2bVvcAaifZNjFQAbCz6YdDWv', NULL, '2022-04-22 11:02:39', '2023-02-22 20:29:13', 1, NULL),
 (76, 2, 'Witthy', 'witthyguitar@gmail.com', 'users/default.png', '2022-04-26 18:23:12', '$2y$10$cHWWtzKx5zqlS0GwD6KGCeNc/gwsyv0D6U4xuF1cM6FZHLII49Dde', 'je9AEtllK6a0lwOgBcOKGyUCIDYV7r7RIPiqrGdhoyINrZboGBUHkIDMNyIh', NULL, '2022-04-26 18:22:47', '2022-04-26 18:25:04', 1, NULL),
-(91, 3, 'Llano Music', 'llanomusicoficial@gmail.com', 'users/default.png', '2022-05-17 22:44:30', '$2y$10$a/RISmUIcxUL3yt.39Zya.1gSJ2tk68Gy6.KDGd4os3rTk/SM4VKC', 'Esyys9Geg6hOs5fOhayn32NwlSonHum7JMkOsfPpIgYxFsDQI43aJGtgFden', '{\"locale\":\"es\"}', '2022-05-17 22:42:27', '2022-09-19 22:23:14', 1, NULL),
+(91, 3, 'Llano Music', 'llanomusicoficial@gmail.com', 'users/default.png', '2022-05-17 22:44:30', '$2y$10$a/RISmUIcxUL3yt.39Zya.1gSJ2tk68Gy6.KDGd4os3rTk/SM4VKC', 'LnoKODFmwGKnUPljjuQadokQOoPfQQBbqeXbgJ6UE8Fn9Rd9fjR8jrAAhbKQ', '{\"locale\":\"es\"}', '2022-05-17 22:42:27', '2022-09-19 22:23:14', 1, NULL),
 (94, 2, 'warningprod', 'warcontacto@gmail.com', 'users/default.png', '2022-05-25 19:36:47', '$2y$10$0WOXqaRFIg1hv7Evqwztke5dJzt3nq7fvdYHajN5/pPF5.Orx8K8a', NULL, NULL, '2022-05-25 19:36:17', '2022-05-25 19:40:08', 1, NULL),
 (99, 2, 'Javier Manchego', 'pildorasparaelcorazonjm@gmail.com', 'users/default.png', '2022-10-29 14:19:59', '$2y$10$4UBqPQpMfxb5.JiF3r1YfOH81TF4.rrz.YiTSoEW4sPqBl9wyaNXO', 'dpxbJ4lHK0aFgHazA5P8KWAdeghU4PXtoFXtsLmGSloAbeTmk4zVrTHqpl1P', '{\"locale\":\"es\"}', '2022-05-31 18:14:03', '2023-01-15 00:14:15', 1, NULL),
 (101, 2, 'magicjuanpa/', 'juanpa12237@gmail.com', 'users/default.png', '2022-06-01 14:56:22', '$2y$10$fWcokHgCSTHxype4/T/rfeJ/mvcbr.1KhzitsHke3qLU0VVoSObhe', 't3UOj1pLMIFpy4kFZHrBdIZ9STLkEhuTFULL0BWcAtkrit3ApmRkP5yGVHXg', NULL, '2022-06-01 14:55:26', '2022-06-01 14:58:59', 1, NULL),
-(102, 2, 'Luna Reyes', 'joropo2014@hotmail.com', 'users/June2022/WVHZQ4Y7qsEwDrecay3V.JPG', '2022-06-01 15:40:24', '$2y$10$u11LaWbiEeIh9z5O/mtqJ.40ia28ujlKj1iVz.i1BrxbdQwfH7Nue', 'DB2O4Py07k3u7CRSKkQX3uZdWYoL84LgqaaYWiVB6AEQ3rS3zEdJcWvnJAdG', '{\"locale\":\"es\"}', '2022-06-01 15:39:06', '2022-06-01 16:17:54', 1, NULL),
-(105, 2, 'papo', 'cealvarezperalta@hotmail.com', 'users/default.png', '2022-06-13 18:20:34', '$2y$10$8IK7JrRtNGNVGYmu2QnJCukuk03tvEmHulN7ED4qhX5qgc2GOoU.m', '24oHsrMG0EZsPM1DhRYdstyowUKzdpo2PgdlxPGjUoM99flxG40efaSG3kIs', '{\"locale\":\"es\"}', '2022-06-13 18:18:41', '2023-01-10 19:31:06', 1, NULL),
+(102, 2, 'Luna Reyes', 'joropo2014@hotmail.com', 'users/June2022/WVHZQ4Y7qsEwDrecay3V.JPG', '2022-06-01 15:40:24', '$2y$10$0I5US.w0gN56X8WSWd.PU.rwoJ.egbLXlz4eRQEQsRK94t8S2Wp2C', 'NjFDVvwihDqZnpoPgHuvMS8zq6LdoZFoIFSanAuVoIOv4dZJ755Qvg47e0Oo', '{\"locale\":\"es\"}', '2022-06-01 15:39:06', '2023-03-21 17:18:54', 1, NULL),
+(105, 2, 'papo', 'cealvarezperalta@hotmail.com', 'users/default.png', '2022-06-13 18:20:34', '$2y$10$qLoeVf.xPTQcb0YgLveOIuS5o93R66nmQ4XvFtaVmdlrT83uoxQMi', 'I9Jmxd6iJkdMBEcS6QVBD4AORfJnTePyzJX2h8CMMiacnsuA4vCI5vOSPsGJ', '{\"locale\":\"es\"}', '2022-06-13 18:18:41', '2023-04-11 14:51:44', 1, NULL),
 (106, 2, 'Dartagnan', 'dartar5.jhu@gmail.com', 'users/June2022/VRPZKAo9pXoeVH9GIumL.jpeg', '2022-06-16 19:54:48', '$2y$10$NfHHwhzVz1.RPKg6lIR3x.u83GIACSghUs.AtsxwJ.2LIrnceQAkm', 'KRzWb7Exs3Di5YBN6n93wbGwZQsRnJcW35yALRflLlkZedFYmX8I8KsQw7SY', '{\"locale\":\"es\"}', '2022-06-16 19:52:05', '2022-11-19 14:10:32', 1, NULL),
 (108, 2, 'Éle de la Rem', 'eledelarem@gmail.com', 'users/default.png', '2022-06-18 16:10:48', '$2y$10$eLkhhlE/P8gKoIhYiw9Y0OHZIAHVe0pu5AbV.Vo0bXUIHS9rNcbju', NULL, NULL, '2022-06-18 16:10:25', '2022-06-18 16:15:29', 1, NULL),
 (109, 2, 'Kelly Cardenas', 'infokellycardenas@gmail.com', 'users/default.png', '2022-06-18 19:17:17', '$2y$10$rFVjd.Nxe9uueg8AGiWjaOZ3qud3DtoELSN2vlZftucWXEoHcFnpK', 'Yviiq86UilI3lKjp0WJN7EtFxB3uTRc3sJFk5qW8AZSK5rwtILGzuOnK5dLl', '{\"locale\":\"es\"}', '2022-06-18 19:15:10', '2023-01-28 20:56:25', 1, NULL),
 (110, 2, 'rei panda', 'jero.quintero12@gmail.com', 'users/default.png', '2022-06-22 00:36:51', '$2y$10$kay3FqneCyX1rFGa1sY8xuEm4sPzz5F9olMbp9VHGdsD.2WX62MnC', NULL, NULL, '2022-06-22 00:36:32', '2022-06-22 00:38:41', 1, NULL),
 (115, 2, 'rockdolf', 'rodolfoudrizard@gmail.com', 'users/default.png', '2022-06-30 19:05:44', '$2y$10$U7fAB0.gT.n1H4.ABrmyG.FIuZFRaq4zYjn.443dm/ANFc7e4hEAS', NULL, NULL, '2022-06-30 19:04:42', '2022-06-30 19:08:27', 1, NULL),
 (117, 2, 'Julio Sencio', 'jhonatansencio06@gmail.com', 'users/default.png', '2022-07-06 23:52:42', '$2y$10$wp33qUefixfP8T01YEbh3.B1cHcrTfMv03pOhJ3k7h5fPXOR.Y366', '8LXas0K2HvOepHUheA9JHNGUeHmmNqdqejo8kNaoBc92xmrgj7F2SrgJC3Q0', NULL, '2022-07-06 23:52:05', '2022-07-07 00:02:51', 1, NULL),
-(119, 2, 'Stornelli', 'stornellioficial@gmail.com', 'users/default.png', '2022-07-09 17:50:29', '$2y$10$b072pjCNyCvlQCh1T5EnneVbENLZkZxUqtWxCo7wZPNHqNjsddhIq', NULL, NULL, '2022-07-09 17:49:58', '2022-07-09 17:52:26', 1, NULL),
+(119, 2, 'Stornelli', 'stornellioficial@gmail.com', 'users/default.png', '2022-07-09 17:50:29', '$2y$10$ottW9x6uHchSjOovuI9t8OkZByuoloNtZUjSKIt5sPvKLUcx.JWxC', 'EC8i4VfMOP7Qc03h0i8ddgnBe2AtOQdWJwhgrySeaQtENxCfv1sC7SgWtQtQ', NULL, '2022-07-09 17:49:58', '2023-03-27 10:33:22', 1, NULL),
 (122, 2, 'Yane Masi', 'yanemasi40@gmail.com', 'users/default.png', '2022-07-11 10:49:33', '$2y$10$ibUmTHGenCFBIohSBGBtW.kuKpVaKhkeWzOM9UQ2EFDCdjgEBKp7.', NULL, NULL, '2022-07-11 10:48:25', '2022-07-11 11:24:56', 1, NULL),
 (124, 2, 'DJSethMCnight', 'Idmusic2@outlook.com', 'users/default.png', '2022-07-13 14:17:03', '$2y$10$7U9ZrtLGH9cNBaxq0ru.1.0Y1EozNpY3MwPlGMukZvqj0v55fVR1q', 'lhLXGVLeB4hKeXKhRYzL6wECTACJfrieMZi6R4xl1e3ach1BWXWSH9j84u2s', '{\"locale\":\"es\"}', '2022-07-13 14:13:42', '2023-01-10 17:16:33', 1, NULL),
 (125, 2, 'Franklinabreu', 'franklinmacaco1@gmail.com', 'users/default.png', '2022-07-14 19:12:00', '$2y$10$0RYJGKwRJ9NexcJ0xhsfQuwIw8mKITsdVBuEUW/n.nASWzRtowMNq', 'aq8xd4240cxbN5ZZL1u4NFwia2x0B4pJ9o3000kpfXlFEhcx7OSPmSxRbTR0', NULL, '2022-07-14 19:07:46', '2022-07-14 19:18:57', 1, NULL),
@@ -2762,14 +2856,14 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (136, 2, 'YACKO MARQUEZ', 'yackomarquez@gmail.com', 'users/default.png', '2022-08-10 16:23:38', '$2y$10$fk1YHl8kK05D5ji7erAvNeWeX5t7/L0ePPZ.C27retQis9byOg80W', 'LMwVNP9Gp6Ku2YuTmjCKDVT9euIds8hLrXoQplTx2VXMQlxMOSjHDra6Hxvp', NULL, '2022-08-10 16:23:20', '2022-08-10 16:25:26', 1, NULL),
 (137, 2, 'Newfest', 'djnewfest2016@hotmail.com', 'users/August2022/iFlVckav7QwViKAhkh8h.jpeg', '2022-08-12 21:19:30', '$2y$10$N6IZEvRNY5lufZbHsWCk3.Y3f2LJC2C4NYkWxyYqZXvIju2Iyn4uW', 'JB3RT6RJcY7EhZO4MvvJfkMZdBo2iayHzG9XtAlQ4FLf0ygSThDbtrqqfUWm', '{\"locale\":\"es\"}', '2022-08-12 21:17:46', '2022-08-14 04:18:43', 1, NULL),
 (139, 2, 'Abimael Herrera', 'abimaelherrera1394@gmail.com', 'users/default.png', '2022-08-13 16:03:39', '$2y$10$g3H1bV1m.E2BZ/NJhCSxPun46/NywNxZiUBUJKiLdHpkEC/ECptk.', NULL, NULL, '2022-08-13 16:03:09', '2022-08-13 16:24:27', 1, NULL),
-(141, 2, 'Alejo Cruz', 'alejocruzmusic@gmail.com', 'users/August2022/Dfugq1c8588Freq1Fsup.jpg', '2022-08-15 11:06:56', '$2y$10$MAy39keOeYOBgxe9ZB6P.uHXVhHgycxcVaFa2wyx1/UvTvnFsJN.C', 'jXvVwulPQ2ny0hU7isUoAR7RvMqiMQEOyd19soRLwkWd65AqK3znpK0XN8X7', '{\"locale\":\"es\"}', '2022-08-15 11:05:07', '2022-08-15 11:09:50', 1, NULL),
+(141, 2, 'Alejo Cruz', 'alejocruzmusic@gmail.com', 'users/August2022/Dfugq1c8588Freq1Fsup.jpg', '2022-08-15 11:06:56', '$2y$10$MAy39keOeYOBgxe9ZB6P.uHXVhHgycxcVaFa2wyx1/UvTvnFsJN.C', 'Q539y6hgZUxIVdd0TJd1cUam6U6FT51CtxWFwCmLCMRc6akyg5Yj0FAXfAXq', '{\"locale\":\"es\"}', '2022-08-15 11:05:07', '2022-08-15 11:09:50', 1, NULL),
 (142, 2, 'Jeyson BPM', 'musicjeyson@gmail.com', 'users/default.png', '2022-08-17 17:17:45', '$2y$10$Ha5ScmNGGMPm8uaN/yTLp.xFJqu0lyIot47FZv2lwTD97i51XSd0.', NULL, NULL, '2022-08-17 17:17:19', '2022-08-17 17:20:01', 1, NULL),
 (143, 2, 'Mar Blanco', 'marblancomusic@gmail.com', 'users/default.png', '2022-08-19 14:43:56', '$2y$10$QyenWKsawVjEsEZZrVkYmOQIOnUcU8uz/YdWfpbL46jq3zK6ab98G', 'ckbugKWTsKxy2dDZc66upg9cIUwhTBDfJqDDbke1eDpdPKpu4DcWBMyZGTau', NULL, '2022-08-19 14:42:07', '2022-08-19 14:46:29', 1, NULL),
 (144, 2, 'de.rodriguezc@uniandes.edu.co', 'de.rodriguezc@uniandes.edu.co', 'users/default.png', '2022-09-15 09:31:28', '$2y$10$EDk/4OrkuiTGU38l69721.pVa7yxUwEsPbodFt7Hmvzu5DSQBsQWy', 'iFr5oL3ynao6ZoBPeHFZpufnT7wAg8xEsGW7wmWmNTdnWa44M4Tm1ixkuIQR', NULL, '2022-08-19 15:08:05', '2022-09-15 09:32:11', 1, '6ZskbfqH8pY0gUAgSsq6ZsQ7mO3aMYopj6W9Fnqe'),
 (146, 2, 'Yeferson Bolivar', 'bolivaryeferson7@gmail.com', 'users/August2022/72fT1iOeqb0ErQhZMMsk.jpg', '2022-08-22 19:29:23', '$2y$10$ECdnTll8kYG.y4F.o64KXumlr2HOkUPONJ1nEaAZLbGHNRkR3QMJS', NULL, '{\"locale\":\"es\"}', '2022-08-22 19:28:45', '2022-08-22 19:46:00', 1, NULL),
 (147, 2, 'Cristian Parra', 'parracristianmusic@gmail.com', 'users/August2022/TLn0ObT6yycurEYdQDDt.jpeg', '2022-08-22 19:45:29', '$2y$10$S15bc.OtN7OdbKAyztK3MeU9.REyNjlbB5p1gjmWBhfmhJMKZGa86', NULL, '{\"locale\":\"es\"}', '2022-08-22 19:43:42', '2022-08-22 19:50:15', 1, NULL),
 (148, 2, 'alejotao', 'alejop.bohorquez@gmail.com', 'users/default.png', '2022-08-24 07:21:35', '$2y$10$4GbZMCkOX3ovkSJQtFIlmeAZsUW91EuDnO3T1sIE5rWWIlUNMCK3a', 'pgnjdPeVmZMj2LQDIp0in8IMemNMENYmBmsx0xQgph3hZixJqhos44DTN4T2', NULL, '2022-08-24 07:20:05', '2022-08-24 07:23:36', 1, NULL),
-(158, 2, 'GEM Seeder Developer', 'javoxdaemon@gmail.com', 'users/default.png', '2022-09-09 21:52:22', '$2y$10$imHvjrgYVehVKkIiOSTZyeAcMUWrEsqWvBsWCt5JWJc6exvEZ11Am', 'MTBle3risVUWTEamrhrzrXfF0pF5D3QdTBGSTMGrIFAKns6BY8jJ4TlQIVpl', NULL, '2022-09-09 21:50:06', '2022-09-09 21:57:06', 1, NULL),
+(158, 2, 'GEM Seeder Developer', 'javoxdaemon@gmail.com', 'users/default.png', '2022-09-09 21:52:22', '$2y$10$imHvjrgYVehVKkIiOSTZyeAcMUWrEsqWvBsWCt5JWJc6exvEZ11Am', 'bhXoDTvOKhO9rTZ6Y5xQBXkH5pzJ56PzXDjkFhrMamwhGIOMMk2c6wZmsz3D', NULL, '2022-09-09 21:50:06', '2022-09-09 21:57:06', 1, NULL),
 (161, 3, 'GEEM Developers', 'desarrollo@geem.com.co', 'users/default.png', '2022-09-18 18:45:06', '$2y$10$/p8l1ilkvQ752R9izR0cPet.DOqo4f.xjUEqFox7GHju2vLZebLtK', NULL, '{\"locale\":\"es\"}', '2022-09-18 18:43:43', '2022-09-18 18:45:06', 1, NULL),
 (162, 2, 'YAGUAZO', 'elyaguazodelllano@gmail.com', 'users/default.png', '2022-09-26 08:53:44', '$2y$10$x4hoSpYPn/Uxz74XShYVp.IfKpBtE82h5ro9vnTOM2GSAS2IKCXf.', 'wsHmztNX9Gs4XJDobXZ8pHhmq1P4tbL275BIOO1zupCigSXcfOQUdW9K8NYS', '{\"locale\":\"es\"}', '2022-09-26 08:51:25', '2023-02-13 09:41:37', 1, NULL),
 (163, 2, 'Orquesta Tropikal Latino', 'reyshell@hotmail.es', 'users/default.png', '2022-09-27 21:06:30', '$2y$10$XhH85wH1iUHhd853pHzGq.im6AX6vuhDKlGTdjyikXU2zgigsn7TS', NULL, NULL, '2022-09-27 20:56:26', '2022-09-27 21:15:21', 1, NULL),
@@ -2796,19 +2890,37 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (218, 2, 'VAIPS ϟ', 'vaipsxxx@gmail.com', 'users/default.png', '2022-11-16 04:41:29', '$2y$10$E41DBSFxeyceot8tmwxM3uWxqLcInXJQqfHO3WT4AkS3.mp1hzi1O', NULL, NULL, '2022-11-16 04:41:04', '2022-11-16 04:44:05', 1, NULL),
 (219, 2, 'Leo Delgado', 'leodelgado0605@gmail.com', 'users/default.png', '2022-11-18 02:31:13', '$2y$10$qkbL4XFra/IMge3q6iKFy.MdrBGanBE5ngz7L3wpzl0/OGE/R3xKS', '6LgDwMcf3FiolQ7viqqqoxkIERRhWJTBx9AVnNiWml4mG4fR9kSqsf875A5A', NULL, '2022-11-18 02:30:45', '2022-11-18 02:35:11', 1, NULL),
 (225, 2, 'Franco Terrazzino', 'terrazzinofranco1996@gmail.com', 'users/default.png', '2022-12-02 17:22:07', '$2y$10$PbnoDwG6dBXWWJlpXOqs2OwhzoVXepCWtU7Pq6OhiUtfnif7ln1dS', 'SMsemtrDqJQoxawqyYrq3LpGmQR9HKzsoWQKGPKSFhW6Z3CRBkkgm1pwGbz6', NULL, '2022-12-02 17:21:45', '2022-12-02 17:30:18', 1, NULL),
-(243, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2023-01-14 11:21:31', '$2y$10$u.9nGSV3oelHrTOIW/g1p.ll.11MZwW3SMGRgFEUj/yyswoBO4lsG', NULL, NULL, '2023-01-14 11:21:01', '2023-02-07 12:28:39', 1, NULL),
+(243, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2023-01-14 11:21:31', '$2y$10$7Bkx3Z5ONMlokWKUmhhkGejGV.5YN5pj6ITf4j6ZuTNK2ZBLspt6i', NULL, '{\"locale\":\"es\"}', '2023-01-14 11:21:01', '2023-03-29 21:02:25', 1, NULL),
 (248, 2, 'Alex Sr', 'alexsalvoreyes@gmail.com', 'users/default.png', '2023-01-20 21:30:15', '$2y$10$ABI7s0EWbQ.vnZ5NIwX9euUGxLorrgnAQc1.f/E4rlTu5yIwVlEE2', 'SSTVaPM8kaOYXNFkV8XTp3EWbn8LlHMtCAn1c1Leu0xoOgXF5xpaqWqUGpqi', NULL, '2023-01-20 21:29:04', '2023-01-20 21:34:30', 1, NULL),
 (250, 2, 'Neit_music', 'jeanf.quesada@gmail.com', 'users/default.png', '2023-01-24 14:57:05', '$2y$10$5YyZHLDlJSl4kRObGBkPs.zx4yONRjPeenc8uO1jI3U.KHql.4XwK', NULL, NULL, '2023-01-24 14:56:21', '2023-01-24 15:03:09', 1, NULL),
-(254, 2, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/February2023/a4zy52Pel8bS99V9N2hX.jpg', '2023-02-07 16:27:59', '$2y$10$XBz7fbVmvVbMQ6YGBxLASev5VzH4gf0reurHKN7zSG8D5qBz1oxcC', 'nr99Z5WeibP11FrTuDoP0SIgariwFJc5vNqrQi8b3vpbR7A4iYymD2SraENw', '{\"locale\":\"es\"}', '2023-02-07 16:27:01', '2023-02-07 19:09:39', 1, NULL),
+(254, 3, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/February2023/a4zy52Pel8bS99V9N2hX.jpg', '2023-02-07 16:27:59', '$2y$10$f49lyr65TR8asbga8Fb/9OTNqhKNiE4lwxGxETKOMHq86miBwFPG6', 'M8DzxuxrkP8ysGeWWmfCFt1YnXlmNF5T4Ef1vx1COd6Zk2Kw2Ehgxjyi6nxt', '{\"locale\":\"es\"}', '2023-02-07 16:27:01', '2023-03-26 16:40:13', 1, NULL),
 (256, 2, 'Byonlc2', 'byronlacalle2@gmail.com', 'users/default.png', '2023-02-13 16:19:05', '$2y$10$wp9tbq0skqEq/oHM027tn./QAjMBwU54z93kMJ2n4ZcAFRanYkN2a', NULL, NULL, '2023-02-13 16:18:39', '2023-02-13 16:24:14', 1, NULL),
-(259, 2, 'Jhoan Osorio', 'ao3870389@gmail.com', 'users/default.png', '2023-02-21 08:45:26', '$2y$10$P3qs4FWG6jtKF3XbWBXKteOrbuKxp11cQ776BEkt5SiG5a03XVeZ.', 'GRjWJdP3bLxKVGWPxnqhWSHxZCNmeYmeQ9IF4SGxzDNAZ75kakmq1qpji2xv', NULL, '2023-02-21 08:44:58', '2023-02-21 08:53:03', 1, NULL),
+(259, 2, 'Jhoan Osorio', 'ao3870389@gmail.com', 'users/default.png', '2023-02-21 08:45:26', '$2y$10$i.zIBFYup415MjrJoWcPu.aFmP7H3PPUs.SXEzbA5K6Zdx1CmsD9K', '5HUMWUhWN2dbJX8gVjuLwhca1CiZk2p3oRRGvXXp1HrDYn7vwENV1l0Jg4Zj', '{\"locale\":\"es\"}', '2023-02-21 08:44:58', '2023-03-18 08:36:53', 1, NULL),
 (262, 2, 'Sebas Rendon', 'sebasrendon907@gmail.com', 'users/default.png', '2023-02-27 05:00:37', '$2y$10$WG37ibnyg2PVoUNLX6GtyOw8mubrnwqsT4DND6vk7SfNxcwWQ6FRu', NULL, NULL, '2023-02-27 05:00:08', '2023-02-27 05:03:47', 1, NULL),
 (267, 2, 'Javier Ramos', 'founderk01@gmail.com', 'users/default.png', '2023-03-07 15:23:37', '$2y$10$AVABmtwv4OUw8T9oaFTw2uI6WFbiyNOfCDGzy.uH1OwfpPcjaKH/6', 'pwJticCTtfHGcHfpXgiOhxvy8a03PyTW3ZNg2VaKOYzjIbFeOIDa8JqAUZzO', NULL, '2023-03-07 15:22:22', '2023-03-07 15:25:03', 1, NULL),
-(268, 2, 'Alejo Manrique', 'amproyectos20@gmail.com', 'users/default.png', '2023-03-07 15:53:28', '$2y$10$qQOnvx1zup5vxWHgpJs3NeRbtfBlOHcbVn5rAggkxxhQlbhvDRFWS', 'RzJLg88A3459pnJ5sQsH95aOf3QmBDivHwvGLxVykdKYWroMM5JdIo5H4QDc', NULL, '2023-03-07 15:46:34', '2023-03-07 16:00:01', 1, NULL),
+(268, 2, 'Alejo Manrique', 'amproyectos20@gmail.com', 'users/default.png', '2023-03-07 15:53:28', '$2y$10$qQOnvx1zup5vxWHgpJs3NeRbtfBlOHcbVn5rAggkxxhQlbhvDRFWS', 'ymYc2M3NlGi5p1zcEX2K4ETDrIIMXZVvrrCtn3C0djZqvunefg4Cfc7sUKYj', NULL, '2023-03-07 15:46:34', '2023-03-07 16:00:01', 1, NULL),
 (269, 2, 'viviana posada', 'vivianaposadaoficial@gmail.com', 'users/default.png', '2023-03-08 17:18:00', '$2y$10$UEsKLS8knc47aBY/fPWCgOMF8R24RPCQNTRJ/sQOUCbdrcuWiEsdS', NULL, NULL, '2023-03-08 17:12:48', '2023-03-08 17:21:38', 1, NULL),
 (270, 2, 'Dempuls', 'prieto.samuel30@gmail.com', 'users/default.png', '2023-03-09 17:37:01', '$2y$10$UqHJGF0KuwiRvFDkoIADyulfNmgrqG6SQ2bvd/EcbjsC5QO1dH0z6', NULL, NULL, '2023-03-09 17:35:49', '2023-03-09 17:47:06', 1, NULL),
-(271, 2, 'Juanter', 'juanter.schmalko@gmail.com', 'users/default.png', '2023-03-16 13:31:26', '$2y$10$OQIoNZWVGSwCnRHiig8QT.QHpGXIlOVR8uZFTwWey1ys6aF4LGJ4m', NULL, NULL, '2023-03-16 13:30:13', '2023-03-16 13:31:26', 0, NULL),
-(272, 2, 'chelo120390', 'che_lo_1@hotmail.com', 'users/default.png', NULL, '$2y$10$jaoiwp/.kcM7MJTcYV.99uWvBGpauqCC7wZ5RMbd.cYfXdfiQfYaS', NULL, NULL, '2023-03-17 13:44:28', '2023-03-17 13:44:28', 0, NULL);
+(275, 2, 'Louki', 'rizalez2018@gmail.com', 'users/default.png', '2023-03-22 19:44:50', '$2y$10$0ogQu3Q.QBCudpyBY8uEIu7Z8J227Q8/FSdLN6p4w4kFjpRsR6RHy', 'UOsb7ixuwciDSHQBJl7Kv9mEaDq61YmQNs7KZMA7pey1hsb0KFsQMGSSk9P7', NULL, '2023-03-22 19:41:02', '2023-03-22 19:44:50', 1, 'vJ5QL1q4ytRgWAmUaPvRB9161qJlhxsHp6X2JIyd'),
+(279, 2, 'Angie Garcia', 'angiegarciaoficial@gmail.com', 'users/default.png', '2023-03-29 14:33:26', '$2y$10$iO9PX40AO0eccePJq2Lu.eSTfZWIu7kvcgaQKDBLgYRSf0oQkrAhu', 'Nsf0xzv3L113dlz1tO1t9wUyU2vgm4aN8r7oG8uKsrnjkYc0foHEH24eaOYK', NULL, '2023-03-29 14:10:57', '2023-03-29 14:37:02', 1, NULL),
+(281, 2, 'jjbeatsprod.x', 'jjonthebeat02@gmail.com', 'users/default.png', '2023-03-30 13:59:55', '$2y$10$DVbALBMnpfbmQSCeZNPF9.yakp6A/dohBrCN95Knq/WbycpfAjc1.', NULL, NULL, '2023-03-30 13:59:08', '2023-03-30 14:05:18', 1, NULL),
+(282, 2, 'Ricardo Montero', 'ricardo.montero.salinas@gmail.com', 'users/default.png', '2023-03-31 08:03:42', '$2y$10$bOe7cBtUyjvrWHVp6C7DA.32gLX2kk3oj0p78ZELOBthyTAPA4rQy', NULL, NULL, '2023-03-31 08:03:20', '2023-03-31 08:07:52', 1, NULL),
+(284, 2, 'Nicolas Lapeña', 'nicolaslapea240@gmail.com', 'users/default.png', '2023-04-02 07:45:30', '$2y$10$etdgcgVtpZK0HN4f1z6.HuvH8/zGHMDk2bo4sHYomNQSesslgn4Ae', NULL, NULL, '2023-04-02 07:45:05', '2023-04-02 07:47:35', 1, NULL),
+(285, 2, 'gaiah', 'julianplarramendy@gmail.com', 'users/default.png', '2023-04-03 12:23:41', '$2y$10$a/zp8zqjVW6zWnub7sE.buVH79f.1zR/NtbN6WJBRh5MzQEQfyjRK', 'lbh1WQ4yceZHhmrbPARrC6lhzEyjoacrOiEr33rwXwur7aFCTKJEABNeC6yF', NULL, '2023-04-03 12:22:53', '2023-04-03 12:25:36', 0, 'prdKL9Xwm672wkLiRlB4UzCwVzhadcB9kBa3vCN6'),
+(286, 2, 'juanpmojicar0@gmail.com', 'juanpmojicar0@gmail.com', 'users/default.png', '2023-04-03 13:44:28', '$2y$10$pmTesKDmXe3yPvYK/6nRz.hIduqFuEO30m4BA8tqaGmte5P9c67xO', 'QeZEOhyHTunN5EB2rU0CJcSIJylrVMfo3KKg1lPwvBayliNKn8gvyelQIb4l', NULL, '2023-04-03 12:58:52', '2023-04-03 13:48:43', 1, 'JHjgjgN7yktxynsbz23tFqxHLpMbvL7fBIZcCezn'),
+(287, 2, 'ingesonja@gmail.com', 'ingesonja@gmail.com', 'users/default.png', '2023-04-03 20:22:57', '$2y$10$BeaOKvukh0HIOpd9YoV02un1mLtjeb/.wxbQC0vOsyIvMzSznIg62', 'gaJQcORfsHSkdneerPGudZ83VeP6Bcb29kgDJz3CJSeVMv5d4iBz3bRPl6Mn', NULL, '2023-04-03 12:58:53', '2023-04-03 20:34:27', 1, 'FJ3JQM29LsMzHlmLsrG1AvEvCwkm6apVmlGeUtDg'),
+(288, 2, 'LUIS GABRIEL JARRO', 'ingesonja1@gmail.com', 'users/default.png', NULL, '$2y$10$lQm6FvZdXu16IdYm/a0F2.lP0zFjehkK6oobI6rjndp4H4Yk9/QRS', NULL, NULL, '2023-04-03 17:56:09', '2023-04-03 17:56:09', 0, NULL),
+(289, 2, '7ONY', '7ONybusiness@gmail.com', 'users/default.png', '2023-04-05 16:24:54', '$2y$10$9BU3glpV0pgMnuezxtlE0.7DgBLY2wP5fjwVns.k9U9Uofp0zMC1e', NULL, NULL, '2023-04-05 16:23:58', '2023-04-05 16:24:54', 0, NULL),
+(290, 2, 'Rami Rami', 'ramiramidecuba@gmail.com', 'users/default.png', '2023-04-05 22:50:32', '$2y$10$OpDt3xhDtzOX4991Fzd2sOqXRbGMaYWK8ia3KA2UUmesimuOIubRK', NULL, NULL, '2023-04-05 22:48:34', '2023-04-05 22:50:32', 0, '6fV3fBLmFHdvI6MnW5R754ecvFDZ1QL2uVBuMiES'),
+(291, 2, 'Dambel', 'bioquimicosmusic@dr.com', 'users/default.png', '2023-04-06 14:47:14', '$2y$10$D/pcL8SS.0ch5KyqIAZByewHW3GDQ0ITHsbatHwPyfXY7ZRW/gbd6', 'hWkJkbsyVny3PQK5uA1qeFHbHzNnnQ8L7nQnF5wiOrbP5bmVC5d0wE6f8rJu', NULL, '2023-04-06 14:46:31', '2023-04-06 14:50:59', 1, 'OQ0jtSMcoZWw8GTSE3gQ81i4vIVxKK8gm4DlqCJc'),
+(292, 2, 'Iliana Beilis', 'iliana.espinoza@gmail.com', 'users/default.png', NULL, '$2y$10$o4mmKqDjr6bAhqDoZ0fwf./RSx44UBLS.yoIhHKcMpid3RUIIdztW', NULL, NULL, '2023-04-07 08:58:23', '2023-04-07 08:58:23', 0, 'vhM4Dfj0HLxS7lnLoLLm128GINt9wUw1BfyvlG48'),
+(293, 2, 'Damian Monsalve', 'damianmonsalve22@gmail.com', 'users/default.png', '2023-04-10 22:46:11', '$2y$10$/5mZNzFZfjl/RfJFPun9CuQXsvp1zYnC0M.NQTtiPBpJdP.ZOMdHm', NULL, NULL, '2023-04-07 13:30:14', '2023-04-10 22:46:11', 0, 'ybgonO6MqDTyCxYdvdD9x7Y7kkKFFrv5Jxb1K2HM'),
+(294, 2, 'Nicolasmanuel82', 'nicolasmanuel82@gmail.con', 'users/default.png', NULL, '$2y$10$wdLByX2eKQ2abR3R4RwAu.uYgGI9xAxk/IbItuzv8YigHI5J00iaO', NULL, NULL, '2023-04-07 16:05:34', '2023-04-07 16:05:34', 0, NULL),
+(295, 2, 'Nicolasmanuel', 'nicolasmanuel82@gmail.com', 'users/default.png', '2023-04-07 16:07:52', '$2y$10$QTr2FUMPrAYXDZDP6o7gnOxYcAS8UL3YMeSD7MlJEUxhixckQNrg6', NULL, NULL, '2023-04-07 16:07:38', '2023-04-07 16:07:52', 0, NULL),
+(296, 2, 'Caelum', 'caelumproficial@gmail.com', 'users/default.png', '2023-04-08 13:12:55', '$2y$10$oVwCxfuFnYVxaDL/9iTNge4eTXbRBV5sfYgnPgUdKXyDhSI5l0vh2', NULL, NULL, '2023-04-08 13:12:18', '2023-04-08 13:12:55', 0, 'hlOCNK1GtNgSAX7OS8zWi1EhTduIEGWvfslPV3P4'),
+(297, 2, 'belico mambo', '28belico@gmail.com', 'users/default.png', '2023-04-09 18:45:59', '$2y$10$C99XIzVkOaqhVMCqnJO.Due1bd/EKHeoqtv6V1xUXOCbrEvK27ycm', NULL, NULL, '2023-04-09 18:43:10', '2023-04-09 18:45:59', 0, '2522VSa74bqaAGNxUXpnUTOfhWSGQRtCrd8mvJ0l'),
+(298, 2, 'El belico', 'rafaelinajimenezjyrstore@gmail.com', 'users/default.png', '2023-04-09 18:51:29', '$2y$10$dUWLA7M1W4r1..9pPCCMfO/DCi6dfB/fT8XkT7DDG1XneYmCZEI82', NULL, NULL, '2023-04-09 18:48:23', '2023-04-09 18:51:29', 0, NULL),
+(299, 2, 'Alan Grizart', 'alangrizart@gmail.com', 'users/default.png', '2023-04-10 21:04:16', '$2y$10$NBN2zGKi/9Geohpw0g6oRuOe0VQ/XTIF9Kd3YZJBgiCAcmpWDZp9C', NULL, NULL, '2023-04-10 07:50:45', '2023-04-10 21:04:16', 0, '63PxWrZeUb7jPitTX58OmHoAveQDTOLWgH0YZAai');
 
 -- --------------------------------------------------------
 
@@ -3082,7 +3194,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `cancion`
 --
 ALTER TABLE `cancion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -3094,25 +3206,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
 --
 ALTER TABLE `colaboracion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion_art_feas`
 --
 ALTER TABLE `colaboracion_art_feas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion_repertorio`
 --
 ALTER TABLE `colaboracion_repertorio`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de la tabla `data_rows`
@@ -3148,7 +3260,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT de la tabla `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -3178,7 +3290,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -3196,13 +3308,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT de la tabla `regalia`
 --
 ALTER TABLE `regalia`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=399;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
 
 --
 -- AUTO_INCREMENT de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -3232,7 +3344,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
 -- AUTO_INCREMENT de la tabla `years`
