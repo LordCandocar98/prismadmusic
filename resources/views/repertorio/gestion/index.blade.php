@@ -58,7 +58,9 @@
                             <td class="text-center">{{ $repertorio->tipo_colaboracion }}</td>
                             <td class="text-center">{{ $repertorio->annio_produccion }}</td>
                             <td class="text-center">
-                                @if($repertorio->terminado == 1)
+                                @if($repertorio->terminado == 2)
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                @elseif($repertorio->terminado == 1)
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 @else
                                     <i class="fa fa-minus" aria-hidden="true"></i>

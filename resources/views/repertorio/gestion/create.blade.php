@@ -7,6 +7,7 @@
         <a href="{{ route('repertorio.create') }}"><i class="voyager-plus" aria-hidden="true"></i> Crear</a>
     </li>
 @endsection
+
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-plus" aria-hidden="true"></i>
@@ -15,35 +16,35 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
-<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
-<link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet"/>
-<style>
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
+    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet"/>
+    <style>
 
-    body, html, .form-control{
-        color: #1e1f20!important;
-    }
+        body, html, .form-control{
+            color: #1e1f20!important;
+        }
 
-    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
-        font-weight: normal;
-    }
+        .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+            font-weight: normal;
+        }
 
-    .parrafo{
-    font-size: 80%;
-    text-align: justify;
-    text-justify: inter-word;
-    color: gray;
-    }
+        .parrafo{
+        font-size: 80%;
+        text-align: justify;
+        text-justify: inter-word;
+        color: gray;
+        }
 
-    .identado {
-        text-indent: 10px;
-    }
+        .identado {
+            text-indent: 10px;
+        }
 
-    .form-validation{
-        font-size: 11px;
-        color: #f96868;
-    }
-</style>
+        .form-validation{
+            font-size: 11px;
+            color: #f96868;
+        }
+    </style>
 @endsection
 
 @section('content')

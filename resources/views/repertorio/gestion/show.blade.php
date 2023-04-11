@@ -9,31 +9,30 @@
 </li>
 @endsection
 @section('page_header')
-<h1 class="page-title">
-    <i class="fa fa-music" aria-hidden="true"></i>
-    Vista general de repertorio
-</h1>
-<a href="{{ route('repertorio.index') }}" class="btn btn-warning">
-    <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">Volver a la lista</span>
-</a>
+    <h1 class="page-title">
+        <i class="fa fa-music" aria-hidden="true"></i> Vista general de repertorio
+    </h1>
+    <a href="{{ route('repertorio.index') }}" class="btn btn-warning">
+        <i class="glyphicon glyphicon-list"></i> <span class="hidden-xs hidden-sm">Volver a la lista</span>
+    </a>
 @endsection
 
 @section('css')
-<style>
-    .card-title {
-        font-size: 2em;
-    }
+    <style>
+        .card-title {
+            font-size: 2em;
+        }
 
-    .card-text {
-        font-size: 1.2rem;
-    }
-    body, html, .form-control, th, td{
-        color: #1e1f20!important;
-    }
-    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
-        font-weight: normal;
-    }
-</style>
+        .card-text {
+            font-size: 1.2rem;
+        }
+        body, html, .form-control, th, td{
+            color: #1e1f20!important;
+        }
+        .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+            font-weight: normal;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -55,7 +54,10 @@
             <div class="col-md-8">
                 <div class="card-body">
                     @if($repertorio->terminado == 1)
-                        <span class="badge badge-secondary badge-success" style="float: right;font-size: 1.5rem;">Terminado</span>
+                        <span class="badge badge-success" style="float: right;font-size: 1.5rem;">Terminado</span>
+                    @endif
+                    @if($repertorio->terminado == 2)
+                        <span class="badge badge-danger" style="float: right;font-size: 1.5rem;">Anulado</span>
                     @endif
                     <h5 class="card-title">{{ $repertorio->titulo }}</h5>
                     <p class="card-text">{{ $repertorio->version }}</p>
@@ -80,11 +82,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id))
+
+                <form action="{{ route('annulProduct', $repertorio->id) }}" method="post" id="form-Aproduct">
+                    @csrf    
+                    <input class="btn btn-danger float-left" style="margin: 1em;" id="btnAnnulProduct" type="submit" value="Anular Producto">
+                </form>
+
+                @endif
+            </div>
+            <div class="col-md-6">
                 @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id) and (count($canciones)>1))
 
-                <form action="{{ route('finishProduct', $repertorio->id) }}" method="get" id="form-fproduct">
-                    <input class="btn btn-success float-right" style="margin: 2em;" id="btnFinishProduct" type="submit" value="Finalizar Producto">
+                <form action="{{ route('finishProduct', $repertorio->id) }}" method="post" id="form-fproduct">
+                    @csrf
+                    <input class="btn btn-success float-right" style="margin: 1em;" id="btnFinishProduct" type="submit" value="Finalizar Producto">
                 </form>
 
                 @endif
@@ -94,11 +107,14 @@
     <br>
     <div class="card">
         <div class="card-body">
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
             <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
 
             @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id))
                 <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
             @endif
+        </div>
 
             <table class="table">
                 <thead>
@@ -143,23 +159,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-        $("#btnFinishProduct").click(function(event){
-            // event.preventDefault();
-            let form = $('#form-fproduct');
-            Swal.fire({
-                title: '¿Quieres guardar los cambios?',
-                text: "Soy consciente de que una vez finalizado no podré hacer modificaciones.",
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Aceptar',
-                }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Guardado!', '', 'success');
-                    form.submit();
-                }
-            });
+    $("#btnFinishProduct").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        let form = $('#form-fproduct');
+        Swal.fire({
+            title: '¿Quieres guardar los cambios?',
+            text: "Soy consciente de que una vez finalizado no podré hacer modificaciones.",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
+    });
+
+    $("#btnAnnulProduct").click(function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        let form = $('#form-Aproduct');
+        Swal.fire({
+            title: '¿Quieres anular o cancelar el repertorio?',
+            text: "Soy consciente que al cancelar no podré hacer modificaciones y no será tomada en cuenta.",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
 </script>
 
 @endsection

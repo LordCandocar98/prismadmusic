@@ -55,37 +55,74 @@ class RepertorioController extends Controller
 
     public function finishProduct($id)
     {
-        $users = DB::table('users')
-        ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
-        ->where('cr.repertorio_id', $id)
-        ->select('users.id', 'users.role_id', 'users.name', 'users.email')
-        ->get()[0];
-
-        if($users->id  == auth()->user()->id){
-            $repertorio = Repertorio::find($id);
-            $repertorio->terminado = 1;
-            $repertorio->save();
-
-            $details = [
-                'title' => 'Asunto: Hora de revisar este nuevo exito!',
-                'subtitle' => $users->name . ' Acaba de finalizar la contrucción del repertorio ' .$repertorio->titulo,
-                'body' => 'En Prismad Music nos encanta apoyar el espíritu musical',
-                'descripcion' => '',
-                'button' => 'Ver Repertorio',
-                'enlace' => route('repertorio.show', $repertorio->id)
-            ];
-
-            $moderadores = User::where('role_id', '=',  3)->get();
-
-            foreach($moderadores as $moderador){
-                Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+        try {
+            $users = DB::table('users')
+            ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+            ->where('cr.repertorio_id', $id)
+            ->select('users.id', 'users.role_id', 'users.name', 'users.email')
+            ->get()[0];
+    
+            if($users->id  == auth()->user()->id){
+                $repertorio = Repertorio::find($id);
+                $repertorio->terminado = 1;
+                $repertorio->save();
+    
+                $details = [
+                    'title' => 'Asunto: Hora de revisar este nuevo exito!',
+                    'subtitle' => $users->name . ' Acaba de finalizar la contrucción del repertorio ' .$repertorio->titulo,
+                    'body' => 'En Prismad Music nos encanta apoyar el espíritu musical',
+                    'descripcion' => '',
+                    'button' => 'Ver Repertorio',
+                    'enlace' => route('repertorio.show', $repertorio->id)
+                ];
+    
+                $moderadores = User::where('role_id', '=',  3)->get();
+    
+                foreach($moderadores as $moderador){
+                    Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+                }
+    
+                return redirect()->route('repertorio.show', $repertorio->id)->with('message', 'Producto terminado con exitosamente');
+            }else{
+                return redirect()->route('repertorio.index')->with('message', 'Usuario no corresponde');
             }
-
-            return redirect()->route('repertorio.show', $repertorio->id);
-        }else{
+        } catch (Exception $e) {
+            Log::debug($e->getMessage() . ' - ' . $e->getFile() . ' - ' . $e->getLine());
             return redirect()->route('repertorio.index');
         }
     }
+
+    /**
+     * Annul finished
+
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+     public function annulProduct($id)
+     {
+         try {
+             $users = DB::table('users')
+             ->join('colaboracion_repertorio as cr', 'users.email', '=', 'cr.cliente_email')
+             ->where('cr.repertorio_id', $id)
+             ->select('users.id', 'users.role_id', 'users.name', 'users.email')
+             ->get()[0];
+     
+             if($users->id  == auth()->user()->id){
+                Repertorio::find($id)
+                ->update([
+                    'terminado' => 2
+                ]);
+     
+                 return redirect()->route('repertorio.show', $id)->with('message', 'Producto Anulado exitosamente');
+             }else{
+                 return redirect()->route('repertorio.index')->with('message', 'Usuario no corresponde');
+             }
+         } catch (Exception $e) {
+             Log::debug($e->getMessage() . ' - ' . $e->getFile() . ' - ' . $e->getLine());
+             return redirect()->route('repertorio.index');
+         }
+     }
 
     /**
      * Show the form for creating a new resource.

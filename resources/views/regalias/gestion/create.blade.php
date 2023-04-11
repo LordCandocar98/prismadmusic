@@ -9,44 +9,43 @@
 @endsection
 @section('page_header')
     <h1 class="page-title">
-        <i class="voyager-plus" aria-hidden="true"></i>
-        Crear Regalia
+        <i class="voyager-plus" aria-hidden="true"></i> Crear Regalia
     </h1>
 @endsection
 @section('css')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
-<link href="{{ asset('css/filepond-plugin-media-preview.css') }}" rel="stylesheet" />
-<style>
-    body,
-    html,
-    .form-control {
-        color: #1e1f20 !important;
-    }
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+    <link href="{{ asset('css/filepond-plugin-media-preview.css') }}" rel="stylesheet" />
+    <style>
+        body,
+        html,
+        .form-control {
+            color: #1e1f20 !important;
+        }
 
-    .parrafo {
-        font-size: 80%;
-        text-align: justify;
-        text-justify: inter-word;
-        color: gray;
-    }
+        .parrafo {
+            font-size: 80%;
+            text-align: justify;
+            text-justify: inter-word;
+            color: gray;
+        }
 
-    .identado {
-        text-indent: 10px;
-    }
+        .identado {
+            text-indent: 10px;
+        }
 
-    .form-validation{
-        font-size: 11px;
-        color: #f96868;
-    }
-    body, html, .form-control, th, td{
-        color: #1e1f20!important;
-    }
-    .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
-        font-weight: normal;
-    }
-</style>
+        .form-validation{
+            font-size: 11px;
+            color: #f96868;
+        }
+        body, html, .form-control, th, td{
+            color: #1e1f20!important;
+        }
+        .btn-link, .checkbox-inline, .checkbox label, .radio-inline, .radio label, label {
+            font-weight: normal;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="col-md-12">

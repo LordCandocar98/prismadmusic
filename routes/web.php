@@ -53,7 +53,8 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     
     Route::get('/cancion-creador/{id}', [CancionController::class, 'create_song'])->name('create_song');
     Route::get('/cancion-colaboracion', [CancionController::class, 'shareSong'])->name('shareSong');
-    Route::get('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
+    Route::post('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
+    Route::post('/annulProduct/{id}', [RepertorioController::class, 'annulProduct'])->name('annulProduct');
     Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
     Route::post('/uploadsong', [CancionController::class, 'uploadsong'])->name('uploadsong');
 

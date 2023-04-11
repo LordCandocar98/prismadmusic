@@ -19,7 +19,7 @@ label {
     font-weight: 500 !important;
 }
 
-input, table, td {
+input:not([type="submit"]):not([type="button"]), table, td {
     color: #1d1d1d !important;
 }
 
