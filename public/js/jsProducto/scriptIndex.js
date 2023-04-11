@@ -31,7 +31,7 @@ $(document).ready( function () {
                 style:    'os',
                 selector: 'td:first-child'
             },
-            order: [[ 0, 'desc' ], [1 , 'asc']]
+            order: [[7, 'asc'], [ 0, 'desc' ], [1 , 'asc']]
         });
          
         // Custom range filtering function

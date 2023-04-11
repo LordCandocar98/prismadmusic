@@ -107,11 +107,11 @@
             <form enctype="multipart/form-data" action="{{ url('producto/' . $repertorio->id) }}" method="post">
                 {!! method_field('PUT') !!}
                 @csrf
-                <div class="form-group  col-md-12">
-                    <button type="submit" class="btn btn-primary save">Procesar</button>
-                    <a href="{{ route("producto.index") }}" title="cancelar" class="btn btn-danger pull-right">
-                        Cancelar
+                <div class="col-md-12 form-group" style="display: flex;justify-content: end;">
+                    <a href="{{ route('producto.index') }}" title="retornar" class="btn btn-secondary">
+                        Regresar
                     </a>
+                    <button type="submit" class="btn btn-primary save">Procesar</button>
                 </div>
             </form>
         </div>
