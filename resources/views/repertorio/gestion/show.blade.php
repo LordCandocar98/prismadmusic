@@ -66,16 +66,13 @@
                             <div><b>Versión:</b> {{ $repertorio->version }}</div>
                             <div><b>Género:</b> {{ $repertorio->genero }}</div>
                             <div><b>Subgénero:</b> {{ $repertorio->subgenero }}</div>
-                            <div><b>Nombre del sello:</b> {{ $repertorio->nombre_sello }}</div>
-                            <div><b>Formato:</b> {{ $repertorio->formato }}</div>
-                            <div><b>Productor:</b> {{ $repertorio->productor }}</div>
+                            <div><b>Formato:</b> {{ $repertorio->formato }}</div> 
                         </div>
                         <div class="col-md-6" style="margin-bottom: 0;">
-                            <div><b>Copyright:</b> {{ $repertorio->copyright }}</div>
+                            <div><b>Nombre del sello:</b> {{ $repertorio->nombre_sello }}</div>
+                            <div><b>Productor:</b> {{ $repertorio->productor }}</div>
                             <div><b>Año de producción:</b> {{ $repertorio->annio_produccion }}</div>
-                            <div><b>UPC/EAN:</b> {{ $repertorio->upc_ean }}</div>
                             <div><b>Fecha de lanzamiento:</b> {{ $repertorio->fecha_lanzamiento }}</div>
-                            <div><b>Número de catálogo</b> {{ $repertorio->numero_catalogo }}</div>
                         </div>
                     </div>
                 </div>
