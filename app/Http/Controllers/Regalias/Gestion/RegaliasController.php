@@ -4,17 +4,13 @@ namespace App\Http\Controllers\Regalias\Gestion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Regalias\Gestion\RegaliasRequest;
-use App\Models\Cancion;
 use App\Models\Cliente;
 use App\Models\Colaboracion;
 use App\Models\Persona;
 use App\Models\Regalia;
 use App\Models\User;
-use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class RegaliasController extends Controller
 {
