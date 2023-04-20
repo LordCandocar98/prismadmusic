@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-04-2023 a las 19:55:45
--- Versión del servidor: 10.5.12-MariaDB-cll-lve
+-- Tiempo de generación: 20-04-2023 a las 23:48:27
+-- Versión del servidor: 10.5.19-MariaDB-cll-lve
 -- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `articulo` (
   `id` int(10) UNSIGNED NOT NULL,
   `editor_id` bigint(20) UNSIGNED NOT NULL,
-  `titulo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `resumen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imagen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `titulo` varchar(255) NOT NULL,
+  `resumen` varchar(255) NOT NULL,
+  `imagen` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -45,27 +45,27 @@ CREATE TABLE `articulo` (
 CREATE TABLE `cancion` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `repertorio_id` bigint(20) NOT NULL,
-  `tipo_secundario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instrumental` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `titulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `version_subtitulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `autor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `compositor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `arreglista` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `productor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pline` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo_secundario` varchar(255) DEFAULT NULL,
+  `instrumental` varchar(255) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `version_subtitulo` varchar(255) DEFAULT NULL,
+  `autor` varchar(255) DEFAULT NULL,
+  `compositor` varchar(255) DEFAULT NULL,
+  `arreglista` varchar(255) DEFAULT NULL,
+  `productor` varchar(255) DEFAULT NULL,
+  `pline` varchar(255) DEFAULT NULL,
   `annio_produccion` year(4) DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subgenero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `genero_secundario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subgenero_secundario` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `letra_chocante_vulgar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `inicio_previsualizacion` varchar(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idioma_titulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `idioma_letra` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `genero` varchar(255) DEFAULT NULL,
+  `subgenero` varchar(255) DEFAULT NULL,
+  `genero_secundario` varchar(255) DEFAULT NULL,
+  `subgenero_secundario` varchar(255) DEFAULT NULL,
+  `letra_chocante_vulgar` varchar(100) DEFAULT NULL,
+  `inicio_previsualizacion` varchar(9) DEFAULT NULL,
+  `idioma_titulo` varchar(255) DEFAULT NULL,
+  `idioma_letra` varchar(255) DEFAULT NULL,
   `fecha_principal_salida` date DEFAULT NULL,
-  `pista_mp3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `link_preguardado` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `pista_mp3` varchar(255) DEFAULT NULL,
+  `link_preguardado` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -152,7 +152,6 @@ INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`,
 (94, 98, 'Original', 'no', 'Mi joropo es para todos', NULL, 'yaguazo', 'Yaguazo', 'Yaguazo', 'Yaguazo', 'prismad music', 2022, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (95, 99, 'Original', 'no', 'Mi tierra llana', NULL, 'yaguazo', 'Yaguazo', 'Yaguazo', 'Yaguazo', 'prismad music', 2022, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (96, 100, 'Original', 'no', 'Siempre a tu lado', NULL, 'yaguazo', 'Yaguazo', 'Yaguazo', 'Yaguazo', 'prismad music', 2022, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
-(97, 45, 'Original', 'no', 'La Nota', NULL, 'Thiago', 'Thiago', NULL, NULL, NULL, 2022, '119', '311', NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (98, 102, 'Original', 'no', 'Arienda suelta', NULL, 'Javier Manchego', 'Javier Manchego', NULL, 'Javier Manchego', 'Javier Manchego', NULL, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (99, 103, 'Original', 'no', 'Clasicas del Amor', NULL, 'Javier Manchego', 'Javier Manchego', NULL, NULL, 'Javier Manchego', 2022, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (100, 104, 'Original', 'no', 'Directo al Corazon', NULL, 'Javier Manchego', 'Javier Manchego', NULL, NULL, 'Javier Manchego', NULL, '121', NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
@@ -205,7 +204,24 @@ INSERT INTO `cancion` (`id`, `repertorio_id`, `tipo_secundario`, `instrumental`,
 (148, 149, 'Original', 'no', 'TIERRA SECA', NULL, 'ANICA RODRIGUEZ', 'ANICA RODRIGUEZ', NULL, 'SANALEJO', NULL, NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (149, 150, 'Original', 'no', 'colombia abre tus alas', NULL, 'ANICA RODRIGUEZ', 'ANICA RODRIGUEZ', NULL, 'SANALEJO', NULL, NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
 (150, 151, 'original', 'no', 'INSTINTO', 'Estudio', 'Alejo Cruz', 'Alejo Cruz', 'Juan Pablo Mojica', 'Alejo Cruz', 'Alejo Cruz', 2023, 'Alternative', 'Psychedelic', 'Alternative', 'Psychedelic', 'no', NULL, 'Español', 'Español', '2023-04-21', '1680544519.wav', 'https://bfan.link/instinto'),
-(151, 152, 'original', 'no', 'DIME', 'Estudio', 'Jorge Velez Panda', 'Luis Albino Herrera / Hermanos Herrera', 'Jorge Velez Panda', 'Alejo Cruz', 'Jorge Velez Panda', 2023, 'Regional Mexicano', 'Popular Colombiana', 'Regional Mexicano', 'Popular Colombiana', 'no', NULL, 'Español', 'Español', '2023-04-21', '1680552198.wav', 'https://bfan.link/dime-3');
+(151, 152, 'original', 'no', 'DIME', 'Estudio', 'Jorge Velez Panda', 'Luis Albino Herrera / Hermanos Herrera', 'Jorge Velez Panda', 'Alejo Cruz', 'Jorge Velez Panda', 2023, 'Regional Mexicano', 'Popular Colombiana', 'Regional Mexicano', 'Popular Colombiana', 'no', NULL, 'Español', 'Español', '2023-04-21', '1680552198.wav', 'https://bfan.link/dime-3'),
+(152, 153, 'Original', 'no', 'añoranza criolla', NULL, 'francis carolina', 'francis carolina', NULL, 'francis carolina', 'prismad music', 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(153, 154, 'Original', 'no', 'Bendicion del cielo', NULL, 'francis carolina', 'francis carolina', NULL, 'francis carolina', 'prismad music', NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(154, 155, 'Original', 'no', 'baila', NULL, 'francis carolina', 'francis carolina', NULL, 'francis carolina', 'prismad music', 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(155, 156, 'Original', 'no', 'no te rindas', NULL, 'francis carolina', 'francis carolina', NULL, 'francis carolina', 'prismad music', 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(156, 157, 'Original', 'no', 'vive tu vida', NULL, 'francis carolina', 'francis carolina', NULL, 'francis carolina', 'prismad music', NULL, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(157, 158, 'Original', 'no', 'LA NOTA', NULL, 'Thiago', 'Thiago', NULL, NULL, 'prismad music', 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(158, 159, 'Original', 'no', 'RECUERDOZZZ', NULL, 'Thiago', 'Thiago', NULL, 'PRISMAD MUSIC', NULL, 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(159, 160, 'Original', 'no', 'MIENTES', NULL, 'Thiago', 'dennis fernando', NULL, 'PRISMAD MUSIC', 'prismad music', 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(160, 161, 'Original', 'no', 'antes de irte', NULL, 'dennis fernando', 'dennis fernando', 'alejo cruz', 'alejo cruz', NULL, 2022, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(161, 162, 'Original', 'no', 'aqui estamos mi guitarra y yo', NULL, 'alejo cruz', 'alejo cruz', NULL, 'alejo cruz', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(162, 163, 'Original', 'no', 'DAME', NULL, 'alejo cruz', 'alejo cruz', NULL, 'alejo cruz', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(163, 164, 'Original', 'no', 'estrella lejana', NULL, 'alejo cruz', 'alejo cruz', 'alejo cruz', 'alejo cruz', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(164, 165, 'Original', 'no', 'frente a frente', NULL, 'alejo cruz', 'alejo cruz', 'alejo cruz', 'alejo cruz', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(165, 166, 'Original', 'no', 'La llorona', NULL, 'alejo cruz', 'alejo cruz', 'alejo cruz', 'alejo cruz', NULL, 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(166, 167, 'Original', 'no', 'morir de amor', NULL, 'alejo cruz', 'alejo cruz', 'alejo cruz', 'san alejo', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(167, 168, 'Original', 'no', 'Soledad Llanera', NULL, 'alejo cruz', 'alejo cruz', NULL, 'alejo cruz', NULL, 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL),
+(168, 169, 'Original', 'no', 'ya no te espero mas', NULL, 'alejo cruz', 'alejo cruz', 'alejo cruz', 'SANALEJO', 'prismad music', 2021, NULL, NULL, NULL, NULL, 'no', NULL, 'Español', 'Español', NULL, '[]', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,8 +233,8 @@ CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `order` int(11) NOT NULL DEFAULT 1,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -240,8 +256,8 @@ INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_a
 CREATE TABLE `cliente` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `persona_id` bigint(20) UNSIGNED NOT NULL,
-  `nombre_artistico` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_spoty` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `nombre_artistico` varchar(255) NOT NULL,
+  `link_spoty` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -343,7 +359,9 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 (120, 138, 'Juan Mojica', NULL),
 (121, 139, 'gaboja', NULL),
 (122, 140, 'gaboja', NULL),
-(123, 141, 'Dambel', 'https://open.spotify.com/track/0me9PxDi6ySXAhJ2trGsYw');
+(123, 141, 'Dambel', 'https://open.spotify.com/track/0me9PxDi6ySXAhJ2trGsYw'),
+(124, 142, 'Picasen', 'https://open.spotify.com/artist/6GlOIfdTkC0oy7uZWiJtzx'),
+(125, 143, 'GABRIEL CALDERÓN', 'https://spotify.link/3AMuf2VZ6yb');
 
 -- --------------------------------------------------------
 
@@ -353,7 +371,7 @@ INSERT INTO `cliente` (`id`, `persona_id`, `nombre_artistico`, `link_spoty`) VAL
 
 CREATE TABLE `colaboracion` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `cliente_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cliente_email` varchar(255) NOT NULL,
   `porcentaje_intelectual` double NOT NULL,
   `cancion_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -500,7 +518,24 @@ INSERT INTO `colaboracion` (`id`, `cliente_email`, `porcentaje_intelectual`, `ca
 (158, 'alejocruzmusic@gmail.com', 80, 150),
 (159, 'juanpmojicar0@gmail.com', 15, 150),
 (160, 'ingesonja@gmail.com', 5, 150),
-(161, 'Jorgevelezpanda@gmail.com', 100, 151);
+(161, 'Jorgevelezpanda@gmail.com', 100, 151),
+(162, 'fcnievesr@gmail.com', 100, 152),
+(163, 'fcnievesr@gmail.com', 100, 153),
+(164, 'fcnievesr@gmail.com', 100, 154),
+(165, 'fcnievesr@gmail.com', 100, 155),
+(166, 'fcnievesr@gmail.com', 100, 156),
+(167, 'thiagoomusic7@gmail.com', 100, 157),
+(168, 'thiagoomusic7@gmail.com', 100, 158),
+(169, 'thiagoomusic7@gmail.com', 50, 159),
+(170, 'alejocruzmusic@gmail.com', 100, 160),
+(171, 'alejocruzmusic@gmail.com', 100, 161),
+(172, 'alejocruzmusic@gmail.com', 100, 162),
+(173, 'alejocruzmusic@gmail.com', 100, 163),
+(174, 'alejocruzmusic@gmail.com', 100, 164),
+(175, 'alejocruzmusic@gmail.com', 100, 165),
+(176, 'alejocruzmusic@gmail.com', 100, 166),
+(177, 'alejocruzmusic@gmail.com', 100, 167),
+(178, 'alejocruzmusic@gmail.com', 100, 168);
 
 -- --------------------------------------------------------
 
@@ -510,8 +545,8 @@ INSERT INTO `colaboracion` (`id`, `cliente_email`, `porcentaje_intelectual`, `ca
 
 CREATE TABLE `colaboracion_art_feas` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `tipo_colaboracion` varchar(255) NOT NULL,
   `cancion_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
@@ -552,9 +587,9 @@ INSERT INTO `colaboracion_art_feas` (`id`, `nombre`, `tipo_colaboracion`, `canci
 CREATE TABLE `colaboracion_repertorio` (
   `id` int(10) UNSIGNED NOT NULL,
   `repertorio_id` bigint(20) NOT NULL,
-  `cliente_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `spotify_colaboracion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `cliente_email` varchar(255) NOT NULL,
+  `tipo_colaboracion` varchar(255) DEFAULT NULL,
+  `spotify_colaboracion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -635,16 +670,16 @@ INSERT INTO `colaboracion_repertorio` (`id`, `repertorio_id`, `cliente_email`, `
 CREATE TABLE `data_rows` (
   `id` int(10) UNSIGNED NOT NULL,
   `data_type_id` int(10) UNSIGNED NOT NULL,
-  `field` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `field` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
   `required` tinyint(1) NOT NULL DEFAULT 0,
   `browse` tinyint(1) NOT NULL DEFAULT 1,
   `read` tinyint(1) NOT NULL DEFAULT 1,
   `edit` tinyint(1) NOT NULL DEFAULT 1,
   `add` tinyint(1) NOT NULL DEFAULT 1,
   `delete` tinyint(1) NOT NULL DEFAULT 1,
-  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text DEFAULT NULL,
   `order` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -835,18 +870,18 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 
 CREATE TABLE `data_types` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_singular` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name_plural` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `policy_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `controller` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `display_name_singular` varchar(255) NOT NULL,
+  `display_name_plural` varchar(255) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `model_name` varchar(255) DEFAULT NULL,
+  `policy_name` varchar(255) DEFAULT NULL,
+  `controller` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `generate_permissions` tinyint(1) NOT NULL DEFAULT 0,
   `server_side` tinyint(4) NOT NULL DEFAULT 0,
-  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -884,11 +919,11 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -902,7 +937,7 @@ CREATE TABLE `genero` (
   `id` int(3) DEFAULT NULL,
   `nombre` varchar(19) DEFAULT NULL,
   `descripcion` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `genero`
@@ -988,7 +1023,7 @@ CREATE TABLE `historico_canciones` (
   `id` int(10) UNSIGNED NOT NULL,
   `cancion_id` int(11) DEFAULT NULL,
   `annio` int(11) DEFAULT NULL,
-  `mes` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mes` varchar(2) DEFAULT NULL,
   `valor` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1023,7 +1058,7 @@ INSERT INTO `historico_canciones` (`id`, `cancion_id`, `annio`, `mes`, `valor`) 
 
 CREATE TABLE `menus` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1046,17 +1081,17 @@ INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `menu_items` (
   `id` int(10) UNSIGNED NOT NULL,
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self',
-  `icon_class` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `target` varchar(255) NOT NULL DEFAULT '_self',
+  `icon_class` varchar(255) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `order` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `route` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parameters` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `route` varchar(255) DEFAULT NULL,
+  `parameters` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1084,7 +1119,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (22, 1, 'Parametros', '', '_self', 'voyager-params', '#000000', NULL, 4, '2022-01-10 23:15:48', '2022-09-16 00:33:55', NULL, ''),
 (26, 1, 'Despliegue', '', '_blank', 'voyager-dot-3', '#000000', 25, 1, '2022-01-10 23:30:25', '2022-01-10 23:32:50', NULL, 'null'),
 (27, 1, 'Desarrollo', '', '_self', 'voyager-whale', '#000000', NULL, 2, '2022-01-10 23:38:07', '2022-01-10 23:41:13', NULL, ''),
-(30, 3, 'Subir Canción', '/repertorio', '_self', 'voyager-music', '#000000', NULL, 3, '2022-02-03 21:55:21', '2023-04-03 10:08:17', NULL, ''),
+(30, 3, 'Subir Tu Canción', '/repertorio', '_self', 'voyager-music', '#000000', NULL, 3, '2022-02-03 21:55:21', '2023-04-20 18:41:20', NULL, ''),
 (31, 3, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:56:24', '2022-02-03 21:56:37', NULL, ''),
 (32, 2, 'Escritorio', '/admin', '_self', 'voyager-boat', '#000000', NULL, 1, '2022-02-03 21:57:47', '2022-02-28 04:00:31', NULL, ''),
 (33, 2, 'Gestión de Nómina', '/nomina', '_self', 'fa fa-university', '#000000', NULL, 2, '2022-02-03 22:00:00', '2022-02-28 04:00:50', NULL, ''),
@@ -1117,7 +1152,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1164,12 +1199,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `nomina` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `cliente_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `desprendible` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `desprendible` varchar(255) DEFAULT NULL,
   `fecha_informe` timestamp NULL DEFAULT NULL,
   `valor` decimal(10,0) DEFAULT NULL,
-  `nombre_banco` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_cuenta` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `nombre_banco` varchar(255) DEFAULT NULL,
+  `numero_cuenta` varchar(255) DEFAULT NULL,
+  `tipo_cuenta` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1188,14 +1223,14 @@ INSERT INTO `nomina` (`id`, `cliente_id`, `desprendible`, `fecha_informe`, `valo
 CREATE TABLE `pages` (
   `id` int(10) UNSIGNED NOT NULL,
   `author_id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
+  `title` varchar(255) NOT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') NOT NULL DEFAULT 'INACTIVE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1214,8 +1249,8 @@ INSERT INTO `pages` (`id`, `author_id`, `title`, `excerpt`, `body`, `image`, `sl
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1227,8 +1262,8 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `permissions` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key` varchar(255) NOT NULL,
+  `table_name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1496,17 +1531,17 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `persona` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `apellido` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pais` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ciudad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_documento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_identificacion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `apellido` varchar(255) DEFAULT NULL,
+  `pais` varchar(255) DEFAULT NULL,
+  `ciudad` varchar(255) DEFAULT NULL,
+  `tipo_documento` varchar(255) DEFAULT NULL,
+  `numero_identificacion` varchar(255) DEFAULT NULL,
+  `telefono` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `departamento` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `firma` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contrato` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `departamento` varchar(255) DEFAULT NULL,
+  `firma` varchar(255) DEFAULT NULL,
+  `contrato` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1610,7 +1645,9 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 (138, 'Juan Pablo', 'Mojica', 'Colombia', 'Bogotá D.C.', 'cc', '1018434667', '3152486857', 286, 'Bogotá D.C.', 'firma/286.png', '/contratos/286.pdf'),
 (139, 'LUIS GABRIEL', 'JARRO MORA', 'Colombia', 'Bogotá D.C.', 'cc', '80053118', '3103388367', 287, 'Cundinamarca', 'firma/287.png', '/contratos/287.pdf'),
 (140, 'LUIS GABRIEL', 'JARRO MORA', 'Colombia', 'Bogotá D.C.', 'cc', '80053118', '3103388367', 287, 'Cundinamarca', 'firma/287.png', '/contratos/287.pdf'),
-(141, 'julio', 'da silva', 'Peru', 'Ica', 'ce', '26818455', '5988162450', 291, 'Ica', 'firma/291.png', '/contratos/291.pdf');
+(141, 'julio', 'da silva', 'Peru', 'Ica', 'ce', '26818455', '5988162450', 291, 'Ica', 'firma/291.png', '/contratos/291.pdf'),
+(142, 'Juan', 'Santiago Martinez', 'Spain', 'Alicante/Alacant', 'ce', '57466874136547416687', '9682476015', 302, 'Alicante', 'firma/302.png', '/contratos/302.pdf'),
+(143, 'Gabriel', 'Calderón', 'Mexico', 'Xalapa de Enríquez', 'cc', 'C004503', '2281240554', 307, 'Veracruz de Ignacio de la Llave', 'firma/307.png', '/contratos/307.pdf');
 
 -- --------------------------------------------------------
 
@@ -1620,11 +1657,11 @@ INSERT INTO `persona` (`id`, `nombre`, `apellido`, `pais`, `ciudad`, `tipo_docum
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1640,15 +1677,15 @@ CREATE TABLE `posts` (
   `id` int(10) UNSIGNED NOT NULL,
   `author_id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seo_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `title` varchar(255) NOT NULL,
+  `seo_title` varchar(255) DEFAULT NULL,
+  `excerpt` text DEFAULT NULL,
+  `body` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) NOT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `status` enum('PUBLISHED','DRAFT','PENDING') NOT NULL DEFAULT 'DRAFT',
   `featured` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1673,7 +1710,7 @@ INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `seo_title`, `ex
 CREATE TABLE `regalia` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `cliente_id` bigint(20) UNSIGNED NOT NULL,
-  `informe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `informe` varchar(255) DEFAULT NULL,
   `fecha_informe_inicio` date NOT NULL,
   `fecha_informe_final` date NOT NULL,
   `nomina_id` bigint(20) DEFAULT NULL,
@@ -2095,7 +2132,187 @@ INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `f
 (432, 29, 'Regalias/March2023/1680307207.xlsx', '2022-07-01', '2022-07-01', NULL, 0),
 (433, 29, 'Regalias/March2023/1680307244.xlsx', '2022-08-01', '2022-08-01', NULL, 0),
 (434, 29, 'Regalias/March2023/1680307278.xlsx', '2022-09-01', '2022-09-01', NULL, 0),
-(435, 29, 'Regalias/March2023/1680307324.xlsx', '2022-10-01', '2022-10-01', NULL, 0);
+(435, 29, 'Regalias/March2023/1680307324.xlsx', '2022-10-01', '2022-10-01', NULL, 0),
+(438, 56, 'Regalias/April2023/1681346998.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(439, 56, 'Regalias/April2023/1681347043.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(440, 56, 'Regalias/April2023/1681347315.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(441, 56, 'Regalias/April2023/1681347351.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(442, 56, 'Regalias/April2023/1681347468.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(443, 56, 'Regalias/April2023/1681347530.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(445, 43, 'Regalias/April2023/1681349126.xlsx', '2022-11-01', '2022-11-01', NULL, 3.37),
+(446, 43, 'Regalias/April2023/1681349674.xlsx', '2022-12-01', '2022-12-01', NULL, 2.22),
+(447, 43, 'Regalias/April2023/1681349756.xlsx', '2022-11-01', '2022-11-01', NULL, 0.05),
+(448, 43, 'Regalias/April2023/1681349815.xlsx', '2022-12-01', '2022-12-01', NULL, 0.04),
+(449, 43, 'Regalias/April2023/1681349909.xlsx', '2022-11-01', '2022-11-01', NULL, 36.13),
+(450, 43, 'Regalias/April2023/1681349956.xlsx', '2022-12-01', '2022-12-01', NULL, 38.22),
+(451, 61, 'Regalias/April2023/1681350567.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(452, 61, 'Regalias/April2023/1681350622.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(453, 61, 'Regalias/April2023/1681350701.xlsx', '2022-11-01', '2022-11-01', NULL, 1.09),
+(454, 61, 'Regalias/April2023/1681350755.xlsx', '2022-12-01', '2022-12-01', NULL, 1.16),
+(455, 61, 'Regalias/April2023/1681350837.xlsx', '2022-11-01', '2022-11-01', NULL, 0.93),
+(456, 61, 'Regalias/April2023/1681350880.xlsx', '2022-12-01', '2022-12-01', NULL, 8.47),
+(457, 61, 'Regalias/April2023/1681351192.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(458, 61, 'Regalias/April2023/1681351219.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(459, 61, 'Regalias/April2023/1681351999.xlsx', '2022-12-01', '2022-12-01', NULL, 0.32),
+(460, 61, 'Regalias/April2023/1681352057.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(461, 61, 'Regalias/April2023/1681352094.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(464, 61, 'Regalias/April2023/1681352339.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(465, 61, 'Regalias/April2023/1681352373.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(466, 43, 'Regalias/April2023/1681352639.xlsx', '2022-11-01', '2022-11-01', NULL, 4.39),
+(467, 43, 'Regalias/April2023/1681352692.xlsx', '2022-12-01', '2022-12-01', NULL, 3.4),
+(469, 57, 'Regalias/April2023/1681354142.xlsx', '2022-08-01', '2022-08-01', NULL, 1.29),
+(470, 57, 'Regalias/April2023/1681354184.xlsx', '2022-09-01', '2022-09-01', NULL, 14.84),
+(471, 57, 'Regalias/April2023/1681354238.xlsx', '2022-10-01', '2022-10-01', NULL, 9.34),
+(472, 57, 'Regalias/April2023/1681354278.xlsx', '2022-11-01', '2022-11-01', NULL, 1.7),
+(473, 57, 'Regalias/April2023/1681354321.xlsx', '2022-12-01', '2022-12-01', NULL, 0.67),
+(474, 57, 'Regalias/April2023/1681354395.xlsx', '2022-12-01', '2022-12-01', NULL, 0.56),
+(475, 57, 'Regalias/April2023/1681354443.xlsx', '2022-09-01', '2022-09-01', NULL, 0.01),
+(476, 57, 'Regalias/April2023/1681354493.xlsx', '2022-10-01', '2022-10-01', NULL, 0.64),
+(477, 57, 'Regalias/April2023/1681354528.xlsx', '2022-11-01', '2022-11-01', NULL, 5.05),
+(478, 57, 'Regalias/April2023/1681354573.xlsx', '2022-12-01', '2022-12-01', NULL, 0.23),
+(479, 95, 'Regalias/April2023/1681356412.xlsx', '2022-11-01', '2022-11-01', NULL, 2.33),
+(480, 95, 'Regalias/April2023/1681356460.xlsx', '2022-12-01', '2022-12-01', NULL, 2.27),
+(481, 95, 'Regalias/April2023/1681356521.xlsx', '2022-11-01', '2022-11-01', NULL, 5.79),
+(482, 95, 'Regalias/April2023/1681356557.xlsx', '2022-12-01', '2022-12-01', NULL, 3.94),
+(483, 95, 'Regalias/April2023/1681356627.xlsx', '2022-11-01', '2022-11-01', NULL, 1.43),
+(484, 95, 'Regalias/April2023/1681356664.xlsx', '2022-12-01', '2022-12-01', NULL, 0.55),
+(485, 95, 'Regalias/April2023/1681356724.xlsx', '2022-11-01', '2022-11-01', NULL, 15.29),
+(486, 95, 'Regalias/April2023/1681356777.xlsx', '2022-12-01', '2022-12-01', NULL, 16.64),
+(487, 95, 'Regalias/April2023/1681356853.xlsx', '2022-11-01', '2022-11-01', NULL, 0.43),
+(488, 95, 'Regalias/April2023/1681356886.xlsx', '2022-12-01', '2022-12-01', NULL, 0.34),
+(489, 95, 'Regalias/April2023/1681356942.xlsx', '2022-11-01', '2022-11-01', NULL, 0.33),
+(490, 95, 'Regalias/April2023/1681356974.xlsx', '2022-12-01', '2022-12-01', NULL, 0.38),
+(491, 95, 'Regalias/April2023/1681357042.xlsx', '2022-11-01', '2022-11-01', NULL, 0.82),
+(492, 95, 'Regalias/April2023/1681357076.xlsx', '2022-12-01', '2022-12-01', NULL, 0.83),
+(493, 95, 'Regalias/April2023/1681357131.xlsx', '2022-11-01', '2022-11-01', NULL, 2.33),
+(494, 95, 'Regalias/April2023/1681357165.xlsx', '2022-12-01', '2022-12-01', NULL, 1.69),
+(495, 95, 'Regalias/April2023/1681357212.xlsx', '2022-11-01', '2022-11-01', NULL, 26.02),
+(496, 95, 'Regalias/April2023/1681357249.xlsx', '2022-12-01', '2022-12-01', NULL, 21.11),
+(497, 95, 'Regalias/April2023/1681357308.xlsx', '2022-11-01', '2022-11-01', NULL, 9.68),
+(498, 95, 'Regalias/April2023/1681357340.xlsx', '2022-12-01', '2022-12-01', NULL, 9.21),
+(499, 93, 'Regalias/April2023/1681357397.xlsx', '2022-11-01', '2022-11-01', NULL, 0.19),
+(500, 93, 'Regalias/April2023/1681357445.xlsx', '2022-12-01', '2022-12-01', NULL, 0.16),
+(501, 45, 'Regalias/April2023/1681358060.xlsx', '2022-11-01', '2022-11-01', NULL, 0.74),
+(502, 45, 'Regalias/April2023/1681358096.xlsx', '2022-12-01', '2022-12-01', NULL, 0.83),
+(503, 45, 'Regalias/April2023/1681358147.xlsx', '2022-11-01', '2022-11-01', NULL, 8.89),
+(504, 45, 'Regalias/April2023/1681358180.xlsx', '2022-12-01', '2022-12-01', NULL, 8.89),
+(505, 45, 'Regalias/April2023/1681358407.xlsx', '2022-11-01', '2022-11-01', NULL, 1.16),
+(506, 45, 'Regalias/April2023/1681358441.xlsx', '2022-12-01', '2022-12-01', NULL, 1.84),
+(507, 45, 'Regalias/April2023/1681358502.xlsx', '2022-11-01', '2022-11-01', NULL, 0.52),
+(508, 45, 'Regalias/April2023/1681358535.xlsx', '2022-12-01', '2022-12-01', NULL, 0.37),
+(509, 45, 'Regalias/April2023/1681358613.xlsx', '2022-11-01', '2022-11-01', NULL, 0.52),
+(510, 45, 'Regalias/April2023/1681358650.xlsx', '2022-12-01', '2022-12-01', NULL, 0.42),
+(511, 41, 'Regalias/April2023/1681359039.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(512, 41, 'Regalias/April2023/1681359074.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(513, 41, 'Regalias/April2023/1681359214.xlsx', '2022-11-01', '2022-11-01', NULL, 0.03),
+(514, 41, 'Regalias/April2023/1681359255.xlsx', '2022-12-01', '2022-12-01', NULL, 0.04),
+(515, 41, 'Regalias/April2023/1681359312.xlsx', '2022-11-01', '2022-11-01', NULL, 2.62),
+(516, 41, 'Regalias/April2023/1681359345.xlsx', '2022-12-01', '2022-12-01', NULL, 0.92),
+(517, 41, 'Regalias/April2023/1681359440.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(518, 41, 'Regalias/April2023/1681359471.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(519, 41, 'Regalias/April2023/1681359546.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(520, 41, 'Regalias/April2023/1681359584.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(521, 41, 'Regalias/April2023/1681359723.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(522, 41, 'Regalias/April2023/1681359751.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(523, 41, 'Regalias/April2023/1681359813.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(524, 41, 'Regalias/April2023/1681359842.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(525, 41, 'Regalias/April2023/1681359909.xlsx', '2022-11-01', '2022-11-01', NULL, 3.42),
+(526, 41, 'Regalias/April2023/1681359944.xlsx', '2022-12-01', '2022-12-01', NULL, 1.81),
+(527, 41, 'Regalias/April2023/1681360017.xlsx', '2022-11-01', '2022-11-01', NULL, 0.03),
+(528, 41, 'Regalias/April2023/1681360053.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(529, 41, 'Regalias/April2023/1681360117.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(530, 41, 'Regalias/April2023/1681360148.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(531, 41, 'Regalias/April2023/1681360223.xlsx', '2022-11-01', '2022-11-01', NULL, 0.85),
+(532, 41, 'Regalias/April2023/1681360261.xlsx', '2022-12-01', '2022-12-01', NULL, 0.75),
+(533, 41, 'Regalias/April2023/1681360327.xlsx', '2022-12-01', '2022-12-01', NULL, 0.03),
+(534, 68, 'Regalias/April2023/1681360437.xlsx', '2022-11-01', '2022-11-01', NULL, 0.03),
+(535, 74, 'Regalias/April2023/1681360437.xlsx', '2022-11-01', '2022-11-01', NULL, 0.03),
+(536, 68, 'Regalias/April2023/1681360478.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(537, 74, 'Regalias/April2023/1681360478.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(538, 23, 'Regalias/April2023/1681360711.xlsx', '2022-11-01', '2022-11-01', NULL, 0.09),
+(539, 23, 'Regalias/April2023/1681360746.xlsx', '2022-12-01', '2022-12-01', NULL, 0.11),
+(540, 43, 'Regalias/April2023/1681361047.xlsx', '2022-11-01', '2022-11-01', NULL, 0.06),
+(541, 43, 'Regalias/April2023/1681361078.xlsx', '2022-12-01', '2022-12-01', NULL, 0.07),
+(542, 43, 'Regalias/April2023/1681361138.xlsx', '2022-11-01', '2022-11-01', NULL, 2.78),
+(543, 43, 'Regalias/April2023/1681361171.xlsx', '2022-12-01', '2022-12-01', NULL, 2.6),
+(544, 43, 'Regalias/April2023/1681361268.xlsx', '2022-11-01', '2022-11-01', NULL, 0.52),
+(545, 43, 'Regalias/April2023/1681361309.xlsx', '2022-12-01', '2022-12-01', NULL, 0.58),
+(546, 43, 'Regalias/April2023/1681361362.xlsx', '2022-11-01', '2022-11-01', NULL, 0.98),
+(547, 43, 'Regalias/April2023/1681361408.xlsx', '2022-12-01', '2022-12-01', NULL, 1.05),
+(548, 25, 'Regalias/April2023/1681361470.xlsx', '2022-11-01', '2022-11-01', NULL, 4.75),
+(549, 25, 'Regalias/April2023/1681361502.xlsx', '2022-12-01', '2022-12-01', NULL, 0.73),
+(550, 25, 'Regalias/April2023/1681361550.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(551, 66, 'Regalias/April2023/1681361550.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(552, 25, 'Regalias/April2023/1681361585.xlsx', '2022-12-01', '2022-12-01', NULL, 0.04),
+(553, 66, 'Regalias/April2023/1681361585.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(554, 52, 'Regalias/April2023/1681439571.xlsx', '2022-11-01', '2022-11-01', NULL, 3.51),
+(555, 50, 'Regalias/April2023/1681439571.xlsx', '2022-11-01', '2022-11-01', NULL, 0.88),
+(556, 52, 'Regalias/April2023/1681439602.xlsx', '2022-12-01', '2022-12-01', NULL, 0.06),
+(557, 50, 'Regalias/April2023/1681439602.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(558, 52, 'Regalias/April2023/1681439712.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(559, 50, 'Regalias/April2023/1681439712.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(560, 52, 'Regalias/April2023/1681439752.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(561, 50, 'Regalias/April2023/1681439752.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(565, 63, 'Regalias/April2023/1681439955.xlsx', '2022-11-01', '2022-11-01', NULL, 0),
+(566, 63, 'Regalias/April2023/1681439988.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(567, 51, 'Regalias/April2023/1681440324.xlsx', '2022-11-01', '2022-11-01', NULL, 2.09),
+(568, 51, 'Regalias/April2023/1681440399.xlsx', '2022-12-01', '2022-12-01', NULL, 1.28),
+(569, 51, 'Regalias/April2023/1681440556.xlsx', '2022-11-01', '2022-11-01', NULL, 0.91),
+(570, 51, 'Regalias/April2023/1681440598.xlsx', '2022-12-01', '2022-12-01', NULL, 0.75),
+(571, 51, 'Regalias/April2023/1681441080.xlsx', '2022-11-01', '2022-11-01', NULL, 0.11),
+(572, 51, 'Regalias/April2023/1681441115.xlsx', '2022-12-01', '2022-12-01', NULL, 0.08),
+(573, 43, 'Regalias/April2023/1681441229.xlsx', '2022-11-01', '2022-11-01', NULL, 1.47),
+(574, 43, 'Regalias/April2023/1681441266.xlsx', '2022-12-01', '2022-12-01', NULL, 1.66),
+(575, 42, 'Regalias/April2023/1681692332.xlsx', '2022-11-01', '2022-11-01', NULL, 0.04),
+(576, 42, 'Regalias/April2023/1681692364.xlsx', '2022-12-01', '2022-12-01', NULL, 0.03),
+(577, 42, 'Regalias/April2023/1681692434.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(578, 42, 'Regalias/April2023/1681692489.xlsx', '2022-11-01', '2022-11-01', NULL, 0.02),
+(579, 42, 'Regalias/April2023/1681692519.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(580, 42, 'Regalias/April2023/1681692604.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(581, 42, 'Regalias/April2023/1681692634.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(582, 42, 'Regalias/April2023/1681692721.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(583, 42, 'Regalias/April2023/1681692753.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(584, 66, 'Regalias/April2023/1681704196.xlsx', '2022-08-01', '2022-08-01', NULL, 0.09),
+(585, 66, 'Regalias/April2023/1681704314.xlsx', '2022-09-01', '2022-09-01', NULL, 0.02),
+(586, 66, 'Regalias/April2023/1681704357.xlsx', '2022-10-01', '2022-10-01', NULL, 0.05),
+(587, 66, 'Regalias/April2023/1681705414.xlsx', '2022-11-01', '2022-11-01', NULL, 0.05),
+(588, 66, 'Regalias/April2023/1681705452.xlsx', '2022-12-01', '2022-12-01', NULL, 0.02),
+(589, 66, 'Regalias/April2023/1681705902.xlsx', '2022-08-01', '2022-08-01', NULL, 0.08),
+(590, 66, 'Regalias/April2023/1681705947.xlsx', '2022-09-01', '2022-09-01', NULL, 0.11),
+(591, 66, 'Regalias/April2023/1681705991.xlsx', '2022-10-01', '2022-10-01', NULL, 0.05),
+(592, 66, 'Regalias/April2023/1681706160.xlsx', '2022-11-01', '2022-11-01', NULL, 0.05),
+(593, 66, 'Regalias/April2023/1681706250.xlsx', '2022-12-01', '2022-12-01', NULL, 0.07),
+(594, 66, 'Regalias/April2023/1681706907.xlsx', '2022-08-01', '2022-08-01', NULL, 0.01),
+(595, 66, 'Regalias/April2023/1681706934.xlsx', '2022-08-01', '2022-08-01', NULL, 0.01),
+(596, 66, 'Regalias/April2023/1681707031.xlsx', '2022-09-01', '2022-09-01', NULL, 0.02),
+(597, 66, 'Regalias/April2023/1681707109.xlsx', '2022-10-01', '2022-10-01', NULL, 0.01);
+INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `fecha_informe_final`, `nomina_id`, `valor`) VALUES
+(598, 66, 'Regalias/April2023/1681707155.xlsx', '2022-10-01', '2022-10-01', NULL, 0.01),
+(599, 66, 'Regalias/April2023/1681707257.xlsx', '2022-10-01', '2022-10-01', NULL, 0.01),
+(600, 66, 'Regalias/April2023/1681707314.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(601, 66, 'Regalias/April2023/1681707597.xlsx', '2022-08-01', '2022-08-01', NULL, 0.02),
+(602, 66, 'Regalias/April2023/1681707696.xlsx', '2022-09-01', '2022-09-01', NULL, 0.02),
+(603, 66, 'Regalias/April2023/1681707771.xlsx', '2022-10-01', '2022-10-01', NULL, 0.02),
+(604, 66, 'Regalias/April2023/1681707934.xlsx', '2022-11-01', '2022-11-01', NULL, 0.02),
+(605, 66, 'Regalias/April2023/1681708089.xlsx', '2022-12-01', '2022-12-01', NULL, 0.01),
+(606, 66, 'Regalias/April2023/1681708329.xlsx', '2022-08-01', '2022-08-01', NULL, 0.01),
+(607, 66, 'Regalias/April2023/1681708421.xlsx', '2022-09-01', '2022-09-01', NULL, 0),
+(608, 66, 'Regalias/April2023/1681708483.xlsx', '2022-10-01', '2022-10-01', NULL, 0.02),
+(609, 66, 'Regalias/April2023/1681708534.xlsx', '2022-11-01', '2022-11-01', NULL, 0.02),
+(610, 66, 'Regalias/April2023/1681708736.xlsx', '2022-12-01', '2022-12-01', NULL, 0.03),
+(611, 66, 'Regalias/April2023/1681708886.xlsx', '2022-08-01', '2022-08-01', NULL, 0.03),
+(612, 66, 'Regalias/April2023/1681708931.xlsx', '2022-08-01', '2022-08-01', NULL, 0.03),
+(613, 66, 'Regalias/April2023/1681709001.xlsx', '2022-09-01', '2022-09-01', NULL, 0.01),
+(614, 66, 'Regalias/April2023/1681709056.xlsx', '2022-10-01', '2022-10-01', NULL, 0.01),
+(615, 66, 'Regalias/April2023/1681709170.xlsx', '2022-11-01', '2022-11-01', NULL, 0.01),
+(616, 66, 'Regalias/April2023/1681709319.xlsx', '2022-12-01', '2022-12-01', NULL, 0),
+(617, 66, 'Regalias/April2023/1681709794.xlsx', '2022-08-01', '2022-08-01', NULL, 1.03),
+(618, 66, 'Regalias/April2023/1681709842.xlsx', '2022-09-01', '2022-09-01', NULL, 0.92),
+(619, 66, 'Regalias/April2023/1681710852.xlsx', '2022-09-01', '2022-09-01', NULL, 0.92),
+(620, 66, 'Regalias/April2023/1681710939.xlsx', '2022-09-01', '2022-09-01', NULL, 1.06),
+(621, 66, 'Regalias/April2023/1681711054.xlsx', '2022-10-01', '2022-10-01', NULL, 0.92),
+(622, 66, 'Regalias/April2023/1681711165.xlsx', '2022-12-01', '2022-12-01', NULL, 0.67),
+(623, 105, 'Regalias/April2023/1681951124.xlsx', '2023-03-01', '2023-04-01', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -2105,18 +2322,18 @@ INSERT INTO `regalia` (`id`, `cliente_id`, `informe`, `fecha_informe_inicio`, `f
 
 CREATE TABLE `repertorio` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `portada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `titulo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subgenero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nombre_sello` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `formato` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `productor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `copyright` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `annio_produccion` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upc_ean` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `numero_catalogo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `portada` varchar(255) DEFAULT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `version` varchar(255) DEFAULT NULL,
+  `genero` varchar(255) DEFAULT NULL,
+  `subgenero` varchar(255) DEFAULT NULL,
+  `nombre_sello` varchar(255) DEFAULT NULL,
+  `formato` varchar(255) DEFAULT NULL,
+  `productor` varchar(255) DEFAULT NULL,
+  `copyright` varchar(255) DEFAULT NULL,
+  `annio_produccion` varchar(4) DEFAULT NULL,
+  `upc_ean` varchar(255) DEFAULT NULL,
+  `numero_catalogo` varchar(255) DEFAULT NULL,
   `fecha_lanzamiento` date DEFAULT NULL,
   `terminado` tinyint(4) DEFAULT 0,
   `procesado` int(11) DEFAULT 0
@@ -2143,7 +2360,6 @@ INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subge
 (42, '1655441435.jpg', 'A MI MODO', 'Pop', 'Pop', 'Latin', 'INDEPENDIENTE', 'SINGLE', 'CARLOS ALVAREZ', 'CARLOS ALVAREZ PERALTA', '2020', NULL, NULL, '2022-06-22', 1, 1),
 (43, '1655442523.jpg', 'ETERNAMENTE AMADA', 'POP - ROCK', 'Pop', 'Alternative', 'INDEPENDIENTE', 'SINGLE', 'CARLOS ALVAREZ', 'CARLOS ALVAREZ PERALTA', '2010', NULL, NULL, '2022-06-23', 1, 1),
 (44, '1659062523.png', 'CUANDO MUERE EL AMOR', 'Original', 'Musica Llanera', 'Folk', 'Abdul Farfán', 'SINGLE', 'Abdul Farfán', 'Abdul Farfán', '2022', NULL, NULL, '2022-08-03', 1, 1),
-(45, '1659065911.jpg', 'La Nota', NULL, 'Reggaeton', 'Latin', 'Thiago', 'SINGLE', 'Yan Boss', 'Prismad Music', '2022', NULL, NULL, '2022-08-05', 0, 0),
 (46, '1659647077.jpg', 'Mi muchacho coleador', NULL, 'Musica Llanera', 'Folk', 'Prismad Music', 'SINGLE', 'Platino Estudio', 'Luna Reyes', '2022', NULL, NULL, '2022-08-10', 1, 1),
 (47, '1660103869.jpg', 'NADA', 'Pop', 'Pop', 'Latin', 'INDEPENDIENTE', 'SINGLE', 'CARLOS ALVAREZ', 'CARLOS ALVAREZ PERALTA', '2022', NULL, NULL, '2022-08-19', 1, 1),
 (48, '1660171148.jpg', 'Te Sigo Extrañando', NULL, 'balada pop', 'Pop in Spanish', 'Prismad Music', 'SINGLE', 'Juan Triana', 'Yacko Marquez', '2022', NULL, NULL, '2022-09-16', 1, 1),
@@ -2227,7 +2443,7 @@ INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subge
 (133, '1675719984.jpg', 'NO ME QUEDA MAS', 'ACUSTICO', 'Regional Mexicano', 'Rancheira', 'PRISMAD MUSIC', 'SINGLE', 'WHITTY THE PRODUCER', 'PRISMADMUSIC', '2023', NULL, NULL, '2023-02-13', 0, 0),
 (134, '1675721062.jpg', 'No me queda mas', 'Acustico', 'Regional Mexicano', 'Cumbia', 'Prismad Music', 'SINGLE', 'Whitty the producer', 'prismad music', '2023', NULL, NULL, '2023-02-13', 1, 1),
 (135, '1675723988.jpg', 'No me queda mas', 'Acustico', 'Blues', 'Acid house', 'Prismad Music', 'SINGLE', 'Whitty the producer', 'prismad music', '2023', NULL, NULL, '2023-02-13', 0, 0),
-(138, '1675791196.jpg', 'Album prueba', 'Album prueba', 'Bossa nova', 'Acid Punk', 'Album prueba', 'ALBUM', 'Album prueba', 'Album prueba', '2023', NULL, NULL, '2023-02-22', 0, 0),
+(138, '1675791196.jpg', 'Album prueba', 'Album prueba', 'Bossa nova', 'Acid Punk', 'Album prueba', 'ALBUM', 'Album prueba', 'Album prueba', '2023', NULL, NULL, '2023-02-22', 1, 1),
 (139, '1675819329.jpg', 'Prueba Javox', 'Prueba Javox', 'Heavy Metal', 'Acid Punk', 'Sello Prueba javox', 'ALBUM', 'Productor Prueba javox', 'Copyright Prueba javox', '2023', '35234-GF', '234-GF', '2023-02-16', 1, 1),
 (140, '1676649813.jpg', 'Estacion Lunar', 'Anica Rod', 'balada pop', 'Alternative', 'Anica Rod', 'SINGLE', 'Anica Rod, Alejandra Olarte', 'Anica Rod', '2022', NULL, NULL, '2023-03-03', 1, 1),
 (141, '1677022014.jpg', '2 AM JHOANY DY ft DHJ3-LETRAS', 'Original', 'Reggaeton', 'Dancehall', 'Jhoany dy', 'SINGLE', 'Jhoan Osorio', 'Original', '2023', NULL, NULL, '2023-02-27', 0, 0),
@@ -2241,7 +2457,24 @@ INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subge
 (149, NULL, 'TIERRA SECA', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
 (150, NULL, 'colombia abre tus alas', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
 (151, '1680544310.jpg', 'INSTINTO', 'Alejo Cruz', 'Alternative', 'Psychedelic', 'SanalejoStudio', 'SINGLE', 'Alejo Cruz', 'Prismad Music', '2023', NULL, NULL, '2023-04-21', 1, 1),
-(152, '1680552043.jpg', 'DIME', 'Jorge Velez Panda', 'Regional Mexicano', 'Popular Colombiana', 'SanalejoStudio', 'SINGLE', 'Alejo Cruz', 'Prismad Music', '2023', NULL, NULL, '2023-04-21', 1, 1);
+(152, '1680552043.jpg', 'DIME', 'Jorge Velez Panda', 'Regional Mexicano', 'Popular Colombiana', 'SanalejoStudio', 'SINGLE', 'Alejo Cruz', 'Prismad Music', '2023', NULL, NULL, '2023-04-21', 1, 1),
+(153, NULL, 'añoranza criolla', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'francis carolina', 'francis carolina', '2022', NULL, NULL, NULL, 1, 1),
+(154, NULL, 'Bendicion del cielo', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'francis carolina', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(155, NULL, 'baila', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'francis carolina', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(156, NULL, 'no te rindas', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'francis carolina', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(157, NULL, 'vive tu vida', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'francis carolina', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(158, NULL, 'LA NOTA', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'YAN BOSS', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(159, NULL, 'RECUERDOZZZ', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'YAN BOSS', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(160, NULL, 'MIENTES', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'PRISMAD MUSIC', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(161, NULL, 'antes de irte', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'alejo cruz', 'prismad music', '2022', NULL, NULL, NULL, 1, 1),
+(162, NULL, 'aqui estamos mi guitarra y yo', NULL, NULL, NULL, 'SANALEJO', 'ALBUM', 'alejo cruz', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(163, NULL, 'DAME', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'alejo cruz', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(164, NULL, 'estrella lejana', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'alejo cruz', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(165, NULL, 'frente a frente', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'alejo cruz', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(166, NULL, 'La llorona', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(167, NULL, 'morir de amor', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'alejo cruz', 'prismad music', '2021', NULL, NULL, NULL, 1, 1),
+(168, NULL, 'Soledad Llanera', NULL, NULL, NULL, 'prismad music', 'SINGLE', 'alejo cruz', '2021', '2022', NULL, NULL, NULL, 1, 1),
+(169, NULL, 'ya no te espero mas', NULL, NULL, NULL, 'SANALEJO', 'SINGLE', 'SANALEJO', 'prismad music', '2021', NULL, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2251,8 +2484,8 @@ INSERT INTO `repertorio` (`id`, `portada`, `titulo`, `version`, `genero`, `subge
 
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2274,13 +2507,13 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) V
 
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `value` text DEFAULT NULL,
+  `details` text DEFAULT NULL,
+  `type` varchar(255) NOT NULL,
   `order` int(11) NOT NULL DEFAULT 1,
-  `group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `group` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2309,7 +2542,7 @@ CREATE TABLE `subgenero` (
   `id` int(3) DEFAULT NULL,
   `nombre` varchar(29) DEFAULT NULL,
   `descripcion` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `subgenero`
@@ -2653,7 +2886,7 @@ INSERT INTO `subgenero` (`id`, `nombre`, `descripcion`) VALUES
 
 CREATE TABLE `tipo_colaboracion` (
   `id` int(10) UNSIGNED NOT NULL,
-  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `tipo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2664,11 +2897,11 @@ CREATE TABLE `tipo_colaboracion` (
 
 CREATE TABLE `translations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `table_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `column_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `table_name` varchar(255) NOT NULL,
+  `column_name` varchar(255) NOT NULL,
   `foreign_key` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(255) NOT NULL,
+  `value` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2798,17 +3031,17 @@ INSERT INTO `translations` (`id`, `table_name`, `column_name`, `foreign_key`, `l
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'users/default.png',
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT 'users/default.png',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settings` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `settings` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `registro_confirmed` tinyint(4) DEFAULT 0,
-  `confirmation_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `confirmation_code` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2816,7 +3049,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`, `registro_confirmed`, `confirmation_code`) VALUES
-(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'w2Rxkwl88StuNs4b7ql9NNk7w1Pbs7rigZkiQVo4PDcfXCjA3AoPOquhy6Qq', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
+(1, 1, 'PrismadMusic', 'prismadmusic@gmail.com', 'users/February2022/aqHRg7reMK3wpKL0Qftr.jpg', '2022-01-15 21:19:31', '$2y$10$5Ilfxt6ad3cHxqwwnmqYGeLdsofwcdq483/PhvUbrEDgCWq1WMFw2', 'mg5WbRkHOHJkBtW67i86prQNVA4uRt3usxBW28h0CkF9flyydGyI2Ju48SNj', '{\"locale\":\"es\"}', '2022-01-02 04:43:19', '2022-02-03 22:37:10', 1, NULL),
 (31, 2, 'Jay es', 'jonathan_susana@hotmail.com', 'users/default.png', '2022-03-07 15:32:05', '$2y$10$dQZ6ZUtKF0m1i8ydTZMrdeEiQBd5n.Iojf1JDRUecUkQnxaBWzlbe', NULL, NULL, '2022-03-07 15:31:04', '2022-03-07 15:36:07', 1, NULL),
 (43, 2, 'Abdul Farfán', 'abdulfd32@gmail.com', 'users/default.png', '2022-03-13 14:46:59', '$2y$10$5mcnArnURZyFxLGuLkqaC.X/v1gYwfOUp88J1Bp5BkZJDoIXxI/ka', 'Tz4veKSxxfLDb1sObzQalSEVm4j6BIINrENwatz9v97wLEhRtoCgwShgLa6U', '{\"locale\":\"es\"}', '2022-03-13 14:46:16', '2023-03-08 16:51:53', 1, NULL),
 (51, 2, 'jonathan', 'jonatangarzon95@gmail.com', 'users/default.png', '2022-03-22 17:05:33', '$2y$10$8Cc7l93aF/7q.tn8oUFLgOx4O2sfZB1PdVtfkniY/.TfqbrmwUkqG', NULL, NULL, '2022-03-22 17:04:55', '2022-03-22 17:07:21', 1, NULL),
@@ -2830,12 +3063,12 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (73, 2, 'Carlos Sanchez', 'goodvibesmusicst@gmail.com', 'users/default.png', '2022-04-22 01:40:02', '$2y$10$3pmVImShYeD/eBbsO1ArEeZYrpHI/OCZ.5LFSVl2uVOatVuCdXlHa', NULL, NULL, '2022-04-22 01:38:53', '2022-04-22 01:41:34', 1, NULL),
 (74, 2, 'anica rod', 'anicarodmusica@gmail.com', 'users/default.png', '2022-04-22 11:13:00', '$2y$10$1/47R.AdumRji9rnyKPjDufTKr5gG5ynZSIbnlbpuQXMjaQwrxSW.', 'zrOSqbHsG89LUgeL82hAmWxkSGPWtCPNw6Qc2bVvcAaifZNjFQAbCz6YdDWv', NULL, '2022-04-22 11:02:39', '2023-02-22 20:29:13', 1, NULL),
 (76, 2, 'Witthy', 'witthyguitar@gmail.com', 'users/default.png', '2022-04-26 18:23:12', '$2y$10$cHWWtzKx5zqlS0GwD6KGCeNc/gwsyv0D6U4xuF1cM6FZHLII49Dde', 'je9AEtllK6a0lwOgBcOKGyUCIDYV7r7RIPiqrGdhoyINrZboGBUHkIDMNyIh', NULL, '2022-04-26 18:22:47', '2022-04-26 18:25:04', 1, NULL),
-(91, 3, 'Llano Music', 'llanomusicoficial@gmail.com', 'users/default.png', '2022-05-17 22:44:30', '$2y$10$a/RISmUIcxUL3yt.39Zya.1gSJ2tk68Gy6.KDGd4os3rTk/SM4VKC', 'LnoKODFmwGKnUPljjuQadokQOoPfQQBbqeXbgJ6UE8Fn9Rd9fjR8jrAAhbKQ', '{\"locale\":\"es\"}', '2022-05-17 22:42:27', '2022-09-19 22:23:14', 1, NULL),
+(91, 3, 'Llano Music', 'llanomusicoficial@gmail.com', 'users/default.png', '2022-05-17 22:44:30', '$2y$10$a/RISmUIcxUL3yt.39Zya.1gSJ2tk68Gy6.KDGd4os3rTk/SM4VKC', 'ZWLEzDIifffksLKY6BrR92f5GoIzfOmDcZk8joda2RW14Xg6xBJZCwCExgS5', '{\"locale\":\"es\"}', '2022-05-17 22:42:27', '2022-09-19 22:23:14', 1, NULL),
 (94, 2, 'warningprod', 'warcontacto@gmail.com', 'users/default.png', '2022-05-25 19:36:47', '$2y$10$0WOXqaRFIg1hv7Evqwztke5dJzt3nq7fvdYHajN5/pPF5.Orx8K8a', NULL, NULL, '2022-05-25 19:36:17', '2022-05-25 19:40:08', 1, NULL),
 (99, 2, 'Javier Manchego', 'pildorasparaelcorazonjm@gmail.com', 'users/default.png', '2022-10-29 14:19:59', '$2y$10$4UBqPQpMfxb5.JiF3r1YfOH81TF4.rrz.YiTSoEW4sPqBl9wyaNXO', 'dpxbJ4lHK0aFgHazA5P8KWAdeghU4PXtoFXtsLmGSloAbeTmk4zVrTHqpl1P', '{\"locale\":\"es\"}', '2022-05-31 18:14:03', '2023-01-15 00:14:15', 1, NULL),
 (101, 2, 'magicjuanpa/', 'juanpa12237@gmail.com', 'users/default.png', '2022-06-01 14:56:22', '$2y$10$fWcokHgCSTHxype4/T/rfeJ/mvcbr.1KhzitsHke3qLU0VVoSObhe', 't3UOj1pLMIFpy4kFZHrBdIZ9STLkEhuTFULL0BWcAtkrit3ApmRkP5yGVHXg', NULL, '2022-06-01 14:55:26', '2022-06-01 14:58:59', 1, NULL),
 (102, 2, 'Luna Reyes', 'joropo2014@hotmail.com', 'users/June2022/WVHZQ4Y7qsEwDrecay3V.JPG', '2022-06-01 15:40:24', '$2y$10$0I5US.w0gN56X8WSWd.PU.rwoJ.egbLXlz4eRQEQsRK94t8S2Wp2C', 'NjFDVvwihDqZnpoPgHuvMS8zq6LdoZFoIFSanAuVoIOv4dZJ755Qvg47e0Oo', '{\"locale\":\"es\"}', '2022-06-01 15:39:06', '2023-03-21 17:18:54', 1, NULL),
-(105, 2, 'papo', 'cealvarezperalta@hotmail.com', 'users/default.png', '2022-06-13 18:20:34', '$2y$10$qLoeVf.xPTQcb0YgLveOIuS5o93R66nmQ4XvFtaVmdlrT83uoxQMi', 'I9Jmxd6iJkdMBEcS6QVBD4AORfJnTePyzJX2h8CMMiacnsuA4vCI5vOSPsGJ', '{\"locale\":\"es\"}', '2022-06-13 18:18:41', '2023-04-11 14:51:44', 1, NULL),
+(105, 2, 'papo', 'cealvarezperalta@hotmail.com', 'users/default.png', '2022-06-13 18:20:34', '$2y$10$NtS/MBXHG2jXxv4X2xGer.bzr.yteSEkQSCZVFqk04VljV93w1lPC', 'lqQmP7EZhBnM7IBPpjIk3kPtE5izxKTPtZzPRbCaKbCe0Oq3TBMb6pgwSWSv', '{\"locale\":\"es\"}', '2022-06-13 18:18:41', '2023-04-11 21:09:18', 1, NULL),
 (106, 2, 'Dartagnan', 'dartar5.jhu@gmail.com', 'users/June2022/VRPZKAo9pXoeVH9GIumL.jpeg', '2022-06-16 19:54:48', '$2y$10$NfHHwhzVz1.RPKg6lIR3x.u83GIACSghUs.AtsxwJ.2LIrnceQAkm', 'KRzWb7Exs3Di5YBN6n93wbGwZQsRnJcW35yALRflLlkZedFYmX8I8KsQw7SY', '{\"locale\":\"es\"}', '2022-06-16 19:52:05', '2022-11-19 14:10:32', 1, NULL),
 (108, 2, 'Éle de la Rem', 'eledelarem@gmail.com', 'users/default.png', '2022-06-18 16:10:48', '$2y$10$eLkhhlE/P8gKoIhYiw9Y0OHZIAHVe0pu5AbV.Vo0bXUIHS9rNcbju', NULL, NULL, '2022-06-18 16:10:25', '2022-06-18 16:15:29', 1, NULL),
 (109, 2, 'Kelly Cardenas', 'infokellycardenas@gmail.com', 'users/default.png', '2022-06-18 19:17:17', '$2y$10$rFVjd.Nxe9uueg8AGiWjaOZ3qud3DtoELSN2vlZftucWXEoHcFnpK', 'Yviiq86UilI3lKjp0WJN7EtFxB3uTRc3sJFk5qW8AZSK5rwtILGzuOnK5dLl', '{\"locale\":\"es\"}', '2022-06-18 19:15:10', '2023-01-28 20:56:25', 1, NULL),
@@ -2890,10 +3123,10 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (218, 2, 'VAIPS ϟ', 'vaipsxxx@gmail.com', 'users/default.png', '2022-11-16 04:41:29', '$2y$10$E41DBSFxeyceot8tmwxM3uWxqLcInXJQqfHO3WT4AkS3.mp1hzi1O', NULL, NULL, '2022-11-16 04:41:04', '2022-11-16 04:44:05', 1, NULL),
 (219, 2, 'Leo Delgado', 'leodelgado0605@gmail.com', 'users/default.png', '2022-11-18 02:31:13', '$2y$10$qkbL4XFra/IMge3q6iKFy.MdrBGanBE5ngz7L3wpzl0/OGE/R3xKS', '6LgDwMcf3FiolQ7viqqqoxkIERRhWJTBx9AVnNiWml4mG4fR9kSqsf875A5A', NULL, '2022-11-18 02:30:45', '2022-11-18 02:35:11', 1, NULL),
 (225, 2, 'Franco Terrazzino', 'terrazzinofranco1996@gmail.com', 'users/default.png', '2022-12-02 17:22:07', '$2y$10$PbnoDwG6dBXWWJlpXOqs2OwhzoVXepCWtU7Pq6OhiUtfnif7ln1dS', 'SMsemtrDqJQoxawqyYrq3LpGmQR9HKzsoWQKGPKSFhW6Z3CRBkkgm1pwGbz6', NULL, '2022-12-02 17:21:45', '2022-12-02 17:30:18', 1, NULL),
-(243, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2023-01-14 11:21:31', '$2y$10$7Bkx3Z5ONMlokWKUmhhkGejGV.5YN5pj6ITf4j6ZuTNK2ZBLspt6i', NULL, '{\"locale\":\"es\"}', '2023-01-14 11:21:01', '2023-03-29 21:02:25', 1, NULL),
+(243, 2, 'santiagoroncancio', 'sntgrncnc@gmail.com', 'users/default.png', '2023-01-14 11:21:31', '$2y$10$04urt6QqcgUWmjL2yVLeIeF1y4spqT7d8VfK1c1TwAPZAYgbGOcs.', NULL, '{\"locale\":\"es\"}', '2023-01-14 11:21:01', '2023-04-19 19:24:51', 1, NULL),
 (248, 2, 'Alex Sr', 'alexsalvoreyes@gmail.com', 'users/default.png', '2023-01-20 21:30:15', '$2y$10$ABI7s0EWbQ.vnZ5NIwX9euUGxLorrgnAQc1.f/E4rlTu5yIwVlEE2', 'SSTVaPM8kaOYXNFkV8XTp3EWbn8LlHMtCAn1c1Leu0xoOgXF5xpaqWqUGpqi', NULL, '2023-01-20 21:29:04', '2023-01-20 21:34:30', 1, NULL),
 (250, 2, 'Neit_music', 'jeanf.quesada@gmail.com', 'users/default.png', '2023-01-24 14:57:05', '$2y$10$5YyZHLDlJSl4kRObGBkPs.zx4yONRjPeenc8uO1jI3U.KHql.4XwK', NULL, NULL, '2023-01-24 14:56:21', '2023-01-24 15:03:09', 1, NULL),
-(254, 3, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/February2023/a4zy52Pel8bS99V9N2hX.jpg', '2023-02-07 16:27:59', '$2y$10$f49lyr65TR8asbga8Fb/9OTNqhKNiE4lwxGxETKOMHq86miBwFPG6', 'M8DzxuxrkP8ysGeWWmfCFt1YnXlmNF5T4Ef1vx1COd6Zk2Kw2Ehgxjyi6nxt', '{\"locale\":\"es\"}', '2023-02-07 16:27:01', '2023-03-26 16:40:13', 1, NULL),
+(254, 3, 'Javier Varon', 'jvaronbueno@gmail.com', 'users/February2023/a4zy52Pel8bS99V9N2hX.jpg', '2023-02-07 16:27:59', '$2y$10$CidUhXtj1bZvsw.r3TFYEOep6mBoMcZ3L2cWRgi6Mc8InHjikq266', 'tESxTdqYlrZmCLJ6pfPJraOd5vSOC1d4d5b4ouE3enIrobK6n7SFk6TuL4cM', '{\"locale\":\"es\"}', '2023-02-07 16:27:01', '2023-04-19 19:25:10', 1, NULL),
 (256, 2, 'Byonlc2', 'byronlacalle2@gmail.com', 'users/default.png', '2023-02-13 16:19:05', '$2y$10$wp9tbq0skqEq/oHM027tn./QAjMBwU54z93kMJ2n4ZcAFRanYkN2a', NULL, NULL, '2023-02-13 16:18:39', '2023-02-13 16:24:14', 1, NULL),
 (259, 2, 'Jhoan Osorio', 'ao3870389@gmail.com', 'users/default.png', '2023-02-21 08:45:26', '$2y$10$i.zIBFYup415MjrJoWcPu.aFmP7H3PPUs.SXEzbA5K6Zdx1CmsD9K', '5HUMWUhWN2dbJX8gVjuLwhca1CiZk2p3oRRGvXXp1HrDYn7vwENV1l0Jg4Zj', '{\"locale\":\"es\"}', '2023-02-21 08:44:58', '2023-03-18 08:36:53', 1, NULL),
 (262, 2, 'Sebas Rendon', 'sebasrendon907@gmail.com', 'users/default.png', '2023-02-27 05:00:37', '$2y$10$WG37ibnyg2PVoUNLX6GtyOw8mubrnwqsT4DND6vk7SfNxcwWQ6FRu', NULL, NULL, '2023-02-27 05:00:08', '2023-02-27 05:03:47', 1, NULL),
@@ -2920,7 +3153,17 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified
 (296, 2, 'Caelum', 'caelumproficial@gmail.com', 'users/default.png', '2023-04-08 13:12:55', '$2y$10$oVwCxfuFnYVxaDL/9iTNge4eTXbRBV5sfYgnPgUdKXyDhSI5l0vh2', NULL, NULL, '2023-04-08 13:12:18', '2023-04-08 13:12:55', 0, 'hlOCNK1GtNgSAX7OS8zWi1EhTduIEGWvfslPV3P4'),
 (297, 2, 'belico mambo', '28belico@gmail.com', 'users/default.png', '2023-04-09 18:45:59', '$2y$10$C99XIzVkOaqhVMCqnJO.Due1bd/EKHeoqtv6V1xUXOCbrEvK27ycm', NULL, NULL, '2023-04-09 18:43:10', '2023-04-09 18:45:59', 0, '2522VSa74bqaAGNxUXpnUTOfhWSGQRtCrd8mvJ0l'),
 (298, 2, 'El belico', 'rafaelinajimenezjyrstore@gmail.com', 'users/default.png', '2023-04-09 18:51:29', '$2y$10$dUWLA7M1W4r1..9pPCCMfO/DCi6dfB/fT8XkT7DDG1XneYmCZEI82', NULL, NULL, '2023-04-09 18:48:23', '2023-04-09 18:51:29', 0, NULL),
-(299, 2, 'Alan Grizart', 'alangrizart@gmail.com', 'users/default.png', '2023-04-10 21:04:16', '$2y$10$NBN2zGKi/9Geohpw0g6oRuOe0VQ/XTIF9Kd3YZJBgiCAcmpWDZp9C', NULL, NULL, '2023-04-10 07:50:45', '2023-04-10 21:04:16', 0, '63PxWrZeUb7jPitTX58OmHoAveQDTOLWgH0YZAai');
+(299, 2, 'Alan Grizart', 'alangrizart@gmail.com', 'users/default.png', '2023-04-10 21:04:16', '$2y$10$NBN2zGKi/9Geohpw0g6oRuOe0VQ/XTIF9Kd3YZJBgiCAcmpWDZp9C', NULL, NULL, '2023-04-10 07:50:45', '2023-04-10 21:04:16', 0, '63PxWrZeUb7jPitTX58OmHoAveQDTOLWgH0YZAai'),
+(300, 2, 'Luzak king', 'lucaslopez687@gmail.com', 'users/default.png', '2023-04-11 19:38:13', '$2y$10$dUE5.klDTk/xwo1pcAMgm.QLq7PNOGgpi0B6I.lZmXUdCcjCIahU.', NULL, NULL, '2023-04-11 19:37:24', '2023-04-11 19:38:13', 0, 'FleB37hfDHniaM2iH66iELpJXzrzoSifNnpikRsZ'),
+(301, 2, 'Barlog', 'barlog.ys@gmail.com', 'users/default.png', '2023-04-12 16:15:54', '$2y$10$Q8ylQbIMWQ5/anqUhdz.7etuIhdC6BuexuFNOSa7dAV0gf0jSDUPq', NULL, NULL, '2023-04-12 16:15:32', '2023-04-12 16:15:54', 0, NULL),
+(302, 2, 'Picasen', 'picasenoficial@gmail.com', 'users/default.png', '2023-04-14 13:59:43', '$2y$10$BsoHeFX6C5K9/1oKj6Zv3.rAPUMDm136lzGtPTC3Ifa3.bFqVi5sC', 'hcm4yciPWRUb52xrSegBK0lkeXhLW1Wde1Ww7dj0MtRJUwJcX6R6pxa7mQl1', NULL, '2023-04-14 13:59:13', '2023-04-14 14:03:04', 1, 'w6VyOns2v8jdrKmk0wBhPKaR3k2JBkWMAPBGKZEw'),
+(303, 2, 'Heal Scream', 'screamheal@gmail.com', 'users/default.png', '2023-04-15 16:24:51', '$2y$10$psg7crKiiyG0vTbDfp5bqOhh1OD1VapcMInD9lu6UPCMNUWJomE2m', 'yJXJ0FMnofeBwKRemwpdMcq1hG8hQ5mJUCyUxwuJPXnUH9NT5Ji0Y74NIUMD', NULL, '2023-04-15 16:24:25', '2023-04-15 16:26:04', 0, 'PTbqItpGuacydNjPLcjQWD61O5A19sLZjHZaSMKG'),
+(304, 2, 'nunciaydosmundos', 'nunziaydosmundos@gmail.com', 'users/default.png', '2023-04-16 09:05:21', '$2y$10$zAq79B6YMcXHc6BDOXGEnuIWNTjJcLyVdljo6uUFpZxmOkxgkS5IO', 'zKnWgK6OTxz432ky2xhfQKTVGvmL8stsKWvCFIcN5cHx7TDhr3O1ae29RbTf', NULL, '2023-04-16 09:03:13', '2023-04-16 09:05:21', 0, NULL),
+(305, 2, 'Axud', 'contactoazud@gmail.com', 'users/default.png', '2023-04-17 16:51:07', '$2y$10$byfuzwLoSqXuJEzzdk12Re2bVWXNYXiTpWI2rHCuYC7ipf52u70ca', NULL, NULL, '2023-04-17 16:50:35', '2023-04-17 16:51:07', 0, 'Q19aIL0Ss8MLiB3cL13pch9VjZ6qfjNEp67Hawjz'),
+(306, 2, 'Claams', 'musicaclaams@gmail.com', 'users/default.png', '2023-04-18 07:40:48', '$2y$10$hTXQ/PwIPa9.Ku8Lk8tIouGqobaTJv/WZGmBwQiYaGR4AkhAtPH/6', NULL, NULL, '2023-04-18 07:37:45', '2023-04-18 07:40:48', 0, 'BpgCUxU6FV9TUHditJqu2VgdrFyEe2vbHKqa3lbj'),
+(307, 2, 'GabrielooSax', 'Calderonherrerag13@gmail.com', 'users/default.png', '2023-04-18 19:47:53', '$2y$10$T8cK.3kb27jgocqIBCWPsut5RxAyka6cocHnKJHwpVM6kR7Gi7c0m', NULL, NULL, '2023-04-18 19:45:57', '2023-04-18 19:54:13', 1, NULL),
+(308, 2, 'Edwin Tranza', 'elswaggr007@gmail.com', 'users/default.png', '2023-04-20 18:25:15', '$2y$10$WrCQ7wQ3AXgZam8aOVM3uOQj1ID0LsIPhnzEOnsI6aX8QlbQiB5Ry', NULL, NULL, '2023-04-20 17:13:22', '2023-04-20 18:25:15', 0, 'xONVr6QE9C3vW6flVlHxwfA2zlixo3yV7aX3AStD'),
+(309, 2, 'el swagger', 'tranzaedwin@gmail.com', 'users/default.png', '2023-04-20 17:22:11', '$2y$10$QkbuZ4xvgzk.1Ec7yuVCHOV3D2g2JaNvSb0WEph3FuOgtZH6AD6Jq', 'c3QyiROw9N2rMRdHE1l1vp2yGdlw8OlQZlTK4sDri0x2v1D6bvze6dZSk3W3', NULL, '2023-04-20 17:20:56', '2023-04-20 17:22:11', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -2941,7 +3184,7 @@ CREATE TABLE `user_roles` (
 
 CREATE TABLE `years` (
   `id` int(10) UNSIGNED NOT NULL,
-  `descripcion` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL
+  `descripcion` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3194,7 +3437,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `cancion`
 --
 ALTER TABLE `cancion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -3206,13 +3449,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion`
 --
 ALTER TABLE `colaboracion`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- AUTO_INCREMENT de la tabla `colaboracion_art_feas`
@@ -3290,7 +3533,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -3308,13 +3551,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT de la tabla `regalia`
 --
 ALTER TABLE `regalia`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=624;
 
 --
 -- AUTO_INCREMENT de la tabla `repertorio`
 --
 ALTER TABLE `repertorio`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -3344,7 +3587,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=310;
 
 --
 -- AUTO_INCREMENT de la tabla `years`
