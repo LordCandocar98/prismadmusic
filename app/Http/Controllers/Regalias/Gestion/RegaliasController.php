@@ -11,6 +11,7 @@ use App\Models\Regalia;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RegaliasController extends Controller
 {
@@ -39,7 +40,16 @@ class RegaliasController extends Controller
      */
     public function create()
     {
-        return view('regalias.gestion.create');
+        $canciones = DB::table('cancion as ca')
+        ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
+        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
+        ->join('users as u', 'u.email', '=', 'col.cliente_email')
+        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", u.name) AS text')) 
+        ->orderBy('ca.id', 'asc')
+        ->get()
+        ->pluck('text', 'id')
+        ->toArray();
+        return view('regalias.gestion.create', compact('canciones'));
     }
 
     /**
@@ -78,7 +88,7 @@ class RegaliasController extends Controller
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            Log($e->getMessage() . ' - ' . $e->getLine() . ' ' . $e->getFile());
+            Log::debug($e->getMessage() . ' - ' . $e->getLine() . ' ' . $e->getFile());
             $notification = array(
                 'message' => $e->getLine() . " " . $e->getMessage(),
                 'alert-type' => 'warning'

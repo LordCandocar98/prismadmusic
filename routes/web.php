@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::get('/subir-cancion', [RepertorioController::class, 'upSong']);
     Route::get('/cancion/historico/{id}', [CancionController::class, 'getDetailSong']);
     Route::get('/getCanciones', [CancionController::class, 'getCanciones']);
+    Route::get('/getColaboradores', [CancionController::class, 'getColaboradoresCancion']);
     Route::get('/datatable/canciones', [CancionController::class, 'getSongsDatatable']);
     Route::get('/datatable/cancion/{id}', [CancionController::class, 'getSongDatatable']);
     

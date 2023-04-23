@@ -69,13 +69,28 @@
                         <div class="form-group  col-md-12 ">
                             <label for="idcancion">Cancion</label>
                             <select class="cancion col-md-12" name="idcancion" id="idcancion">
-                                @if(old('idcancion')  != null)
-                                <option value="{{ old('idcancion') }}" selected="selected">
-                                    {{ old('item_title') }}
+                                <option value="" disabled="" selected="" hidden="">Seleccione una canción</option>
+                                @foreach ($canciones as $id => $cancion)
+                                <option value="{{ old('idcancion', $id) }}">
+                                    {{ old('item_title', $cancion) }}
                                 </option>
-                                @endif
+                                @endforeach
+
                             </select>
                             <input type="hidden" id="item_title" name ="item_title" value="{{ old('item_title') }}" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="colaboradores">Colaboradores</label>
+                            <table id="colaboradores">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Porcentaje</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
                         <div class="form-group col-md-12 ">
                             <label class="control-label" for="fileInforme">Informe</label>

@@ -74,6 +74,28 @@ class CancionController extends Controller
     }
 
     /**
+     * Mostrar los colaboradores de las canciones
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getColaboradoresCancion (Request $request) {
+        $cancion_id = $request->cancion;
+
+        $colaboradores = DB::table('cancion as ca')
+        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
+        ->join('users as u', 'u.email', '=', 'col.cliente_email')
+        ->where('col.cancion_id', '=', $cancion_id)
+        ->select(
+            'u.name as nombre',
+            'u.email as correo',
+            'col.porcentaje_intelectual as porcentaje'    
+        )
+        ->get();
+
+        return response()->json($colaboradores);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
