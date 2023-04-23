@@ -37,7 +37,7 @@
                                 <td class="text-center">{{ $regalia->fecha_informe_inicio }}</td>
                                 <td class="text-center">{{ $regalia->fecha_informe_final }}</td>
                                 <td class="text-center">
-                                    <a href="{{ url('storage/'.$regalia->informe) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
+                                    <a href="{{ url('storage/'.$regalia->informe) }}" download="Informe-regalia" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="fa fa-download"></i> <span class="hidden-xs hidden-sm">Descargar</span>
                                     </a>
                                 </td>
