@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::post('/uploadcover', [RepertorioController::class, 'uploadcover'])->name('uploadcover');
     Route::post('/uploadsong', [CancionController::class, 'uploadsong'])->name('uploadsong');
 
+    //Proceso de solicitud de pago de un usuario normal.
+    Route::get('/nomina/create', [NominaController::class, 'create'])->name('nomina.create');
+    Route::post('/nomina', [NominaController::class, 'store'])->name('nomina.store');
+
     //Notificacion para solicitud de pago menor a 200 dolares
     Route::get('/sinSaldo',[NominaController::class, 'solicitudPagoDenegado'])->name('sinSaldo');
 
@@ -67,7 +71,10 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
         Route::resource('clientes', ClientesController::class);
         Route::resource('regalias', RegaliasController::class);
         Route::resource('producto', ProductoController::class);
-        Route::resource('nomina', NominaController::class);
+        // Route::resource('nomina', NominaController::class);
+        Route::get('/nomina', [NominaController::class, 'index'])->name('nomina.index');
+        Route::put('/nomina/{id}', [NominaController::class, 'update'])->name('nomina.update');
+        Route::get('/nomina/{id}', [NominaController::class, 'show'])->name('nomina.show');
 
         //Gestion para moderador de historico canciones de clientes
         Route::resource('hitorico-cancion', HistoricoCancionController::class);
