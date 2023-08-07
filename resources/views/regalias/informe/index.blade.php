@@ -33,7 +33,7 @@
                             <td class="text-center">{{ $it + 1 }}</td>
                             <td class="text-center">{{ $regalia->nombre . ' ' . $regalia->apellido }}</td>
                             <td class="text-center">{{ $regalia->numero_identificacion }}</td>
-                            <td class="text-center">{{ $regalia->valor }}</td>
+                            <td class="text-center">USD {{ $regalia->valor }}</td>
                             <td class="text-center">{{ $regalia->fecha_informe_inicio }}</td>
                             <td class="text-center">{{ $regalia->fecha_informe_final }}</td>
                             <td class="text-center">

@@ -44,7 +44,7 @@ class RegaliasController extends Controller
         ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
         ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
         ->join('users as u', 'u.email', '=', 'col.cliente_email')
-        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", u.name) AS text')) 
+        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", u.name) AS text'))
         ->orderBy('ca.id', 'asc')
         ->get()
         ->pluck('text', 'id')
@@ -76,7 +76,7 @@ class RegaliasController extends Controller
                     ->where('users.email', $colaboracion->cliente_email)
                     ->select('cliente.id', 'cliente.nombre_artistico')
                     ->first();
-                $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100), 2);
+                $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100)-0.001, 2);
                 $regalia = new Regalia;
                 $regalia->cliente_id = $cliente->id;
                 $regalia->informe = $filename;

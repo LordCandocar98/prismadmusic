@@ -11,8 +11,8 @@
     </h1>
 @endsection
 @section('content')
-    <div class="col-md-12">  
-        <div class="panel panel-bordered"> 
+    <div class="col-md-12">
+        <div class="panel panel-bordered">
             <div class="panel-body">
                 <div class="table-responsive">
                     <table id="dataTableNomina" name="dataTableNomina" class="display" cellspacing="0" width="100%">
@@ -26,7 +26,7 @@
                                 <th class="text-center">Nombre Banco</th>
                                 <th class="text-center">Tipo Cuenta</th>
                                 <th class="text-center">Valor</th>
-                                <th class="text-center">Acciones</th> 
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,7 +39,7 @@
                                 <td class="text-center">{{ $nomina->numero_cuenta }}</td>
                                 <td class="text-center">{{ $nomina->nombre_banco }}</td>
                                 <td class="text-center">{{ $nomina->tipo_cuenta }}</td>
-                                <td class="text-center">{{ $nomina->valor }}</td>
+                                <td class="text-center">USD {{ $nomina->valor }}</td>
                                 <td class="text-center">
                                     @if ($nomina->desprendible == "")
                                     <a href="{{ url('nomina/'.$nomina->id) }}" title="Editar" class="btn btn-sm btn-primary pull-right edit">
