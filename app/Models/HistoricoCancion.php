@@ -19,4 +19,14 @@ class HistoricoCancion extends Model
         'mes',
         'valor',
     ];
+        /**
+     * Get the user's first name.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getValorFalsoAttribute($value)
+    {
+        return 'USD ' . $this->valor;
+    }
 }

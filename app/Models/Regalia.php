@@ -20,4 +20,8 @@ class Regalia extends Model
         'nomina_id',
         'valor'
     ];
+    public function getValorFalsoAttribute($value)
+    {
+        return 'USD ' . $this->valor;
+    }
 }

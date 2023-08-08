@@ -11,8 +11,8 @@
     </h1>
 @endsection
 @section('content')
-    <div class="col-md-12">  
-        <div class="panel panel-bordered"> 
+    <div class="col-md-12">
+        <div class="panel panel-bordered">
             <div class="panel-body">
                 <div class="table-responsive">
                     <table id="dataTableNomina" name="dataTableNomina" class="display" cellspacing="0" width="100%">
@@ -23,7 +23,7 @@
                                 <th class="text-center">Banco</th>
                                 <th class="text-center">Numero de cuenta Bancaria</th>
                                 <th class="text-center">Valor</th>
-                                <th class="text-center">Acciones</th> 
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,11 +33,22 @@
                                 <td class="text-center">{{ $nomina->fecha_informe }}</td>
                                 <td class="text-center">{{ $nomina->nombre_banco}}</td>
                                 <td class="text-center">{{ $nomina->numero_cuenta }}</td>
-                                <td class="text-center">{{ $nomina->valor }}</td>
+                                <td class="text-center">USD {{ $nomina->valor }}</td>
                                 <td class="text-center">
+                                    <?php
+                                    if($nomina->desprendible==null){
+                                        ?>
+                                         <a href="{{ url('storage/'.$nomina->desprendible) }}" type="button" class="btn btn-sm pull-right btn-dark">Pendiente</a>
+
+                            <?php
+                                    }else{
+                                    ?>
                                     <a href="{{ url('storage/'.$nomina->desprendible) }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                         <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
                                     </a>
+                                    <?php
+                                }
+                                ?>
                                 </td>
                             </tr>
                         @endforeach
