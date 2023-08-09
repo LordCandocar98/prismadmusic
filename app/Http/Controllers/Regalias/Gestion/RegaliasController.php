@@ -44,7 +44,7 @@ class RegaliasController extends Controller
         ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
         ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
         ->join('users as u', 'u.email', '=', 'col.cliente_email')
-        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", u.name) AS text'))
+        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", ca.autor) AS text'))
         ->orderBy('ca.id', 'asc')
         ->get()
         ->pluck('text', 'id')
