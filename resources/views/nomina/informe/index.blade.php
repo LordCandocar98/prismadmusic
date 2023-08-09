@@ -38,7 +38,7 @@
                                     <?php
                                     if($nomina->desprendible==null){
                                         ?>
-                                         <a href="{{ url('storage/'.$nomina->desprendible) }}" type="button" class="btn btn-sm pull-right btn-dark">Pendiente</a>
+                                        <a type="button" class="btn btn-sm pull-right btn-dark">Pendiente</a>
 
                             <?php
                                     }else{

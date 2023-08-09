@@ -29,6 +29,7 @@
                             <th class="text-center">Final</th>
                             <th class="text-center">Pago</th>
                             <th class="text-center">Acciones</th>
+                            <th class="text-center">Tipo saldo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,11 +49,20 @@
                                 !!}
                             </td>
                             <td class="text-center">
+                                @if( $regalia->tipo != null)
                                 @if($regalia->informe != '[]')
                                 <a href="{{ url('storage/' . $regalia->informe) }}" download="{{ $regalia->informe }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                     <i class="fa fa-download"></i> <span class="hidden-xs hidden-sm">Descargar</span>
                                 </a>
                                 @endif
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                {!!
+                                $regalia->tipo != null?
+                                '<button type="button" class="btn btn-info">Saldo</button>':
+                                '<button type="button" class="btn btn-info">Sobrante</button>'
+                                !!}
                             </td>
                         </tr>
                         @endforeach

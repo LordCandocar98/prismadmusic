@@ -108,12 +108,14 @@ class NominaController extends Controller
                     $restante = $suma - $request->valor;
                     $update_regalia = Regalia::find($regalia->id);
                     $update_regalia->nomina_id = $nomina->id;
+                    $update_regalia->tipo='';
                     $update_regalia->save();
 
                     break;
                 }else{
                     $update_regalia = Regalia::find($regalia->id);
                     $update_regalia->nomina_id = $nomina->id;
+                    $update_regalia->tipo=1;
                     $update_regalia->save();
                 }
             }
