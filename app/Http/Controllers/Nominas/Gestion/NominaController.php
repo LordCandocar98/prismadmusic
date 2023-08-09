@@ -103,29 +103,32 @@ class NominaController extends Controller
             $aprobadoRegalias = false;
             foreach ($regalias as $regalia) {
                 $suma += $regalia->valor;
+                //para cuando la suma supera el valor solicitado por el cliente
                 if($suma >= $request->valor){
                     $aprobadoRegalias = true;
                     $restante = $suma - $request->valor;
                     $update_regalia = Regalia::find($regalia->id);
                     $update_regalia->nomina_id = $nomina->id;
-                    $update_regalia->tipo='';
+                    $update_regalia->tipo=NULL;
                     $update_regalia->save();
 
                     break;
                 }else{
+                    //para cuando la suma no supera el valor solicitado
                     $update_regalia = Regalia::find($regalia->id);
                     $update_regalia->nomina_id = $nomina->id;
-                    $update_regalia->tipo=1;
+                    $update_regalia->tipo=NULL;
                     $update_regalia->save();
                 }
             }
-
+            //si hay sobrante, se crea regalia ficticia
             if($restante > 0.0){
                 $regalia_sobrante = new Regalia;
                 $regalia_sobrante->cliente_id            = $request->idCliente;
                 $regalia_sobrante->fecha_informe_inicio  = date("Y-m-d");
                 $regalia_sobrante->fecha_informe_final   = date("Y-m-d");
                 $regalia_sobrante->valor                 = $restante;
+                $regalia_sobrante->tipo                  = 1;
                 $regalia_sobrante->save();
             }
 

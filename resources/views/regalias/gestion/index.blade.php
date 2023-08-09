@@ -49,7 +49,7 @@
                                 !!}
                             </td>
                             <td class="text-center">
-                                @if( $regalia->tipo != null)
+                                @if( $regalia->tipo == null)
                                 @if($regalia->informe != '[]')
                                 <a href="{{ url('storage/' . $regalia->informe) }}" download="{{ $regalia->informe }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                     <i class="fa fa-download"></i> <span class="hidden-xs hidden-sm">Descargar</span>
@@ -58,11 +58,14 @@
                                 @endif
                             </td>
                             <td class="text-center">
+                                @if($regalia->nomina_id != null)
+                                @else
                                 {!!
-                                $regalia->tipo != null?
+                                $regalia->tipo == null?
                                 '<button type="button" class="btn btn-info">Saldo</button>':
                                 '<button type="button" class="btn btn-info">Sobrante</button>'
                                 !!}
+                                @endif
                             </td>
                         </tr>
                         @endforeach
