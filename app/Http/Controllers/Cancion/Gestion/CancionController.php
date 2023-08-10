@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Cancion\Gestion;
 
 use Exception;
 use App\Models\User;
+use App\Models\Persona;
+use App\Models\Cliente;
 use App\Models\Cancion;
 use App\Models\Repertorio;
 use Illuminate\Support\Str;
@@ -184,7 +186,27 @@ class CancionController extends Controller
                         'role_id'  => 2,
                         'confirmation_code' => Str::random(40),
                     ]);
+                       
+                    $persona = Persona::create([
+                        'nombre' => 'default',
+                        'apellido' => 'default',
+                        'pais' => 'default',
+                        'ciudad' => '',
+                        'departamento' => '',
+                        'tipo_documento' => 'cc',
+                        'numero_identificacion' => 0000,
+                        'telefono' => 0000,
+                        'firma' => 'default',
+                        'contrato'=> 'default',
+                        'user_id'=> $usuario->id //AGARRA EL ID DE LA SESIÓN ACTUAL
+                    ]);
 
+                    Cliente::create([
+                        'nombre_artistico' => 'default',
+                        'link_spoty' => 'default',
+                        'persona_id' => $persona->id
+                    ]);
+                    
                     $details = [
                         'title' => 'Asunto: ¡Te invito a Prismad Music!',
                         'subtitle' => $session->email . ' te invita a formar parte de su nuevo éxito "' . $song->titulo . '"',

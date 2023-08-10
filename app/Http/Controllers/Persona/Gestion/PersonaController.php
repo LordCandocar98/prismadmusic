@@ -48,6 +48,8 @@ class PersonaController extends Controller
             }
         }
         if (Auth::user()->registro_confirmed == 0){
+            $condicional_metodo = 0;
+            $accion="registro";
             return view('registro/index', compact('accion','condicional_metodo'));
         }
         return redirect('admin');
@@ -68,6 +70,12 @@ class PersonaController extends Controller
     public function store(RegistroRequest $request)
     {
         $id = Auth::user()->id;
+
+        $personaExist = Persona::where('user_id', $id)->first();
+        $banRegDefault = 0;
+        if(isset($personaExist -> nombre) == 'default'){
+            $banRegDefault = 1;
+        }
         // Pasar a usuario verificado
         User::where('id', $id)->update([
             'registro_confirmed' => 1,
@@ -84,9 +92,11 @@ class PersonaController extends Controller
 
         // Generar documento
         $rutaDocumento = $this->generarDocumento($request, $id);
-
-        $persona = Persona::create([
-            'nombre' => $request->nombre,
+            
+        $persona = Persona::updateOrCreate([
+            'user_id'=> auth()->id() //AGARRA EL ID DE LA SESIÓN ACTUAL
+            ],
+            ['nombre' => $request->nombre,
             'apellido' => $request->apellido,
             'pais' => $request->pais,
             'ciudad' => $request->ciudad,
@@ -95,21 +105,29 @@ class PersonaController extends Controller
             'numero_identificacion' => $request->numero_identificacion,
             'telefono' => $request->telefono,
             'firma' => "firma/" . $imageName,
-            'contrato'=> $rutaDocumento,
-            'user_id'=> auth()->id() //AGARRA EL ID DE LA SESIÓN ACTUAL
+            'contrato'=> $rutaDocumento
         ]);
 
-        Cliente::create([
-            'nombre_artistico' => $request->nombre_artistico,
-            'link_spoty' => $request->link_spoty,
+        Cliente::updateOrCreate([
             'persona_id' => $persona->id
+            ],
+            ['nombre_artistico' => $request->nombre_artistico,
+            'link_spoty' => $request->link_spoty
         ]);
 
-        $notification = array(
-            'message' => 'Registro completado exitosamente!',
-            'alert-type' => 'success'
-        );
-        return redirect('admin')->with($notification);
+        if($banRegDefault == 0){
+            $notification = array(
+                'message' => 'Registro completado exitosamente!',
+                'alert-type' => 'success'
+            );
+            return redirect('admin')->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Registro exitoso, sin embargo, se recomienda cambiar la contraseña por temas de seguridad',
+                'alert-type' => 'warning'
+            );
+            return redirect('admin/users/'.$id.'/edit')->with($notification);
+        }
     }
 
     public function update($id, RegistroRequest $request)
