@@ -25,6 +25,7 @@
                             <th class="text-center">Inicio</th>
                             <th class="text-center">Final</th>
                             <th class="text-center">Acciones</th>
+                            <th class="text-center">Tipo saldo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,9 +38,23 @@
                             <td class="text-center">{{ $regalia->fecha_informe_inicio }}</td>
                             <td class="text-center">{{ $regalia->fecha_informe_final }}</td>
                             <td class="text-center">
-                                <a href="{{ url('storage/'.$regalia->informe) }}" download="{{ $regalia->informe }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
+                                @if( $regalia->tipo == null)
+                                @if($regalia->informe != '[]')
+                                <a href="{{ url('storage/' . $regalia->informe) }}" download="{{ $regalia->informe }}" title="Ver" target="_blank" class="btn btn-sm btn-warning pull-right view">
                                     <i class="fa fa-download"></i> <span class="hidden-xs hidden-sm">Descargar</span>
                                 </a>
+                                @endif
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if($regalia->nomina_id != null)
+                                @else
+                                {!!
+                                $regalia->tipo == null?
+                                '<button type="button" class="btn btn-info">Saldo</button>':
+                                '<button type="button" class="btn btn-info">Sobrante</button>'
+                                !!}
+                                @endif
                             </td>
                         </tr>
                         @endforeach
