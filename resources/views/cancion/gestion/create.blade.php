@@ -463,7 +463,7 @@
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        // form.submit();
+                        form.submit();
                     }
                 });
             } else {
@@ -489,7 +489,7 @@
             Swal.fire({
                 title: 'Audio con error',
                 text: 'El fonograma presenta error',
-                icon: 'danger'
+                icon: 'warning'
             });
         }
 
