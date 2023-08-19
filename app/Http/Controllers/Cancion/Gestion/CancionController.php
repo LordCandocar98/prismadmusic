@@ -11,9 +11,11 @@ use App\Models\Repertorio;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Colaboracion;
+use App\Models\HistoricoCancion;
 use App\Mail\CorreoPrismadMusic;
 use App\Models\ColaboracionArtFea;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -21,8 +23,6 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\Cancion\CancionRequest;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
-use App\Models\HistoricoCancion;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Controlador Maneja Lógica de Canciones.
@@ -39,7 +39,9 @@ use Illuminate\Support\Facades\Log;
 class CancionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar un listado del recurso.
+     * 
+     * @access public
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,8 +51,10 @@ class CancionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario de creación de un nuevo recurso.
      *
+     * @access public
+     * 
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -59,79 +63,109 @@ class CancionController extends Controller
     }
 
     /**
-     * Mostrar todas las canciones
-     *
+     * Obtener todas las canciones.
+     * 
+     * @access public
+     * @param \Illuminate\Http\Request  $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function getCanciones(Request $request)
     {
-        $term = $request->term ?: '';
-        $canciones = DB::table('cancion as ca')
-        ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
-        ->where('ca.titulo', 'like', '%' . $term . '%')
-        ->orWhere('re.titulo', 'like', '%' . $term . '%')
-        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo) AS text'))
-        ->get();
+        try {
+            $term = $request->term ?: '';
+            $canciones = DB::table('cancion as ca')
+                ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
+                ->where('ca.titulo', 'like', '%' . $term . '%')
+                ->orWhere('re.titulo', 'like', '%' . $term . '%')
+                ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo) AS text'))
+                ->get();
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());
+        }
+
         return response()->json($canciones);
     }
 
     /**
      * Mostrar los colaboradores de las canciones
+     * 
+     * @access public
+     * @param \Illuminate\Http\Request  $request
      *
      * @return \Illuminate\Http\Response
      */
     public function getColaboradoresCancion (Request $request) {
-        $cancion_id = $request->cancion;
+        try {
+            $cancion_id = $request->cancion;
 
-        $colaboradores = DB::table('cancion as ca')
-        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
-        ->join('users as u', 'u.email', '=', 'col.cliente_email')
-        ->where('col.cancion_id', '=', $cancion_id)
-        ->select(
-            'u.name as nombre',
-            'u.email as correo',
-            'col.porcentaje_intelectual as porcentaje'    
-        )
-        ->get();
+            $colaboradores = DB::table('cancion as ca')
+                ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
+                ->join('users as u', 'u.email', '=', 'col.cliente_email')
+                ->where('col.cancion_id', '=', $cancion_id)
+                ->select(
+                    'u.name as nombre',
+                    'u.email as correo',
+                    'col.porcentaje_intelectual as porcentaje'    
+                )
+                ->get();
 
-        return response()->json($colaboradores);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create_song(int $id)
-    {
-        $repertorio = Repertorio::find($id);
-        $session = Auth::user();
-        if ($repertorio->terminado == 0) {
-            return view('cancion.gestion.create', compact('repertorio', 'session'));
-        } else {
-            return redirect()->route('repertorio.index');
+            return response()->json($colaboradores);
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());
         }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Crear canción.
+     * 
+     * @access public
+     * @param int $id Identificador de la tabla repertorio.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function createSong(int $id)
+    {
+        try {
+            $repertorio = Repertorio::find($id);
+            $session = Auth::user();
+            if ($repertorio->terminado == 0) {
+                return view('cancion.gestion.create', compact('repertorio', 'session'));
+            } else {
+                return redirect()->route('repertorio.index');
+            }
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());
+        }
+    }
+
+    /**
+     * Compartir canción.
+     * 
+     * @access public
      *
      * @return \Illuminate\Http\Response
      */
     public function shareSong()
     {
-        $session = Auth::user();
-        $colas = Colaboracion::where('cliente_email', '=', $session->email)
-            ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
-            ->get();
+        try {
+            $session = Auth::user();
+            $colas = Colaboracion::where('cliente_email', '=', $session->email)
+                ->join('cancion', 'colaboracion.cancion_id', '=', 'cancion.id')
+                ->get();
 
-        return view('cancion.gestion.share', compact("colas"));
+            return view('cancion.gestion.share', compact("colas"));
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacenar un recurso recién creado.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @access public
+     * @param  \App\Http\Requests\Cancion\CancionRequest  $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function store(CancionRequest $request)
@@ -259,6 +293,14 @@ class CancionController extends Controller
         }
     }
 
+    /**
+     * Verifique codigo de confirmación.
+     *
+     * @access public
+     * @param  mixed  $code Codigo de confirmación.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function verify($code)
     {
         $user = User::where('confirmation_code', $code)->first();
@@ -272,16 +314,22 @@ class CancionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra el recurso especificado.
      *
-     * @param  int  $id
+     * @access public
+     * @param  int  $id Identificado de la tabla Cancion
+     * 
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $cancion = Cancion::find($id);
-        $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
-        return view('cancion.gestion.show', compact('cancion', $cancion, 'colaboraciones', $colaboraciones));
+        try {
+            $cancion = Cancion::find($id);
+            $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
+            return view('cancion.gestion.show', compact('cancion', $cancion, 'colaboraciones', $colaboraciones));
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile()); 
+        }
     }
 
     /**
@@ -297,7 +345,8 @@ class CancionController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * 
+     * @access public
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -319,29 +368,37 @@ class CancionController extends Controller
     }
 
     /**
-     * upload cover in the product view
+     * Subir canción.
      *
-     * @param  Request $request
-     * @return \Illuminate\Http\Response
+     * @access public
+     * @param  \Illuminate\Http\Request  $request
+     * 
+     * @return array Datos de canción.
      */
     public function uploadsong(Request $request)
     {
-        if ($song = $request->file('pista_mp3')) {
-            $destinosong = 'canciones/tmp/';
-            $profilesong  = time() . '.' . $song->getClientOriginalExtension();
-            $song->move(storage_path() . '/app/public/' . $destinosong, $profilesong);
-        };
+        try {
+            if ($song = $request->file('pista_mp3')) {
+                $destinosong = 'canciones/tmp/';
+                $profilesong  = time() . '.' . $song->getClientOriginalExtension();
+                $song->move(storage_path() . '/app/public/' . $destinosong, $profilesong);
+            };
 
-        return [
-            'folder' => $destinosong,
-            'filename' => $profilesong
-        ];
+            return [
+                'folder' => $destinosong,
+                'filename' => $profilesong
+            ];
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile()); 
+        }
     }
 
     /**
      * Datatable con listado de canciones subidas por el usuario actual
-     *
-     * @param  Request $request
+     * 
+     * @access public
+     * @param  \Illuminate\Http\Request  $request
+     * 
      * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
      */
     public function getSongsDatatable(Request $request)
@@ -382,20 +439,26 @@ class CancionController extends Controller
     /**
      * Obtener el detalle de una canción para su historico
      *
+     * @access public
      * @param  int  $id de la canción solicitada
      * @return \Illuminate\Http\View
      */
     public function getDetailSong($id)
     {
-        $cancion = Cancion::findOrFail($id);
-        // $colaboraciones = Colaboracion::where('cancion_id', $id)->get();
-        return view('cancion.gestion.detalle', compact('cancion'));
+        try {
+            $cancion = Cancion::findOrFail($id);
+            return view('cancion.gestion.detalle', compact('cancion'));
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());  
+        }
     }
 
     /**
      * Datatable del historico de una canción
      *
-     * @param  int $id de la canción
+     * @access public
+     * @param  int $id Identificador de la canción.
+     * 
      * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
      */
     public function getSongDatatable(int $id)
@@ -418,6 +481,7 @@ class CancionController extends Controller
                 ->rawColumns(['valores', 'mes_reporte'])
                 ->make(true);
         } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile()); 
             return response()->json([
                 'code'    => 500,
                 'status'  => 'error',
@@ -428,35 +492,42 @@ class CancionController extends Controller
     /**
      * Datatable del Clientes par ver historicos de canciones por cliente
      *
+     * @access public
      * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
      */
     public function getClientesDatatable()
     {
-        $users = DB::table('users')
-            ->join('persona', 'users.id', '=', 'persona.user_id')
-            ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
-            ->select('users.id', 'users.registro_confirmed', 'users.email', 'users.avatar', DB::raw('CONCAT(persona.nombre," ",persona.apellido) AS nombre_completo'))
-            ->where('role_id', 2)
-            ->get();
-        $url = env('APP_URL'); 
-        return Datatables::of($users)
-            ->addColumn('ver_colaboraciones', function ($user) use ($url) {
-                return "<abbr title='Ver Colaboraciones'><a href='" . $url . "/hitorico-cliente/canciones/" . $user->id . "' class='btn btn-sm btn-primary pull-right edit'><i class='fa fa-external-link' aria-hidden='true'></i> Ver Colaboraciones</a></abbr>";
-            })
-            ->addColumn('avatar', function ($user) use ($url) {
-                return '<img src="{{ asset("storage/"' . $user->avatar . '") }}" style="width:100px">';
-            })
-            ->addColumn('registro_confirmed', function ($user) use ($url) {
-                return '<span class="label label-primary">' . $user->registro_confirmed === 0 ? "Incompleto" : "Completado" . '</span>';
-            })
-            ->rawColumns(['ver_colaboraciones', 'avatar', 'registro_confirmed'])
-            ->make(true);    
+        try {
+            $users = DB::table('users')
+                ->join('persona', 'users.id', '=', 'persona.user_id')
+                ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
+                ->select('users.id', 'users.registro_confirmed', 'users.email', 'users.avatar', DB::raw('CONCAT(persona.nombre," ",persona.apellido) AS nombre_completo'))
+                ->where('role_id', 2)
+                ->get();
+            $url = env('APP_URL'); 
+            return Datatables::of($users)
+                ->addColumn('ver_colaboraciones', function ($user) use ($url) {
+                    return "<abbr title='Ver Colaboraciones'><a href='" . $url . "/hitorico-cliente/canciones/" . $user->id . "' class='btn btn-sm btn-primary pull-right edit'><i class='fa fa-external-link' aria-hidden='true'></i> Ver Colaboraciones</a></abbr>";
+                })
+                ->addColumn('avatar', function ($user) use ($url) {
+                    return '<img src="{{ asset("storage/"' . $user->avatar . '") }}" style="width:100px">';
+                })
+                ->addColumn('registro_confirmed', function ($user) use ($url) {
+                    return '<span class="label label-primary">' . $user->registro_confirmed === 0 ? "Incompleto" : "Completado" . '</span>';
+                })
+                ->rawColumns(['ver_colaboraciones', 'avatar', 'registro_confirmed'])
+                ->make(true); 
+        } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile()); 
+        }   
     }
 
      /**
      * Datatable con listado de canciones subidas por cliente.
      *
-     * @param  Request $request
+     * @access public
+     * @param  \Illuminate\Http\Request  $request
+     * 
      * @return \Illuminate\Http\Response|\Yajra\DataTables\Facades\DataTables
      */
     public function getSongsDatatableCliente(Request $request)
@@ -506,13 +577,12 @@ class CancionController extends Controller
                 ->rawColumns(['accion', 'link_preguardado', 'total'])
                 ->make(true);
         } catch (Exception $exception) {
+            Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile()); 
             return response()->json([
                 'code'    => 500,
                 'status'  => 'error',
                 'message' => $exception->getMessage()
             ], 500, [], JSON_PRETTY_PRINT);
         }
-    }
-
-        
+    }   
 }

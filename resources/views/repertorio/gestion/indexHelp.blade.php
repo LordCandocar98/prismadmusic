@@ -55,7 +55,7 @@
                                 <td class="text-center">{{ $repertorio->titulo}}</td>
                                 <td class="text-center">{{ $repertorio->genero}}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('create_song', $repertorio->id) }}" class="btn btn-primary">Agregar Canción</a>
+                                    <a href="{{ route('createSong', $repertorio->id) }}" class="btn btn-primary">Agregar Canción</a>
                                 </td>
                             </tr>
                             @endforeach

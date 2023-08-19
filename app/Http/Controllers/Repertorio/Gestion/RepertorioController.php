@@ -193,7 +193,7 @@ class RepertorioController extends Controller
     
             DB::commit();
 
-            return redirect()->route('create_song', $repertorio->id);
+            return redirect()->route('createSong', $repertorio->id);
         } catch (Exception $exception) {
             Log::error($exception->getLine() . ' - ' . $exception->getMessage() . ' - ' . $exception->getFile());   
             DB::rollBack();

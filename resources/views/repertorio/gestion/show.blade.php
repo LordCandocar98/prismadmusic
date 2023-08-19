@@ -109,7 +109,7 @@
             <h5 class="card-title"><i class="fa fa-headphones" aria-hidden="true"></i> Música</h5>
 
             @if(($repertorio->terminado == 0) and ($users->id  == auth()->user()->id))
-                <a class="btn btn-primary float-right mb-3" href="{{ route('create_song', $repertorio->id) }}">Agregar canción</a>
+                <a class="btn btn-primary float-right mb-3" href="{{ route('createSong', $repertorio->id) }}">Agregar canción</a>
             @endif
         </div>
 

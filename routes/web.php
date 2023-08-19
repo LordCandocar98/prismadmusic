@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     Route::get('/datatable/canciones', [CancionController::class, 'getSongsDatatable']);
     Route::get('/datatable/cancion/{id}', [CancionController::class, 'getSongDatatable']);
     
-    Route::get('/cancion-creador/{id}', [CancionController::class, 'create_song'])->name('create_song');
+    Route::get('/cancion-creador/{id}', [CancionController::class, 'createSong'])->name('createSong');
     Route::get('/cancion-colaboracion', [CancionController::class, 'shareSong'])->name('shareSong');
     Route::post('/finishProduct/{id}', [RepertorioController::class, 'finishProduct'])->name('finishProduct');
     Route::post('/annulProduct/{id}', [RepertorioController::class, 'annulProduct'])->name('annulProduct');
