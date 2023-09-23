@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Regalias\Gestion;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Regalias\Gestion\RegaliasRequest;
+use App\Http\Requests\Regalias\Varios\RegaliasVariasRequest;
 use App\Models\Cliente;
 use App\Models\Colaboracion;
 use App\Models\Persona;
@@ -13,7 +13,9 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class RegaliasController extends Controller
+
+
+class RegaliasVariasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,11 +30,15 @@ class RegaliasController extends Controller
             ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
             ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
             ->where('role_id', 2)
-            ->where('tipo',1)
-            ->orWhere('tipo',null)
-            // ->whereNull('nomina_id')
+            ->where('tipo',2)
+            ->orWhere('tipo',3)
+            //->where('pago_externo', 1)
             ->get();
-        return view('regalias.gestion.index', compact('regalias'));
+
+            //cambiar esta view
+
+        return view('regalias.varios.index', compact('regalias'));
+        //
     }
 
     /**
@@ -42,16 +48,16 @@ class RegaliasController extends Controller
      */
     public function create()
     {
-        $canciones = DB::table('cancion as ca')
-        ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
-        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
-        ->join('users as u', 'u.email', '=', 'col.cliente_email')
-        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", ca.autor) AS text'))
-        ->orderBy('ca.id', 'asc')
+        $clientes = DB::table('cliente as cl')
+        ->join('persona as pe', 'pe.id', '=', 'cl.persona_id')
+        ->select('cl.id', DB::raw('CONCAT(pe.nombre, " - ",pe.apellido) AS text'))
+        ->where('cl.pago_externo', '=', 1)
+        ->orderBy('cl.id', 'asc')
         ->get()
         ->pluck('text', 'id')
         ->toArray();
-        return view('regalias.gestion.create', compact('canciones'));
+        return view('regalias.varios.create', compact('clientes'));
+        //
     }
 
     /**
@@ -60,35 +66,24 @@ class RegaliasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegaliasRequest $request)
+    public function store(RegaliasVariasRequest $request)
     {
         try {
-            $filename = "";
-            if ($xlsArchivo = $request->file('fileInforme')) {
-                $destinoXls = 'Regalias/' . date('FY') . '/';
-                $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
-                $filename = $destinoXls . $profileXls;
-                $xlsArchivo->move(storage_path() . '/app/public/' . $destinoXls, $profileXls);
-            };
             DB::beginTransaction();
-            $colaboraciones = Colaboracion::where('cancion_id', $request->idcancion)->get();
-            foreach ($colaboraciones as $colaboracion) {
-                $cliente = User::join('persona', 'persona.user_id', 'users.id')
-                    ->join('cliente', 'cliente.persona_id', 'persona.id')
-                    ->where('users.email', $colaboracion->cliente_email)
-                    ->select('cliente.id', 'cliente.nombre_artistico')
-                    ->first();
-                $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100)-0.001, 2);
-                $regalia = new Regalia;
-                $regalia->cliente_id = $cliente->id;
-                $regalia->informe = $filename;
-                $regalia->fecha_informe_inicio =  date('Y-m-d', strtotime($request->fecha_informe_inicio));
-                $regalia->fecha_informe_final = date('Y-m-d', strtotime($request->fecha_informe_final));
-                $regalia->valor = $valor_cliente;
-                $regalia->save();
-            }
-            DB::commit();}
-            catch (Exception $e) {
+            $cliente = cliente::where('id', $request ->idcliente2) ->first();
+            $valor_cliente = $request->valor2;
+            $regalia = new Regalia;
+            $regalia->cliente_id = $cliente->id;
+            $regalia->fecha_informe_inicio =  date("Y-m-d");
+            $regalia->fecha_informe_final = date("Y-m-d");
+            $regalia->valor = $valor_cliente;
+            $regalia->tipo = 2;
+            $regalia->save();
+            DB::commit();
+
+        }
+    
+        catch (Exception $e) {
             DB::rollBack();
             Log::debug($e->getMessage() . ' - ' . $e->getLine() . ' ' . $e->getFile());
             $notification = array(
@@ -102,8 +97,10 @@ class RegaliasController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect('regalias')->with($notification);
+        return redirect('regaliasvarias')->with($notification);
     }
+        //
+    
 
     /**
      * Display the specified resource.
@@ -120,10 +117,15 @@ class RegaliasController extends Controller
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->select('users.*', 'persona.*', 'cliente.*')
+            ->where('pago_externo', 1)
             ->where('role_id', 2)
             ->where('registro_confirmed', 1)
             ->get();
+
+            //cambiar esta view
+
         return view('regalias.gestion.edit', compact('regalia', 'persona', 'clientes', 'client'));
+        //
     }
 
     /**
@@ -144,29 +146,14 @@ class RegaliasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RegaliasRequest $request, $id)
+    public function update(RegaliasVariasRequest $request, $id)
     {
+        
         $regalia = Regalia::find($id);
         if ($regalia->nomina_id == null) {
             //Guardado y path del archivo
             $filename = "";
-            if ($xlsArchivo = $request->file('fileInforme')) {
-                $destinoXls = 'Regalias/' . date('FY') . '/';
-                $profileXls  = time() . '.' . $xlsArchivo->getClientOriginalExtension();
-                $filename = $destinoXls . $profileXls;
-                $xlsArchivo->move(storage_path() . '/app/public/' . $destinoXls, $profileXls);
-            };
 
-            //Control de archivos vacios
-            $regalia->cliente_id = $request->idCliente;
-            if ($filename != "") {
-                $regalia->informe = $filename;
-            } else {
-                $regalia->informe = $regalia->informe;
-            }
-
-            $regalia->fecha_informe_inicio  = $request->fecha_informe_inicio;
-            $regalia->fecha_informe_final   = $request->fecha_informe_final;
             $regalia->valor                 = $request->valor;
             $regalia->save();
             $notification = array(
@@ -183,6 +170,7 @@ class RegaliasController extends Controller
 
             return redirect('regalias')->with($notification);
         }
+        //
     }
 
     /**

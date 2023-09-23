@@ -8,6 +8,7 @@ use App\Http\Controllers\Cancion\Gestion\HistoricoCancionController;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
+use App\Http\Controllers\Regalias\Gestion\RegaliasVariasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
 use App\Http\Controllers\Nominas\Informe\InformeNominaController;
 use App\Http\Controllers\Persona\Gestion\PersonaController;
@@ -70,6 +71,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     //Route roles: ADMIN y Moderadores.
         Route::resource('clientes', ClientesController::class);
         Route::resource('regalias', RegaliasController::class);
+        Route::resource('regaliasvarias', RegaliasVariasController::class);
         Route::resource('producto', ProductoController::class);
         // Route::resource('nomina', NominaController::class);
         Route::get('/nomina', [NominaController::class, 'index'])->name('nomina.index');
