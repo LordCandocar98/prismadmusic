@@ -181,6 +181,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        $(document).ready(function() {
+            $("form").keypress(function(e) {
+                if (e.which == 13) {
+                    return false;
+                }
+            });
+        });
         document.addEventListener("DOMContentLoaded", function () {
             const btnSave = document.getElementById("btnSave");
             btnSave.addEventListener("click", function () {
