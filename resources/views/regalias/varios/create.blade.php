@@ -1,10 +1,10 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
     <li class="active">
-        <a href="{{ route('regaliasvarias.index') }}"><i class="voyager-wallet" aria-hidden="true"></i> Gestion de Regalias Externas</a>
+        <a href="{{ route('regalias-externas.index') }}"><i class="voyager-wallet" aria-hidden="true"></i> Gestion de Regalias Externas</a>
     </li>
     <li class="active">
-        <a href="{{ route('regaliasvarias.create') }}"><i class="voyager-plus" aria-hidden="true"></i></i> Crear Regalia Externa</a>
+        <a href="{{ route('regalias-externas.create') }}"><i class="voyager-plus" aria-hidden="true"></i></i> Crear Regalia Externa</a>
     </li>
 @endsection
 @section('page_header')
@@ -58,7 +58,7 @@
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
-                    <form enctype="multipart/form-data" action="{{ route('regaliasvarias.store') }}" method="POST" id="formRegalias2">
+                    <form enctype="multipart/form-data" action="{{ route('regalias-externas.store') }}" method="POST" id="formRegalias2">
                         @csrf
                         <div>
                             @if ($errors->any())

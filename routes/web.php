@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
     //Route roles: ADMIN y Moderadores.
         Route::resource('clientes', ClientesController::class);
         Route::resource('regalias', RegaliasController::class);
-        Route::resource('regaliasvarias', RegaliasVariasController::class);
+        Route::resource('regalias-externas', RegaliasVariasController::class);
         Route::resource('producto', ProductoController::class);
         // Route::resource('nomina', NominaController::class);
         Route::get('/nomina', [NominaController::class, 'index'])->name('nomina.index');

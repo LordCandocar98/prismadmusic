@@ -97,7 +97,7 @@ class RegaliasVariasController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect('regaliasvarias')->with($notification);
+        return redirect('regalias-externas')->with($notification);
     }
         //
     

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('addBreadcrumbs')
 <li class="active">
-    <a href="{{ route('regaliasvarias.index') }}"><i class="voyager-wallet" aria-hidden="true"></i> Gestion de Regalias Externas</a>
+    <a href="{{ route('regalias-externas.index') }}"><i class="voyager-wallet" aria-hidden="true"></i> Gestion de Regalias Externas</a>
 </li>
 @endsection
 @section('page_header')
@@ -9,7 +9,7 @@
     <i class="voyager-wallet" aria-hidden="true"></i>
     Gestión de Regalias Externas
 </h1>
-<a href="{{ route('regaliasvarias.create') }}" class="btn btn-success btn-add-new">
+<a href="{{ route('regalias-externas.create') }}" class="btn btn-success btn-add-new">
     <i class="voyager-plus"></i> <span>Crear</span>
 </a>
 @endsection
