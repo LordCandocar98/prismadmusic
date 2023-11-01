@@ -31,7 +31,7 @@ class ClienteW extends AbstractWidget
             'text'   => "Actualmente hay un total de $count clientes registradas en plataforma. Haga clic en el botón de abajo para ver todos los clientes.",
             'button' => [
                 'text' => 'Ver todos los clientes',
-                'link' => $user->role_id == 3 ?  url("/admin/clientes") : route('voyager.cliente.index'),
+                'link' => $user->role_id == 3 ?  url("/admin/cliente") : route('voyager.cliente.index'),
                 'color' => "#34a4eb",
             ],
             'image' => '/images/cliente.jpg',
