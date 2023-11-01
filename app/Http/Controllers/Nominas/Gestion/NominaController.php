@@ -128,7 +128,12 @@ class NominaController extends Controller
                 $regalia_sobrante->fecha_informe_inicio  = date("Y-m-d");
                 $regalia_sobrante->fecha_informe_final   = date("Y-m-d");
                 $regalia_sobrante->valor                 = $restante;
-                $regalia_sobrante->tipo                  = 1;
+                if($regalia_sobrante->tipo = null || 1){
+                    $regalia_sobrante->tipo                  = 1;
+                }
+                if ($regalia_sobrante->tipo = 2 || 3){
+                    $regalia_sobrante->tipo                  = 3;
+                }
                 $regalia_sobrante->save();
             }
 
