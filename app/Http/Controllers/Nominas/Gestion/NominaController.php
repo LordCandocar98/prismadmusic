@@ -9,10 +9,13 @@ use App\Models\Cliente;
 use App\Models\Nomina;
 use App\Models\Persona;
 use App\Models\Regalia;
+use App\Models\User;
+use App\Mail\CorreoPrismadMusic;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Svg\Tag\Rect;
 
 class NominaController extends Controller
@@ -78,6 +81,7 @@ class NominaController extends Controller
     public function store(NominaRequest $request)
     {
         try{
+            $users = User::whereIn('role_id', [1, 3])->get();
             $user = Auth::user();
             $restante = 0.0;
             DB::beginTransaction();
@@ -93,7 +97,15 @@ class NominaController extends Controller
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
-            ->select('regalia.valor','regalia.id')
+            ->select(
+                'regalia.valor',
+                'regalia.id',
+                'cliente.nombre_artistico',
+                'cliente.link_spoty',
+                'persona.nombre',
+                'persona.apellido',
+                'persona.telefono'
+            )
             ->where('users.role_id',2)
             ->where('users.id', $user->id)
             ->whereNull('nomina_id')
@@ -111,7 +123,18 @@ class NominaController extends Controller
                     $update_regalia->nomina_id = $nomina->id;
                     $update_regalia->tipo=NULL;
                     $update_regalia->save();
-
+                    foreach ($users as $moderador) {
+                        $details = [
+                            'title' => 'Asunto: Hay una nueva solicitud de nomina',
+                            'subtitle' => 'Sr(a). ' . $moderador->name . '. Un nuevo artista solicito un pago con nombre artístico: ' . $regalia->nombre_artistico,
+                            'body' => 'Un usuario ha pedido un pago: ' .
+                                'Nombre: ' . $regalia->nombre . ', Apellido: ' . $regalia->apellido . ', Celular: ' . $regalia->telefono . 'Link spotify: ' . $regalia->link_spoty,
+                            'descripcion' => 'Buen día',
+                            'button' => 'Revisa en el portal',
+                            'enlace' => url('/nomina')
+                        ];
+                        Mail::to($moderador->email)->send(new CorreoPrismadMusic($details));
+                    }
                     break;
                 }else{
                     //para cuando la suma no supera el valor solicitado
@@ -158,7 +181,6 @@ class NominaController extends Controller
             'message' => 'Solicitud creada exitosamente!',
             'alert-type' => 'success'
         );
-
         return redirect('admin')->with($notification);
     }
 

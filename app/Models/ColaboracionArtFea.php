@@ -14,7 +14,8 @@ class ColaboracionArtFea extends Model
     protected $fillable = [
         'nombre',
         'tipo_colaboracion',
-        'cancion_id'
+        'cancion_id',
+        'link_spoty'
     ];
 }
 

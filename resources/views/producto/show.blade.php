@@ -48,6 +48,28 @@
                             <div><b>Número de catálogo</b> {{ $repertorio->numero_catalogo }}</div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 0;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Artista</th>
+                                        <th scope="col">Spotify</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($colaboradores as $key => $colaborador)
+                                    <tr>
+                                        <th scope="row">{{ $key+1 }}</th>
+                                        <td>{{ $colaborador->nombre }}</td>
+                                        <td>{{ $colaborador->link_spoty }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

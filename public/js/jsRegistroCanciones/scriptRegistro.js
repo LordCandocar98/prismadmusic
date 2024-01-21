@@ -117,12 +117,16 @@ $(document).ready(function () {
                 <div class="col-md-12">
                     <label for="nombreartista">Ingresar nombre del artista</label>
                     <br>
-                    <input type="text" id="nombreartista-` + cantcolArtista + `" name="nombreartista[]" class="form-control" required>
+                    <input type="text" id="nombreartista-` + cantcolArtista + `" name="nombreartista[]" placeholder="Digitar nombre del artista principal" class="form-control"  required>
+                    <br>
+                    <input type="text" id="linkspoty-` + cantcolArtista + `" name="linkspoty[]" placeholder="Ingresar link de spotify" class="form-control" required>
                 </div>
             </div>
             `;
-
+        
         $("#zoneaddcol-artista").append(cola);
+
+        $("#cantcolArtista").val(cantcolArtista);
     });
 
     $("#addcol-featuring").on('click', function () {
@@ -165,6 +169,7 @@ $(document).ready(function () {
             $("#artista-" + cantcolArtista).remove();
 
             cantcolArtista -= 1;
+            $("#cantcolArtista").val(cantcolArtista);
 
         } else {
             Swal.fire({

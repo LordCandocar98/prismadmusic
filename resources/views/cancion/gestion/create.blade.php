@@ -70,6 +70,7 @@
     <input type="hidden" name="repertorio" value="{{$repertorio->id}}">
     <input type="hidden" name="session_email" id="session_email" value="{{ $session->email }}">
     <input type="hidden" id="cantcol" name="cantcol" value="0">
+    <input type="hidden" id="cantcolArtista" name="cantcolArtista" value="0">
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
@@ -103,7 +104,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3 {{ $errors->has('compositor') ? 'has-error' : '' }}">
-                        <label for="compositor">Compositor</label>
+                        <label for="compositor">Nombre real del compositor <i class="fa fa-question-circle" aria-hidden="true" id="helpCompositor" style="cursor: pointer;"></i></label>
                         <br>
                         <input type="text" class="form-control" id="compositor" name="compositor" placeholder="Ejemplo: Wolfgang Amadeus Mozart " value="{{ old('compositor') }}">
                         @if ($errors->has('compositor'))
@@ -265,16 +266,21 @@
         </div>
     </div>
     <br>
-    <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('artistaPrincipal') ? 'has-error' : '' }}">
+    <div class="card" style="width: 100%; padding-bottom: 2em; {{ $errors->has('nombreartista-0') ? 'has-error' : '' }}">
         <div class="card-body">
             <h5 class="card-title">Artista Principales</h5>
             <div class="row">
                 <div class="col-md-12 pb-5">
-                    <label for="artistaPrincipal">Nombre del artista principal</label>
+                    <label for="nombreartista-0">Nombre del artista principal</label>
                     <br>
-                    <input type="text" class="form-control" id="artistaPrincipal" name="artistaPrincipal" placeholder="Digitar nombre del artista principal" value="{{ old('artistaPrincipal') }}">
-                    @if ($errors->has('artistaPrincipal'))
-                    <span class="form-validation">{{ $errors->first('artistaPrincipal') }}</span>
+                    <input type="text" class="form-control" id="nombreartista-0" name="nombreartista[]" placeholder="Digitar nombre del artista principal" value="{{ old('nombreartista-0') }}">
+                    @if ($errors->has('nombreartista-0'))
+                    <span class="form-validation">{{ $errors->first('nombreartista-0') }}</span>
+                    @endif
+                    <br>
+                    <input type="text" class="form-control" id="linkspoty-0" name="linkspoty[]" placeholder="Ingresar link de spotify" value="{{ old('linkspoty') }}" required>
+                    @if ($errors->has('linkspoty-0'))
+                    <span class="form-validation">{{ $errors->first('linkspoty-0') }}</span>
                     @endif
                 </div>
             </div>
@@ -431,6 +437,25 @@
 
 <!-- CDN ALERT2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function validarFormulario() {
+        let cantcolArtista = $("#cantcolArtista").val();
+        for (let i = 0; i <= cantcolArtista; i++) {
+            var currentLink = "linkspoty-" + i ;
+            var enlaceInput = document.getElementById(currentLink);
+            var enlaceValue = enlaceInput.value.trim();
+            // Utilizar una expresión regular para validar la URL
+            var urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+
+            if (!urlRegex.test(enlaceValue)) {
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
+
 <script>
     $("#addsong").click(function(event) {
         event.preventDefault();
@@ -453,6 +478,10 @@
             if (suma == 100) {
 
                 let form = $('#formRegistro');
+                let otroInput = document.getElementById('compositor');
+                let otroValue = otroInput.value.trim();
+                let palabras = otroValue.split(/\s+/);
+                let pivote = true;
 
                 Swal.fire({
                     title: '¿Quieres guardar los cambios?',
@@ -463,7 +492,26 @@
                 }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
-                        form.submit();
+                            if (palabras.length < 2) {
+                                Swal.fire({
+                                    title: 'Error en el nombre real del compositor',
+                                    text: 'El nombre debe contener almenos dos palabras',
+                                    icon: 'warning'
+                                });
+                                pivote = false;
+                            }
+                            if (validarFormulario() == false) {
+                                Swal.fire({
+                                    title: 'Algun link de spotify es incorrecto',
+                                    text: 'Por favor, ingrese una URL válida.',
+                                    icon: 'warning'
+                                }); 
+                                pivote = false;
+                            }
+                            if (pivote == true) {
+                                Swal.fire('Guardado!', '', 'success');
+                                form.submit();
+                            }
                     }
                 });
             } else {
@@ -501,6 +549,13 @@
             'question'
         )
     });
+$('#helpCompositor').click(function() {
+    Swal.fire(
+        'Nombre real del compositor',
+        'Recuerda no poner el nombre de artista o apodos, ingresa el nombre real del compositor. Minimo 2 palabras',
+        'question'
+    )
+});
     $('#upSong').click(function() {
         Swal.fire(
             'Subir audio',

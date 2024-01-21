@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cancion;
 use App\Models\Persona;
 use App\Models\Repertorio;
+use App\Models\ColaboracionArtFea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,8 +67,9 @@ class ProductoController extends Controller
         if(Auth::user()->role_id == 3){
             $repertorio = Repertorio::find($id);
             $canciones = Cancion::where('repertorio_id', '=', $id)->get();
+            $colaboradores = ColaboracionArtFea::whereIn('cancion_id', $canciones->pluck('id'))->get();
             $principal = Persona::where('id', '=', $repertorio->artista_principal)->get();
-            return view('producto.show', compact('repertorio', 'canciones', 'principal'));
+            return view('producto.show', compact('repertorio', 'canciones', 'principal', 'colaboradores'));
         }else{
             return redirect()->route('repertorio.index');
         }
