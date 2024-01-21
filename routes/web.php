@@ -7,6 +7,7 @@ use App\Http\Controllers\Cancion\Gestion\CancionController;
 use App\Http\Controllers\Cancion\Gestion\HistoricoCancionController;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
+use App\Http\Controllers\ConsultaUsuario\Gestion\ConsultaUsuarioController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasVariasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
@@ -99,6 +100,9 @@ Route::group(['middleware' => ['auth', 'verified', 'autenticado']], function () 
             Artisan::call('config:cache');
             return "Cache is cleared";
         });
+
+        Route::get('/admin/consultausuarios', [ConsultaUsuarioController::class, 'index']);
+        Route::get('/admin/datable-clientes', [ConsultaUsuarioController::class, 'getUsuariosDatatable']);
     });
 });
 

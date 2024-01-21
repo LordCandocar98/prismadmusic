@@ -171,7 +171,7 @@
             labelIdle: 'Arrastra y suelta tu archivo o <span class="filepond--label-action">examinar</span>',
             maxParallelUploads: 1,
             allowFileTypeValidation: true,
-            acceptedFileTypes: ['application/pdf'],
+            acceptedFileTypes: ['application/pdf', 'image/*'],
         });
 
         FilePond.setOptions(labels_es_ES);

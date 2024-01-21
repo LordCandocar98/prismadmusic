@@ -8,6 +8,7 @@ use App\Models\Persona;
 use App\Models\Repertorio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -19,7 +20,20 @@ class ProductoController extends Controller
     public function index()
     {
         if(Auth::user()->role_id == 3){ //Moderador
-            $repertorio = Repertorio::where('terminado', '=', 1)->get();
+            // $repertorio = Repertorio::where('terminado', '=', 1)->get();
+            $repertorio = DB::table('repertorio')
+            ->join('cancion', 'cancion.repertorio_id', '=', 'repertorio.id')
+            ->leftjoin('colaboracion_art_feas as caf', 'caf.cancion_id', '=', 'cancion.id')
+            ->where('repertorio.terminado', '=', 1)
+            ->select(
+                'repertorio.*', 
+                // DB::raw('GROUP_CONCAT(DISTINCT caf.nombre) as artPrincipal')
+                DB::raw('GROUP_CONCAT(DISTINCT CASE WHEN caf.tipo_colaboracion = "Artista Principal" THEN caf.nombre ELSE NULL END) as artPrincipal')
+            )
+            ->groupBy('repertorio.id')
+            ->orderBy('repertorio.id','desc')
+            ->get();
+            // dd($repertorio);
             return view('producto.index', ['repertorio' => $repertorio]);
         }else{
             return redirect()->route('repertorio.index');

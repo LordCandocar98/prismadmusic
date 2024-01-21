@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">N°</th>
+                                <th class="text-center">Fecha Solicitud</th>
                                 <th class="text-center">Nombres y Apellidos</th>
                                 <th class="text-center">Correo</th>
                                 <th class="text-center">Numero Telefonico</th>
@@ -33,6 +34,7 @@
                         @foreach ($nominas as $nomina)
                         <tr role="row">
                                 <td class="text-center"></td>
+                                <td class="text-center">{{ $nomina->created_at }}</td>
                                 <td class="text-center">{{ $nomina->nombre.' '.$nomina->apellido }}</td>
                                 <td class="text-center">{{ $nomina->email }}</td>
                                 <td class="text-center">{{ $nomina->telefono }}</td>

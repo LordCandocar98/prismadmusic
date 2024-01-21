@@ -38,6 +38,7 @@ class NominaController extends Controller
                 'persona.telefono',
                 'cliente.nombre_artistico',
                 'nomina.id',
+                'nomina.created_at',
                 'nomina.desprendible',
                 'nomina.valor',
                 'nomina.numero_cuenta',
@@ -87,6 +88,7 @@ class NominaController extends Controller
                 $nomina->numero_cuenta  = $request->numero_cuenta;
                 $nomina->tipo_cuenta    = $request->tipo_cuenta;
                 $nomina->valor          = $request->valor;
+                $nomina->created_at     = now();
                 $nomina->save();
 
             $regalias = DB::table('users')
