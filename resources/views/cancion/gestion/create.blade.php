@@ -71,6 +71,7 @@
     <input type="hidden" name="session_email" id="session_email" value="{{ $session->email }}">
     <input type="hidden" id="cantcol" name="cantcol" value="0">
     <input type="hidden" id="cantcolArtista" name="cantcolArtista" value="0">
+    <input type="hidden" id="cantcolFeaturing" name="cantcolFeaturing" value="0">
     <div class="col-md-12">
         <div class="panel panel-bordered">
             <div class="panel-body">
@@ -278,7 +279,7 @@
                     <span class="form-validation">{{ $errors->first('nombreartista-0') }}</span>
                     @endif
                     <br>
-                    <input type="text" class="form-control" id="linkspoty-0" name="linkspoty[]" placeholder="Ingresar link de spotify" value="{{ old('linkspoty') }}" required>
+                    <input type="text" class="form-control" id="linkspoty-0" name="linkspoty[]" placeholder="Ingresar link de spotify" value="{{ old('linkspoty-0') }}" required>
                     @if ($errors->has('linkspoty-0'))
                     <span class="form-validation">{{ $errors->first('linkspoty-0') }}</span>
                     @endif
@@ -441,6 +442,8 @@
 <script>
     function validarFormulario() {
         let cantcolArtista = $("#cantcolArtista").val();
+        let cantcolFeaturing = $("#cantcolFeaturing").val();
+        let opcion = 0;
         for (let i = 0; i <= cantcolArtista; i++) {
             var currentLink = "linkspoty-" + i ;
             var enlaceInput = document.getElementById(currentLink);
@@ -449,10 +452,22 @@
             var urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
 
             if (!urlRegex.test(enlaceValue)) {
-                return false;
+                opcion = 1;
+                return opcion;
             }
         }
-        return true;
+        for (let a = 1; a <= cantcolFeaturing; a++) {
+            var currentLink2 = "linkspoty_fea-" + a ;
+            var enlaceInput2 = document.getElementById(currentLink2);
+            var enlaceValue2 = enlaceInput2.value.trim();
+            var urlRegex2 = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+
+            if (!urlRegex2.test(enlaceValue2)) {
+                opcion = 2;
+                return opcion;
+            }
+        }
+        return opcion;
     }
 </script>
 
@@ -500,9 +515,17 @@
                                 });
                                 pivote = false;
                             }
-                            if (validarFormulario() == false) {
+                            if (validarFormulario() == 1) {
                                 Swal.fire({
-                                    title: 'Algun link de spotify es incorrecto',
+                                    title: 'Algun link de spotify de los artistas es incorrecto',
+                                    text: 'Por favor, ingrese una URL válida.',
+                                    icon: 'warning'
+                                }); 
+                                pivote = false;
+                            }
+                            if (validarFormulario() == 2) {
+                                Swal.fire({
+                                    title: 'Algun link de spotify de los featuring es incorrecto',
                                     text: 'Por favor, ingrese una URL válida.',
                                     icon: 'warning'
                                 }); 

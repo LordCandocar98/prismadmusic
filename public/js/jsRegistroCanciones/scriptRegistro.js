@@ -139,11 +139,14 @@ $(document).ready(function () {
                     <label for="nombrefeaturing">Ingresar nombre del featuring</label>
                     <br>
                     <input type="text" id="nombrefeaturing-` + cantcolFeaturing + `" name="nombrefeaturing[]" class="form-control" required>
+                    <br>
+                    <input type="text" id="linkspoty_fea-` + cantcolFeaturing + `" name="linkspoty_fea[]" class="form-control" required>
                 </div>
             </div>
             `;
 
         $("#zoneaddcol-featuring").append(cola);
+        $("#cantcolFeaturing").val(cantcolFeaturing);
     });
 
     $("#delcol").on("click", function () {
@@ -186,6 +189,7 @@ $(document).ready(function () {
             $("#featuring-" + cantcolFeaturing).remove();
 
             cantcolFeaturing -= 1;
+            $("#cantcolFeaturing").val(cantcolFeaturing);
 
         } else {
             Swal.fire({

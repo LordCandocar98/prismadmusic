@@ -55,6 +55,8 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Artista</th>
+                                        <th scope="col">Cancion</th>
+                                        <th scope="col">Tipo</th>
                                         <th scope="col">Spotify</th>
                                     </tr>
                                 </thead>
@@ -63,6 +65,12 @@
                                     <tr>
                                         <th scope="row">{{ $key+1 }}</th>
                                         <td>{{ $colaborador->nombre }}</td>
+                                        @foreach ($canciones as $cancion)
+                                            @if($colaborador->cancion_id == $cancion->id)
+                                                <td>{{ $cancion->titulo }}</td>
+                                            @endif
+                                        @endforeach
+                                        <td>{{ $colaborador->tipo_colaboracion }}</td>
                                         <td>{{ $colaborador->link_spoty }}</td>
                                     </tr>
                                     @endforeach

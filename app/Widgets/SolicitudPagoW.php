@@ -28,7 +28,7 @@ class SolicitudPagoW extends AbstractWidget
         $count = count($nomina);
 
         return view('voyager::dimmer', array_merge($this->config, [
-            'icon'   => 'voyager-wallet',
+            'icon'   => 'voyager-treasure',
             'title'  => "Solicitudes de pago",
             'text'   => "Actualmente hay un total de $count solicitudes de pago. Haga clic en el botón de abajo para ver todas las solicitudes.",
             'button' => [

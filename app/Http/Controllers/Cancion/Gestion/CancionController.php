@@ -238,10 +238,12 @@ class CancionController extends Controller
             }
 
             $infoFeaturing = $request->nombrefeaturing ?? [];
+            $infoSpoty_fea = $request->linkspoty_fea ?? [];
 
             for ($i = 0; $i < count($infoFeaturing); $i++) {
                 $cola = new ColaboracionArtFea();
                 $cola->nombre = $infoFeaturing[$i];
+                $cola->link_spoty = $infoSpoty_fea[$i];
                 $cola->tipo_colaboracion = "Featuring";
                 $cola->cancion_id = $song->id;
                 $cola->save();
