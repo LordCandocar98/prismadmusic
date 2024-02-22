@@ -26,7 +26,8 @@ class RegaliasController extends Controller
             ->join('persona', 'users.id', '=', 'persona.user_id')
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
-            ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
+            ->leftJoin('cancion', 'cancion.id', '=', 'regalia.cancion_id')
+            ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*', 'cancion.titulo')
             ->where('role_id', 2)
             ->where('tipo',1)
             ->orWhere('tipo',null)
@@ -44,9 +45,14 @@ class RegaliasController extends Controller
     {
         $canciones = DB::table('cancion as ca')
         ->leftJoin('repertorio as re', 're.id', '=', 'ca.repertorio_id')
-        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id')
+        ->leftJoin('colaboracion as col', 'col.cancion_id', '=', 'ca.id') 
+        ->leftjoin('colaboracion_art_feas as caf', 'caf.cancion_id', '=', 'ca.id')
         ->join('users as u', 'u.email', '=', 'col.cliente_email')
-        ->select('ca.id', DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", ca.autor) AS text'))
+        ->select(
+            'ca.id',
+            DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", IFNULL(GROUP_CONCAT(DISTINCT CASE WHEN caf.tipo_colaboracion = "Artista Principal" THEN caf.nombre END), "No hay autor principal")) AS text')
+        )
+        ->groupBy('ca.id')
         ->orderBy('ca.id', 'asc')
         ->get()
         ->pluck('text', 'id')
@@ -81,6 +87,7 @@ class RegaliasController extends Controller
                 $valor_cliente = round(floatval($request->valor) * ($colaboracion->porcentaje_intelectual / 100)-0.001, 2);
                 $regalia = new Regalia;
                 $regalia->cliente_id = $cliente->id;
+                $regalia->cancion_id = $request->idcancion;
                 $regalia->informe = $filename;
                 $regalia->fecha_informe_inicio =  date('Y-m-d', strtotime($request->fecha_informe_inicio));
                 $regalia->fecha_informe_final = date('Y-m-d', strtotime($request->fecha_informe_final));

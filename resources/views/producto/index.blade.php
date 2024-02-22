@@ -30,6 +30,7 @@
                             <tr>
                                 <th class="text-center">N°</th>
                                 <th class="text-center">Titulo</th>
+                                <th class="text-center">Artista principal</th>
                                 <th class="text-center">Formato</th>
                                 <th class="text-center">Genero</th>
                                 <th class="text-center">Subgenero</th>
@@ -43,6 +44,7 @@
                         <tr role="row">
                                 <td class="text-center">{{$key+1}}</td>
                                 <td class="text-center">{{ $rep->titulo }}</td>
+                                <td class="text-center">{{ $rep->artPrincipal }}</td>
                                 <td class="text-center">{{ $rep->formato }}</td>
                                 <td class="text-center">{{ $rep->genero }}</td>
                                 <td class="text-center">{{ $rep->subgenero }}</td>
