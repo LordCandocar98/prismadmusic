@@ -48,7 +48,7 @@ class ProductoController extends Controller
                 'repertorio.fecha_lanzamiento',
                 'repertorio.procesado'
                 )
-            ->orderBy('repertorio.id','asc')
+            ->orderBy('repertorio.id','desc')
             ->get();
             // dd($repertorio);
             return view('producto.index', ['repertorio' => $repertorio]);
