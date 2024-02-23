@@ -27,11 +27,27 @@ class ProductoController extends Controller
             ->leftjoin('colaboracion_art_feas as caf', 'caf.cancion_id', '=', 'cancion.id')
             ->where('repertorio.terminado', '=', 1)
             ->select(
-                'repertorio.*', 
+                'repertorio.id',
+                'repertorio.titulo', 
+                'repertorio.formato',
+                'repertorio.genero',
+                'repertorio.subgenero',
+                'repertorio.annio_produccion',
+                'repertorio.fecha_lanzamiento', 
+                'repertorio.procesado', 
                 // DB::raw('GROUP_CONCAT(DISTINCT caf.nombre) as artPrincipal')
                 DB::raw('GROUP_CONCAT(DISTINCT CASE WHEN caf.tipo_colaboracion = "Artista Principal" THEN caf.nombre ELSE NULL END) as artPrincipal')
             )
-            ->groupBy('repertorio.id')
+            ->groupBy(
+                'repertorio.id',
+                'repertorio.titulo', 
+                'repertorio.formato',
+                'repertorio.genero',
+                'repertorio.subgenero',
+                'repertorio.annio_produccion',
+                'repertorio.fecha_lanzamiento',
+                'repertorio.procesado'
+                )
             ->orderBy('repertorio.id','desc')
             ->get();
             // dd($repertorio);
