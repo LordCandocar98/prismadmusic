@@ -36,7 +36,7 @@ Route::get('/register', function () {
 Route::get('/admin/login', function () {
     auth()->logout();
     return redirect()->route('login');
-})->name('login');
+});
 
 Route::resource('registro', PersonaController::class); //Registro de Personas con un controlador creado a mano
 
