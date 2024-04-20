@@ -52,7 +52,7 @@ class RegaliasController extends Controller
             'ca.id',
             DB::raw('CONCAT(ca.titulo, " - ", re.titulo, " - ", IFNULL(GROUP_CONCAT(DISTINCT CASE WHEN caf.tipo_colaboracion = "Artista Principal" THEN caf.nombre END), "No hay autor principal")) AS text')
         )
-        ->groupBy('ca.id')
+        ->groupBy('ca.id', 'ca.titulo', 're.titulo')
         ->orderBy('ca.id', 'asc')
         ->get()
         ->pluck('text', 'id')
