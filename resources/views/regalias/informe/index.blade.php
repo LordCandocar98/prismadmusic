@@ -21,6 +21,7 @@
                             <th class="text-center">Nº</th>
                             <th class="text-center">Nombres y Apellidos</th>
                             <th class="text-center">N° Identificacion</th>
+                            <th class="text-center">Nombre Cancion</th>
                             <th class="text-center">Valor</th>
                             <th class="text-center">Inicio</th>
                             <th class="text-center">Final</th>
@@ -34,6 +35,7 @@
                             <td class="text-center">{{ $it + 1 }}</td>
                             <td class="text-center">{{ $regalia->nombre . ' ' . $regalia->apellido }}</td>
                             <td class="text-center">{{ $regalia->numero_identificacion }}</td>
+                            <td class="text-center">{{ $regalia->titulo }}</td>
                             <td class="text-center">USD {{ $regalia->valor }}</td>
                             <td class="text-center">{{ $regalia->fecha_informe_inicio }}</td>
                             <td class="text-center">{{ $regalia->fecha_informe_final }}</td>

@@ -27,7 +27,13 @@ class RegaliasController extends Controller
             ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
             ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
             ->leftJoin('cancion', 'cancion.id', '=', 'regalia.cancion_id')
-            ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*', 'cancion.titulo')
+            ->select(
+                    'users.*', 
+                    'persona.*', 
+                    'cliente.*', 
+                    'regalia.*', 
+                    DB::raw('COALESCE(cancion.titulo, "-") as titulo')
+                )
             ->where('role_id', 2)
             ->where('tipo',1)
             ->orWhere('tipo',null)

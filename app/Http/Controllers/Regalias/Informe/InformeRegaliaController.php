@@ -21,7 +21,14 @@ class InformeRegaliaController extends Controller
         ->join('persona', 'users.id', '=', 'persona.user_id')
         ->join('cliente', 'persona.id', '=', 'cliente.persona_id')
         ->join('regalia', 'cliente.id', '=', 'regalia.cliente_id')
-        ->select('users.*', 'persona.*', 'cliente.*', 'regalia.*')
+        ->leftJoin('cancion', 'cancion.id', "=", 'regalia.cancion_id')
+        ->select(
+                'users.*', 
+                'persona.*', 
+                'cliente.*', 
+                'regalia.*',
+                DB::raw('COALESCE(cancion.titulo, "-") as titulo')
+            )
         ->where('users.role_id', 2)
         ->where('users.id', $sesion->id)
         ->where('users.registro_confirmed', 1)
