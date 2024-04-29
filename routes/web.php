@@ -8,6 +8,7 @@ use App\Http\Controllers\Cancion\Gestion\HistoricoCancionController;
 use App\Http\Controllers\Repertorio\Gestion\RepertorioController;
 use App\Http\Controllers\Clientes\Gestion\ClientesController;
 use App\Http\Controllers\ConsultaUsuario\Gestion\ConsultaUsuarioController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasController;
 use App\Http\Controllers\Regalias\Gestion\RegaliasVariasController;
 use App\Http\Controllers\Nominas\Gestion\NominaController;
@@ -118,6 +119,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/compartir-musica', [SiteController::class, 'compartir'])->name('compartir');
 Route::get('/articulo', [SiteController::class, 'articulo'])->name('articulo');
 Route::post('/compartir-musica', [SiteController::class, 'postCompartir'])->name('compartirMusica');
+
+Route::get('/posts', [SiteController::class, 'indexPost'])->name('post.index');
+Route::get('/posts/{id}', [SiteController::class, 'show'])->name('post.show');
 
 Route::get('/terminos-y-condiciones', function () {
     return view('site.termino_uso.tcondiciones');

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use TCG\Voyager\Models\Post;
 
 class SiteController extends Controller
 {
@@ -19,7 +20,8 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return view('site.home');
+        $posts = Post::where('status', 'PUBLISHED')->latest()->take(3)->get();
+        return view('site.home', compact('posts'));
     }
 
     public function nosotros()
@@ -72,5 +74,20 @@ class SiteController extends Controller
         }
 
         return back()->with("message", 'Por favor verifica tu bandeja de correo electrónico para completar el registro y poder procesar tus datos.');
+    }
+
+
+    // Posts
+
+    public function indexPost()
+    {
+        $posts = Post::paginate(9);
+        return view('site.posts.index', compact('posts'));
+    }
+
+    public function show($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('site.posts.show', compact('post'));
     }
 }
